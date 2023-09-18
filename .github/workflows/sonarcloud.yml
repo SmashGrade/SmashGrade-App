@@ -29,26 +29,28 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
-      - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.16.0
-          cache: npm
-
+#      - name: Setup node
+#        uses: actions/setup-node@v3
+#        with:
+#          node-version: 18.16.0
+#          cache: npm
+#
       - name: Install ESLint
         run: |
-          npm install eslint
+           npm install eslint
            mkdir reports
            cd reports
            pwd
 
       - name: Run ESLint
-        run:
-          npx eslint .
-          --config .eslintrc.cjs
-          --ext .ts,.tsx
-          --format json
-          --output-file reports/eslint.json
+        run: |
+           mkdir reports
+           npx eslint 
+           --config .eslintrc.cjs
+           --ext .ts,.tsx
+           --format json
+           --output-file reports/eslint.json
+           src/
 
       - name: Output ESLint
         run: cat reports/eslint.json
