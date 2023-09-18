@@ -38,9 +38,6 @@ jobs:
           mkdir reports
           npm run lint-report
 
-      - name: Output ESLint
-        run: cat reports/eslint.json
-
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@master
         env:

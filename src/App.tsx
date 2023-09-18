@@ -1,7 +1,6 @@
 import { Button, Select } from 'antd';
 
 function App() {
-    console.log('test');
     return (
         <>
             <Button onClick={() => console.log('clicked')} loading={true} shape={'round'}>
