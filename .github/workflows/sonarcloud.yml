@@ -44,7 +44,6 @@ jobs:
 
       - name: Run ESLint
         run: |
-           mkdir reports
            npx eslint 
            --config .eslintrc.cjs
            --ext .ts,.tsx
