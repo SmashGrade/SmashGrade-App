@@ -31,7 +31,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm i
+          npm i --production=false
 
       - name: Run ESLint
         run: |
