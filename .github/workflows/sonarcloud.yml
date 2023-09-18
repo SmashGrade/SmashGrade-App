@@ -36,17 +36,22 @@ jobs:
           cache: npm
 
       - name: Install ESLint
-        run: npm install eslint
+        run: |
+          npm install eslint
+           mkdir reports
+           cd reports
+           pwd
 
       - name: Run ESLint
-        run: npx eslint .
+        run:
+          npx eslint .
           --config .eslintrc.cjs
           --ext .ts,.tsx
           --format json
           --output-file /reports/eslint.json
 
       - name: Output ESLint
-        run: cat /reports/eslint.json
+        run: cat reports/eslint.json
 
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@master
