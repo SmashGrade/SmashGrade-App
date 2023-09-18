@@ -48,7 +48,7 @@ jobs:
           --config .eslintrc.cjs
           --ext .ts,.tsx
           --format json
-          --output-file /reports/eslint.json
+          --output-file reports/eslint.json
 
       - name: Output ESLint
         run: cat reports/eslint.json
