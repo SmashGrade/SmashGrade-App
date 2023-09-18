@@ -29,19 +29,9 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
-#      - name: Setup node
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: 18.16.0
-#          cache: npm
-#
-      - name: Install ESLint
-        run: |
-           npm i
-           mkdir reports
-
       - name: Run ESLint
         run: |
+          mkdir reports
           npm run lint-report
 
       - name: Output ESLint
