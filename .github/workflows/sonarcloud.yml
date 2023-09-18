@@ -44,12 +44,7 @@ jobs:
 
       - name: Run ESLint
         run: |
-           npx eslint 
-           --config .eslintrc.cjs
-           --ext .ts,.tsx
-           --format json
-           --output-file reports/eslint.json
-           src/
+           npx eslint --config .eslintrc.cjs --ext .ts,.tsx --format json --output-file reports/eslint.json src/
 
       - name: Output ESLint
         run: cat reports/eslint.json
