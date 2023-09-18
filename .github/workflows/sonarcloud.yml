@@ -43,10 +43,10 @@ jobs:
           --config .eslintrc.cjs
           --ext .ts,.tsx
           --format json
-          --output-file eslint.json
+          --output-file /reports/eslint.json
 
       - name: Output ESLint
-        run: cat eslint.json
+        run: cat /reports/eslint.json
 
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@master
