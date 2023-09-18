@@ -24,15 +24,21 @@ jobs:
   Analysis:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.0
+          cache: npm
+
       - name: Install ESLint
-            run: |
-              npm install eslint
+        run: npm install eslint
+
       - name: Run ESLint
-          run: npx eslint .
-            --config .eslintrc.cjs
-            --ext .ts,.tsx
-            --format json
-            --output-file eslint.json
+        run: npx eslint .
+          --config .eslintrc.cjs
+          --ext .ts,.tsx
+          --format json
+          --output-file eslint.json
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@d@master
         env:
