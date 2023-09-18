@@ -37,6 +37,7 @@ jobs:
 #
       - name: Install ESLint
         run: |
+           npm i
            mkdir reports
 
       - name: Run ESLint
