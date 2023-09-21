@@ -7,13 +7,25 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <ConfigProvider
             theme={{
+                components: {
+                    Collapse: {
+                        headerBg: '#95223F',
+                        colorTextHeading: '#FFFFFF',
+                    },
+                    Table: {
+                        headerBg: '#95223F',
+                        colorTextHeading: '#FFFFFF',
+                    },
+                },
                 token: {
-                    //  Seed Token
-                    // colorPrimary: 'red',
-                    //  borderRadius: 6,
-                    //
-                    // Alias Token
-                    // colorBgContainer: 'green',
+                    colorPrimary: '#95223F',
+                    borderRadius: 2,
+                    colorBgContainer: '#FFFFFF',
+                    borderRadiusLG: 8,
+                    fontFamily: 'Roboto',
+                    colorLink: '#C6264E',
+                    colorLinkHover: '#3D3D3C',
+                    colorLinkActive: '#5F1530',
                 },
             }}
         >
