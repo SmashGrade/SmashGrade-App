@@ -1,6 +1,6 @@
 import styles from './Overview.module.scss';
 import { useState } from 'react';
-import SelectWithTitle from '../../components/SelectWithTitle.tsx';
+import SelectWithTitle from '@components/SelectWithTitle.tsx';
 
 const startYears = [
     { value: 2023, label: '2023' },
