@@ -1,0 +1,15 @@
+{
+  "startYears": [
+    { "year": 2022 },
+    { "year": 2023 },
+    { "year": 2024 },
+    { "year": 2025 },
+    { "year": 2026 }
+  ],
+  "curriculums": [
+    { "id": 1, "title": "1. Lehrgang", "year": 2023 },
+    { "id": 2, "title": "2. Lehrgang", "year": 2023 },
+    { "id": 3, "title": "3. Lehrgang", "year": 2024 },
+    { "id": 4, "title": "4. Lehrgang", "year": 2026 }
+  ]
+}
