@@ -1,11 +1,7 @@
-import Onboarding from './features/overview/Onboarding';
+import { OnboardingPage } from './pages/OnboardingPage';
 
 function App() {
-    return (
-        <>
-            <Onboarding />
-        </>
-    );
+    return <OnboardingPage />;
 }
 
 export default App;
