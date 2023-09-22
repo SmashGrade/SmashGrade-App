@@ -18,7 +18,7 @@ npm run dev
 ```
 If you want to start the React app with the json-server run this command:
 ```shell
-npm run simDev
+npm run dev-db
 ```
 
 ## Expanding the ESLint configuration
