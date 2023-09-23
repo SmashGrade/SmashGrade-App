@@ -16,9 +16,14 @@
 
         /* Linting */
         "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true
+        "noFallthroughCasesInSwitch": true,
+
+        /* Aliases */
+        "baseUrl": "./",
+        "paths": {
+            "@components/*": ["src/components/*" ],
+            "@features/*": ["src/features/*" ],
+        },
     },
     "include": ["src"],
     "references": [{ "path": "./tsconfig.node.json" }]
