@@ -6,8 +6,6 @@ on:
       - dev
   pull_request:
     types: [opened, synchronize, reopened, closed]
-    branches:
-      - dev
 
 jobs:
   build_and_deploy_job:
