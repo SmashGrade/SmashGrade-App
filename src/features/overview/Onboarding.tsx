@@ -24,7 +24,7 @@ export default function Onboarding() {
 
     return (
         <div className={styles.overviewContainer}>
-            <h1>Overview</h1>
+            <h1>Overview Page</h1>
             <SelectWithTitle
                 key={'startYear'}
                 title={'Startjahr'}
