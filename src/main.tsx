@@ -10,11 +10,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             theme={{
                 components: {
                     Collapse: {
-                        headerBg: '#95223F',
+                        headerBg: '#C6264E',
                         colorTextHeading: '#FFFFFF',
                     },
                     Table: {
-                        headerBg: '#95223F',
+                        headerBg: '#C6264E',
                         colorTextHeading: '#FFFFFF',
                     },
                 },
@@ -22,11 +22,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                     colorPrimary: '#C6264E',
                     borderRadius: 12,
                     colorBgContainer: '#FFFFFF',
-                    borderRadiusLG: 8,
                     fontFamily: 'Roboto',
                     colorLink: '#C6264E',
                     colorLinkHover: '#3D3D3C',
-                    colorLinkActive: '#5F1530',
+                    colorLinkActive: '#95223F',
                 },
             }}
         >
