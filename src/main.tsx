@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import { ConfigProvider } from 'antd';
+import './global.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
@@ -18,8 +19,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                     },
                 },
                 token: {
-                    colorPrimary: '#95223F',
-                    borderRadius: 2,
+                    colorPrimary: '#C6264E',
+                    borderRadius: 12,
                     colorBgContainer: '#FFFFFF',
                     borderRadiusLG: 8,
                     fontFamily: 'Roboto',

@@ -1,6 +1,8 @@
 import styles from './Overview.module.scss';
 import { useState } from 'react';
 import SelectWithTitle from '@components/SelectWithTitle.tsx';
+import { Button } from 'antd';
+import { RocketOutlined } from '@ant-design/icons';
 
 const startYears = [
     { value: 2023, label: '2023' },
@@ -11,7 +13,7 @@ const startYears = [
 
 const curriculums = [
     { value: 'Lehrgang 0', label: 'Lehrgang 0', year: 2022 },
-    { value: 'Lehrgang 1', label: 'Lehrgang 1', year: 2023 },
+    { value: 'VZ Systemtechnik - Automation/ICT', label: 'VZ Systemtechnik - Automation/ICT', year: 2023 },
     { value: 'Lehrgang 2', label: 'Lehrgang 2', year: 2023 },
     { value: 'Lehrgang 3', label: 'Lehrgang 3', year: 2025 },
     { value: 'Lehrgang 4', label: 'Lehrgang 4', year: 2026 },
@@ -32,6 +34,10 @@ export default function Onboarding() {
             />
 
             <SelectWithTitle key={'curriculum'} title={'Lehrgang'} selectProps={{ options: availableCurriculums }} />
+
+            <Button type={'primary'} icon={<RocketOutlined />}>
+                Studium starten
+            </Button>
         </div>
     );
 }
