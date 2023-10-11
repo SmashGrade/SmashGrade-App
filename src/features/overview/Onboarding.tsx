@@ -1,5 +1,6 @@
 import SelectWithTitle from '@components/SelectWithTitle.tsx';
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import { useState } from 'react';
 import styles from './Overview.module.scss';
 
@@ -40,29 +41,25 @@ interface Curriculum {
 ];*/
 
 async function getYears(): Promise<Year[]> {
-    return await fetch('http://localhost:3000/startYears')
-        .then((data) => data.json())
-        .then((years: YearResponse[]) => {
-            const selectOptions: Year[] = [];
-            years.forEach((year) => {
-                selectOptions.push({ value: year.year, label: year.year.toString() });
-            });
+    const { data } = await axios.get<YearResponse[]>('http://localhost:3000/startYears');
 
-            return selectOptions;
-        });
+    const selectOptions: Year[] = [];
+    data.forEach((year: YearResponse) => {
+        selectOptions.push({ value: year.year, label: year.year.toString() });
+    });
+
+    return selectOptions;
 }
 
 async function getCurriculums(): Promise<Curriculum[]> {
-    return await fetch('http://localhost:3000/curriculums')
-        .then((data) => data.json())
-        .then((curriculums: CurriculumResponse[]) => {
-            const selectOptions: Curriculum[] = [];
-            curriculums.forEach((curriculum) => {
-                selectOptions.push({ value: curriculum.title, label: curriculum.title, year: curriculum.year });
-            });
+    const { data } = await axios.get<CurriculumResponse[]>('http://localhost:3000/curriculums');
 
-            return selectOptions;
-        });
+    const selectOptions: Curriculum[] = [];
+    data.forEach((curriculum) => {
+        selectOptions.push({ value: curriculum.title, label: curriculum.title, year: curriculum.year });
+    });
+
+    return selectOptions;
 }
 
 export default function Onboarding() {
