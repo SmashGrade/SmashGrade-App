@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import { ConfigProvider } from 'antd';
+import colors from './colors.module.scss';
 import './global.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -10,22 +11,22 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             theme={{
                 components: {
                     Collapse: {
-                        headerBg: '#C6264E',
-                        colorTextHeading: '#FFFFFF',
+                        headerBg: colors.colorPrimary,
+                        colorTextHeading: colors.colorTextHeading,
                     },
                     Table: {
-                        headerBg: '#C6264E',
-                        colorTextHeading: '#FFFFFF',
+                        headerBg: colors.colorPrimary,
+                        colorTextHeading: colors.colorTextHeading,
                     },
                 },
                 token: {
-                    colorPrimary: '#C6264E',
+                    colorPrimary: colors.colorPrimary,
                     borderRadius: 12,
-                    colorBgContainer: '#FFFFFF',
+                    colorBgContainer: colors.colorBgContainer,
                     fontFamily: 'Roboto',
-                    colorLink: '#C6264E',
-                    colorLinkHover: '#3D3D3C',
-                    colorLinkActive: '#95223F',
+                    colorLink: colors.colorLink,
+                    colorLinkHover: colors.colorLinkHover,
+                    colorLinkActive: colors.colorLinkActive,
                 },
             }}
         >

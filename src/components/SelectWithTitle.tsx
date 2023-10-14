@@ -1,5 +1,5 @@
 import { Select, SelectProps } from 'antd';
-import styles from './SelectWithTitle.scss';
+import styles from './SelectWithTitle.module.scss';
 
 export interface SelectWithTitleProps {
     title: string;
@@ -9,9 +9,9 @@ export interface SelectWithTitleProps {
 export default function SelectWithTitle({ title, selectProps }: SelectWithTitleProps) {
     return (
         <div className={styles.selectWithTitleContainer}>
-            <div className={'title'}>{title}</div>
+            <div className={styles.title}>{title}</div>
             <Select
-                className={'select-element'}
+                className={styles.selectElement}
                 // This always sets the first value as default value, but can be overwritten by setting defaultValue inside selectProps
                 defaultValue={selectProps?.options?.[0] ? selectProps?.options[0].value : null}
                 {...selectProps}
