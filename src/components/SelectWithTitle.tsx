@@ -8,7 +8,7 @@ export interface SelectWithTitleProps {
 
 export default function SelectWithTitle({ title, selectProps }: SelectWithTitleProps) {
     return (
-        <div className={'select-with-title-container'}>
+        <div className={styles.selectWithTitleContainer}>
             <div className={'title'}>{title}</div>
             <Select
                 className={'select-element'}
