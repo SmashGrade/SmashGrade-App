@@ -1,5 +1,5 @@
 import { Select, SelectProps } from 'antd';
-import './SelectWithTitle.scss';
+import styles from './SelectWithTitle.scss';
 
 export interface SelectWithTitleProps {
     title: string;
