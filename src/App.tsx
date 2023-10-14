@@ -9,6 +9,7 @@ function App() {
 
     useMsalAuthentication(InteractionType.Redirect);
     const [m_strUser, setm_strUser] = useState<string>('');
+    const [userRoles, setm_UserRoles] = useState<string[]>([]);
 
     function Render() {
         const { accounts } = useMsal();
@@ -16,6 +17,11 @@ function App() {
         try {
             const username = accounts[0].username;
             setm_strUser(username);
+
+            if (accounts[0].idTokenClaims && accounts[0].idTokenClaims.roles) {
+                const userRoles = accounts[0].idTokenClaims.roles;
+                setm_UserRoles(userRoles);
+            }
         } catch (e) {
             console.log(e);
         }
@@ -25,6 +31,7 @@ function App() {
         return (
             <div className={'App'}>
                 <div>User: {m_strUser}</div>
+                <div>Roles: {userRoles.join(', ')}</div>
             </div>
         );
     else
