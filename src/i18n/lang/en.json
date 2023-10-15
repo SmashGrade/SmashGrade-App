@@ -1,0 +1,23 @@
+{
+  "app.locale.de": {
+    "defaultMessage": "German"
+  },
+  "app.locale.en": {
+    "defaultMessage": "English"
+  },
+  "app.locale.fr": {
+    "defaultMessage": "French"
+  },
+  "onboarding.curriculum": {
+    "defaultMessage": "Curriculum",
+    "description": "Onboarding curriculum"
+  },
+  "onboarding.startYear": {
+    "defaultMessage": "Start Year",
+    "description": "Onboarding start year"
+  },
+  "onboarding.title": {
+    "defaultMessage": "Overview",
+    "description": "Onboarding title"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "app.locale.de": [
+    {
+      "type": 0,
+      "value": "German"
+    }
+  ],
+  "app.locale.en": [
+    {
+      "type": 0,
+      "value": "English"
+    }
+  ],
+  "app.locale.fr": [
+    {
+      "type": 0,
+      "value": "French"
+    }
+  ],
+  "onboarding.curriculum": [
+    {
+      "type": 0,
+      "value": "Curriculum"
+    }
+  ],
+  "onboarding.startYear": [
+    {
+      "type": 0,
+      "value": "Start Year"
+    }
+  ],
+  "onboarding.title": [
+    {
+      "type": 0,
+      "value": "Overview"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "app.locale.de": [
+    {
+      "type": 0,
+      "value": "Allmand"
+    }
+  ],
+  "app.locale.en": [
+    {
+      "type": 0,
+      "value": "Anglais"
+    }
+  ],
+  "app.locale.fr": [
+    {
+      "type": 0,
+      "value": "Français"
+    }
+  ],
+  "onboarding.curriculum": [
+    {
+      "type": 0,
+      "value": "Programme d'études"
+    }
+  ],
+  "onboarding.startYear": [
+    {
+      "type": 0,
+      "value": "Année de lancement"
+    }
+  ],
+  "onboarding.title": [
+    {
+      "type": 0,
+      "value": "Apercu"
+    }
+  ]
+}
