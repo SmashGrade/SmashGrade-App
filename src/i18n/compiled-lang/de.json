@@ -1,38 +1,8 @@
 {
-  "app.locale.de": [
-    {
-      "type": 0,
-      "value": "Deutsch"
-    }
-  ],
-  "app.locale.en": [
-    {
-      "type": 0,
-      "value": "Englisch"
-    }
-  ],
-  "app.locale.fr": [
-    {
-      "type": 0,
-      "value": "Französisch"
-    }
-  ],
-  "onboarding.curriculum": [
-    {
-      "type": 0,
-      "value": "Lehrplan"
-    }
-  ],
-  "onboarding.startYear": [
-    {
-      "type": 0,
-      "value": "Startjahr"
-    }
-  ],
-  "onboarding.title": [
-    {
-      "type": 0,
-      "value": "Übersicht"
-    }
-  ]
+  "app.locale.de": "Deutsch",
+  "app.locale.en": "Englisch",
+  "app.locale.fr": "Französisch",
+  "onboarding.curriculum": "Lehrplan",
+  "onboarding.startYear": "Startjahr",
+  "onboarding.title": "Übersicht"
 }

@@ -1,38 +1,8 @@
 {
-  "app.locale.de": [
-    {
-      "type": 0,
-      "value": "German"
-    }
-  ],
-  "app.locale.en": [
-    {
-      "type": 0,
-      "value": "English"
-    }
-  ],
-  "app.locale.fr": [
-    {
-      "type": 0,
-      "value": "French"
-    }
-  ],
-  "onboarding.curriculum": [
-    {
-      "type": 0,
-      "value": "Curriculum"
-    }
-  ],
-  "onboarding.startYear": [
-    {
-      "type": 0,
-      "value": "Start Year"
-    }
-  ],
-  "onboarding.title": [
-    {
-      "type": 0,
-      "value": "Overview"
-    }
-  ]
+  "app.locale.de": "German",
+  "app.locale.en": "English",
+  "app.locale.fr": "French",
+  "onboarding.curriculum": "Curriculum",
+  "onboarding.startYear": "Start Year",
+  "onboarding.title": "Overview"
 }
