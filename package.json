@@ -13,8 +13,12 @@
         "prepare": "husky install",
         "json-db": "json-server --watch db.json",
         "dev-db": "concurrently \"npm:json-db\" \"npm:dev\"",
-        "extract": "formatjs extract \"src/**/*.{ts,tsx}\" --ignore \"**/*.d.ts\"",
-        "compile": "formatjs compile \"src/**/*.{ts,tsx}\" --ignore \"**/*.d.ts\""
+        "extract-de": "formatjs extract \"src/**/*.{ts,tsx}\" --ignore=\"**/*.d.ts\" --id-interpolation-pattern \"[sha512: contenthash:base64:6]\" --out-file \"src/i18n/lang/de.json\"",
+        "extract-en": "formatjs extract \"src/**/*.{ts,tsx}\" --ignore=\"**/*.d.ts\" --id-interpolation-pattern \"[sha512: contenthash:base64:6]\" --out-file \"src/i18n/lang/en.json\"",
+        "extract-fr": "formatjs extract \"src/**/*.{ts,tsx}\" --ignore=\"**/*.d.ts\" --id-interpolation-pattern \"[sha512: contenthash:base64:6]\" --out-file \"src/i18n/lang/fr.json\"",
+        "compile-de": "formatjs compile \"src/i18n/lang/de.json\" --out-file \"src/i18n/compiled-lang/de.json\"",
+        "compile-en": "formatjs compile \"src/i18n/lang/en.json\" --out-file \"src/i18n/compiled-lang/en.json\"",
+        "compile-fr": "formatjs compile \"src/i18n/lang/fr.json\" --out-file \"src/i18n/compiled-lang/fr.json\"",
         "start": "json-server db.json --static ./dist --port 8080"
     },
     "lint-staged": {
