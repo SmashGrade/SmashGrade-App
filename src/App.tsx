@@ -1,11 +1,11 @@
-import { OnboardingPage } from './pages/OnboardingPage';
-import { IntlProvider } from 'react-intl';
-import { useState } from 'react';
-import { languages, locales } from './i18n/languages.ts';
 import LocaleSwitcher from '@components/LocaleSwitcher.tsx';
+import { useState } from 'react';
+import { IntlProvider } from 'react-intl';
+import { languages, Locale, locales } from './i18n/languages.ts';
+import { OnboardingPage } from './pages/OnboardingPage';
 
 function App() {
-    const defaultLocale = navigator.language ? navigator.language : locales.de;
+    const defaultLocale: Locale = (navigator.language as Locale) ?? locales.de;
     const [locale, setLocale] = useState(defaultLocale);
     const messages = languages[locale];
 

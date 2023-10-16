@@ -13,6 +13,8 @@
         "prepare": "husky install",
         "json-db": "json-server --watch db.json",
         "dev-db": "concurrently \"npm:json-db\" \"npm:dev\"",
+        "extract": "formatjs extract \"src/**/*.{ts,tsx}\" --ignore \"**/*.d.ts\"",
+        "compile": "formatjs compile \"src/**/*.{ts,tsx}\" --ignore \"**/*.d.ts\""
         "start": "json-server db.json --static ./dist --port 8080"
     },
     "lint-staged": {
