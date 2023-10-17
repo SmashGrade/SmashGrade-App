@@ -1,13 +1,11 @@
 import LocaleSwitcher from '@components/LocaleSwitcher.tsx';
 import React, { PropsWithChildren, useEffect, useState } from 'react';
-import { IntlProvider as IntlProvider_ } from 'react-intl';
+import { IntlProvider as IntlProviderCustom } from 'react-intl';
 import type * as sourceOfTruth from './compiled-lang/en.json';
 import { AvailableLocales } from './Locale';
 
 export type LocaleMessages = typeof sourceOfTruth;
 export type LocaleKey = keyof LocaleMessages;
-
-// export type AllowedLocales = 'de' | 'en' | 'fr';
 
 async function importMessages(locale: AvailableLocales): Promise<LocaleMessages> {
     switch (locale) {
@@ -31,10 +29,10 @@ async function importMessages(locale: AvailableLocales): Promise<LocaleMessages>
 }
 
 const IntlProvider: React.FC<
-    Omit<React.ComponentProps<typeof IntlProvider_>, 'messages'> & {
+    Omit<React.ComponentProps<typeof IntlProviderCustom>, 'messages'> & {
         messages: LocaleMessages;
     }
-> = (props) => <IntlProvider_ {...props} />;
+> = (props) => <IntlProviderCustom {...props} />;
 
 export function ReactIntlProvider({ children }: PropsWithChildren) {
     const defaultLocale = (navigator.language as AvailableLocales) ?? AvailableLocales.German;

@@ -6,7 +6,7 @@ interface LocaleSwitcherProps {
     setLocale: (locale: AvailableLocales) => void;
 }
 
-function LocaleSwitcher({ setLocale }: LocaleSwitcherProps) {
+function LocaleSwitcher({ setLocale }: Readonly<LocaleSwitcherProps>) {
     const intl = useIntl();
 
     return (
