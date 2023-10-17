@@ -1,0 +1,26 @@
+{
+  "curriculum": {
+    "defaultMessage": "Plan d'études",
+    "description": "Lehrplan Dropdown Titel"
+  },
+  "language.english": {
+    "defaultMessage": "Anglais",
+    "description": "Sprachoption Englisch"
+  },
+  "language.french": {
+    "defaultMessage": "Français",
+    "description": "Sprachoption Französisch"
+  },
+  "language.german": {
+    "defaultMessage": "Allemand",
+    "description": "Sprachoption Deutsch"
+  },
+  "onboarding.title": {
+    "defaultMessage": "Aperçu",
+    "description": "Übersicht Titel"
+  },
+  "startYear": {
+    "defaultMessage": "Année de lancement",
+    "description": "Startjahr Dropdown Titel"
+  }
+}

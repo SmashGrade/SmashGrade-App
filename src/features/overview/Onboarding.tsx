@@ -3,6 +3,7 @@ import { useState } from 'react';
 import SelectWithTitle from '@components/SelectWithTitle.tsx';
 import { Button } from 'antd';
 import { RocketOutlined } from '@ant-design/icons';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const startYears = [
     { value: 2023, label: '2023' },
@@ -21,19 +22,37 @@ const curriculums = [
 
 export default function Onboarding() {
     const [currentYear, setCurrentYear] = useState(startYears[0].value);
-
     const availableCurriculums = curriculums.filter((curriculum) => curriculum.year === currentYear);
+    const intl = useIntl();
 
     return (
         <div className={styles.overviewContainer}>
-            <h1>Overview</h1>
+            <h1>
+                <FormattedMessage
+                    id={'onboarding.title'}
+                    defaultMessage={'Übersicht'}
+                    description={'Übersicht Titel'}
+                />
+            </h1>
             <SelectWithTitle
                 key={'startYear'}
-                title={'Startjahr'}
+                title={intl.formatMessage({
+                    id: 'startYear',
+                    defaultMessage: 'Startjahr',
+                    description: 'Startjahr Dropdown Titel',
+                })}
                 selectProps={{ options: startYears, onChange: setCurrentYear }}
             />
 
-            <SelectWithTitle key={'curriculum'} title={'Lehrgang'} selectProps={{ options: availableCurriculums }} />
+            <SelectWithTitle
+                key={'curriculum'}
+                title={intl.formatMessage({
+                    id: 'curriculum',
+                    defaultMessage: 'Lehrplan',
+                    description: 'Lehrplan Dropdown Titel',
+                })}
+                selectProps={{ options: availableCurriculums }}
+            />
 
             <Button type={'primary'} icon={<RocketOutlined />}>
                 Studium starten
