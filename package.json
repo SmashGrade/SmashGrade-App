@@ -13,7 +13,7 @@
         "prepare": "husky install",
         "json-db": "json-server --watch db.json",
         "dev-db": "concurrently \"npm:json-db\" \"npm:dev\"",
-        "start": "json-server db.json --static ./dist"
+        "start": "json-server db.json --static ./dist --port 8080"
     },
     "lint-staged": {
         "*.{ts,tsx}": "npm run lint",
