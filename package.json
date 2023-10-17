@@ -12,7 +12,8 @@
         "preview": "vite preview",
         "prepare": "husky install",
         "json-db": "json-server --watch db.json",
-        "dev-db": "concurrently \"npm:json-db\" \"npm:dev\""
+        "dev-db": "concurrently \"npm:json-db\" \"npm:dev\"",
+        "start": "json-server db.json --static ./dist"
     },
     "lint-staged": {
         "*.{ts,tsx}": "npm run lint",
