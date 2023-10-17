@@ -30,7 +30,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm i
+          npm pkg delete scripts.prepare
+          npm clean-install --omit=dev
 
       - name: Run ESLint
         run: |
