@@ -36,7 +36,9 @@ jobs:
           cp ./dist ./build/dist -r
 
       - name: Zip artifact for deployment
-        run: zip build.zip ./build/* -r
+        run: |
+          cd build
+          zip ../build.zip ./* -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
