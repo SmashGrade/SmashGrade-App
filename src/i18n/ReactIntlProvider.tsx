@@ -1,7 +1,7 @@
 import LocaleSwitcher from '@components/LocaleSwitcher.tsx';
 import React, { PropsWithChildren, useEffect, useState } from 'react';
 import { IntlProvider as IntlProviderCustom } from 'react-intl';
-import type * as sourceOfTruth from './compiled-lang/en.json';
+import type * as sourceOfTruth from './compiled-lang/de.json';
 import { AvailableLocales } from './Locale';
 
 export type LocaleMessages = typeof sourceOfTruth;
@@ -22,7 +22,7 @@ async function importMessages(locale: AvailableLocales): Promise<LocaleMessages>
             return frModule.default;
         }
         default: {
-            const defaultModule = await import('./compiled-lang/en.json');
+            const defaultModule = await import('./compiled-lang/de.json');
             return defaultModule.default;
         }
     }
@@ -34,8 +34,22 @@ const IntlProvider: React.FC<
     }
 > = (props) => <IntlProviderCustom {...props} />;
 
+function getDefaultLanguage() {
+    const userLang = localStorage.getItem('locale') as AvailableLocales;
+    if (userLang) {
+        return userLang;
+    }
+
+    const navLang = navigator.language.split('-')[0] as AvailableLocales;
+    if (Object.values(AvailableLocales).includes(navLang)) {
+        return navLang;
+    }
+
+    return AvailableLocales.German;
+}
+
 export function ReactIntlProvider({ children }: PropsWithChildren) {
-    const defaultLocale = (navigator.language as AvailableLocales) ?? AvailableLocales.German;
+    const defaultLocale = getDefaultLanguage();
     const [locale, setLocale] = useState(defaultLocale);
     const [messages, setMessages] = useState<LocaleMessages | null>(null);
 

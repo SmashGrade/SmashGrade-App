@@ -1,8 +1,8 @@
 {
-    "app.locale.de": "Allemand",
-    "app.locale.en": "Anglais",
-    "app.locale.fr": "Français",
-    "onboarding.curriculum": "Programme d'études",
-    "onboarding.startYear": "Année de lancement",
-    "onboarding.title": "Apercu"
+  "curriculum": "Plan d'études",
+  "language.english": "Anglais",
+  "language.french": "Français",
+  "language.german": "Allemand",
+  "onboarding.title": "Aperçu",
+  "startYear": "Année de lancement"
 }

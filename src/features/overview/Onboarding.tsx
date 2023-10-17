@@ -30,16 +30,16 @@ export default function Onboarding() {
             <h1>
                 <FormattedMessage
                     id={'onboarding.title'}
-                    defaultMessage={'Overview'}
-                    description={'Onboarding title'}
+                    defaultMessage={'Übersicht'}
+                    description={'Übersicht Titel'}
                 />
             </h1>
             <SelectWithTitle
                 key={'startYear'}
                 title={intl.formatMessage({
-                    id: 'onboarding.startYear',
-                    defaultMessage: 'Start Year',
-                    description: 'Onboarding start year',
+                    id: 'startYear',
+                    defaultMessage: 'Startjahr',
+                    description: 'Startjahr Dropdown Titel',
                 })}
                 selectProps={{ options: startYears, onChange: setCurrentYear }}
             />
@@ -47,9 +47,9 @@ export default function Onboarding() {
             <SelectWithTitle
                 key={'curriculum'}
                 title={intl.formatMessage({
-                    id: 'onboarding.curriculum',
-                    defaultMessage: 'Curriculum',
-                    description: 'Onboarding curriculum',
+                    id: 'curriculum',
+                    defaultMessage: 'Lehrplan',
+                    description: 'Lehrplan Dropdown Titel',
                 })}
                 selectProps={{ options: availableCurriculums }}
             />

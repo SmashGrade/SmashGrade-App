@@ -19,20 +19,32 @@ function LocaleSwitcher({ setLocale }: Readonly<LocaleSwitcherProps>) {
                     {
                         value: AvailableLocales.German,
                         label: intl.formatMessage({
-                            id: 'app.locale.de',
-                            defaultMessage: 'German',
+                            id: 'language.german',
+                            defaultMessage: 'Deutsch',
+                            description: 'Sprachoption Deutsch',
                         }),
                     },
                     {
                         value: AvailableLocales.English,
-                        label: intl.formatMessage({ id: 'app.locale.en', defaultMessage: 'English' }),
+                        label: intl.formatMessage({
+                            id: 'language.english',
+                            defaultMessage: 'Englisch',
+                            description: 'Sprachoption Englisch',
+                        }),
                     },
                     {
                         value: AvailableLocales.French,
-                        label: intl.formatMessage({ id: 'app.locale.fr', defaultMessage: 'French' }),
+                        label: intl.formatMessage({
+                            id: 'language.french',
+                            defaultMessage: 'Französisch',
+                            description: 'Sprachoption Französisch',
+                        }),
                     },
                 ]}
-                onSelect={(val) => setLocale(val)}
+                onSelect={(val) => {
+                    setLocale(val);
+                    localStorage.setItem('locale', val);
+                }}
             />
         </Space>
     );
