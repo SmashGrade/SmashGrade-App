@@ -43,10 +43,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                         colorLink: colors.colorLink,
                         colorLinkHover: colors.colorLinkHover,
                         colorLinkActive: colors.colorLinkActive,
-                    },
-                }}
-            >
-                <QueryClientProvider client={queryClient}>
+                },
+            }}
+        >
+<QueryClientProvider client={queryClient}>
                     <RouterProvider router={router} />
                     <ReactQueryDevtools initialIsOpen={false} />
                 </QueryClientProvider>
