@@ -1,9 +1,9 @@
 import { Select, Space } from 'antd';
 import { useIntl } from 'react-intl';
-import { Locale, locales } from '../i18n/languages';
+import { AvailableLocales } from '../i18n/Locale.ts';
 
 interface LocaleSwitcherProps {
-    setLocale: (locale: Locale) => void;
+    setLocale: (locale: AvailableLocales) => void;
 }
 
 function LocaleSwitcher({ setLocale }: LocaleSwitcherProps) {
@@ -17,19 +17,19 @@ function LocaleSwitcher({ setLocale }: LocaleSwitcherProps) {
                 bordered={false}
                 options={[
                     {
-                        value: locales.de,
+                        value: AvailableLocales.German,
                         label: intl.formatMessage({
                             id: 'app.locale.de',
-                            defaultMessage: 'Deutsch',
+                            defaultMessage: 'German',
                         }),
                     },
                     {
-                        value: locales.en,
-                        label: intl.formatMessage({ id: 'app.locale.en', defaultMessage: 'Englisch' }),
+                        value: AvailableLocales.English,
+                        label: intl.formatMessage({ id: 'app.locale.en', defaultMessage: 'English' }),
                     },
                     {
-                        value: locales.fr,
-                        label: intl.formatMessage({ id: 'app.locale.fr', defaultMessage: 'Französisch' }),
+                        value: AvailableLocales.French,
+                        label: intl.formatMessage({ id: 'app.locale.fr', defaultMessage: 'French' }),
                     },
                 ]}
                 onSelect={(val) => setLocale(val)}

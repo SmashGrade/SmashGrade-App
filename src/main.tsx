@@ -1,12 +1,14 @@
+import { ConfigProvider } from 'antd';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
-import { ConfigProvider } from 'antd';
 import colors from './colors.module.scss';
 import './global.scss';
+import { ReactIntlProvider } from './i18n/ReactIntlProvider.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
+        <ReactIntlProvider>
         <ConfigProvider
             theme={{
                 components: {
@@ -32,5 +34,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         >
             <App />
         </ConfigProvider>
+        </ReactIntlProvider>
     </React.StrictMode>
 );

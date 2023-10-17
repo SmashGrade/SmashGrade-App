@@ -22,9 +22,7 @@ const curriculums = [
 
 export default function Onboarding() {
     const [currentYear, setCurrentYear] = useState(startYears[0].value);
-
     const availableCurriculums = curriculums.filter((curriculum) => curriculum.year === currentYear);
-
     const intl = useIntl();
 
     return (

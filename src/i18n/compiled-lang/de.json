@@ -1,8 +1,8 @@
 {
-  "app.locale.de": "Deutsch",
-  "app.locale.en": "Englisch",
-  "app.locale.fr": "Französisch",
-  "onboarding.curriculum": "Lehrplan",
-  "onboarding.startYear": "Startjahr",
-  "onboarding.title": "Übersicht"
+    "app.locale.de": "Deutsch",
+    "app.locale.en": "Englisch",
+    "app.locale.fr": "Französisch",
+    "onboarding.curriculum": "Lehrplan",
+    "onboarding.startYear": "Startjahr",
+    "onboarding.title": "Übersicht"
 }

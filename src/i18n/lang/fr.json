@@ -1,23 +1,23 @@
 {
-  "app.locale.de": {
-    "defaultMessage": "Allemand"
-  },
-  "app.locale.en": {
-    "defaultMessage": "Anglais"
-  },
-  "app.locale.fr": {
-    "defaultMessage": "Français"
-  },
-  "onboarding.curriculum": {
-    "defaultMessage": "Programme d'études",
-    "description": "Onboarding curriculum"
-  },
-  "onboarding.startYear": {
-    "defaultMessage": "Année de lancement",
-    "description": "Onboarding start year"
-  },
-  "onboarding.title": {
-    "defaultMessage": "Apercu",
-    "description": "Onboarding title"
-  }
+    "app.locale.de": {
+        "defaultMessage": "Allemand"
+    },
+    "app.locale.en": {
+        "defaultMessage": "Anglais"
+    },
+    "app.locale.fr": {
+        "defaultMessage": "Français"
+    },
+    "onboarding.curriculum": {
+        "defaultMessage": "Programme d'études",
+        "description": "Onboarding curriculum"
+    },
+    "onboarding.startYear": {
+        "defaultMessage": "Année de lancement",
+        "description": "Onboarding start year"
+    },
+    "onboarding.title": {
+        "defaultMessage": "Apercu",
+        "description": "Onboarding title"
+    }
 }

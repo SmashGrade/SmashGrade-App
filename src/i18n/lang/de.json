@@ -1,23 +1,23 @@
 {
-  "app.locale.de": {
-    "defaultMessage": "Deutsch"
-  },
-  "app.locale.en": {
-    "defaultMessage": "Englisch"
-  },
-  "app.locale.fr": {
-    "defaultMessage": "Französisch"
-  },
-  "onboarding.curriculum": {
-    "defaultMessage": "Lehrplan",
-    "description": "Onboarding curriculum"
-  },
-  "onboarding.startYear": {
-    "defaultMessage": "Startjahr",
-    "description": "Onboarding start year"
-  },
-  "onboarding.title": {
-    "defaultMessage": "Übersicht",
-    "description": "Onboarding title"
-  }
+    "app.locale.de": {
+        "defaultMessage": "Deutsch"
+    },
+    "app.locale.en": {
+        "defaultMessage": "Englisch"
+    },
+    "app.locale.fr": {
+        "defaultMessage": "Französisch"
+    },
+    "onboarding.curriculum": {
+        "defaultMessage": "Lehrplan",
+        "description": "Onboarding curriculum"
+    },
+    "onboarding.startYear": {
+        "defaultMessage": "Startjahr",
+        "description": "Onboarding start year"
+    },
+    "onboarding.title": {
+        "defaultMessage": "Übersicht",
+        "description": "Onboarding title"
+    }
 }
