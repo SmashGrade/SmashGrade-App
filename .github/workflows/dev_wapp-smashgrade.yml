@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm pkg delete scripts.prepare
-          npm clean-install --omit=dev
+          npm clean-install
 
       - name: Build react App
         run:  npm run build --if-present
