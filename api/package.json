@@ -1,12 +1,10 @@
 {
-  "name": "dist",
+  "name": "JSON Server and React App",
   "version": "1.0.0",
   "engines": {
     "node": ">=18.0.0"
   },
   "scripts": {
-    "start": "node ../dist/server.js"
-  },
-  "dependencies": {
+    "start": "node server.js"
   }
 }
