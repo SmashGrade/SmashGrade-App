@@ -30,6 +30,9 @@ jobs:
       - name: Copy package.json
         run:  cp api/package.json ./dist
 
+      - name: Copy db.json
+        run: cp db.json ./dist
+
       - name: Zip artifact for deployment
         run: zip build.zip ./dist/* -r
 
