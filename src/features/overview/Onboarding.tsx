@@ -28,23 +28,13 @@ interface Curriculum {
 async function getYears(): Promise<Year[]> {
     const { data } = await axios.get<YearResponse[]>('http://localhost:3000/startYears');
 
-    const selectOptions: Year[] = [];
-    data.forEach((year: YearResponse) => {
-        selectOptions.push({ value: year.year, label: year.year.toString() });
-    });
-
-    return selectOptions;
+    return data.map(({ year }) => ({ value: year, label: year.toString() }));
 }
 
 async function getCurriculums(): Promise<Curriculum[]> {
     const { data } = await axios.get<CurriculumResponse[]>('http://localhost:3000/curriculums');
 
-    const selectOptions: Curriculum[] = [];
-    data.forEach((curriculum) => {
-        selectOptions.push({ value: curriculum.title, label: curriculum.title, year: curriculum.year });
-    });
-
-    return selectOptions;
+    return data.map((curriculum) => ({ value: curriculum.title, label: curriculum.title, year: curriculum.year }));
 }
 
 export default function Onboarding() {
