@@ -5,8 +5,6 @@ name: Build and deploy Node.js app to Azure Web App - wapp-SmashGrade
 
 on:
   push:
-    branches:
-      - dev
   workflow_dispatch:
 
 jobs:
@@ -27,18 +25,13 @@ jobs:
           npm clean-install
 
       - name: Build react App
-        run:  npm run build --if-present
+        run:  npm run build:azure --if-present
 
       - name: Copy package.json
-        run: | 
-          mkdir build
-          cp package.json ./build
-          cp ./dist ./build/dist -r
+        run:  cp api/package.json ./dist
 
       - name: Zip artifact for deployment
-        run: |
-          cd build
-          zip ../build.zip ./* -r
+        run: zip build.zip ./dist/* -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
