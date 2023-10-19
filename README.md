@@ -31,6 +31,7 @@ npm run lint && npm run format
 ```
 
 ## I18N
+
 To extract the messages from the source code use either of the following:
 
 ```shell
