@@ -25,8 +25,12 @@
         "build:azure": "npm run build && tsc api/server.ts --outDir dist"
     },
     "lint-staged": {
-        "*.{ts,tsx}": "npm run lint",
-        "*.--write": "npm run format"
+        "src/**/*.{js,jsx,ts,tsx,json,css,scss,md,mdx}": [
+            "npm run format"
+        ],
+        "src/**/*.{ts,tsx,json,css,scss}": [
+            "npm run lint"
+        ]
     },
     "dependencies": {
         "@tanstack/react-query": "^4.36.1",
