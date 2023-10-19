@@ -29,10 +29,10 @@ export default function Onboarding() {
         fetch('/startYears')
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
+                console.info(data);
             })
             .catch((error) => {
-                console.log(error);
+                console.error(error);
             });
     }, []);
     return (
