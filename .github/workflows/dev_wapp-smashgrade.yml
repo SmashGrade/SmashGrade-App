@@ -77,7 +77,7 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            ### Building Deployment Preview..
+            ### Building Deployment Preview...
             A preview of this Pull Request is being created. Hold tight while it's building ⚒️
             This comment will be automatically updated when the preview is ready.  
 
@@ -106,7 +106,6 @@ jobs:
         with:
           app-name: 'wapp-SmashGrade'
           slot-name: preview-pr-${{ github.event.pull_request.number }}
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BDC317CC1F5242B498DBF6ABD5308B66 }}
           package: ./dist
 
       - name: Update comment
@@ -141,7 +140,7 @@ jobs:
           comment-id: ${{ steps.deploy-preview-comment.outputs.comment-id }}
           edit-mode: replace
           body: |
-            ### Building Deployment Preview..
+            ### Building Deployment Preview...
             The Pull Request preview is being updated. Hold tight while it's building ⚒️
             This comment will be automatically updated when the new version is ready.
 
@@ -154,13 +153,17 @@ jobs:
         run: |
           unzip build.zip
 
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'wapp-SmashGrade'
           slot-name: preview-pr-${{ github.event.pull_request.number }}
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BDC317CC1F5242B498DBF6ABD5308B66 }}
           package: ./dist
 
       - name: Update comment
@@ -226,12 +229,16 @@ jobs:
       - name: Unzip artifact for deployment
         run: |
           unzip build.zip
+          
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'wapp-SmashGrade'
-          slot-name: preview-pr-${{ github.event.pull_request.number }}
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BDC317CC1F5242B498DBF6ABD5308B66 }}
+          slot-name: 'Production'
           package: ./dist
