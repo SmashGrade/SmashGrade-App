@@ -7,13 +7,11 @@ on:
   pull_request:
     types: [opened, synchronize, closed]
     branches-ignore:
-      - master
       - dev
 
   push:
     branches:
       - dev
-  workflow_dispatch:
 
 jobs:
   build:
