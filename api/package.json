@@ -1,5 +1,5 @@
 {
-  "name": "JSON Server and React App",
+  "name": "react-app-with-json-server",
   "version": "1.0.0",
   "engines": {
     "node": ">=18.0.0"
