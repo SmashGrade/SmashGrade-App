@@ -68,7 +68,7 @@ jobs:
     needs: build
     environment:
       name: 'pr-preview-${{ github.event.pull_request.number }}'
-      url: https://${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Initial Deployment Preview Comment
@@ -115,7 +115,7 @@ jobs:
           edit-mode: replace
           body: |
             ### Deployment Preview
-            😎 Preview this PR: https://${{ steps.deploy-to-webapp.outputs.webapp-url }}
+            😎 Preview this PR: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
             🧑🏼‍💻 Commit SHA: ${{ github.sha }}
           reactions: rocket
 
@@ -176,7 +176,7 @@ jobs:
           edit-mode: replace
           body: |
             ### Deployment Preview
-            😎 Preview this PR: https://${{ steps.deploy-to-webapp.outputs.webapp-url }}
+            😎 Preview this PR: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
             🧑🏼‍💻 Commit SHA: ${{ github.sha }}
           reactions: rocket
 
@@ -221,7 +221,7 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: https://${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Download artifact from build job
