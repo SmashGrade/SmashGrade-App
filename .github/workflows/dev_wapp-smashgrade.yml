@@ -68,7 +68,7 @@ jobs:
     needs: build
     environment:
       name: 'pr-preview-${{ github.event.pull_request.number }}'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: https://${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Initial Deployment Preview Comment
@@ -115,7 +115,7 @@ jobs:
           edit-mode: replace
           body: |
             ### Deployment Preview
-            😎 Preview this PR: wapp-smashgrade-preview-pr-${{ github.event.pull_request.number }}.azurewebsites.net
+            😎 Preview this PR: https://${{ steps.deploy-to-webapp.outputs.webapp-url }}
             🧑🏼‍💻 Commit SHA: ${{ github.sha }}
           reactions: rocket
 
@@ -123,6 +123,9 @@ jobs:
     if: github.event.action == 'synchronize'
     runs-on: ubuntu-latest
     needs: build
+    environment:
+      name: 'pr-preview-${{ github.event.pull_request.number }}'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Find PR Preview Comment
@@ -173,7 +176,7 @@ jobs:
           edit-mode: replace
           body: |
             ### Deployment Preview
-            😎 Preview this PR: wapp-smashgrade-preview-pr-${{ github.event.pull_request.number }}.azurewebsites.net
+            😎 Preview this PR: https://${{ steps.deploy-to-webapp.outputs.webapp-url }}
             🧑🏼‍💻 Commit SHA: ${{ github.sha }}
           reactions: rocket
 
@@ -218,7 +221,7 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: https://${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Download artifact from build job
