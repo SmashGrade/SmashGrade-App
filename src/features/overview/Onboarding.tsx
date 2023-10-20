@@ -1,9 +1,9 @@
-import styles from './Overview.module.scss';
-import { useState } from 'react';
+import { RocketOutlined } from '@ant-design/icons';
 import SelectWithTitle from '@components/SelectWithTitle.tsx';
 import { Button } from 'antd';
-import { RocketOutlined } from '@ant-design/icons';
+import { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import styles from './Overview.module.scss';
 
 const startYears = [
     { value: 2023, label: '2023' },
@@ -25,6 +25,16 @@ export default function Onboarding() {
     const availableCurriculums = curriculums.filter((curriculum) => curriculum.year === currentYear);
     const intl = useIntl();
 
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_BACKEND_API_URL}/startYears`)
+            .then((response) => response.json())
+            .then((data) => {
+                console.info(data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
     return (
         <div className={styles.overviewContainer}>
             <h1>

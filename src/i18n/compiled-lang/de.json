@@ -1,8 +1,8 @@
 {
-  "curriculum": "Lehrplan",
-  "language.english": "Englisch",
-  "language.french": "Französisch",
-  "language.german": "Deutsch",
-  "onboarding.title": "Übersicht",
-  "startYear": "Startjahr"
+    "curriculum": "Lehrplan",
+    "language.english": "Englisch",
+    "language.french": "Französisch",
+    "language.german": "Deutsch",
+    "onboarding.title": "Übersicht",
+    "startYear": "Startjahr"
 }

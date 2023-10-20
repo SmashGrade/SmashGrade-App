@@ -9,9 +9,9 @@
     "scripts": {
         "dev": "vite",
         "build": "tsc && vite build",
-        "lint": "eslint --ext ts,tsx --report-unused-disable-directives --max-warnings 0 src",
-        "lint-report": "eslint --ext ts,tsx --format json-relative --output-file reports/eslint.json src",
-        "format": "prettier --write src/**/*",
+        "lint": "eslint --ext ts,tsx,css --report-unused-disable-directives --max-warnings 0 src",
+        "lint-report": "eslint --ext ts,tsx,css --format json-relative --output-file reports/eslint.json src",
+        "format": "prettier --write \"*.{js,jsx,ts,tsx,json,css,scss,md}\"",
         "preview": "vite preview",
         "prepare": "husky install",
         "json-db": "json-server --watch db.json",
@@ -22,11 +22,15 @@
         "compile-de": "formatjs compile \"src/i18n/lang/de.json\" --out-file \"src/i18n/compiled-lang/de.json\"",
         "compile-en": "formatjs compile \"src/i18n/lang/en.json\" --out-file \"src/i18n/compiled-lang/en.json\"",
         "compile-fr": "formatjs compile \"src/i18n/lang/fr.json\" --out-file \"src/i18n/compiled-lang/fr.json\"",
-        "start": "npm install --no-package-lock --no-save json-server && json-server db.json --static ./dist --port 8080"
+        "build:azure": "npm run build && tsc api/server.ts --outDir dist"
     },
     "lint-staged": {
-        "*.{ts,tsx}": "npm run lint",
-        "*.--write": "npm run format"
+        "*.{js,jsx,ts,tsx,json,css,scss,md}": [
+            "npm run format"
+        ],
+        "**/!(api)/*.{ts,tsx,css}": [
+            "npm run lint"
+        ]
     },
     "dependencies": {
         "@tanstack/react-query": "^4.36.1",
@@ -40,6 +44,8 @@
     "devDependencies": {
         "@formatjs/cli": "^6.2.0",
         "@formatjs/ts-transformer": "^3.13.5",
+        "@types/json-server": "^0.14.6",
+        "@types/node": "^20.8.6",
         "@types/react": "^18.2.15",
         "@types/react-dom": "^18.2.7",
         "@typescript-eslint/eslint-plugin": "^6.0.0",
