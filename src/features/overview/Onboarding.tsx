@@ -26,7 +26,7 @@ export default function Onboarding() {
     const intl = useIntl();
 
     useEffect(() => {
-        fetch('/startYears')
+        fetch(`${import.meta.env.VITE_BACKEND_API_URL}/startYears`)
             .then((response) => response.json())
             .then((data) => {
                 console.info(data);

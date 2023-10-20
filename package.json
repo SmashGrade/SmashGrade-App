@@ -25,10 +25,10 @@
         "build:azure": "npm run build && tsc api/server.ts --outDir dist"
     },
     "lint-staged": {
-        "*": [
+        "*.{js,jsx,ts,tsx,json,css,scss,md}": [
             "npm run format"
         ],
-        "*.{ts,tsx,css}": [
+        "**/!(api)/*.{ts,tsx,css}": [
             "npm run lint"
         ]
     },
