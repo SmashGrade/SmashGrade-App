@@ -24,18 +24,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Log Event output
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
 
-      - name: Test Comment
-        uses: peter-evans/create-or-update-comment@v3
-        id: pr-preview-comment
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            ### Building Deployment Preview..
-            A preview of this Pull Request is being created. Hold tight while it's building ⚒️
-            This comment will be automatically updated when the preview is ready. 
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
