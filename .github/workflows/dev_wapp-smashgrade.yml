@@ -137,10 +137,10 @@ jobs:
           body-includes: Deployment Preview
 
       - name: Update PR Preview Comment
-        if: steps.deploy-preview-comment.outputs.comment-id != ''
+        if: steps.find-preview-comment.outputs.comment-id != ''
         uses: peter-evans/create-or-update-comment@v1.4.5
         with:
-          comment-id: ${{ steps.deploy-preview-comment.outputs.comment-id }}
+          comment-id: ${{ steps.find-preview-comment.outputs.comment-id }}
           edit-mode: replace
           body: |
             ### Building Deployment Preview...
