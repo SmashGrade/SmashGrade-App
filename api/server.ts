@@ -9,5 +9,5 @@ const port = process.env.PORT ?? 3000;
 server.use(middlewares);
 server.use('/api', router);
 server.listen(port, () => {
-    console.log(`JSON Server is running on: ${port}/api}`);
+    console.info(`JSON Server is running on: ${port}/api}`);
 });
