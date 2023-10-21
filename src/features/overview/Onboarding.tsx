@@ -1,8 +1,11 @@
 import SelectWithTitle from '@components/SelectWithTitle.tsx';
+import { RocketOutlined } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useState } from 'react';
 import styles from './Overview.module.scss';
+import { Button } from 'antd';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 interface YearResponse {
     year: number;
@@ -24,17 +27,15 @@ interface Curriculum {
     label: string;
     year: number;
 }
-import { Button } from 'antd';
-import { RocketOutlined } from '@ant-design/icons';
 
 async function getYears(): Promise<Year[]> {
-    const { data } = await axios.get<YearResponse[]>('http://localhost:3000/startYears');
+    const { data } = await axios.get<YearResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/startYears`);
 
     return data.map(({ year }) => ({ value: year, label: year.toString() }));
 }
 
 async function getCurriculums(): Promise<Curriculum[]> {
-    const { data } = await axios.get<CurriculumResponse[]>('http://localhost:3000/curriculums');
+    const { data } = await axios.get<CurriculumResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/curriculums`);
 
     return data.map((curriculum) => ({ value: curriculum.title, label: curriculum.title, year: curriculum.year }));
 }
@@ -59,6 +60,7 @@ export default function Onboarding() {
     });
 
     const [currentYear, setCurrentYear] = useState(yearData?.length ? yearData[0].value : 0);
+    const intl = useIntl();
 
     if (yearsLoading || curriculumsLoading) {
         return <h2>Loading</h2>;
@@ -77,14 +79,32 @@ export default function Onboarding() {
 
     return (
         <div className={styles.overviewContainer}>
-            <h1>Overview</h1>
+            <h1>
+                <FormattedMessage
+                    id={'onboarding.title'}
+                    defaultMessage={'Übersicht'}
+                    description={'Übersicht Titel'}
+                />
+            </h1>
             <SelectWithTitle
                 key={'startYear'}
-                title={'Startjahr'}
                 selectProps={{ options: yearData, onChange: setCurrentYear }}
+                title={intl.formatMessage({
+                    id: 'startYear',
+                    defaultMessage: 'Startjahr',
+                    description: 'Startjahr Dropdown Titel',
+                })}
             />
 
-            <SelectWithTitle key={'curriculum'} title={'Lehrgang'} selectProps={{ options: availableCurriculums }} />
+            <SelectWithTitle
+                key={'curriculum'}
+                title={intl.formatMessage({
+                    id: 'curriculum',
+                    defaultMessage: 'Lehrplan',
+                    description: 'Lehrplan Dropdown Titel',
+                })}
+                selectProps={{ options: availableCurriculums }}
+            />
 
             <Button type={'primary'} icon={<RocketOutlined />}>
                 Studium starten

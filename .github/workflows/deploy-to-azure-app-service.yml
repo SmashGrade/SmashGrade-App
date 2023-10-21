@@ -1,0 +1,239 @@
+name: Build and deploy app to Azure Web App Service
+
+on:
+  pull_request:
+    types: [opened, synchronize, closed]
+    branches:
+      - dev
+
+  push:
+    branches:
+      - dev
+
+permissions:
+  pull-requests: write # allows to add comments to PRs
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: |
+          npm pkg delete scripts.prepare
+          npm clean-install
+
+      - name: Build react App
+        run:  npm run build:azure --if-present
+
+      - name: Copy package.json
+        run:  cp api/package.json ./dist
+
+      - name: Copy db.json
+        run: cp db.json ./dist
+
+      - name: Zip artifact for deployment
+        run: zip build.zip ./dist/* -r
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: react-build
+          path: build.zip
+
+  create-deployment-preview:
+    if: github.event.action == 'opened'
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'pr-preview-${{ github.event.pull_request.number }}'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Initial Deployment Preview Comment
+        uses: peter-evans/create-or-update-comment@v3
+        id: pr-preview-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ### Building Deployment Preview...
+            A preview of this Pull Request is being created. Hold tight while it's building ⚒️
+            This comment will be automatically updated when the preview is ready.  
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Create PR Deployment Slot
+        uses: Azure/cli@v1
+        with:
+          inlineScript: az webapp deployment slot create --name wapp-SmashGrade --resource-group rg-SmashGrade --slot preview-pr-${{ github.event.pull_request.number }}
+
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: react-build
+
+      - name: Unzip artifact for deployment
+        run: |
+          unzip build.zip
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'wapp-SmashGrade'
+          slot-name: preview-pr-${{ github.event.pull_request.number }}
+          package: ./dist
+
+      - name: Update comment
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          comment-id: ${{ steps.pr-preview-comment.outputs.comment-id }}
+          edit-mode: replace
+          body: |
+            ### Deployment Preview
+            😎 Preview this PR: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+            🧑🏼‍💻 Commit SHA: ${{ github.sha }}
+          reactions: rocket
+
+  update-deployment-preview:
+    if: github.event.action == 'synchronize'
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'pr-preview-${{ github.event.pull_request.number }}'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Find PR Preview Comment
+        uses: peter-evans/find-comment@v2
+        id: find-preview-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: "github-actions[bot]"
+          body-includes: Deployment Preview
+
+      - name: Update PR Preview Comment
+        if: steps.find-preview-comment.outputs.comment-id != ''
+        uses: peter-evans/create-or-update-comment@v1.4.5
+        with:
+          comment-id: ${{ steps.find-preview-comment.outputs.comment-id }}
+          edit-mode: replace
+          body: |
+            ### Building Deployment Preview...
+            The Pull Request preview is being updated. Hold tight while it's building ⚒️
+            This comment will be automatically updated when the new version is ready.
+
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: react-build
+
+      - name: Unzip artifact for deployment
+        run: |
+          unzip build.zip
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'wapp-SmashGrade'
+          slot-name: preview-pr-${{ github.event.pull_request.number }}
+          package: ./dist
+
+      - name: Update comment
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          comment-id: ${{ steps.find-preview-comment.outputs.comment-id }}
+          edit-mode: replace
+          body: |
+            ### Deployment Preview
+            😎 Preview this PR: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+            🧑🏼‍💻 Commit SHA: ${{ github.sha }}
+          reactions: rocket
+
+  delete-deployment-preview:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Azure Login
+        uses: Azure/login@v1.4.3
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Delete PR Deployment Slot
+        uses: Azure/cli@v1
+        with:
+          inlineScript: |
+            az webapp deployment slot delete --name wapp-SmashGrade --resource-group rg-SmashGrade --slot preview-pr-${{ github.event.pull_request.number }}
+
+      - name: Find PR Preview Comment
+        uses: peter-evans/find-comment@v2
+        id: find-preview-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: "github-actions[bot]"
+          body-includes: Deployment Preview
+
+      - name: Update PR Preview Comment
+        if: steps.find-preview-comment.outputs.comment-id != ''
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          comment-id: ${{ steps.find-preview-comment.outputs.comment-id }}
+          edit-mode: replace
+          body: |
+            ### Deployment Preview
+            🏁 This PR has been closed. No deployment preview is available.
+          reactions: "hooray"
+
+  deploy-to-prod:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: react-build
+
+      - name: Unzip artifact for deployment
+        run: |
+          unzip build.zip
+          
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'wapp-SmashGrade'
+          slot-name: 'Production'
+          package: ./dist

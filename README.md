@@ -29,3 +29,22 @@ To run eslint and prettier use:
 ```shell
 npm run lint && npm run format
 ```
+
+## I18N
+
+To extract the messages from the source code use either of the following:
+
+```shell
+npm run extract-de # extract German messages
+npm run extract-en # extract English messages
+npm run extract-fr # extract French messages
+```
+
+Before compiling the messages make sure that the messages are translated correctly in the previously extracted file.
+To compile the messages use either of the following:
+
+```shell
+npm run compile-de # compile German messages
+npm run compile-en # compile English messages
+npm run compile-fr # compile French messages
+```
