@@ -24,6 +24,8 @@ interface Curriculum {
     label: string;
     year: number;
 }
+import { Button } from 'antd';
+import { RocketOutlined } from '@ant-design/icons';
 
 async function getYears(): Promise<Year[]> {
     const { data } = await axios.get<YearResponse[]>('http://localhost:3000/startYears');
@@ -83,6 +85,10 @@ export default function Onboarding() {
             />
 
             <SelectWithTitle key={'curriculum'} title={'Lehrgang'} selectProps={{ options: availableCurriculums }} />
+
+            <Button type={'primary'} icon={<RocketOutlined />}>
+                Studium starten
+            </Button>
         </div>
     );
 }
