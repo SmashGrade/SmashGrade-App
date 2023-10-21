@@ -20,8 +20,8 @@
         "*.--write": "npm run format"
     },
     "dependencies": {
-        "@tanstack/react-query": "^4.36.1",
-        "@tanstack/react-query-devtools": "^4.36.1",
+        "@tanstack/react-query": "^5.0.0",
+        "@tanstack/react-query-devtools": "^5.0.3",
         "antd": "^5.9.1",
         "axios": "^1.5.1",
         "react": "^18.2.0",
