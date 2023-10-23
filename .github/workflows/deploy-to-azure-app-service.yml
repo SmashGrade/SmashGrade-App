@@ -208,7 +208,7 @@ jobs:
           reactions: "hooray"
 
       - name: Delete GitHub deployment environment
-      - uses: octokit/request-action@v2.x
+        uses: octokit/request-action@v2.x
         id: delete_github-deploy-env
         with:
           route: DELETE /repos/{owner}/{repo}/environments/preview-pr-${{ github.event.pull_request.number }}
