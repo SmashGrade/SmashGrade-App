@@ -56,6 +56,14 @@ jobs:
           name: react-build
           path: build.zip
 
+      - name: Delete GitHub deployment environment
+        uses: octokit/request-action@v2.x
+        id: delete_github-deploy-env
+        with:
+          route: DELETE /repos/SmashGrade/SmashGrade-App/environments/pr-preview-34
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   create-deployment-preview:
     if: github.event.action == 'opened'
     runs-on: ubuntu-latest
