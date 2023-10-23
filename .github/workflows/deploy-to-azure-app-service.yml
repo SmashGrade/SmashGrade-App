@@ -10,7 +10,10 @@ on:
     branches:
       - dev
 
-permissions: write-all
+permissions:
+  pull-requests: write # allows to add comments to PRs
+  contents: read
+  deployments: write
 
 jobs:
   build:
@@ -53,13 +56,20 @@ jobs:
           name: react-build
           path: build.zip
 
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app_id: ${{ secrets.WORKFLOW_APP_APP_ID }}
+          private_key: ${{ secrets.WORKFLOW_APP_PRIVATE_KEY }}
+
       - name: Delete GitHub deployment environment
         uses: octokit/request-action@v2.x
         id: delete_github-deploy-env
         with:
           route: DELETE /repos/SmashGrade/SmashGrade-App/environments/pr-preview-34
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
 
   create-deployment-preview:
     if: github.event.action == 'opened'
