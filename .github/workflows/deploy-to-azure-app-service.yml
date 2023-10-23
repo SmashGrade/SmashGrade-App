@@ -33,6 +33,23 @@ jobs:
         with:
           node-version: 18
 
+
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.WORKFLOW_APP_APP_ID }}
+          private-key: ${{ secrets.WORKFLOW_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Delete GitHub deployment environment
+        uses: octokit/request-action@v2.x
+        id: delete_github-deploy-env
+        with:
+          route: DELETE /repos/SmashGrade/SmashGrade-App/environments/test
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+
       - name: Install dependencies
         run: |
           npm pkg delete scripts.prepare
@@ -56,21 +73,7 @@ jobs:
           name: react-build
           path: build.zip
 
-      - name: Generate a token
-        id: generate_token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ secrets.WORKFLOW_APP_APP_ID }}
-          private-key: ${{ secrets.WORKFLOW_APP_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
 
-      - name: Delete GitHub deployment environment
-        uses: octokit/request-action@v2.x
-        id: delete_github-deploy-env
-        with:
-          route: DELETE /repos/SmashGrade/SmashGrade-App/environments/pr-preview-34
-        env:
-          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
 
   create-deployment-preview:
     if: github.event.action == 'opened'
