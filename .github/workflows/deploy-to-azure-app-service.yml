@@ -221,7 +221,7 @@ jobs:
         with:
           # Use a JWT created with your GitHub App's private key
           token: ${{ steps.generate_token.outputs.token }}
-          environment: preview-pr-${{ github.event.pull_request.number }}
+          environment: pr-preview-${{ github.event.pull_request.number }}
 
   deploy-to-prod:
     if: github.ref == 'refs/heads/dev'
