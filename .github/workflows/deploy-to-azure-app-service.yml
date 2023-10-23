@@ -13,6 +13,7 @@ on:
 permissions:
   pull-requests: write # allows to add comments to PRs
   contents: read
+  deployments: write
 
 jobs:
   build:
