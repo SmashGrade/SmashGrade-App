@@ -37,8 +37,8 @@ jobs:
         uses: navikt/github-app-token-generator@v1
         id: get-token
         with:
-          app-id: ${{ secrets.GH_APP_ID }}
-          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          app-id: ${{ secrets.WORKFLOW_APP_APP_ID }}
+          private-key: ${{ secrets.WORKFLOW_APP_PRIVATE_KEY }}
 
       - name: 🗑 Delete deployment environment
         uses: strumwolf/delete-deployment-environment@v2.2.3
