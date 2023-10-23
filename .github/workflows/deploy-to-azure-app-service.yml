@@ -13,6 +13,7 @@ on:
 permissions:
   pull-requests: write # allows to add comments to PRs
   contents: read
+  deployments: write
 
 jobs:
   build:
@@ -207,14 +208,20 @@ jobs:
             ### Deployment Preview
             🏁 This PR has been closed. No deployment preview is available.
           reactions: "hooray"
-
-      - name: Delete GitHub deployment environment
-        uses: octokit/request-action@v2.x
-        id: delete_github-deploy-env
+          
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
         with:
-          route: DELETE /repos/SmashGrade/SmashGrade-App/environments/preview-pr-${{ github.event.pull_request.number }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          app-id: ${{ secrets.WORKFLOW_APP_APP_ID }}
+          private-key: ${{ secrets.WORKFLOW_APP_PRIVATE_KEY }}
+
+      - name: 🗑 Delete deployment environment
+        uses: strumwolf/delete-deployment-environment@v2.2.3
+        with:
+          # Use a JWT created with your GitHub App's private key
+          token: ${{ steps.generate_token.outputs.token }}
+          environment: preview-pr-${{ github.event.pull_request.number }}
 
   deploy-to-prod:
     if: github.ref == 'refs/heads/dev'
