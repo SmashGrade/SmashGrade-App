@@ -1,7 +1,11 @@
-import { OnboardingPage } from './pages/OnboardingPage';
+import { Outlet } from '@tanstack/react-router';
 
 function App() {
-    return <OnboardingPage />;
+    return (
+        <>
+            <Outlet />
+        </>
+    );
 }
 
 export default App;

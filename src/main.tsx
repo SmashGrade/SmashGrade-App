@@ -7,8 +7,18 @@ import App from './App.tsx';
 import colors from './colors.module.scss';
 import './global.scss';
 import { ReactIntlProvider } from './i18n/ReactIntlProvider.tsx';
+import { RootRoute, Route, Router, RouterProvider } from '@tanstack/react-router';
+import { OnboardingPage } from './pages/OnboardingPage';
 
 const queryClient = new QueryClient();
+
+const rootRoute: RootRoute = new RootRoute({
+    component: App,
+});
+
+const indexRoute = new Route({ getParentRoute: () => rootRoute, path: '/', component: OnboardingPage });
+const routeTree = rootRoute.addChildren([indexRoute]);
+const router = new Router({ routeTree });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
@@ -37,7 +47,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                 }}
             >
                 <QueryClientProvider client={queryClient}>
-                    <App />
+                    <RouterProvider router={router} />
                     <ReactQueryDevtools initialIsOpen={false} />
                 </QueryClientProvider>
             </ConfigProvider>
