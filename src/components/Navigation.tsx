@@ -1,3 +1,4 @@
+import { useNavigate } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
 import { useState } from 'react';
 import smashgradelogo from '../assets/images/nav_logo_250.png';
@@ -58,15 +59,19 @@ const items: MenuProps['items'] = [
                 Navigation Four - Link
             </a>
         ),
-        key: 'alipay',
+        key: 'test',
     },
 ];
 
 export default function Navigation() {
     const [current, setCurrent] = useState('onboarding');
+    const navigate = useNavigate();
 
     const onClick: MenuProps['onClick'] = (e) => {
         setCurrent(e.key);
+        void navigate({
+            to: `/${e.key}`,
+        });
     };
 
     return (

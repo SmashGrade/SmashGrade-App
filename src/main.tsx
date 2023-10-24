@@ -9,6 +9,7 @@ import './global.scss';
 import { ReactIntlProvider } from './i18n/ReactIntlProvider.tsx';
 import { RootRoute, Route, Router, RouterProvider } from '@tanstack/react-router';
 import { OnboardingPage } from './pages/OnboardingPage';
+import { PlaceholderCurriculumPage } from './pages/PlaceholderCurriculumPage.tsx';
 
 const queryClient = new QueryClient();
 
@@ -17,7 +18,13 @@ const rootRoute: RootRoute = new RootRoute({
 });
 
 const indexRoute = new Route({ getParentRoute: () => rootRoute, path: '/', component: OnboardingPage });
-const routeTree = rootRoute.addChildren([indexRoute]);
+const onboardingRoute = new Route({ getParentRoute: () => rootRoute, path: '/onboarding', component: OnboardingPage });
+const curriculumRoute = new Route({
+    getParentRoute: () => rootRoute,
+    path: '/curriculum',
+    component: PlaceholderCurriculumPage,
+});
+const routeTree = rootRoute.addChildren([indexRoute, onboardingRoute, curriculumRoute]);
 const router = new Router({ routeTree });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
