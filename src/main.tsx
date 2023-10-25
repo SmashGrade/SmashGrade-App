@@ -7,9 +7,8 @@ import App from './App.tsx';
 import colors from './colors.module.scss';
 import './global.scss';
 import { ReactIntlProvider } from './i18n/ReactIntlProvider.tsx';
-import { RootRoute, Route, Router, RouterProvider } from '@tanstack/react-router';
+import { RootRoute, Route, Router, RouterProvider, lazyRouteComponent } from '@tanstack/react-router';
 import { OnboardingPage } from './pages/OnboardingPage';
-import { PlaceholderCurriculumPage } from './pages/PlaceholderCurriculumPage.tsx';
 
 const queryClient = new QueryClient();
 
@@ -17,13 +16,24 @@ const rootRoute: RootRoute = new RootRoute({
     component: App,
 });
 
-const indexRoute = new Route({ getParentRoute: () => rootRoute, path: '/', component: OnboardingPage });
-const onboardingRoute = new Route({ getParentRoute: () => rootRoute, path: '/onboarding', component: OnboardingPage });
+const indexRoute = new Route({
+    getParentRoute: () => rootRoute,
+    path: '/',
+    component: OnboardingPage,
+});
+
+const onboardingRoute = new Route({
+    getParentRoute: () => rootRoute,
+    path: '/onboarding',
+    component: OnboardingPage,
+});
+
 const curriculumRoute = new Route({
     getParentRoute: () => rootRoute,
     path: '/curriculum',
-    component: PlaceholderCurriculumPage,
+    component: lazyRouteComponent(() => import('./pages/PlaceholderCurriculumPage.tsx')),
 });
+
 const routeTree = rootRoute.addChildren([indexRoute, onboardingRoute, curriculumRoute]);
 const router = new Router({ routeTree });
 

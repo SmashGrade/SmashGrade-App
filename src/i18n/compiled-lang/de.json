@@ -1,8 +1,14 @@
 {
+    "course.menu": "Kurs",
     "curriculum": "Lehrplan",
+    "curriculum.menu": "Studiengang",
     "language.english": "Englisch",
     "language.french": "Französisch",
     "language.german": "Deutsch",
+    "module.menu": "Module",
+    "my-course.menu": "Meine Kurse",
+    "my-curriculum.menu": "Mein Studium",
     "onboarding.title": "Übersicht",
-    "startYear": "Startjahr"
+    "startYear": "Startjahr",
+    "user-management.menu": "Benutzerverwaltung"
 }

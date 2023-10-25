@@ -1,8 +1,14 @@
 {
+    "course.menu": "Course",
     "curriculum": "Curriculum",
+    "curriculum.menu": "Curriculum",
     "language.english": "English",
     "language.french": "French",
     "language.german": "German",
+    "module.menu": "Module",
+    "my-course.menu": "My Courses",
+    "my-curriculum.menu": "My Curriculum",
     "onboarding.title": "Overview",
-    "startYear": "Start Year"
+    "startYear": "Start Year",
+    "user-management.menu": "Usermanagement"
 }

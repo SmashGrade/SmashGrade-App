@@ -1,7 +1,31 @@
 {
     "curriculum": {
         "defaultMessage": "Curriculum",
-        "description": "Lehrplan Dropdown Titel"
+        "description": "Studiengang Dropdown Titel"
+    },
+    "curriculum.menu": {
+        "defaultMessage": "Curriculum",
+        "description": "Studiengang Menu"
+    },
+    "module.menu": {
+        "defaultMessage": "Module",
+        "description": "Module Menu"
+    },
+    "course.menu": {
+        "defaultMessage": "Course",
+        "description": "Kurs Menu"
+    },
+    "user-management.menu": {
+        "defaultMessage": "Usermanagement",
+        "description": "Benutzerverwaltung Menu"
+    },
+    "my-course.menu": {
+        "defaultMessage": "My Courses",
+        "description": "My Courses Menu"
+    },
+    "my-curriculum.menu": {
+        "defaultMessage": "My Curriculum",
+        "description": "My Curriculum Menu"
     },
     "language.english": {
         "defaultMessage": "English",
