@@ -1,8 +1,14 @@
 {
+    "course.menu": "Cours",
     "curriculum": "Plan d'études",
+    "curriculum.menu": "Programme",
     "language.english": "Anglais",
     "language.french": "Français",
     "language.german": "Allemand",
+    "module.menu": "Modules",
+    "my-course.menu": "Mes cours",
+    "my-curriculum.menu": "Mon programme",
     "onboarding.title": "Aperçu",
-    "startYear": "Année de lancement"
+    "startYear": "Année de début",
+    "user-management.menu": "Gestion des utilisateurs"
 }
