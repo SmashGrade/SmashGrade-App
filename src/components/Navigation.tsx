@@ -8,7 +8,8 @@ import {
 } from '@ant-design/icons';
 import { Link } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
-import { useState } from 'react';
+import { MenuClickEventHandler } from 'rc-menu/lib/interface';
+import { useCallback, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import smashgradelogo from '../assets/images/smashgrade_logo_transparent.png';
 import styles from './Navigation.module.scss';
@@ -98,9 +99,7 @@ const items: MenuProps['items'] = [
 export default function Navigation() {
     const [current, setCurrent] = useState('onboarding');
 
-    const onClick: MenuProps['onClick'] = (e) => {
-        setCurrent(e.key);
-    };
+    const onNavItemClick = useCallback<MenuClickEventHandler>((e) => setCurrent(e.key), []);
 
     return (
         <div className={styles.navigationContainer}>
@@ -110,7 +109,7 @@ export default function Navigation() {
                 className={styles.logo}
             />
             <Menu
-                onClick={onClick}
+                onClick={onNavItemClick}
                 selectedKeys={[current]}
                 mode={'horizontal'}
                 items={items}
