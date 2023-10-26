@@ -38,12 +38,12 @@ jobs:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-          PR_VALUE: ${{ github.event.pull_request.number && github.event.pull_request.number || github.event.inputs.pull-request-number }}
-          CREATE_AZURE_SLOT: ${{ github.event.inputs.create_azure_slot }}
+          PR_VALUE: ${{ github.event.pull_request.number && github.event.pull_request.number || inputs.pull-request-number }}
+          CREATE_AZURE_SLOT: ${{ inputs.create_azure_slot }}
         run: |
-          echo "$GITHUB_CONTEXT"
           echo "pr-preview-$PR_VALUE"
-          echo "$CREATE_AZURE_SLOT"
+          echo "Create Azure Slot: $CREATE_AZURE_SLOT"
+          echo "$GITHUB_CONTEXT"
 
 
       - name: Set up Node.js version
@@ -75,11 +75,11 @@ jobs:
           path: build.zip
 
   create-deployment-preview:
-    if: github.event.action == 'opened' || github.event.inputs.create_azure_slot == true
+    if: github.event.action == 'opened' || inputs.create_azure_slot == true
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'pr-preview-${{ github.event.pull_request.number && github.event.pull_request.number || github.event.inputs.pull-request-number }}'
+      name: 'pr-preview-${{ github.event.pull_request.number && github.event.pull_request.number || inputs.pull-request-number }}'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -87,7 +87,7 @@ jobs:
         uses: peter-evans/create-or-update-comment@v3
         id: pr-preview-comment
         with:
-          issue-number: ${{ github.event.pull_request.number && github.event.pull_request.number || github.event.inputs.pull-request-number }}
+          issue-number: ${{ github.event.pull_request.number && github.event.pull_request.number || inputs.pull-request-number }}
           body: |
             ### Building Deployment Preview...
             A preview of this Pull Request is being created. Hold tight while it's building ⚒️
@@ -101,7 +101,7 @@ jobs:
       - name: Create PR Deployment Slot
         uses: Azure/cli@v1
         with:
-          inlineScript: az webapp deployment slot create --name wapp-SmashGrade --resource-group rg-SmashGrade --slot preview-pr-${{ github.event.pull_request.number && github.event.pull_request.number || github.event.inputs.pull-request-number }}
+          inlineScript: az webapp deployment slot create --name wapp-SmashGrade --resource-group rg-SmashGrade --slot preview-pr-${{ github.event.pull_request.number && github.event.pull_request.number || inputs.pull-request-number }}
 
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
@@ -117,7 +117,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'wapp-SmashGrade'
-          slot-name: preview-pr-${{ github.event.pull_request.number && github.event.pull_request.number || github.event.inputs.pull-request-number }}
+          slot-name: preview-pr-${{ github.event.pull_request.number && github.event.pull_request.number || inputs.pull-request-number }}
           package: ./dist
 
       - name: Update comment

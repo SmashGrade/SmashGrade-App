@@ -6,7 +6,7 @@ import {
     ReadOutlined,
     UserOutlined,
 } from '@ant-design/icons';
-import { Link, useNavigate } from '@tanstack/react-router';
+import { Link } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -97,13 +97,9 @@ const items: MenuProps['items'] = [
 
 export default function Navigation() {
     const [current, setCurrent] = useState('onboarding');
-    const navigate = useNavigate();
 
     const onClick: MenuProps['onClick'] = (e) => {
         setCurrent(e.key);
-        void navigate({
-            to: `/${e.key}`,
-        });
     };
 
     return (
