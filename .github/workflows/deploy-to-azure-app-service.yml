@@ -38,9 +38,11 @@ jobs:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
+          PR_VALUE: ${{ github.event.pull_request.number && github.event.pull_request.number || pull-request-number }}
         run: | 
           echo "$GITHUB_CONTEXT"
-          echo "pr-preview-${{ github.event.pull_request.number && github.event.pull_request.number || pull-request-number }}"
+          echo "pr-preview-$PR_VALUE"
+      
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
