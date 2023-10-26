@@ -18,7 +18,7 @@ interface CourseResponse {
 const defaultCourseColDef: ColDef<CourseResponse> = { sortable: true, filter: 'agTextColumnFilter' };
 
 const courseColumnDefs: ColDef<CourseResponse>[] = [
-    { field: 'id', headerName: 'ID', filter: 'agNumberColumnFilter' },
+    { field: 'id', headerName: 'ID', filter: 'agNumberColumnFilter', sort: 'asc' },
     { field: 'number', headerName: 'Course Number' },
     { field: 'description', headerName: 'Course Name', flex: 1 },
     { field: 'teachers', headerName: 'Teachers', flex: 1 },
