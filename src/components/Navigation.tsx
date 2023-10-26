@@ -15,14 +15,14 @@ import styles from './Navigation.module.scss';
 
 const items: MenuProps['items'] = [
     {
-        label: <Link>Onboarding</Link>,
+        label: <Link to={'/onboarding'}>Onboarding</Link>,
         key: 'onboarding',
         icon: <ProfileOutlined />,
         disabled: false,
     },
     {
         label: (
-            <Link>
+            <Link to={'/curriculum'}>
                 <FormattedMessage
                     id={'curriculum.menu'}
                     defaultMessage={'Studiengang'}
