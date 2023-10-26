@@ -85,7 +85,7 @@ jobs:
         uses: peter-evans/create-or-update-comment@v3
         id: pr-preview-comment
         with:
-          issue-number: ${{ github.event.pull_request.number }}
+          issue-number: ${{ github.event.pull_request.number && github.event.pull_request.number || github.event.inputs.pull-request-number }}
           body: |
             ### Building Deployment Preview...
             A preview of this Pull Request is being created. Hold tight while it's building ⚒️
@@ -99,7 +99,7 @@ jobs:
       - name: Create PR Deployment Slot
         uses: Azure/cli@v1
         with:
-          inlineScript: az webapp deployment slot create --name wapp-SmashGrade --resource-group rg-SmashGrade --slot preview-pr-${{ github.event.pull_request.number }}
+          inlineScript: az webapp deployment slot create --name wapp-SmashGrade --resource-group rg-SmashGrade --slot preview-pr-${{ github.event.pull_request.number && github.event.pull_request.number || github.event.inputs.pull-request-number }}
 
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
@@ -115,7 +115,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'wapp-SmashGrade'
-          slot-name: preview-pr-${{ github.event.pull_request.number }}
+          slot-name: preview-pr-${{ github.event.pull_request.number && github.event.pull_request.number || github.event.inputs.pull-request-number }}
           package: ./dist
 
       - name: Update comment
