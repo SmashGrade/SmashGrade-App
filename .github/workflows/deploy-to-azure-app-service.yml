@@ -38,7 +38,7 @@ jobs:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-          PR_VALUE: ${{ github.event.pull_request.number && github.event.pull_request.number || pull-request-number }}
+          PR_VALUE: ${{ github.event.pull_request.number && github.event.pull_request.number || github.event.inputs.pull-request-number }}
         run: | 
           echo "$GITHUB_CONTEXT"
           echo "pr-preview-$PR_VALUE"
