@@ -46,7 +46,7 @@ const items: MenuProps['items'] = [
     },
     {
         label: (
-            <Link>
+            <Link to={'/course'}>
                 <FormattedMessage id={'course.menu'} defaultMessage={'Kurs'} description={'Kurs Menu'} />
             </Link>
         ),
@@ -98,7 +98,6 @@ const items: MenuProps['items'] = [
 
 export default function Navigation() {
     const [current, setCurrent] = useState('onboarding');
-
     const onNavItemClick = useCallback<MenuClickEventHandler>((e) => setCurrent(e.key), []);
 
     return (
