@@ -1,40 +1,43 @@
+import {
+    AppstoreOutlined,
+    BookOutlined,
+    HeartOutlined,
+    ProfileOutlined,
+    ReadOutlined,
+    UserOutlined,
+} from '@ant-design/icons';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
 import { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import smashgradelogo from '../assets/images/smashgrade_logo_transparent.png';
 import styles from './Navigation.module.scss';
-import { FormattedMessage } from 'react-intl';
-
-import {
-    BookOutlined,
-    AppstoreOutlined,
-    UserOutlined,
-    ReadOutlined,
-    HeartOutlined,
-    ProfileOutlined,
-} from '@ant-design/icons';
 
 const items: MenuProps['items'] = [
     {
-        label: <Link>Onboarding </Link>,
+        label: <Link>Onboarding</Link>,
         key: 'onboarding',
         icon: <ProfileOutlined />,
         disabled: false,
     },
     {
         label: (
-            <FormattedMessage id={'curriculum.menu'} defaultMessage={'Studiengang'} description={'Studiengang Menu'}>
-                {(text) => <Link>{text}</Link>}
-            </FormattedMessage>
+            <Link>
+                <FormattedMessage
+                    id={'curriculum.menu'}
+                    defaultMessage={'Studiengang'}
+                    description={'Studiengang Menu'}
+                />
+            </Link>
         ),
         key: 'curriculum',
         icon: <BookOutlined />,
     },
     {
         label: (
-            <FormattedMessage id={'module.menu'} defaultMessage={'Module'} description={'Module Menu'}>
-                {(text) => <Link>{text}</Link>}
-            </FormattedMessage>
+            <Link>
+                <FormattedMessage id={'module.menu'} defaultMessage={'Module'} description={'Module Menu'} />
+            </Link>
         ),
         key: 'module',
         icon: <AppstoreOutlined />,
@@ -42,31 +45,35 @@ const items: MenuProps['items'] = [
     },
     {
         label: (
-            <FormattedMessage id={'course.menu'} defaultMessage={'Kurs'} description={'Kurs Menu'}>
-                {(text) => <Link>{text}</Link>}
-            </FormattedMessage>
+            <Link>
+                <FormattedMessage id={'course.menu'} defaultMessage={'Kurs'} description={'Kurs Menu'} />
+            </Link>
         ),
         key: 'course',
         icon: <ReadOutlined />,
     },
     {
         label: (
-            <FormattedMessage
-                id={'user-management.menu'}
-                defaultMessage={'Benutzerverwaltung'}
-                description={'Benutzerverwaltung Menu'}
-            >
-                {(text) => <Link>{text}</Link>}
-            </FormattedMessage>
+            <Link>
+                <FormattedMessage
+                    id={'user-management.menu'}
+                    defaultMessage={'Benutzerverwaltung'}
+                    description={'Benutzerverwaltung Menu'}
+                />
+            </Link>
         ),
         key: 'user-management',
         icon: <UserOutlined />,
     },
     {
         label: (
-            <FormattedMessage id={'my-course.menu'} defaultMessage={'Meine Kurse'} description={'Meine Kurse Menu'}>
-                {(text) => <Link>{text}</Link>}
-            </FormattedMessage>
+            <Link>
+                <FormattedMessage
+                    id={'my-course.menu'}
+                    defaultMessage={'Meine Kurse'}
+                    description={'Meine Kurse Menu'}
+                />
+            </Link>
         ),
         key: 'my-course',
         icon: <HeartOutlined />,
@@ -74,13 +81,13 @@ const items: MenuProps['items'] = [
     },
     {
         label: (
-            <FormattedMessage
-                id={'my-curriculum.menu'}
-                defaultMessage={'Mein Studium'}
-                description={'Mein Studium Menu'}
-            >
-                {(text) => <Link>{text}</Link>}
-            </FormattedMessage>
+            <Link>
+                <FormattedMessage
+                    id={'my-curriculum.menu'}
+                    defaultMessage={'Mein Studium'}
+                    description={'Mein Studium Menu'}
+                />
+            </Link>
         ),
         key: 'my-curriculum',
         icon: <ProfileOutlined />,
@@ -100,21 +107,19 @@ export default function Navigation() {
     };
 
     return (
-        <>
-            <div className={styles.navigationContainer}>
-                <img
-                    src={smashgradelogo}
-                    alt={'SmashGrade - Höhere Fachschule für Technik Mittelland'}
-                    className={styles.logo}
-                />
-                <Menu
-                    onClick={onClick}
-                    selectedKeys={[current]}
-                    mode={'horizontal'}
-                    items={items}
-                    className={styles.menuContainer}
-                />
-            </div>
-        </>
+        <div className={styles.navigationContainer}>
+            <img
+                src={smashgradelogo}
+                alt={'SmashGrade - Höhere Fachschule für Technik Mittelland'}
+                className={styles.logo}
+            />
+            <Menu
+                onClick={onClick}
+                selectedKeys={[current]}
+                mode={'horizontal'}
+                items={items}
+                className={styles.menuContainer}
+            />
+        </div>
     );
 }
