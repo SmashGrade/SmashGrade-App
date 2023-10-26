@@ -10,6 +10,18 @@ on:
     branches:
       - dev
 
+  workflow_dispatch:
+    inputs:
+      create_azure_slot:
+        type: boolean
+        description: Allows to manually trigger the creation and deployment to an Azure slot
+        default: false
+      pull-request-number:
+        type: number
+        description: Specify the pull request number to create a deployment preview for it
+        required: true
+
+
 permissions:
   pull-requests: write # allows to add comments to PRs
   contents: read
@@ -26,7 +38,9 @@ jobs:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+        run: | 
+          echo "$GITHUB_CONTEXT"
+          echo "pr-preview-${{ github.event.pull_request.number && github.event.pull_request.number || pull-request-number }}"
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
@@ -57,11 +71,11 @@ jobs:
           path: build.zip
 
   create-deployment-preview:
-    if: github.event.action == 'opened'
+    if: github.event.action == 'opened' || ${{ github.event.inputs.create_azure_slot }}
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'pr-preview-${{ github.event.pull_request.number }}'
+      name: 'pr-preview-${{ github.event.pull_request.number && github.event.pull_request.number || pull-request-number }}'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
