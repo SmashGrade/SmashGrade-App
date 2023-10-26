@@ -2,7 +2,7 @@ name: Build and deploy app to Azure Web App Service
 
 on:
   pull_request:
-    types: [opened, synchronize, closed]
+    types: [ opened, synchronize, closed ]
     branches:
       - dev
 
@@ -39,10 +39,12 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
           PR_VALUE: ${{ github.event.pull_request.number && github.event.pull_request.number || github.event.inputs.pull-request-number }}
-        run: | 
+          CREATE_AZURE_SLOT: ${{ github.event.inputs.create_azure_slot }}
+        run: |
           echo "$GITHUB_CONTEXT"
           echo "pr-preview-$PR_VALUE"
-      
+          echo "$CREATE_AZURE_SLOT"
+
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
@@ -55,10 +57,10 @@ jobs:
           npm clean-install
 
       - name: Build react App
-        run:  npm run build:azure --if-present
+        run: npm run build:azure --if-present
 
       - name: Copy package.json
-        run:  cp api/package.json ./dist
+        run: cp api/package.json ./dist
 
       - name: Copy db.json
         run: cp db.json ./dist
@@ -73,7 +75,7 @@ jobs:
           path: build.zip
 
   create-deployment-preview:
-    if: github.event.action == 'opened' || ${{ github.event.inputs.create_azure_slot }}
+    if: github.event.action == 'opened' || github.event.inputs.create_azure_slot == true
     runs-on: ubuntu-latest
     needs: build
     environment:
@@ -224,7 +226,7 @@ jobs:
             ### Deployment Preview
             🏁 This PR has been closed. No deployment preview is available.
           reactions: "hooray"
-          
+
       - name: Generate a token
         id: generate_token
         uses: actions/create-github-app-token@v1
@@ -256,7 +258,7 @@ jobs:
       - name: Unzip artifact for deployment
         run: |
           unzip build.zip
-          
+
       - name: Azure Login
         uses: Azure/login@v1
         with:
