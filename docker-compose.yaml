@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  smash-grade-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: react-app
+    container_name: smash-grade-frontend
+    ports:
+      - "80:80"
+      - "443:443"

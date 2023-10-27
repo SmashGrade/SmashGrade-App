@@ -5,7 +5,8 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "start": "npm i && node server.js"
+    "start": "npm i && node server.js",
+    "start:docker": "json-server --watch ../db.json --port 3000"
   },
   "dependencies": {
     "json-server": "^0.17.4"
