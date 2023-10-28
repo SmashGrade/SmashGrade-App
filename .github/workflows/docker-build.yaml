@@ -14,9 +14,9 @@ jobs:
       matrix:
         include:
           - dockerfile: ./Dockerfile
-            image: ghcr.io/smashgrade/react-app
+            image: ghcr.io/smashgrade/smashgrade-app/react-app
           - dockerfile: ./dev.Dockerfile
-            image: ghcr.io/smashgrade/json-server
+            image: ghcr.io/smashgrade/smashgrade-app/json-server
     permissions:
       packages: write
     steps:
