@@ -35,9 +35,11 @@
         ]
     },
     "dependencies": {
-        "@tanstack/react-router": "^0.0.1-beta.191",
         "@tanstack/react-query": "^5.0.0",
         "@tanstack/react-query-devtools": "^5.0.3",
+        "@tanstack/react-router": "^0.0.1-beta.191",
+        "ag-grid-community": "^30.2.0",
+        "ag-grid-react": "^30.2.0",
         "antd": "^5.9.1",
         "axios": "^1.5.1",
         "react": "^18.2.0",

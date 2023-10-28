@@ -1,5 +1,5 @@
 import Onboarding from '@features/overview/Onboarding.tsx';
 
-export function OnboardingPage() {
+export default function OnboardingPage() {
     return <Onboarding />;
 }

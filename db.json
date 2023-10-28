@@ -5,5 +5,77 @@
         { "id": 2, "title": "2. Lehrgang", "year": 2023 },
         { "id": 3, "title": "3. Lehrgang", "year": 2024 },
         { "id": 4, "title": "4. Lehrgang", "year": 2026 }
+    ],
+    "courses": [
+        {
+            "id": 1,
+            "description": "Introduction to Programming",
+            "number": "1.101",
+            "teachers": ["Alice Smith", "Bob Johnson"],
+            "evaluationType": "E"
+        },
+        {
+            "id": 2,
+            "description": "Data Structures and Algorithms",
+            "number": "2.201",
+            "teachers": ["David Brown", "Emma White"],
+            "evaluationType": "E"
+        },
+        {
+            "id": 3,
+            "description": "Digital Marketing",
+            "number": "4.401",
+            "teachers": ["Grace Miller", "Henry Davis"],
+            "evaluationType": "M"
+        },
+        {
+            "id": 4,
+            "description": "Art History",
+            "number": "5.321",
+            "teachers": ["Olivia Green", "Samuel Clark"],
+            "evaluationType": "E"
+        },
+        {
+            "id": 5,
+            "description": "Psychology 101",
+            "number": "3.001",
+            "teachers": ["Sophia Wilson", "Michael Turner"],
+            "evaluationType": "E"
+        },
+        {
+            "id": 6,
+            "description": "Business Finance",
+            "number": "4.501",
+            "teachers": ["Liam Anderson", "Ava Hall"],
+            "evaluationType": "M"
+        },
+        {
+            "id": 7,
+            "description": "Environmental Science",
+            "number": "2.301",
+            "teachers": ["Noah Lee", "Ella Harris"],
+            "evaluationType": "E"
+        },
+        {
+            "id": 8,
+            "description": "Chemistry Lab",
+            "number": "6.112",
+            "teachers": ["Lucas Taylor", "Mia King"],
+            "evaluationType": "M"
+        },
+        {
+            "id": 9,
+            "description": "World History",
+            "number": "5.201",
+            "teachers": ["William Brown", "Charlotte Young"],
+            "evaluationType": "E"
+        },
+        {
+            "id": 10,
+            "description": "Physical Education",
+            "number": "1.501",
+            "teachers": ["James Moore", "Emily Adams"],
+            "evaluationType": "P"
+        }
     ]
 }

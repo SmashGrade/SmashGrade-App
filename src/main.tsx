@@ -8,7 +8,7 @@ import App from './App.tsx';
 import colors from './colors.module.scss';
 import './global.scss';
 import { ReactIntlProvider } from './i18n/ReactIntlProvider.tsx';
-import { OnboardingPage } from './pages/OnboardingPage';
+import OnboardingPage from './pages/OnboardingPage';
 
 const queryClient = new QueryClient();
 
@@ -34,7 +34,13 @@ const curriculumRoute = new Route({
     component: lazyRouteComponent(() => import('./pages/PlaceholderCurriculumPage.tsx')),
 });
 
-const routeTree = rootRoute.addChildren([indexRoute, onboardingRoute, curriculumRoute]);
+export const courseRoute = new Route({
+    getParentRoute: () => rootRoute,
+    path: '/course',
+    component: lazyRouteComponent(() => import('./pages/CoursePage.tsx')),
+});
+
+const routeTree = rootRoute.addChildren([indexRoute, onboardingRoute, curriculumRoute, courseRoute]);
 const router = new Router({ routeTree });
 
 // Register your router for maximum type safety

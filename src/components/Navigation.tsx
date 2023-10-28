@@ -6,7 +6,7 @@ import {
     ReadOutlined,
     UserOutlined,
 } from '@ant-design/icons';
-import { Link } from '@tanstack/react-router';
+import { Link, useRouter } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 import { useCallback, useState } from 'react';
@@ -46,7 +46,7 @@ const items: MenuProps['items'] = [
     },
     {
         label: (
-            <Link>
+            <Link to={'/course'}>
                 <FormattedMessage id={'course.menu'} defaultMessage={'Kurs'} description={'Kurs Menu'} />
             </Link>
         ),
@@ -97,8 +97,9 @@ const items: MenuProps['items'] = [
 ];
 
 export default function Navigation() {
-    const [current, setCurrent] = useState('onboarding');
-
+    const router = useRouter();
+    const currentPath = router.state.location.pathname;
+    const [current, setCurrent] = useState(currentPath.substring(1) || 'onboarding');
     const onNavItemClick = useCallback<MenuClickEventHandler>((e) => setCurrent(e.key), []);
 
     return (
