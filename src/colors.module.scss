@@ -4,6 +4,7 @@ $colorBgContainer: #ffffff;
 $colorLink: #c6264e;
 $colorLinkHover: #3d3d3c;
 $colorLinkActive: #95223f;
+$colorBgContainerHighlight: lightgrey;
 
 :export {
     colorPrimary: $colorPrimary;
@@ -12,4 +13,5 @@ $colorLinkActive: #95223f;
     colorLink: $colorLink;
     colorLinkHover: $colorLinkHover;
     colorLinkActive: $colorLinkActive;
+    colorBgContainerHighlight: $colorBgContainerHighlight;
 }
