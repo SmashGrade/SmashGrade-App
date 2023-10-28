@@ -1,11 +1,23 @@
+# TODO: Fokus auf zusammenspiel zwischen json-server und react-app legen, anschliessend auf backend
 version: "3.8"
 services:
   smash-grade-frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: react-app
+    image: react-app # ghcr.io/smashgrade/react-app:latest  # TODO: Prüfen wie images für alle gepullt werden können
     container_name: smash-grade-frontend
     ports:
       - "80:80"
-      - "443:443"
+    networks:
+      - smash-grade-network
+    depends_on:
+        - json-server
+  json-server:
+    image: json-server # ghcr.io/smashgrade/json-server:latest  # TODO: Prüfen wie images für alle gepullt werden können
+    container_name: json-server
+    ports:
+      - "3000:3000"
+    networks:
+      - smash-grade-network
+
+networks:
+  smash-grade-network:
+    driver: bridge

@@ -6,9 +6,10 @@
   },
   "scripts": {
     "start": "npm i && node server.js",
-    "start:docker": "json-server --watch ../db.json --port 3000"
+    "start:docker": "node serverDocker.js"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "json-server": "^0.17.4"
   }
 }
