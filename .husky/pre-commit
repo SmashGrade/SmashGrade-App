@@ -1,7 +1,7 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx concurrently "npx lint-staged" "npm run check-typescript"
+npx concurrently "npx lint-staged" "npm run check-typescript" --names "lint & format,check-typescript"
 
 #npx lint-staged
 #npm run check-typescript
