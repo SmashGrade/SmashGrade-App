@@ -1,6 +1,8 @@
 body {
     font-family: 'Roboto', sans-serif;
     height: 100%;
+    margin: 0;
+    padding: 0px 8px;
 }
 
 html {
@@ -8,5 +10,7 @@ html {
 }
 
 #root {
+    display: flex;
+    flex-direction: column;
     height: 100%;
 }
