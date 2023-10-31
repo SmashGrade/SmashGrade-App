@@ -1,26 +1,58 @@
 {
+    "buttonActivate": {
+        "defaultMessage": "Aktivieren",
+        "description": "Speichern Button"
+    },
+    "buttonAdd": {
+        "defaultMessage": "+ Hinzufügen",
+        "description": "Hinzufuegen Button"
+    },
+    "buttonCancel": {
+        "defaultMessage": "Abbrechen",
+        "description": "Abbrechen Button"
+    },
+    "buttonSave": {
+        "defaultMessage": "Speichern",
+        "description": "Speichern Button"
+    },
+    "courseNumber": {
+        "defaultMessage": "Kurs Nummer",
+        "description": "Kurs Nummer"
+    },
+    "courseTitle": {
+        "defaultMessage": "Kurs",
+        "description": "Kurs Titel"
+    },
     "curriculum": {
-        "defaultMessage": "Curriculum",
+        "defaultMessage": "Lehrplan",
         "description": "Lehrplan Dropdown Titel"
     },
     "language.english": {
-        "defaultMessage": "English",
+        "defaultMessage": "Englisch",
         "description": "Sprachoption Englisch"
     },
     "language.french": {
-        "defaultMessage": "French",
+        "defaultMessage": "Französisch",
         "description": "Sprachoption Französisch"
     },
     "language.german": {
-        "defaultMessage": "German",
+        "defaultMessage": "Deutsch",
         "description": "Sprachoption Deutsch"
     },
+    "lecturerTitle": {
+        "defaultMessage": "Dozent(en)",
+        "description": "Name Dozent"
+    },
+    "moduleTitle": {
+        "defaultMessage": "Modul(e)",
+        "description": "Module Title"
+    },
     "onboarding.title": {
-        "defaultMessage": "Overview",
+        "defaultMessage": "Übersicht",
         "description": "Übersicht Titel"
     },
     "startYear": {
-        "defaultMessage": "Start Year",
+        "defaultMessage": "Startjahr",
         "description": "Startjahr Dropdown Titel"
     }
 }

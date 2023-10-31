@@ -7,7 +7,7 @@ import App from './App.tsx';
 import colors from './colors.module.scss';
 import './global.scss';
 import { ReactIntlProvider } from './i18n/ReactIntlProvider.tsx';
-import { RootRoute, Route, Router, RouterProvider } from '@tanstack/react-router';
+import { lazyRouteComponent, RootRoute, Route, Router, RouterProvider } from '@tanstack/react-router';
 import { OnboardingPage } from './pages/OnboardingPage';
 
 const queryClient = new QueryClient();
@@ -16,8 +16,19 @@ const rootRoute: RootRoute = new RootRoute({
     component: App,
 });
 
-const indexRoute = new Route({ getParentRoute: () => rootRoute, path: '/', component: OnboardingPage });
-const routeTree = rootRoute.addChildren([indexRoute]);
+const indexRoute = new Route({
+    getParentRoute: () => rootRoute,
+    path: '/',
+    component: OnboardingPage,
+});
+
+const courseCreationRoute = new Route({
+    getParentRoute: () => rootRoute,
+    path: '/course/edit/$courseId',
+    component: lazyRouteComponent(() => import('./features/course-admin/CourseCreation.tsx')),
+});
+
+const routeTree = rootRoute.addChildren([indexRoute, courseCreationRoute]);
 const router = new Router({ routeTree });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

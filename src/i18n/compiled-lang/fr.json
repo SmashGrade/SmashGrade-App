@@ -1,8 +1,16 @@
 {
-    "curriculum": "Plan d'études",
-    "language.english": "Anglais",
-    "language.french": "Français",
-    "language.german": "Allemand",
-    "onboarding.title": "Aperçu",
-    "startYear": "Année de lancement"
+    "buttonActivate": "Aktivieren",
+    "buttonAdd": "+ Hinzufügen",
+    "buttonCancel": "Abbrechen",
+    "buttonSave": "Speichern",
+    "courseNumber": "Kurs Nummer",
+    "courseTitle": "Kurs",
+    "curriculum": "Lehrplan",
+    "language.english": "Englisch",
+    "language.french": "Französisch",
+    "language.german": "Deutsch",
+    "lecturerTitle": "Dozent(en)",
+    "moduleTitle": "Modul(e)",
+    "onboarding.title": "Übersicht",
+    "startYear": "Startjahr"
 }

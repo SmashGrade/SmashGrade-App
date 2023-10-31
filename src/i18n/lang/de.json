@@ -1,4 +1,28 @@
 {
+    "buttonActivate": {
+        "defaultMessage": "Aktivieren",
+        "description": "Speichern Button"
+    },
+    "buttonAdd": {
+        "defaultMessage": "+ Hinzufügen",
+        "description": "Hinzufuegen Button"
+    },
+    "buttonCancel": {
+        "defaultMessage": "Abbrechen",
+        "description": "Abbrechen Button"
+    },
+    "buttonSave": {
+        "defaultMessage": "Speichern",
+        "description": "Speichern Button"
+    },
+    "courseNumber": {
+        "defaultMessage": "Kurs Nummer",
+        "description": "Kurs Nummer"
+    },
+    "courseTitle": {
+        "defaultMessage": "Kurs",
+        "description": "Kurs Titel"
+    },
     "curriculum": {
         "defaultMessage": "Lehrplan",
         "description": "Lehrplan Dropdown Titel"
@@ -14,6 +38,14 @@
     "language.german": {
         "defaultMessage": "Deutsch",
         "description": "Sprachoption Deutsch"
+    },
+    "lecturerTitle": {
+        "defaultMessage": "Dozent(en)",
+        "description": "Name Dozent"
+    },
+    "moduleTitle": {
+        "defaultMessage": "Modul(e)",
+        "description": "Module Title"
     },
     "onboarding.title": {
         "defaultMessage": "Übersicht",
