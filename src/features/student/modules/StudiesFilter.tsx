@@ -5,7 +5,7 @@ interface StudiesFilterProps {
     tabsProps: TabsProps;
 }
 
-export default function StudiesFilter({ tabsProps, defaultActiveKey }: StudiesFilterProps) {
+export default function StudiesFilter({ tabsProps, defaultActiveKey }: Readonly<StudiesFilterProps>) {
     return (
         <Tabs
             defaultActiveKey={defaultActiveKey}

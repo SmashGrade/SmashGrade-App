@@ -62,6 +62,6 @@ interface ModulesProps {
 }
 
 export default function Modules({ activeFilter }: ModulesProps) {
-    const collapseItems = items.filter((item) => item.study == activeFilter);
+    const collapseItems = items.filter((item) => item.study === activeFilter);
     return collapseItems.length > 0 ? <Collapse items={collapseItems} /> : <h2>No modules found</h2>;
 }
