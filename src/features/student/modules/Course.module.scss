@@ -1,0 +1,22 @@
+@import '../../../colors.module.scss';
+
+.courseContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $colorSecondary;
+    border-radius: 12px;
+    padding: 0 10px;
+    margin: 10px 0 10px 0;
+    color: black;
+}
+
+.courseTitle {
+    font-weight: bold;
+}
+
+.extraButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

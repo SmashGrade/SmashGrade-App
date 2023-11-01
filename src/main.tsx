@@ -1,3 +1,4 @@
+import StudentModulePage from './pages/ModulesPage.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ConfigProvider } from 'antd';
@@ -17,7 +18,12 @@ const rootRoute: RootRoute = new RootRoute({
 });
 
 const indexRoute = new Route({ getParentRoute: () => rootRoute, path: '/', component: OnboardingPage });
-const routeTree = rootRoute.addChildren([indexRoute]);
+const studentModuleRoute = new Route({
+    getParentRoute: () => rootRoute,
+    path: '/modules/',
+    component: StudentModulePage,
+});
+const routeTree = rootRoute.addChildren([indexRoute, studentModuleRoute]);
 const router = new Router({ routeTree });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -27,8 +33,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                 theme={{
                     components: {
                         Collapse: {
-                            headerBg: colors.colorPrimary,
+                            headerBg: colors.colorSecondary,
+                            colorBgContainer: colors.colorTertiary,
                             colorTextHeading: colors.colorTextHeading,
+                            fontWeightStrong: 1000,
                         },
                         Table: {
                             headerBg: colors.colorPrimary,
