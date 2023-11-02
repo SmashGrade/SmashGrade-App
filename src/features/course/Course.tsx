@@ -1,6 +1,6 @@
 import Grid from '@components/Grid.tsx';
 import { useQuery } from '@tanstack/react-query';
-import { ColDef } from 'ag-grid-community/dist/lib/entities/colDef';
+import { ColDef } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
 import { Spin } from 'antd';
