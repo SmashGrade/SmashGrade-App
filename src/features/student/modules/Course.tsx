@@ -7,11 +7,9 @@ interface Props {
 
 export default function Course({ name }: Props) {
     return (
-        <>
-            <div className={styles.courseContainer}>
-                <p className={styles.courseTitle}>{name}</p>
-                <Rating rating={5.5} ratingType={'good'} />
-            </div>
-        </>
+        <div className={styles.courseContainer}>
+            <p className={styles.courseTitle}>{name}</p>
+            <Rating rating={5.5} ratingType={'good'} />
+        </div>
     );
 }
