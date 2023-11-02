@@ -1,7 +1,7 @@
 import { SaveOutlined, BookOutlined, ContactsOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
 import { invariant } from '@tanstack/react-router';
-import { Button, Input, SelectProps, Space, Select, Spin } from 'antd';
+import { Button, Input, SelectProps, Space, Select, Spin, Form } from 'antd';
 import axios from 'axios';
 import { FormattedMessage } from 'react-intl';
 import styles from './CourseCreation.module.scss';
@@ -52,6 +52,8 @@ const handleVersionDropChange = (value: string) => {
 };
 
 export default function CourseCreation() {
+    const [form] = Form.useForm();
+
     // API Requests
     const { courseId = 1 } = useParams();
     invariant(courseId);
@@ -171,38 +173,51 @@ export default function CourseCreation() {
             </h1>
             <div style={{ display: 'flex', width: '100%' }}>
                 <div style={{ flex: '1', width: '33.33%' }}>
-                    <p>
-                        <FormattedMessage id={'courseName'} defaultMessage={'Kurs'} description={'Kurs Name'} />
-                    </p>
-                    <Input placeholder={courseData?.description} />
-                    <p>
-                        <FormattedMessage
-                            id={'courseNumber'}
-                            defaultMessage={'Kurs Nummer'}
-                            description={'Kurs Nummer'}
-                        />
-                    </p>
-                    <Input placeholder={courseData?.number} />
-
-                    <p>
-                        <FormattedMessage
-                            id={'lecturerTitle'}
-                            defaultMessage={'Dozent(en)'}
-                            description={'Name Dozent'}
-                        />
-                        <ContactsOutlined style={{ float: 'right' }} />
-                    </p>
-                    <Space style={{ width: '100%' }} direction={'vertical'}>
-                        <Select
-                            mode={'multiple'}
-                            allowClear
-                            style={{ width: '100%' }}
-                            placeholder={'Please select'}
-                            defaultValue={courseData?.teachers}
-                            onChange={handleChange}
-                            options={courseOptions}
-                        />
-                    </Space>
+                    <Form layout={'vertical'} form={form}>
+                        <Form.Item
+                            label={
+                                <FormattedMessage id={'courseName'} defaultMessage={'Kurs'} description={'Kurs Name'} />
+                            }
+                        >
+                            <Input placeholder={courseData?.description} />
+                        </Form.Item>
+                        <Form.Item
+                            label={
+                                <FormattedMessage
+                                    id={'courseNumber'}
+                                    defaultMessage={'Nummer'}
+                                    description={'Kurs Nummer'}
+                                />
+                            }
+                        >
+                            <Input placeholder={'input placeholder'} />
+                        </Form.Item>
+                        <Form.Item
+                            label={
+                                <div>
+                                    <FormattedMessage
+                                        id={'lecturerTitle'}
+                                        defaultMessage={'Dozent(en)'}
+                                        description={'Name Dozent'}
+                                    />
+                                    <ContactsOutlined style={{ float: 'right' }} />
+                                </div>
+                            }
+                        >
+                            <Space style={{ width: '100%' }} direction={'vertical'}>
+                                <Select
+                                    mode={'multiple'}
+                                    allowClear
+                                    style={{ width: '100%' }}
+                                    placeholder={'Please select'}
+                                    defaultValue={courseData?.teachers}
+                                    onChange={handleChange}
+                                    options={courseOptions}
+                                />
+                            </Space>
+                        </Form.Item>
+                    </Form>
+                    <Space style={{ width: '100%' }} direction={'vertical'} />
 
                     <div
                         style={{

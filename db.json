@@ -124,17 +124,24 @@
             "role": "Student"
         },
         {
-            "id": 0,
+            "id": 1,
             "class-startyear": 0,
             "name": "Simeon Liniger",
             "email": "Simeon.Liniger@hftm.ch",
             "role": "Teacher"
         },
         {
-            "id": 0,
+            "id": 2,
             "class-startyear": 0,
             "name": "Alice Smith",
             "email": "Alice.Smith@hftm.ch",
+            "role": "Teacher"
+        },
+        {
+            "id": 3,
+            "class-startyear": 0,
+            "name": "Bob Johnson",
+            "email": "Bob.Johnson@hftm.ch",
             "role": "Teacher"
         }
     ]

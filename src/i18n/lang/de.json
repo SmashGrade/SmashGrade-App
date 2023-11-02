@@ -20,7 +20,7 @@
         "description": "Kurs Name"
     },
     "courseNumber": {
-        "defaultMessage": "Kurs Nummer",
+        "defaultMessage": "Nummer",
         "description": "Kurs Nummer"
     },
     "courseTitle": {
