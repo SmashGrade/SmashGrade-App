@@ -1,3 +1,4 @@
+import { DevSupport } from '@react-buddy/ide-toolbox';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { lazyRouteComponent, RootRoute, Route, Router, RouterProvider } from '@tanstack/react-router';
@@ -6,6 +7,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import colors from './colors.module.scss';
+import { ComponentPreviews, useInitial } from './dev';
 import './global.scss';
 import { ReactIntlProvider } from './i18n/ReactIntlProvider.tsx';
 import OnboardingPage from './pages/OnboardingPage';
@@ -78,7 +80,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             >
                 <QueryClientProvider client={queryClient}>
                     <RouterProvider router={router} />
-                    <ReactQueryDevtools initialIsOpen={false} />
+                    <DevSupport ComponentPreviews={ComponentPreviews} useInitialHook={useInitial}>
+                        <ReactQueryDevtools initialIsOpen={false} />
+                    </DevSupport>
                 </QueryClientProvider>
             </ConfigProvider>
         </ReactIntlProvider>
