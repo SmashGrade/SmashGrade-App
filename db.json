@@ -82,9 +82,9 @@
     "modules": [
         {
             "id": 0,
-            "description": "Schnittstellen-Technologien",
+            "description": "2023 - Schnittstellen-Technologien ||",
             "number": "string",
-            "status": "Aktiv",
+            "status": "Active",
             "bewertungstyp_beschreibung": "Wenn alle Kurse erfuellt sind",
             "bewertungstyp_bezeichnung": "E",
             "courses": [
@@ -99,9 +99,9 @@
         },
         {
             "id": 1,
-            "description": "Datenbanken",
+            "description": "2024 - Datenbanken ||",
             "number": "string",
-            "status": "Aktiv",
+            "status": "Active",
             "bewertungstyp_beschreibung": "Wenn alle Kurse erfuellt sind",
             "bewertungstyp_bezeichnung": "E",
             "courses": [
@@ -119,8 +119,8 @@
         {
             "id": 0,
             "class-startyear": 0,
-            "name": "Max Muster",
-            "email": "Max.Muster@hftm.ch",
+            "name": "Max Musterschueler",
+            "email": "Max.Musterschueler@hftm.ch",
             "role": "Student"
         },
         {
@@ -128,6 +128,13 @@
             "class-startyear": 0,
             "name": "Simeon Liniger",
             "email": "Simeon.Liniger@hftm.ch",
+            "role": "Teacher"
+        },
+        {
+            "id": 0,
+            "class-startyear": 0,
+            "name": "Alice Smith",
+            "email": "Alice.Smith@hftm.ch",
             "role": "Teacher"
         }
     ]

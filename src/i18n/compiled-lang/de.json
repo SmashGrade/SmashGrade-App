@@ -3,6 +3,7 @@
     "buttonAdd": "+ Hinzufügen",
     "buttonCancel": "Abbrechen",
     "buttonSave": "Speichern",
+    "courseName": "Kurs",
     "courseNumber": "Kurs Nummer",
     "courseTitle": "Kurs",
     "curriculum": "Lehrplan",
@@ -12,5 +13,6 @@
     "lecturerTitle": "Dozent(en)",
     "moduleTitle": "Modul(e)",
     "onboarding.title": "Übersicht",
+    "qualificationCertificatesTitle": "Qualifikationsnachweise",
     "startYear": "Startjahr"
 }

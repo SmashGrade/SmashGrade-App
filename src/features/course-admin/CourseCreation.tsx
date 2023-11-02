@@ -40,16 +40,21 @@ interface TeacherResponse {
     role: 'Student' | 'Teacher' | 'CourseAdmin';
 }
 
+// Dropdown with the Version
 const handleChange = (value: string[]) => {
     value;
     //console.log(`selected ${value.toString()}`);
 };
 
+const handleVersionDropChange = (value: string) => {
+    value;
+    //console.log(`selected ${value}`);
+};
+
 export default function CourseCreation() {
+    // API Requests
     const { courseId = 1 } = useParams();
     invariant(courseId);
-
-    //console.log('this is the id ' + courseId);
 
     async function getCourse(): Promise<CourseResponse> {
         const { data } = await axios.get<CourseResponse>(`${import.meta.env.VITE_BACKEND_API_URL}/courses/${courseId}`);
@@ -105,7 +110,7 @@ export default function CourseCreation() {
     if (isTeacherError) return <div>Error when loading teachers</div>;
     if (isTeacherLoading) return <Spin />;
 
-    // Clear the courseOptions and moduleOptions arrays to avoid doubling entries
+    // Clear the Options arrays to avoid doubling entries
     if (courseOptions) {
         courseOptions.length = 0;
     }
@@ -138,16 +143,36 @@ export default function CourseCreation() {
         });
     }
 
+    // Display
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-            <h1>
-                {<BookOutlined />}
-                <FormattedMessage id={'courseTitle'} defaultMessage={' Kurs'} description={'Übersicht Kurs Titel'} />
+            <h1 style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ marginRight: '10px' }}>
+                        <BookOutlined />
+                    </span>
+                    <FormattedMessage id={'courseTitle'} defaultMessage={'Kurs'} description={'Übersicht Kurs Titel'} />
+                </div>
+
+                <div>
+                    <Space wrap>
+                        <Select
+                            //defaultValue={''}
+                            style={{ width: 120 }}
+                            onChange={handleVersionDropChange}
+                            options={[
+                                { value: 'V1', label: 'V1' },
+                                { value: 'V2', label: 'V2' },
+                                { value: 'V3', label: 'V3' },
+                            ]}
+                        />
+                    </Space>
+                </div>
             </h1>
             <div style={{ display: 'flex', width: '100%' }}>
                 <div style={{ flex: '1', width: '33.33%' }}>
                     <p>
-                        <FormattedMessage id={'courseTitle'} defaultMessage={'Kurs'} description={'Kurs Titel'} />
+                        <FormattedMessage id={'courseName'} defaultMessage={'Kurs'} description={'Kurs Name'} />
                     </p>
                     <Input placeholder={courseData?.description} />
                     <p>
@@ -221,14 +246,14 @@ export default function CourseCreation() {
                     <p>
                         <b>
                             <FormattedMessage
-                                id={'moduleTitle'}
-                                defaultMessage={'Modul(e)'}
-                                description={'Module Title'}
+                                id={'qualificationCertificatesTitle'}
+                                defaultMessage={'Qualifikationsnachweise'}
+                                description={'Qualification Certificates Title'}
                             />
                         </b>
                     </p>
 
-                    <Button type={'text'}>
+                    <Button type={'text'} style={{ background: 'primary' }}>
                         <FormattedMessage
                             id={'buttonAdd'}
                             defaultMessage={'+ Hinzufügen'}

@@ -15,13 +15,17 @@
         "defaultMessage": "Speichern",
         "description": "Speichern Button"
     },
+    "courseName": {
+        "defaultMessage": "Kurs",
+        "description": "Kurs Name"
+    },
     "courseNumber": {
         "defaultMessage": "Kurs Nummer",
         "description": "Kurs Nummer"
     },
     "courseTitle": {
         "defaultMessage": "Kurs",
-        "description": "Kurs Titel"
+        "description": "Übersicht Kurs Titel"
     },
     "curriculum": {
         "defaultMessage": "Lehrplan",
@@ -50,6 +54,10 @@
     "onboarding.title": {
         "defaultMessage": "Übersicht",
         "description": "Übersicht Titel"
+    },
+    "qualificationCertificatesTitle": {
+        "defaultMessage": "Qualifikationsnachweise",
+        "description": "Qualification Certificates Title"
     },
     "startYear": {
         "defaultMessage": "Startjahr",
