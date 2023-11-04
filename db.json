@@ -144,5 +144,31 @@
             "email": "Bob.Johnson@hftm.ch",
             "role": "Teacher"
         }
+    ],
+    "exams": [
+        {
+            "id": 0,
+            "designation": "Projektarbeit",
+            "weight": 3,
+            "type": "Schritfliche Arbeit",
+            "course": {
+                "id": 0,
+                "designation": "Projektmanagement",
+                "number": "3.121",
+                "professor": [["Kurt Munter", "Lancelot"]]
+            }
+        },
+        {
+            "id": 1,
+            "designation": "Moodle Prüfung",
+            "weight": 2,
+            "type": "Schritfliche Arbeit",
+            "course": {
+                "id": 0,
+                "designation": "Projektmanagement",
+                "number": "3.121",
+                "professor": [["Kurt Munter", "Lancelot"]]
+            }
+        }
     ]
 }

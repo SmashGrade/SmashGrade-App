@@ -1,4 +1,8 @@
 {
+    "Titel": {
+        "defaultMessage": "Titel",
+        "description": "Titel"
+    },
     "buttonActivate": {
         "defaultMessage": "Aktivieren",
         "description": "Speichern Button"

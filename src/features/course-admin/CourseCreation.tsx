@@ -1,8 +1,9 @@
-import { SaveOutlined, BookOutlined, ContactsOutlined, AppstoreAddOutlined } from '@ant-design/icons';
+import { SaveOutlined, BookOutlined, ContactsOutlined, AppstoreAddOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
 import { invariant } from '@tanstack/react-router';
 import { Button, Input, SelectProps, Space, Select, Spin, Form } from 'antd';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import styles from './CourseCreation.module.scss';
 import layout from '../../layout.module.scss';
@@ -32,6 +33,21 @@ interface ModulesResponse {
     courses: CourseResponse[];
 }
 
+interface ExamResponse {
+    id: number;
+    designation: string;
+    weight: number;
+    type: string;
+    course: CourseResponse[];
+}
+
+interface EmptyExam {
+    designation: string;
+    weight: number;
+    type: string;
+    course: null;
+}
+
 interface TeacherResponse {
     id: number;
     classstartyear: string;
@@ -53,6 +69,8 @@ const handleVersionDropChange = (value: string) => {
 
 export default function CourseCreation() {
     const [form] = Form.useForm();
+    const [examData, setExams] = useState<(ExamResponse | EmptyExam)[]>([]);
+    const [emptyFieldCount, setEmptyFieldCount] = useState(0);
 
     // API Requests
     const { courseId = 1 } = useParams();
@@ -72,6 +90,12 @@ export default function CourseCreation() {
         const { data } = await axios.get<TeacherResponse[] | null>(`${import.meta.env.VITE_BACKEND_API_URL}/users`);
         return data;
     }
+
+    async function getExams(): Promise<ExamResponse[] | null> {
+        const { data } = await axios.get<ExamResponse[] | null>(`${import.meta.env.VITE_BACKEND_API_URL}/exams`);
+        return data;
+    }
+
     const {
         isLoading: isCourseLoading,
         error: isCourseError,
@@ -99,9 +123,21 @@ export default function CourseCreation() {
         queryFn: getTeachers,
     });
 
-    if (!courseId) {
-        return <Spin />;
-    }
+    const {
+        isLoading: isExamLoading,
+        error: isExamError,
+        data: fetchedExamData,
+    } = useQuery({
+        queryKey: ['exams'],
+        queryFn: getExams,
+    });
+
+    // Use an effect to update the state when new exam data is fetched
+    useEffect(() => {
+        if (fetchedExamData) {
+            setExams(fetchedExamData);
+        }
+    }, [fetchedExamData]);
 
     if (isCourseError) return <div>Error when loading courses</div>;
     if (isCourseLoading) return <Spin />;
@@ -111,6 +147,9 @@ export default function CourseCreation() {
 
     if (isTeacherError) return <div>Error when loading teachers</div>;
     if (isTeacherLoading) return <Spin />;
+
+    if (isExamError) return <div>Error when loading exams</div>;
+    if (isExamLoading) return <Spin />;
 
     // Clear the Options arrays to avoid doubling entries
     if (courseOptions) {
@@ -144,6 +183,25 @@ export default function CourseCreation() {
             });
         });
     }
+
+    const handleAddEmptyField = () => {
+        // Create an empty exam data object
+        const emptyExam = {
+            designation: '', // Initialize other properties as needed
+            weight: 0,
+            type: '',
+            course: null,
+        };
+
+        setExams([...examData, emptyExam]);
+        setEmptyFieldCount(emptyFieldCount + 1);
+    };
+
+    const handleDeleteField = (index: number) => {
+        const updatedExamData = [...examData];
+        updatedExamData.splice(index, 1); // Remove the element at the given index
+        setExams(updatedExamData);
+    };
 
     // Display
     return (
@@ -268,7 +326,48 @@ export default function CourseCreation() {
                         </b>
                     </p>
 
-                    <Button type={'text'} style={{ background: 'primary' }}>
+                    <div>
+                        <p>
+                            <FormattedMessage id={'Titel'} defaultMessage={'Titel'} description={'Titel'} />
+                        </p>
+                        <Form form={form} name={'exam-form'}>
+                            {examData.map((exam, index) => (
+                                <div key={index} style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    <Form.Item
+                                        label={''}
+                                        name={`examDesignation`}
+                                        style={{ flex: 1, marginRight: '8px', marginBottom: '0px' }}
+                                    >
+                                        <Input type={'text'} placeholder={exam.designation} />
+                                    </Form.Item>
+                                    <Form.Item
+                                        label={''}
+                                        name={`examType`}
+                                        style={{ flex: 1, marginRight: '8px', marginBottom: '0px' }}
+                                    >
+                                        <Input type={'text'} placeholder={exam.type} />
+                                    </Form.Item>
+                                    <Form.Item
+                                        label={''}
+                                        name={`examWeight`}
+                                        style={{ flex: 1, marginRight: '8px', marginBottom: '0px' }}
+                                    >
+                                        <Input type={'text'} placeholder={exam.weight.toString()} />
+                                    </Form.Item>
+                                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                                        <Button
+                                            type={'text'}
+                                            style={{ color: 'red' }}
+                                            onClick={() => handleDeleteField(index)}
+                                        >
+                                            <DeleteOutlined />
+                                        </Button>
+                                    </div>
+                                </div>
+                            ))}
+                        </Form>
+                    </div>
+                    <Button type={'text'} style={{ background: 'primary' }} onClick={handleAddEmptyField}>
                         <FormattedMessage
                             id={'buttonAdd'}
                             defaultMessage={'+ Hinzufügen'}

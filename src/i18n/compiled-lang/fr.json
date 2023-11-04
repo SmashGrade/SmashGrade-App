@@ -1,10 +1,11 @@
 {
+    "Titel": "Titel",
     "buttonActivate": "Aktivieren",
     "buttonAdd": "+ Hinzufügen",
     "buttonCancel": "Abbrechen",
     "buttonSave": "Speichern",
     "courseName": "Kurs",
-    "courseNumber": "Kurs Nummer",
+    "courseNumber": "Nummer",
     "courseTitle": "Kurs",
     "curriculum": "Lehrplan",
     "language.english": "Englisch",
