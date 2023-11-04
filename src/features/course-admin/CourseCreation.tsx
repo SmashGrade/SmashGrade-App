@@ -1,19 +1,17 @@
-import { SaveOutlined, BookOutlined, ContactsOutlined, AppstoreAddOutlined, DeleteOutlined } from '@ant-design/icons';
+import { AppstoreAddOutlined, BookOutlined, ContactsOutlined, DeleteOutlined, SaveOutlined } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
 import { invariant } from '@tanstack/react-router';
-import { Button, Input, SelectProps, Space, Select, Spin, Form } from 'antd';
+import { Button, Form, Input, Select, SelectProps, Space, Spin } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import styles from './CourseCreation.module.scss';
-import layout from '../../layout.module.scss';
-import colors from '../../colors.module.scss';
 import { useParams } from 'react-router-dom';
+import colors from '../../colors.module.scss';
+import layout from '../../layout.module.scss';
+import styles from './CourseCreation.module.scss';
 
 //const courseOptions: { label: string; value: string }[] = [];
-const courseOptions: SelectProps['options'] = [];
 const moduleOptions: SelectProps['options'] = [];
-const teacherOptions: SelectProps['options'] = [];
 
 interface CourseResponse {
     id: number;
@@ -56,45 +54,64 @@ interface TeacherResponse {
     role: 'Student' | 'Teacher' | 'CourseAdmin';
 }
 
+async function getCourse(courseId: string): Promise<CourseResponse> {
+    const { data } = await axios.get<CourseResponse>(`${import.meta.env.VITE_BACKEND_API_URL}/courses/${courseId}`);
+    return data;
+}
+
+async function getModules(): Promise<ModulesResponse[] | null> {
+    const { data } = await axios.get<ModulesResponse[] | null>(`${import.meta.env.VITE_BACKEND_API_URL}/modules`);
+    return data;
+}
+
+async function getTeachers(): Promise<SelectProps['options']> {
+    const { data } = await axios.get<TeacherResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/users`);
+    const teachers = data.map((teacher) => ({
+        label: teacher.name,
+        value: teacher.name,
+    }));
+    return teachers;
+}
+
+async function getExams(): Promise<ExamResponse[] | null> {
+    const { data } = await axios.get<ExamResponse[] | null>(`${import.meta.env.VITE_BACKEND_API_URL}/exams`);
+    return data;
+}
+
 // Dropdown with the Version
-const handleChange = (value: string[]) => {
-    value;
-    //console.log(`selected ${value.toString()}`);
-};
 
 const handleVersionDropChange = (value: string) => {
-    value;
-    //console.log(`selected ${value}`);
+    // TODO: Neuer kurs vom backend fetchen basierend auf der version
 };
 
+function ExamFormRow(props: { exam: ExamResponse | EmptyExam; onClick: () => void; index: number }) {
+    return (
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Form.Item label={''} name={`examDesignation`} style={{ flex: 1, marginRight: '8px', marginBottom: '0px' }}>
+                <Input type={'text'} placeholder={props.exam.designation} />
+            </Form.Item>
+            <Form.Item label={''} name={`examType`} style={{ flex: 1, marginRight: '8px', marginBottom: '0px' }}>
+                <Input type={'text'} placeholder={props.exam.type} />
+            </Form.Item>
+            <Form.Item label={''} name={`examWeight`} style={{ flex: 1, marginRight: '8px', marginBottom: '0px' }}>
+                <Input type={'text'} placeholder={props.exam.weight.toString()} />
+            </Form.Item>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Button type={'text'} style={{ color: 'red' }} onClick={props.onClick(props.index)}>
+                    <DeleteOutlined />
+                </Button>
+            </div>
+        </div>
+    );
+}
+
 export default function CourseCreation() {
-    const [form] = Form.useForm();
+    const [courseForm] = Form.useForm();
     const [examData, setExams] = useState<(ExamResponse | EmptyExam)[]>([]);
-    const [emptyFieldCount, setEmptyFieldCount] = useState(0);
 
     // API Requests
-    const { courseId = 1 } = useParams();
+    const { courseId = '1' } = useParams();
     invariant(courseId);
-
-    async function getCourse(): Promise<CourseResponse> {
-        const { data } = await axios.get<CourseResponse>(`${import.meta.env.VITE_BACKEND_API_URL}/courses/${courseId}`);
-        return data;
-    }
-
-    async function getModules(): Promise<ModulesResponse[] | null> {
-        const { data } = await axios.get<ModulesResponse[] | null>(`${import.meta.env.VITE_BACKEND_API_URL}/modules`);
-        return data;
-    }
-
-    async function getTeachers(): Promise<TeacherResponse[] | null> {
-        const { data } = await axios.get<TeacherResponse[] | null>(`${import.meta.env.VITE_BACKEND_API_URL}/users`);
-        return data;
-    }
-
-    async function getExams(): Promise<ExamResponse[] | null> {
-        const { data } = await axios.get<ExamResponse[] | null>(`${import.meta.env.VITE_BACKEND_API_URL}/exams`);
-        return data;
-    }
 
     const {
         isLoading: isCourseLoading,
@@ -102,7 +119,7 @@ export default function CourseCreation() {
         data: courseData,
     } = useQuery({
         queryKey: ['courses'],
-        queryFn: getCourse,
+        queryFn: () => getCourse(courseId),
     });
 
     const {
@@ -152,29 +169,18 @@ export default function CourseCreation() {
     if (isExamLoading) return <Spin />;
 
     // Clear the Options arrays to avoid doubling entries
-    if (courseOptions) {
-        courseOptions.length = 0;
-    }
-    if (moduleOptions) {
-        moduleOptions.length = 0;
-    }
-    if (teacherOptions) {
-        teacherOptions.length = 0;
-    }
+    // if (courseOptions) {
+    //     courseOptions.length = 0;
+    // }
+    // if (moduleOptions) {
+    //     moduleOptions.length = 0;
+    // }
+    // if (teacherOptions) {
+    //     teacherOptions.length = 0;
+    // }
 
     // Add the course data teachers to the options array
-    if (teacherData) {
-        teacherData?.forEach((teacher) => {
-            if (teacher.role === 'Teacher') {
-                courseOptions?.push({
-                    label: teacher.name,
-                    value: teacher.name,
-                });
-            }
-        });
-    }
-
-    // Add the course data teachers to the options array
+    // TODO: Transformation direkt im API Request machen
     if (moduleData) {
         moduleData?.forEach((module) => {
             moduleOptions?.push({
@@ -194,7 +200,6 @@ export default function CourseCreation() {
         };
 
         setExams([...examData, emptyExam]);
-        setEmptyFieldCount(emptyFieldCount + 1);
     };
 
     const handleDeleteField = (index: number) => {
@@ -203,8 +208,11 @@ export default function CourseCreation() {
         setExams(updatedExamData);
     };
 
+    console.log('courses', courseData);
+
     // Display
     return (
+        // TODO: Alle CSS Styles extern im module.scss File definieren
         <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
             <h1 style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -231,15 +239,27 @@ export default function CourseCreation() {
             </h1>
             <div style={{ display: 'flex', width: '100%' }}>
                 <div style={{ flex: '1', width: '33.33%' }}>
-                    <Form layout={'vertical'} form={form}>
+                    <Form
+                        // mit <> type definieren welche daten das form enthalten soll
+                        // TODO: Intial values setzen anstelle von PLaceholder und für alle felder ein "name" property definieren
+                        layout={'vertical'}
+                        form={courseForm}
+                        initialValues={courseData}
+                        onFinish={(values) => {
+                            console.log('Finish');
+                            console.log(values);
+                        }}
+                    >
                         <Form.Item
+                            name={'description'}
                             label={
                                 <FormattedMessage id={'courseName'} defaultMessage={'Kurs'} description={'Kurs Name'} />
                             }
                         >
-                            <Input placeholder={courseData?.description} />
+                            <Input />
                         </Form.Item>
                         <Form.Item
+                            name={'number'}
                             label={
                                 <FormattedMessage
                                     id={'courseNumber'}
@@ -269,11 +289,11 @@ export default function CourseCreation() {
                                     style={{ width: '100%' }}
                                     placeholder={'Please select'}
                                     defaultValue={courseData?.teachers}
-                                    onChange={handleChange}
-                                    options={courseOptions}
+                                    options={teacherData}
                                 />
                             </Space>
                         </Form.Item>
+                        <Form.Item />
                     </Form>
                     <Space style={{ width: '100%' }} direction={'vertical'} />
 
@@ -299,7 +319,6 @@ export default function CourseCreation() {
                                 style={{ width: '100%' }}
                                 placeholder={'Please select'}
                                 defaultValue={moduleData?.map((value) => value.description)}
-                                onChange={handleChange}
                                 options={moduleOptions}
                             />
                         </Space>
@@ -330,40 +349,10 @@ export default function CourseCreation() {
                         <p>
                             <FormattedMessage id={'Titel'} defaultMessage={'Titel'} description={'Titel'} />
                         </p>
-                        <Form form={form} name={'exam-form'}>
+                        <Form form={courseForm} name={'exam-form'}>
                             {examData.map((exam, index) => (
-                                <div key={index} style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <Form.Item
-                                        label={''}
-                                        name={`examDesignation`}
-                                        style={{ flex: 1, marginRight: '8px', marginBottom: '0px' }}
-                                    >
-                                        <Input type={'text'} placeholder={exam.designation} />
-                                    </Form.Item>
-                                    <Form.Item
-                                        label={''}
-                                        name={`examType`}
-                                        style={{ flex: 1, marginRight: '8px', marginBottom: '0px' }}
-                                    >
-                                        <Input type={'text'} placeholder={exam.type} />
-                                    </Form.Item>
-                                    <Form.Item
-                                        label={''}
-                                        name={`examWeight`}
-                                        style={{ flex: 1, marginRight: '8px', marginBottom: '0px' }}
-                                    >
-                                        <Input type={'text'} placeholder={exam.weight.toString()} />
-                                    </Form.Item>
-                                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                                        <Button
-                                            type={'text'}
-                                            style={{ color: 'red' }}
-                                            onClick={() => handleDeleteField(index)}
-                                        >
-                                            <DeleteOutlined />
-                                        </Button>
-                                    </div>
-                                </div>
+                                // Todo: Komponente "ExamFormRow" erstellen und hier einfügen
+                                <ExamFormRow key={index} exam={exam} onClick={handleAddEmptyField} index={index} />
                             ))}
                         </Form>
                     </div>
@@ -386,7 +375,7 @@ export default function CourseCreation() {
                     />
                 </Button>
 
-                <Button className={styles.buttons}>
+                <Button className={styles.buttons} htmlType={'submit'}>
                     <FormattedMessage
                         id={'buttonActivate'}
                         defaultMessage={'Aktivieren'}
@@ -394,7 +383,16 @@ export default function CourseCreation() {
                     />
                 </Button>
 
-                <Button type={'primary'} icon={<SaveOutlined />} className={styles.buttons}>
+                <Button
+                    type={'primary'}
+                    icon={<SaveOutlined />}
+                    className={styles.buttons}
+                    onClick={() => {
+                        console.log('Clicked');
+                        console.log('form', courseForm, courseForm.getFieldsValue());
+                        courseForm.submit();
+                    }}
+                >
                     <FormattedMessage id={'buttonSave'} defaultMessage={'Speichern'} description={'Speichern Button'} />
                 </Button>
             </div>

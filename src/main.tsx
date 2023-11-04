@@ -1,5 +1,7 @@
+import CourseCreation from '@features/course-admin/CourseCreation.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { RootRoute, Route, Router, RouterProvider } from '@tanstack/react-router';
 import { ConfigProvider } from 'antd';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -7,7 +9,6 @@ import App from './App.tsx';
 import colors from './colors.module.scss';
 import './global.scss';
 import { ReactIntlProvider } from './i18n/ReactIntlProvider.tsx';
-import { lazyRouteComponent, RootRoute, Route, Router, RouterProvider } from '@tanstack/react-router';
 import { OnboardingPage } from './pages/OnboardingPage';
 
 const queryClient = new QueryClient();
@@ -25,7 +26,7 @@ const indexRoute = new Route({
 const courseCreationRoute = new Route({
     getParentRoute: () => rootRoute,
     path: '/course/edit/$courseId',
-    component: lazyRouteComponent(() => import('./features/course-admin/CourseCreation.tsx')),
+    component: ({ useParams }) => CourseCreation({ useParams: useParams }),
 });
 
 const routeTree = rootRoute.addChildren([indexRoute, courseCreationRoute]);
