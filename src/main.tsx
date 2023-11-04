@@ -5,6 +5,7 @@ import { RootRoute, Route, Router, RouterProvider } from '@tanstack/react-router
 import { ConfigProvider } from 'antd';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { z } from 'zod';
 import App from './App.tsx';
 import colors from './colors.module.scss';
 import './global.scss';
@@ -23,13 +24,18 @@ const indexRoute = new Route({
     component: OnboardingPage,
 });
 
-const courseCreationRoute = new Route({
+export const courseEditRoute = new Route({
     getParentRoute: () => rootRoute,
     path: '/course/edit/$courseId',
-    component: ({ useParams }) => CourseCreation({ useParams: useParams }),
+    parseParams: (params) => ({
+        // validate courseId is a number
+        courseId: z.number().parse(Number(params.courseId)),
+    }),
+    stringifyParams: ({ courseId }) => ({ courseId: `${courseId}` }),
+    component: CourseCreation,
 });
 
-const routeTree = rootRoute.addChildren([indexRoute, courseCreationRoute]);
+const routeTree = rootRoute.addChildren([indexRoute, courseEditRoute]);
 const router = new Router({ routeTree });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

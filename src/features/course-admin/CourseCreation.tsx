@@ -1,16 +1,16 @@
-import { AppstoreAddOutlined, BookOutlined, ContactsOutlined, DeleteOutlined, SaveOutlined } from '@ant-design/icons';
+import { AppstoreAddOutlined, BookOutlined, ContactsOutlined, SaveOutlined } from '@ant-design/icons';
+import { ExamFormRow } from '@features/course-admin/ExamFormRow.tsx';
 import { useQuery } from '@tanstack/react-query';
-import { invariant } from '@tanstack/react-router';
+import { useParams } from '@tanstack/react-router';
 import { Button, Form, Input, Select, SelectProps, Space, Spin } from 'antd';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useParams } from 'react-router-dom';
 import colors from '../../colors.module.scss';
 import layout from '../../layout.module.scss';
+import { courseEditRoute } from '../../main.tsx';
 import styles from './CourseCreation.module.scss';
 
-//const courseOptions: { label: string; value: string }[] = [];
 const moduleOptions: SelectProps['options'] = [];
 
 interface CourseResponse {
@@ -31,7 +31,7 @@ interface ModulesResponse {
     courses: CourseResponse[];
 }
 
-interface ExamResponse {
+export interface ExamResponse {
     id: number;
     designation: string;
     weight: number;
@@ -39,7 +39,7 @@ interface ExamResponse {
     course: CourseResponse[];
 }
 
-interface EmptyExam {
+export interface EmptyExam {
     designation: string;
     weight: number;
     type: string;
@@ -54,7 +54,7 @@ interface TeacherResponse {
     role: 'Student' | 'Teacher' | 'CourseAdmin';
 }
 
-async function getCourse(courseId: string): Promise<CourseResponse> {
+async function getCourse(courseId: number): Promise<CourseResponse> {
     const { data } = await axios.get<CourseResponse>(`${import.meta.env.VITE_BACKEND_API_URL}/courses/${courseId}`);
     return data;
 }
@@ -66,11 +66,10 @@ async function getModules(): Promise<ModulesResponse[] | null> {
 
 async function getTeachers(): Promise<SelectProps['options']> {
     const { data } = await axios.get<TeacherResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/users`);
-    const teachers = data.map((teacher) => ({
+    return data.map((teacher) => ({
         label: teacher.name,
         value: teacher.name,
     }));
-    return teachers;
 }
 
 async function getExams(): Promise<ExamResponse[] | null> {
@@ -81,37 +80,17 @@ async function getExams(): Promise<ExamResponse[] | null> {
 // Dropdown with the Version
 
 const handleVersionDropChange = (value: string) => {
+    console.log(value);
     // TODO: Neuer kurs vom backend fetchen basierend auf der version
 };
 
-function ExamFormRow(props: { exam: ExamResponse | EmptyExam; onClick: () => void; index: number }) {
-    return (
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Form.Item label={''} name={`examDesignation`} style={{ flex: 1, marginRight: '8px', marginBottom: '0px' }}>
-                <Input type={'text'} placeholder={props.exam.designation} />
-            </Form.Item>
-            <Form.Item label={''} name={`examType`} style={{ flex: 1, marginRight: '8px', marginBottom: '0px' }}>
-                <Input type={'text'} placeholder={props.exam.type} />
-            </Form.Item>
-            <Form.Item label={''} name={`examWeight`} style={{ flex: 1, marginRight: '8px', marginBottom: '0px' }}>
-                <Input type={'text'} placeholder={props.exam.weight.toString()} />
-            </Form.Item>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-                <Button type={'text'} style={{ color: 'red' }} onClick={props.onClick(props.index)}>
-                    <DeleteOutlined />
-                </Button>
-            </div>
-        </div>
-    );
-}
-
 export default function CourseCreation() {
     const [courseForm] = Form.useForm();
+    const [examForm] = Form.useForm();
     const [examData, setExams] = useState<(ExamResponse | EmptyExam)[]>([]);
 
-    // API Requests
-    const { courseId = '1' } = useParams();
-    invariant(courseId);
+    const params = useParams<typeof courseEditRoute>({ from: courseEditRoute.id });
+    const courseId = params.courseId ?? 1;
 
     const {
         isLoading: isCourseLoading,
@@ -156,6 +135,11 @@ export default function CourseCreation() {
         }
     }, [fetchedExamData]);
 
+    // TODO: any mit dem selben type wie die FormInstance ersetzen
+    const onFormFinish = useCallback((values: any) => {
+        console.log('form finish', values);
+    }, []);
+
     if (isCourseError) return <div>Error when loading courses</div>;
     if (isCourseLoading) return <Spin />;
 
@@ -192,7 +176,7 @@ export default function CourseCreation() {
 
     const handleAddEmptyField = () => {
         // Create an empty exam data object
-        const emptyExam = {
+        const emptyExam: EmptyExam = {
             designation: '', // Initialize other properties as needed
             weight: 0,
             type: '',
@@ -207,8 +191,6 @@ export default function CourseCreation() {
         updatedExamData.splice(index, 1); // Remove the element at the given index
         setExams(updatedExamData);
     };
-
-    console.log('courses', courseData);
 
     // Display
     return (
@@ -245,10 +227,7 @@ export default function CourseCreation() {
                         layout={'vertical'}
                         form={courseForm}
                         initialValues={courseData}
-                        onFinish={(values) => {
-                            console.log('Finish');
-                            console.log(values);
-                        }}
+                        onFinish={onFormFinish}
                     >
                         <Form.Item
                             name={'description'}
@@ -349,10 +328,14 @@ export default function CourseCreation() {
                         <p>
                             <FormattedMessage id={'Titel'} defaultMessage={'Titel'} description={'Titel'} />
                         </p>
-                        <Form form={courseForm} name={'exam-form'}>
+                        <Form form={examForm} name={'exam-form'}>
                             {examData.map((exam, index) => (
-                                // Todo: Komponente "ExamFormRow" erstellen und hier einfügen
-                                <ExamFormRow key={index} exam={exam} onClick={handleAddEmptyField} index={index} />
+                                <ExamFormRow
+                                    key={index}
+                                    exam={exam}
+                                    onDeleteClick={handleDeleteField}
+                                    rowIndex={index}
+                                />
                             ))}
                         </Form>
                     </div>
@@ -375,7 +358,7 @@ export default function CourseCreation() {
                     />
                 </Button>
 
-                <Button className={styles.buttons} htmlType={'submit'}>
+                <Button className={styles.buttons}>
                     <FormattedMessage
                         id={'buttonActivate'}
                         defaultMessage={'Aktivieren'}
@@ -387,11 +370,7 @@ export default function CourseCreation() {
                     type={'primary'}
                     icon={<SaveOutlined />}
                     className={styles.buttons}
-                    onClick={() => {
-                        console.log('Clicked');
-                        console.log('form', courseForm, courseForm.getFieldsValue());
-                        courseForm.submit();
-                    }}
+                    onClick={() => courseForm.submit()}
                 >
                     <FormattedMessage id={'buttonSave'} defaultMessage={'Speichern'} description={'Speichern Button'} />
                 </Button>
