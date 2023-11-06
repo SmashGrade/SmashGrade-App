@@ -3,17 +3,13 @@ import Rating from '@features/student/modules/Rating.tsx';
 import { Collapse } from 'antd';
 import { ItemType } from 'rc-collapse/es/interface';
 import { CSSProperties } from 'react';
-import colors from '../../../colors.module.scss';
 
 type ModuleCollapseItemProps = ItemType & {
     study: string;
 };
 
 const panelStyle: CSSProperties = {
-    marginBottom: 12,
     fontWeight: 'bold',
-    background: colors.colorPrimary,
-    borderRadius: 12,
     border: 'none',
 };
 

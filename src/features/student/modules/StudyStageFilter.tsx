@@ -1,11 +1,11 @@
 import { Tabs, TabsProps } from 'antd';
 
-interface StudiesFilterProps {
+interface StudyStageFilter {
     defaultActiveKey: string;
     tabsProps: TabsProps;
 }
 
-export default function StudiesFilter({ tabsProps, defaultActiveKey }: Readonly<StudiesFilterProps>) {
+export default function StudyStageFilter({ tabsProps, defaultActiveKey }: Readonly<StudyStageFilter>) {
     return (
         <Tabs
             defaultActiveKey={defaultActiveKey}

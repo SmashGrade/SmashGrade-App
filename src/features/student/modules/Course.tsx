@@ -1,11 +1,11 @@
 import Rating from '@features/student/modules/Rating.tsx';
 import styles from './Course.module.scss';
 
-interface Props {
+interface CourseProps {
     name: string;
 }
 
-export default function Course({ name }: Props) {
+export default function Course({ name }: CourseProps) {
     return (
         <div className={styles.courseContainer}>
             <p className={styles.courseTitle}>{name}</p>
