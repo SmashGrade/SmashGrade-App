@@ -5,7 +5,7 @@ import { Link } from '@tanstack/react-router';
 import { ICellRendererParams } from 'ag-grid-community';
 import { Button } from 'antd';
 
-export function OpenDetailButton(params: Readonly<ICellRendererParams<CourseResponse, number>>) {
+export function LinkButtonCellRenderer(params: Readonly<ICellRendererParams<CourseResponse, number>>) {
     return (
         <Link
             from={courseRoute.to}

@@ -1,5 +1,5 @@
 import Grid from '@components/Grid.tsx';
-import { OpenDetailButton } from '@features/course/OpenDetailButton.tsx';
+import { LinkButtonCellRenderer } from '@features/course/LinkButtonCellRenderer.tsx';
 import { newCourseRoute } from '@pages/routes/courseRoutes.ts';
 import { courseRoute } from '@pages/routes/routes.ts';
 import { useQuery } from '@tanstack/react-query';
@@ -22,7 +22,7 @@ export interface CourseResponse {
 const defaultCourseColDef: ColDef<CourseResponse> = { sortable: true, filter: 'agTextColumnFilter' };
 
 const courseColumnDefs: ColDef<CourseResponse>[] = [
-    { field: 'id', headerName: '', filter: null, cellRenderer: OpenDetailButton },
+    { field: 'id', headerName: '', filter: null, cellRenderer: LinkButtonCellRenderer },
     { field: 'id', headerName: 'ID', filter: 'agNumberColumnFilter', sort: 'asc' },
     { field: 'number', headerName: 'Course Number' },
     { field: 'description', headerName: 'Course Name', flex: 1 },
@@ -45,7 +45,7 @@ export default function CourseList() {
     return (
         <div className={styles.courseContainer}>
             <Link from={courseRoute.to} to={newCourseRoute.to}>
-                <Button>New Course</Button>
+                <Button type={'primary'}>New Course</Button>
             </Link>
 
             <Grid<CourseResponse> columnDefs={courseColumnDefs} rowData={data} defaultColDef={defaultCourseColDef} />
