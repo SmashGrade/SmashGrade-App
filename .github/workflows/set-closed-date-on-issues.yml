@@ -1,0 +1,35 @@
+name: Set closed date on issues
+
+on:
+  issues:
+    types: [closed]
+
+permissions:
+  issues: write
+
+jobs:
+  update-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+          DATE: ${{ steps.date.outputs.date }}
+        run: |
+          echo "current date ${{ DATE }}"
+          echo "$GITHUB_CONTEXT"
+
+#      - name: Update closed date
+#        id: update_status
+#        uses: github/update-project-action@v2
+#        with:
+#          github_token: ${{ secrets.STATUS_UPDATE_TOKEN }}
+#          project_number: 1
+#          content_id: ${{ github.event.client_payload.command.resource.id }}
+#          field: Status
+#          value: ${{ github.event.client_payload.data.status }}
+
