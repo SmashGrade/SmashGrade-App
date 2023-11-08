@@ -24,11 +24,18 @@ jobs:
           echo "current date $DATE"
           echo "$GITHUB_CONTEXT"
 
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.WORKFLOW_APP_APP_ID }}
+          private-key: ${{ secrets.WORKFLOW_APP_PRIVATE_KEY }}
+
       - name: Update closed date
         id: update_status
         uses: github/update-project-action@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ steps.generate_token.outputs.token }}
           organization: SmashGrade
           project_number: 1
           content_id: ${{ github.event.issue.id }}
