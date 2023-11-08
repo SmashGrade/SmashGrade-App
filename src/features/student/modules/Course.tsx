@@ -15,7 +15,7 @@ export function Course({ course }: Readonly<CourseProps>) {
     return (
         <div className={styles.courseContainer}>
             <p className={styles.courseTitle}>{course.description}</p>
-            <Rating rating={course.grade} ratingType={'good'} />
+            <Rating rating={course.grade} />
         </div>
     );
 }

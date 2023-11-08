@@ -5,6 +5,7 @@ import { Collapse, Spin } from 'antd';
 import axios from 'axios';
 import { ItemType } from 'rc-collapse/es/interface';
 import { CSSProperties } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 const panelStyle: CSSProperties = {
     fontWeight: 'bold',
@@ -46,7 +47,7 @@ const getModules = async (activeFilter: string): Promise<ItemType[]> => {
                 key: module.id,
                 label: module.description,
                 children: getCourses(module.courses),
-                extra: <Rating rating={module.grade} ratingType={'good'} />,
+                extra: <Rating rating={module.grade} />,
                 style: panelStyle,
             };
         });
@@ -69,5 +70,15 @@ export default function Modules({ activeFilter }: Readonly<ModulesProps>) {
     if (modulesError) {
         return <h2>Error</h2>;
     }
-    return modules && modules.length > 0 ? <Collapse items={modules} /> : <h2>No modules found</h2>;
+    return modules && modules.length > 0 ? (
+        <Collapse items={modules} />
+    ) : (
+        <h2>
+            <FormattedMessage
+                id={'student.noModulesFound'}
+                defaultMessage={'Es wurden keine Module gefunden'}
+                description={'no modules found'}
+            />
+        </h2>
+    );
 }

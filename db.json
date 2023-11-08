@@ -151,6 +151,45 @@
                     "grade": 5.5
                 }
             ]
+        },
+        {
+            "id": 3,
+            "version": 0,
+            "description": "Datentechnik",
+            "number": "3.112",
+            "isActive": true,
+            "grade": 2.5,
+            "studyStage": {
+                "id": 2,
+                "description": "Fachstudium"
+            },
+            "valuationCategory": {
+                "description": "string",
+                "code": "E"
+            },
+            "courses": [
+                {
+                    "id": 9,
+                    "version": 0,
+                    "description": "Datenbanken 1",
+                    "number": "3.121",
+                    "grade": 4.6
+                },
+                {
+                    "id": 10,
+                    "version": 0,
+                    "description": "Datenbanken 2",
+                    "number": "3.121",
+                    "grade": 5.5
+                },
+                {
+                    "id": 11,
+                    "version": 0,
+                    "description": "XML-Grundlagen",
+                    "number": "3.121",
+                    "grade": 5.5
+                }
+            ]
         }
     ],
     "studentmodule3": []

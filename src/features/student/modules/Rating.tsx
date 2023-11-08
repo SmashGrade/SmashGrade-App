@@ -8,14 +8,23 @@ const RATING_CLASSNAMES: Record<RatingType, string> = {
     bad: styles.ratingBad,
 };
 
+const getRatingClass = (rating: number) => {
+    if (rating < 4) {
+        return RATING_CLASSNAMES.bad;
+    } else if (rating < 5) {
+        return RATING_CLASSNAMES.median;
+    } else {
+        return RATING_CLASSNAMES.good;
+    }
+};
+
 interface RatingProps {
     rating: number;
-    ratingType: RatingType;
 }
-export default function Rating({ rating, ratingType }: RatingProps) {
+export default function Rating({ rating }: Readonly<RatingProps>) {
     return (
         <div className={`${styles.ratingContainer}`}>
-            <div className={`${styles.rating} ${RATING_CLASSNAMES[ratingType]}`}>{rating}</div>
+            <div className={`${styles.rating} ${getRatingClass(rating)}`}>{rating}</div>
         </div>
     );
 }

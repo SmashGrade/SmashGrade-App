@@ -46,5 +46,21 @@
     "startYear": {
         "defaultMessage": "Année de début",
         "description": "Titre du menu déroulant de l'année de début"
+    },
+    "student.basicStudies": {
+        "defaultMessage": "Études de base",
+        "description": "Tab Grundstudium"
+    },
+    "student.focusStudies": {
+        "defaultMessage": "Priorité aux études",
+        "description": "Tab Schwerpunkt"
+    },
+    "student.noModulesFound": {
+        "defaultMessage": "Aucun module n'a été trouvé",
+        "description": "no modules found"
+    },
+    "student.specialisedStudies": {
+        "defaultMessage": "Études spécialisées",
+        "description": "Tab Fachstudium"
     }
 }

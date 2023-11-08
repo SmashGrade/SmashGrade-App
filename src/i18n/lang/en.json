@@ -46,5 +46,21 @@
     "startYear": {
         "defaultMessage": "Start Year",
         "description": "Startjahr Dropdown Titel"
+    },
+    "student.basicStudies": {
+        "defaultMessage": "Basic studies",
+        "description": "Tab Grundstudium"
+    },
+    "student.focusStudies": {
+        "defaultMessage": "Focus studies",
+        "description": "Tab Schwerpunkt"
+    },
+    "student.noModulesFound": {
+        "defaultMessage": "No modules found",
+        "description": "no modules found"
+    },
+    "student.specialisedStudies": {
+        "defaultMessage": "Specialised studies",
+        "description": "Tab Fachstudium"
     }
 }
