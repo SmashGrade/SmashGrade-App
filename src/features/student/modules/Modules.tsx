@@ -1,63 +1,73 @@
-import Course from '@features/student/modules/Course.tsx';
+import { CourseObj, Course } from '@features/student/modules/Course.tsx';
 import Rating from '@features/student/modules/Rating.tsx';
-import { Collapse } from 'antd';
+import { useQuery } from '@tanstack/react-query';
+import { Collapse, Spin } from 'antd';
+import axios from 'axios';
 import { ItemType } from 'rc-collapse/es/interface';
 import { CSSProperties } from 'react';
-
-type ModuleCollapseItemProps = ItemType & {
-    study: string;
-};
 
 const panelStyle: CSSProperties = {
     fontWeight: 'bold',
     border: 'none',
 };
 
-const items: ModuleCollapseItemProps[] = [
-    {
-        key: '1',
-        label: 'Mathematik',
-        children: <p>{'Lorem ipsum dolor sit amet...'}</p>,
-        extra: <Rating rating={5.5} ratingType={'good'} />,
-        style: panelStyle,
-        study: 'Grundstudium',
-    },
-    {
-        key: '2',
-        label: 'Systemtechnik',
-        children: <p>{'Lorem ipsum dolor sit amet...'}</p>,
-        extra: <Rating rating={2.3} ratingType={'bad'} />,
-        style: panelStyle,
-        study: 'Fachstudium',
-    },
-    {
-        key: '4',
-        label: 'Programmieren',
-        children: (
-            <>
-                <Course name={'OOP1'} />
-                <Course name={'OOP2'} />
-            </>
-        ),
-        extra: <Rating rating={5.0} ratingType={'good'} />,
-        style: panelStyle,
-        study: 'Fachstudium',
-    },
-    {
-        key: '3',
-        label: 'Enterprise Technologien',
-        children: <p>{'Lorem ipsum dolor sit amet...'}</p>,
-        extra: <Rating rating={4.9} ratingType={'median'} />,
-        style: panelStyle,
-        study: 'Schwerpunkt',
-    },
-];
-
 interface ModulesProps {
     activeFilter: string;
 }
 
-export default function Modules({ activeFilter }: ModulesProps) {
-    const collapseItems = items.filter((item) => item.study === activeFilter);
-    return collapseItems.length > 0 ? <Collapse items={collapseItems} /> : <h2>No modules found</h2>;
+interface Module {
+    id: number;
+    description: string;
+    number: string;
+    isActive: boolean;
+    grade: number;
+    courses: CourseObj[];
+}
+
+const getCourses = (courses: CourseObj[]) => {
+    return (
+        <>
+            {courses.map((course) => (
+                <Course key={course.id} course={course} />
+            ))}
+        </>
+    );
+};
+
+const getModules = async (activeFilter: string): Promise<ItemType[]> => {
+    const { data: modules } = await axios.get<Module[]>(
+        `${import.meta.env.VITE_BACKEND_API_URL}/module/student/${activeFilter}`
+    );
+
+    return modules
+        .filter((module) => module.isActive)
+        .map((module) => {
+            return {
+                key: module.id,
+                label: module.description,
+                children: getCourses(module.courses),
+                extra: <Rating rating={module.grade} ratingType={'good'} />,
+                style: panelStyle,
+            };
+        });
+};
+
+export default function Modules({ activeFilter }: Readonly<ModulesProps>) {
+    const {
+        isLoading: modulesLoading,
+        error: modulesError,
+        data: modules,
+    } = useQuery({
+        queryKey: ['StudentModules' + activeFilter],
+        queryFn: () => getModules(activeFilter),
+    });
+
+    if (modulesLoading) {
+        return <Spin />;
+    }
+
+    if (modulesError) {
+        return <h2>Error</h2>;
+    }
+    return modules && modules.length > 0 ? <Collapse items={modules} /> : <h2>No modules found</h2>;
 }

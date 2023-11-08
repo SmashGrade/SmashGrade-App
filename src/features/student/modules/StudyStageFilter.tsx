@@ -10,9 +10,9 @@ export default function StudyStageFilter({ tabsProps, defaultActiveKey }: Readon
         <Tabs
             defaultActiveKey={defaultActiveKey}
             items={[
-                { key: 'Grundstudium', label: 'Grundstudium' },
-                { key: 'Fachstudium', label: 'Fachstudium' },
-                { key: 'Schwerpunkt', label: 'Schwerpunkt' },
+                { key: '1', label: 'Grundstudium' },
+                { key: '2', label: 'Fachstudium' },
+                { key: '3', label: 'Schwerpunkt' },
             ]}
             {...tabsProps}
         />

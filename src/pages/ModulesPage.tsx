@@ -8,9 +8,7 @@ function setStudyStageFilter(filter: string, setFilter: (filter: string) => void
 }
 
 export default function StudentModulePage() {
-    const [selectedFilter, setSelectedFilter] = useState<string>(
-        localStorage.getItem('studyStageFilter') ?? 'Grundstudium'
-    );
+    const [selectedFilter, setSelectedFilter] = useState<string>(localStorage.getItem('studyStageFilter') ?? '1');
 
     return (
         <>

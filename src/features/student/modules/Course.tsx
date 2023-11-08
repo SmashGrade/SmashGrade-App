@@ -1,15 +1,21 @@
 import Rating from '@features/student/modules/Rating.tsx';
 import styles from './Course.module.scss';
 
-interface CourseProps {
-    name: string;
+export interface CourseObj {
+    id: number;
+    description: string;
+    grade: number;
 }
 
-export default function Course({ name }: CourseProps) {
+interface CourseProps {
+    course: CourseObj;
+}
+
+export function Course({ course }: Readonly<CourseProps>) {
     return (
         <div className={styles.courseContainer}>
-            <p className={styles.courseTitle}>{name}</p>
-            <Rating rating={5.5} ratingType={'good'} />
+            <p className={styles.courseTitle}>{course.description}</p>
+            <Rating rating={course.grade} ratingType={'good'} />
         </div>
     );
 }

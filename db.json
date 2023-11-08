@@ -77,5 +77,81 @@
             "teachers": ["James Moore", "Emily Adams"],
             "evaluationType": "P"
         }
-    ]
+    ],
+    "studentmodule1": [
+        {
+            "id": 1,
+            "version": 0,
+            "description": "Mathematik",
+            "number": "3.112",
+            "isActive": true,
+            "grade": 5.5,
+            "studyStage": {
+                "id": 1,
+                "description": "Grudstudium"
+            },
+            "valuationCategory": {
+                "description": "string",
+                "code": "E"
+            },
+            "courses": [
+                {
+                    "id": 1,
+                    "version": 0,
+                    "description": "Mathematik I",
+                    "number": "3.121",
+                    "grade": 3.6
+                },
+                {
+                    "id": 2,
+                    "version": 0,
+                    "description": "Mathematik II",
+                    "number": "3.121",
+                    "grade": 4.8
+                },
+                {
+                    "id": 3,
+                    "version": 0,
+                    "description": "Mathematik III",
+                    "number": "3.121",
+                    "grade": 5.5
+                }
+            ]
+        }
+    ],
+    "studentmodule2": [
+        {
+            "id": 2,
+            "version": 0,
+            "description": "Programmierung",
+            "number": "3.112",
+            "isActive": true,
+            "grade": 5.5,
+            "studyStage": {
+                "id": 2,
+                "description": "Fachstudium"
+            },
+            "valuationCategory": {
+                "description": "string",
+                "code": "E"
+            },
+            "courses": [
+                {
+                    "id": 7,
+                    "version": 0,
+                    "description": "OOP I",
+                    "number": "3.121",
+                    "grade": 4.6
+                },
+                {
+                    "id": 8,
+                    "version": 0,
+                    "description": "OOP II",
+                    "number": "3.121",
+                    "grade": 5.5
+                }
+            ]
+        }
+    ],
+    "studentmodule3": []
 }
