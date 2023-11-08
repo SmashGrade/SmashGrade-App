@@ -23,13 +23,14 @@ jobs:
           echo "current date $DATE"
           echo "$GITHUB_CONTEXT"
 
-#      - name: Update closed date
-#        id: update_status
-#        uses: github/update-project-action@v2
-#        with:
-#          github_token: ${{ secrets.STATUS_UPDATE_TOKEN }}
-#          project_number: 1
-#          content_id: ${{ github.event.client_payload.command.resource.id }}
-#          field: Status
-#          value: ${{ github.event.client_payload.data.status }}
+      - name: Update closed date
+        id: update_status
+        uses: github/update-project-action@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          project_number: 1
+          content_id: ${{ github.event.issue.id }}
+          field: Closed Date
+          value: ${{ steps.date.outputs.date }}
+
 
