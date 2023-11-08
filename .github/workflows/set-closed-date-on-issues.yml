@@ -38,7 +38,7 @@ jobs:
           github_token: ${{ steps.generate_token.outputs.token }}
           organization: SmashGrade
           project_number: 1
-          content_id: ${{ github.event.issue.id }}
+          content_id: ${{ github.event.issue.node_id }}
           field: Closed Date
           value: ${{ steps.date.outputs.date }}
 
