@@ -6,6 +6,7 @@ on:
 
 permissions:
   issues: write
+  repository-projects: write
 
 jobs:
   update-issue:
@@ -28,6 +29,7 @@ jobs:
         uses: github/update-project-action@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          organization: SmashGrade
           project_number: 1
           content_id: ${{ github.event.issue.id }}
           field: Closed Date
