@@ -6,7 +6,7 @@ import {
     ReadOutlined,
     UserOutlined,
 } from '@ant-design/icons';
-import { courseRoute, curriculumRoute, onboardingRoute } from '@pages/routes/routes.ts';
+import { courseRoute, curriculumRoute, onboardingRoute, studentModuleRoute } from '@pages/routes/routes.ts';
 import { Link, useRouter } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
@@ -44,7 +44,7 @@ export default function Navigation() {
             },
             {
                 label: (
-                    <Link>
+                    <Link to={studentModuleRoute.to}>
                         <FormattedMessage id={'module.menu'} defaultMessage={'Module'} description={'Module Menu'} />
                     </Link>
                 ),

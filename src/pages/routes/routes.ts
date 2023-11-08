@@ -34,7 +34,7 @@ export const courseRoute = new Route({
     component: lazyRouteComponent(() => import('@pages/CoursePage.tsx')),
 });
 
-const studentModuleRoute = new Route({
+export const studentModuleRoute = new Route({
     getParentRoute: () => rootRoute,
     path: '/modules/',
     component: StudentModulePage,
