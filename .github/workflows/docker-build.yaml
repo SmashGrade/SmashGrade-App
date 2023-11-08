@@ -7,7 +7,7 @@ on:
       - '*'
 
 jobs:
-  build-docker-images:
+  build-tagged-docker-images:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -28,10 +28,39 @@ jobs:
             registry: https://ghcr.io
             username: ${{ github.actor }}
             password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v2
+      - name: Build and push Docker images with given tag
+        uses: docker/build-push-action@v5
         with:
           push: true
           tags: ${{ matrix.image }}:${{ github.ref_name }}
+          context: .
+          file: ${{ matrix.dockerfile }}
+
+  build-latest-docker-images:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - dockerfile: ./Dockerfile
+            image: ghcr.io/smashgrade/smashgrade-app/react-app:latest
+          - dockerfile: ./dev.Dockerfile
+            image: ghcr.io/smashgrade/smashgrade-app/json-server:latest
+    permissions:
+      packages: write
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+      - name: Log in to the GHCR Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: https://ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push latest Docker images
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: ${{ matrix.image }}
           context: .
           file: ${{ matrix.dockerfile }}
