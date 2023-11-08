@@ -1,4 +1,4 @@
-name: Set closed date on issues
+name: Set closed date on issue when ticket is closed
 
 on:
   issues:
@@ -9,13 +9,21 @@ permissions:
   repository-projects: write
 
 jobs:
-  update-issue:
+  set-closed-date:
     runs-on: ubuntu-latest
     steps:
       - name: Set current date to env variable
         id: date
         run: |
-          echo "date=$(date +'%Y-%m-%d')" >> "$GITHUB_ENV"
+          echo "date=$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+
+      - name: Dump GitHub context
+        env:
+          DATE: ${{ steps.date.outputs.date }}
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "Date:$DATE"
+          echo "$GITHUB_CONTEXT"
 
       - name: Generate a token
         id: generate_token
@@ -24,7 +32,7 @@ jobs:
           app-id: ${{ secrets.WORKFLOW_APP_APP_ID }}
           private-key: ${{ secrets.WORKFLOW_APP_PRIVATE_KEY }}
 
-      - name: Update closed date
+      - name: Update issue closed date
         id: update_status
         uses: github/update-project-action@v2
         with:
