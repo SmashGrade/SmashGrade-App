@@ -20,7 +20,7 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
           DATE: ${{ steps.date.outputs.date }}
         run: |
-          echo "current date ${{ DATE }}"
+          echo "current date $DATE"
           echo "$GITHUB_CONTEXT"
 
 #      - name: Update closed date
