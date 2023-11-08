@@ -1,5 +1,5 @@
-import Course from '@features/course/Course.tsx';
+import { Outlet } from '@tanstack/react-router';
 
 export default function CoursePage() {
-    return <Course />;
+    return <Outlet />;
 }

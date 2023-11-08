@@ -1,13 +1,17 @@
 import Grid from '@components/Grid.tsx';
+import { LinkButtonCellRenderer } from '@features/course/LinkButtonCellRenderer.tsx';
+import { newCourseRoute } from '@pages/routes/courseRoutes.ts';
+import { courseRoute } from '@pages/routes/routes.ts';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from '@tanstack/react-router';
 import { ColDef } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
-import { Spin } from 'antd';
+import { Button, Spin } from 'antd';
 import axios from 'axios';
 import styles from './Course.module.scss';
 
-interface CourseResponse {
+export interface CourseResponse {
     id: number;
     description: string;
     number: string;
@@ -18,6 +22,7 @@ interface CourseResponse {
 const defaultCourseColDef: ColDef<CourseResponse> = { sortable: true, filter: 'agTextColumnFilter' };
 
 const courseColumnDefs: ColDef<CourseResponse>[] = [
+    { field: 'id', headerName: '', filter: null, cellRenderer: LinkButtonCellRenderer },
     { field: 'id', headerName: 'ID', filter: 'agNumberColumnFilter', sort: 'asc' },
     { field: 'number', headerName: 'Course Number' },
     { field: 'description', headerName: 'Course Name', flex: 1 },
@@ -25,7 +30,7 @@ const courseColumnDefs: ColDef<CourseResponse>[] = [
     { field: 'evaluationType', headerName: 'Evaluation Type' },
 ];
 
-export default function Course() {
+export default function CourseList() {
     const { isPending, isError, data } = useQuery({
         queryKey: ['courses'],
         queryFn: async () => {
@@ -39,6 +44,10 @@ export default function Course() {
 
     return (
         <div className={styles.courseContainer}>
+            <Link from={courseRoute.to} to={newCourseRoute.to}>
+                <Button type={'primary'}>New Course</Button>
+            </Link>
+
             <Grid<CourseResponse> columnDefs={courseColumnDefs} rowData={data} defaultColDef={defaultCourseColDef} />
         </div>
     );
