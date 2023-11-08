@@ -2,7 +2,7 @@ name: Set closed date on issues
 
 on:
   issues:
-    types: [closed]
+    types: [ closed ]
 
 permissions:
   issues: write
@@ -12,17 +12,10 @@ jobs:
   update-issue:
     runs-on: ubuntu-latest
     steps:
-      - name: Get current date
+      - name: Set current date to env variable
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
-
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-          DATE: ${{ steps.date.outputs.date }}
         run: |
-          echo "current date $DATE"
-          echo "$GITHUB_CONTEXT"
+          echo "date=$(date +'%Y-%m-%d')" >> "$GITHUB_ENV"
 
       - name: Generate a token
         id: generate_token
