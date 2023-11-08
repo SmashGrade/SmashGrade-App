@@ -48,7 +48,7 @@ export default function Navigation() {
                         <FormattedMessage id={'module.menu'} defaultMessage={'Module'} description={'Module Menu'} />
                     </Link>
                 ),
-                key: 'module',
+                key: 'modules',
                 icon: <AppstoreOutlined />,
                 disabled: false,
             },
