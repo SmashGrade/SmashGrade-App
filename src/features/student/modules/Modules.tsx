@@ -1,4 +1,4 @@
-import { CourseObj, Course } from '@features/student/modules/Course.tsx';
+import { Course, CourseObj } from '@features/student/modules/Course.tsx';
 import Rating from '@features/student/modules/Rating.tsx';
 import { useQuery } from '@tanstack/react-query';
 import { Collapse, Spin } from 'antd';
@@ -14,6 +14,11 @@ const panelStyle: CSSProperties = {
 
 interface ModulesProps {
     activeFilter: string;
+}
+
+interface StudentModuleResponse {
+    id: number;
+    modules: Module[];
 }
 
 interface Module {
@@ -36,9 +41,10 @@ const getCourses = (courses: CourseObj[]) => {
 };
 
 const getModules = async (activeFilter: string): Promise<ItemType[]> => {
-    const { data: modules } = await axios.get<Module[]>(
-        `${import.meta.env.VITE_BACKEND_API_URL}/module/student/${activeFilter}`
+    const studentModuleResponse = await axios.get<StudentModuleResponse>(
+        `${import.meta.env.VITE_BACKEND_API_URL}/moduleStudent/${activeFilter}`
     );
+    const modules = studentModuleResponse.data.modules;
 
     return modules
         .filter((module) => module.isActive)

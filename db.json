@@ -78,119 +78,131 @@
             "evaluationType": "P"
         }
     ],
-    "studentmodule1": [
+
+    "moduleStudent": [
         {
             "id": 1,
-            "version": 0,
-            "description": "Mathematik",
-            "number": "3.112",
-            "isActive": true,
-            "grade": 5.5,
-            "studyStage": {
-                "id": 1,
-                "description": "Grudstudium"
-            },
-            "valuationCategory": {
-                "description": "string",
-                "code": "E"
-            },
-            "courses": [
+            "modules": [
                 {
                     "id": 1,
                     "version": 0,
-                    "description": "Mathematik I",
-                    "number": "3.121",
-                    "grade": 3.6
-                },
+                    "description": "Mathematik",
+                    "number": "3.112",
+                    "isActive": true,
+                    "grade": 5.5,
+                    "studyStage": {
+                        "id": 1,
+                        "description": "Grundstudium"
+                    },
+                    "valuationCategory": {
+                        "description": "string",
+                        "code": "E"
+                    },
+                    "courses": [
+                        {
+                            "id": 1,
+                            "version": 0,
+                            "description": "Mathematik I",
+                            "number": "3.121",
+                            "grade": 3.6
+                        },
+                        {
+                            "id": 2,
+                            "version": 0,
+                            "description": "Mathematik II",
+                            "number": "3.121",
+                            "grade": 4.8
+                        },
+                        {
+                            "id": 3,
+                            "version": 0,
+                            "description": "Mathematik III",
+                            "number": "3.121",
+                            "grade": 5.5
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "modules": [
                 {
                     "id": 2,
                     "version": 0,
-                    "description": "Mathematik II",
-                    "number": "3.121",
-                    "grade": 4.8
+                    "description": "Programmierung",
+                    "number": "3.112",
+                    "isActive": true,
+                    "grade": 5.5,
+                    "studyStage": {
+                        "id": 2,
+                        "description": "Fachstudium"
+                    },
+                    "valuationCategory": {
+                        "description": "string",
+                        "code": "E"
+                    },
+                    "courses": [
+                        {
+                            "id": 7,
+                            "version": 0,
+                            "description": "OOP I",
+                            "number": "3.121",
+                            "grade": 4.6
+                        },
+                        {
+                            "id": 8,
+                            "version": 0,
+                            "description": "OOP II",
+                            "number": "3.121",
+                            "grade": 5.5
+                        }
+                    ]
                 },
                 {
                     "id": 3,
                     "version": 0,
-                    "description": "Mathematik III",
-                    "number": "3.121",
-                    "grade": 5.5
-                }
-            ]
-        }
-    ],
-    "studentmodule2": [
-        {
-            "id": 2,
-            "version": 0,
-            "description": "Programmierung",
-            "number": "3.112",
-            "isActive": true,
-            "grade": 5.5,
-            "studyStage": {
-                "id": 2,
-                "description": "Fachstudium"
-            },
-            "valuationCategory": {
-                "description": "string",
-                "code": "E"
-            },
-            "courses": [
-                {
-                    "id": 7,
-                    "version": 0,
-                    "description": "OOP I",
-                    "number": "3.121",
-                    "grade": 4.6
-                },
-                {
-                    "id": 8,
-                    "version": 0,
-                    "description": "OOP II",
-                    "number": "3.121",
-                    "grade": 5.5
+                    "description": "Datentechnik",
+                    "number": "3.112",
+                    "isActive": true,
+                    "grade": 0,
+                    "studyStage": {
+                        "id": 2,
+                        "description": "Fachstudium"
+                    },
+                    "valuationCategory": {
+                        "description": "string",
+                        "code": "E"
+                    },
+                    "courses": [
+                        {
+                            "id": 9,
+                            "version": 0,
+                            "description": "Datenbanken 1",
+                            "number": "3.121",
+                            "grade": 0
+                        },
+                        {
+                            "id": 10,
+                            "version": 0,
+                            "description": "Datenbanken 2",
+                            "number": "3.121",
+                            "grade": 5.5
+                        },
+                        {
+                            "id": 11,
+                            "version": 0,
+                            "description": "XML-Grundlagen",
+                            "number": "3.121",
+                            "grade": 5.5
+                        }
+                    ]
                 }
             ]
         },
         {
             "id": 3,
-            "version": 0,
-            "description": "Datentechnik",
-            "number": "3.112",
-            "isActive": true,
-            "grade": 0,
-            "studyStage": {
-                "id": 2,
-                "description": "Fachstudium"
-            },
-            "valuationCategory": {
-                "description": "string",
-                "code": "E"
-            },
-            "courses": [
-                {
-                    "id": 9,
-                    "version": 0,
-                    "description": "Datenbanken 1",
-                    "number": "3.121",
-                    "grade": 0
-                },
-                {
-                    "id": 10,
-                    "version": 0,
-                    "description": "Datenbanken 2",
-                    "number": "3.121",
-                    "grade": 5.5
-                },
-                {
-                    "id": 11,
-                    "version": 0,
-                    "description": "XML-Grundlagen",
-                    "number": "3.121",
-                    "grade": 5.5
-                }
-            ]
+            "modules": []
         }
-    ],
-    "studentmodule3": []
+    ]
 }
