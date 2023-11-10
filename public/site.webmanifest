@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "SmashGrade",
+    "short_name": "SmashGrade",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

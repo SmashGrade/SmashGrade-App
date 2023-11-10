@@ -12,7 +12,7 @@ import { Menu, MenuProps } from 'antd';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 import { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import smashgradelogo from '../assets/images/smashgrade_logo_transparent.png';
+import logo from '../assets/images/SmashGrade-AppIcon.png';
 import styles from './Navigation.module.scss';
 
 export default function Navigation() {
@@ -107,11 +107,7 @@ export default function Navigation() {
 
     return (
         <div className={styles.navigationContainer}>
-            <img
-                src={smashgradelogo}
-                alt={'SmashGrade - Höhere Fachschule für Technik Mittelland'}
-                className={styles.logo}
-            />
+            <img src={logo} alt={'SmashGrade - Höhere Fachschule für Technik Mittelland'} className={styles.logo} />
             <Menu
                 onClick={onNavItemClick}
                 selectedKeys={[current]}
