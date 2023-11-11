@@ -76,7 +76,7 @@ queryKey: ['studentModules', activeFilter],
     if (modulesError) {
         return <h2>Error</h2>;
     }
-    return modules && modules.length > 0 ? (
+ return  modules?.length ? (
         <Collapse items={modules} />
     ) : (
         <h2>
