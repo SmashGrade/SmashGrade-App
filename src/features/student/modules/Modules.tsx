@@ -65,7 +65,7 @@ export default function Modules({ activeFilter }: Readonly<ModulesProps>) {
         error: modulesError,
         data: modules,
     } = useQuery({
-        queryKey: ['StudentModules' + activeFilter],
+queryKey: ['studentModules', activeFilter],
         queryFn: () => getModules(activeFilter),
     });
 
