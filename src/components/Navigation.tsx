@@ -44,7 +44,7 @@ export default function Navigation() {
             },
             {
                 label: (
-                    <Link to={studentModuleRoute.to}>
+                    <Link>
                         <FormattedMessage id={'module.menu'} defaultMessage={'Module'} description={'Module Menu'} />
                     </Link>
                 ),
@@ -90,7 +90,7 @@ export default function Navigation() {
             },
             {
                 label: (
-                    <Link>
+                    <Link to={studentModuleRoute.to}>
                         <FormattedMessage
                             id={'my-curriculum.menu'}
                             defaultMessage={'Mein Studium'}
@@ -100,7 +100,7 @@ export default function Navigation() {
                 ),
                 key: 'my-curriculum',
                 icon: <ProfileOutlined />,
-                disabled: true,
+                disabled: false,
             },
         ];
     }, []);
