@@ -1,4 +1,8 @@
 {
+    "course.menu": {
+        "defaultMessage": "Kurs",
+        "description": "Kurs Menu"
+    },
     "curriculum": {
         "defaultMessage": "Lehrplan",
         "description": "Lehrplan Dropdown Titel"
@@ -6,26 +10,6 @@
     "curriculum.menu": {
         "defaultMessage": "Studiengang",
         "description": "Studiengang Menu"
-    },
-    "module.menu": {
-        "defaultMessage": "Module",
-        "description": "Module Menu"
-    },
-    "course.menu": {
-        "defaultMessage": "Kurs",
-        "description": "Kurs Menu"
-    },
-    "user-management.menu": {
-        "defaultMessage": "Benutzerverwaltung",
-        "description": "Benutzerverwaltung Menu"
-    },
-    "my-course.menu": {
-        "defaultMessage": "Meine Kurse",
-        "description": "Meine Kurse Menu"
-    },
-    "my-curriculum.menu": {
-        "defaultMessage": "Mein Studium",
-        "description": "Mein Studium Menu"
     },
     "language.english": {
         "defaultMessage": "Englisch",
@@ -39,6 +23,18 @@
         "defaultMessage": "Deutsch",
         "description": "Sprachoption Deutsch"
     },
+    "module.menu": {
+        "defaultMessage": "Module",
+        "description": "Module Menu"
+    },
+    "my-course.menu": {
+        "defaultMessage": "Meine Kurse",
+        "description": "Meine Kurse Menu"
+    },
+    "my-curriculum.menu": {
+        "defaultMessage": "Mein Studium",
+        "description": "Mein Studium Menu"
+    },
     "onboarding.title": {
         "defaultMessage": "Übersicht",
         "description": "Übersicht Titel"
@@ -46,5 +42,25 @@
     "startYear": {
         "defaultMessage": "Startjahr",
         "description": "Startjahr Dropdown Titel"
+    },
+    "student.basicStudies": {
+        "defaultMessage": "Grundstudium",
+        "description": "Tab Grundstudium"
+    },
+    "student.focusStudies": {
+        "defaultMessage": "Schwerpunkt",
+        "description": "Tab Schwerpunkt"
+    },
+    "student.noModulesFound": {
+        "defaultMessage": "Es wurden keine Module gefunden",
+        "description": "no modules found"
+    },
+    "student.specialisedStudies": {
+        "defaultMessage": "Fachstudium",
+        "description": "Tab Fachstudium"
+    },
+    "user-management.menu": {
+        "defaultMessage": "Benutzerverwaltung",
+        "description": "Benutzerverwaltung Menu"
     }
 }

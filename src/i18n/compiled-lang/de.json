@@ -10,5 +10,9 @@
     "my-curriculum.menu": "Mein Studium",
     "onboarding.title": "Übersicht",
     "startYear": "Startjahr",
+    "student.basicStudies": "Grundstudium",
+    "student.focusStudies": "Schwerpunkt",
+    "student.noModulesFound": "Es wurden keine Module gefunden",
+    "student.specialisedStudies": "Fachstudium",
     "user-management.menu": "Benutzerverwaltung"
 }

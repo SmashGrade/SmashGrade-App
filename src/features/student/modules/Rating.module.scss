@@ -1,0 +1,30 @@
+@import '../../../colors.module.scss';
+
+.ratingContainer {
+    color: black;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    margin: 0 10px;
+
+    .rating {
+        border-radius: 5px;
+        padding: 2px 10px;
+    }
+}
+
+.ratingGood {
+    background-color: $colorRatingGood;
+}
+
+.ratingBad {
+    background-color: $colorRatingBad;
+}
+
+.ratingMedian {
+    background-color: $colorRatingMedian;
+}
+
+.ratingNone {
+    background-color: $colorSecondary;
+}

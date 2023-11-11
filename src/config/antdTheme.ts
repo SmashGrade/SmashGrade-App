@@ -5,7 +5,9 @@ export const antdTheme: ThemeConfig = {
     components: {
         Collapse: {
             headerBg: colors.colorPrimary,
+            colorBgContainer: colors.colorTertiary,
             colorTextHeading: colors.colorTextHeading,
+            fontWeightStrong: 1000,
         },
         Table: {
             headerBg: colors.colorPrimary,
