@@ -30,16 +30,6 @@ interface Module {
     courses: CourseObj[];
 }
 
-const getCourses = (courses: CourseObj[]) => {
-    return (
-        <>
-            {courses.map((course) => (
-                <Course key={course.id} course={course} />
-            ))}
-        </>
-    );
-};
-
 const getModules = async (activeFilter: string): Promise<ItemType[]> => {
     const studentModuleResponse = await axios.get<StudentModuleResponse>(
         `${import.meta.env.VITE_BACKEND_API_URL}/moduleStudent/${activeFilter}`
@@ -52,7 +42,7 @@ const getModules = async (activeFilter: string): Promise<ItemType[]> => {
             return {
                 key: module.id,
                 label: module.description,
-                children: getCourses(module.courses),
+                children: module.courses.map((course) => <Course key={course.id} course={course} />),
                 extra: <Rating rating={module.grade} />,
                 style: panelStyle,
             };
@@ -65,7 +55,7 @@ export default function Modules({ activeFilter }: Readonly<ModulesProps>) {
         error: modulesError,
         data: modules,
     } = useQuery({
-queryKey: ['studentModules', activeFilter],
+        queryKey: ['studentModules', activeFilter],
         queryFn: () => getModules(activeFilter),
     });
 
@@ -76,7 +66,7 @@ queryKey: ['studentModules', activeFilter],
     if (modulesError) {
         return <h2>Error</h2>;
     }
- return  modules?.length ? (
+    return modules?.length ? (
         <Collapse items={modules} />
     ) : (
         <h2>

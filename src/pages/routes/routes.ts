@@ -36,7 +36,7 @@ export const courseRoute = new Route({
 
 export const studentModuleRoute = new Route({
     getParentRoute: () => rootRoute,
-    path: '/modules/',
+    path: 'modules',
     component: StudentModulePage,
 });
 
