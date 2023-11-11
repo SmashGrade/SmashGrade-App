@@ -10,14 +10,15 @@ const RATING_CLASSNAMES: Record<RatingType, string> = {
 };
 
 const getRatingClass = (rating: number) => {
-    if (rating <= 0) {
-        return RATING_CLASSNAMES.none;
-    } else if (rating < 4) {
-        return RATING_CLASSNAMES.bad;
-    } else if (rating < 5) {
-        return RATING_CLASSNAMES.median;
-    } else {
-        return RATING_CLASSNAMES.good;
+    switch (true) {
+        case rating <= 0:
+            return RATING_CLASSNAMES.none;
+        case rating < 4:
+            return RATING_CLASSNAMES.bad;
+        case rating < 5:
+            return RATING_CLASSNAMES.median;
+        default:
+            return RATING_CLASSNAMES.good;
     }
 };
 
