@@ -9,8 +9,8 @@ on:
       - dev
 
   push:
-    branches:
-      - *
+#    branches:
+#      *
 
   workflow_dispatch:
     inputs:
