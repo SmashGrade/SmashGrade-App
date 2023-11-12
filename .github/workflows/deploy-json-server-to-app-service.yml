@@ -1,0 +1,281 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy Node.js app to Azure Web App - json-server-api
+on:
+  pull_request:
+    types: [ opened, synchronize, closed ]
+    branches:
+      - dev
+
+  push:
+    branches:
+      - dev
+
+  workflow_dispatch:
+    inputs:
+      create_azure_slot:
+        type: boolean
+        description: Allows to manually trigger the creation and deployment to an Azure slot
+        default: false
+      pull-request-number:
+        type: number
+        description: Specify the pull request number to create a deployment preview for it
+        required: true
+
+permissions:
+  pull-requests: write # allows to add comments to PRs
+  contents: read
+  deployments: write
+
+jobs:
+  build-json-server:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+
+    defaults:
+        run:
+            working-directory: ./api
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+          PR_VALUE: ${{ github.event.pull_request.number && github.event.pull_request.number || inputs.pull-request-number }}
+          CREATE_AZURE_SLOT: ${{ inputs.create_azure_slot }}
+        run: |
+          echo "pr-preview-$PR_VALUE"
+          echo "Create Azure Slot: $CREATE_AZURE_SLOT"
+          echo "$GITHUB_CONTEXT"
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: Install dependencies
+        run:  npm install-clean
+
+      - name: Build json-server
+        run: npm run build --if-present
+
+      - name: Zip artifact for deployment
+        run: zip json-server.zip ./* -r
+
+      - name: output directory
+        run: |
+            pwd
+            ls -la
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: json-server
+          path: ./api/json-server.zip
+
+  create-deployment-preview:
+    if: github.event.action == 'opened' || inputs.create_azure_slot == true
+    runs-on: ubuntu-latest
+    needs: build-json-server
+    environment:
+      name: 'json-server-pr-preview-${{ github.event.pull_request.number && github.event.pull_request.number || inputs.pull-request-number }}'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Initial Deployment Preview Comment
+        uses: peter-evans/create-or-update-comment@v3
+        id: pr-preview-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number && github.event.pull_request.number || inputs.pull-request-number }}
+          body: |
+            ### Building Deployment Preview for JSON Server API...
+            A preview of this Pull Request is being created. Hold tight while it's building ⚒️
+            This comment will be automatically updated when the preview is ready.  
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Create PR Deployment Slot
+        uses: Azure/cli@v1
+        with:
+          inlineScript: az webapp deployment slot create --name jsonserver-api --resource-group rg-SmashGrade --slot preview-pr-${{ github.event.pull_request.number && github.event.pull_request.number || inputs.pull-request-number }}
+
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: json-server
+
+      - name: Unzip artifact for deployment
+        run: unzip json-server.zip
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'jsonserver-api'
+          slot-name: preview-pr-${{ github.event.pull_request.number && github.event.pull_request.number || inputs.pull-request-number }}
+          package: .
+
+      - name: Update comment
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          comment-id: ${{ steps.pr-preview-comment.outputs.comment-id }}
+          edit-mode: replace
+          body: |
+            ### Deployment Preview for JSON Server API
+            😎 Preview this PR: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+            🧑🏼‍💻 Commit SHA: ${{ github.sha }}
+          reactions: rocket
+
+  update-deployment-preview:
+    if: github.event.action == 'synchronize'
+    runs-on: ubuntu-latest
+    needs: build-json-server
+    environment:
+      name: 'json-server-pr-preview-${{ github.event.pull_request.number }}'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Find PR Preview Comment
+        uses: peter-evans/find-comment@v2
+        id: find-preview-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: "github-actions[bot]"
+          body-includes: JSON Server API
+
+      - name: Update PR Preview Comment
+        if: steps.find-preview-comment.outputs.comment-id != ''
+        uses: peter-evans/create-or-update-comment@v1.4.5
+        with:
+          comment-id: ${{ steps.find-preview-comment.outputs.comment-id }}
+          edit-mode: replace
+          body: |
+            ### Building Deployment Preview for JSON Server API...
+            The Pull Request preview is being updated. Hold tight while it's building ⚒️
+            This comment will be automatically updated when the new version is ready.
+
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: json-server
+
+      - name: Unzip artifact for deployment
+        run: unzip json-server.zip
+
+      - name: output directory
+        run: |
+          pwd
+          ls -la
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'jsonserver-api'
+          slot-name: preview-pr-${{ github.event.pull_request.number && github.event.pull_request.number || inputs.pull-request-number }}
+          package: .
+
+      - name: Update comment
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          comment-id: ${{ steps.pr-preview-comment.outputs.comment-id }}
+          edit-mode: replace
+          body: |
+            ### Deployment Preview for JSON Server API
+            😎 Preview this PR: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+            🧑🏼‍💻 Commit SHA: ${{ github.sha }}
+          reactions: rocket
+
+  delete-deployment-preview:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Azure Login
+        uses: Azure/login@v1.4.3
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Delete PR Deployment Slot
+        uses: Azure/cli@v1
+        with:
+          inlineScript: |
+            az webapp deployment slot delete --name jsonserver-api --resource-group rg-SmashGrade --slot preview-pr-${{ github.event.pull_request.number }}
+
+      - name: Find PR Preview Comment
+        uses: peter-evans/find-comment@v2
+        id: find-preview-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: "github-actions[bot]"
+          body-includes: JSON Server API
+
+      - name: Update PR Preview Comment
+        if: steps.find-preview-comment.outputs.comment-id != ''
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          comment-id: ${{ steps.find-preview-comment.outputs.comment-id }}
+          edit-mode: replace
+          body: |
+            ### Deployment Preview
+            🏁 This PR has been closed. No deployment preview is available.
+          reactions: "hooray"
+
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.WORKFLOW_APP_APP_ID }}
+          private-key: ${{ secrets.WORKFLOW_APP_PRIVATE_KEY }}
+
+      - name: 🗑 Delete deployment environment
+        uses: strumwolf/delete-deployment-environment@v2.2.3
+        with:
+          # Use a JWT created with your GitHub App's private key
+          token: ${{ steps.generate_token.outputs.token }}
+          environment: json-server-pr-preview-${{ github.event.pull_request.number }}
+
+  deploy-to-prod:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    needs: build-json-server
+    environment:
+      name: 'json-server-Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: json-server
+
+      - name: Unzip artifact for deployment
+        run: unzip json-server.zip
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'jsonserver-api'
+          slot-name: production
+          package: .
