@@ -60,6 +60,16 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip json-server.zip
 
+      - name: output directory
+        run: |
+          pwd
+          ls -la
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
@@ -67,4 +77,3 @@ jobs:
           app-name: 'json-server-api'
           slot-name: 'production'
           package: .
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_90d42771e7f9488982ea2c79823a0856 }}
