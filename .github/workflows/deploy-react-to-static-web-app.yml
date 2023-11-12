@@ -27,7 +27,10 @@ jobs:
       - name: Create .env.pullrequest file
         run: echo "VITE_BACKEND_API_URL=https://jsonserver-api-preview-pr-${{ github.event.pull_request.number}}.azurewebsites.net" > .env.pullrequest
 
-      - name: Build And Deploy
+      - name: Remove NPM prepare script
+        run: npm pkg delete scripts.prepare
+
+      - name: Build And Deploy to Azure Static Web app
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
@@ -35,6 +38,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
           app_build_command: "npm run build:pr"
+          skip_api_build: true
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/" # App source code path
           output_location: "dist" # Built app content directory - optional
