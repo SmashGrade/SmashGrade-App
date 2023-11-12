@@ -15,7 +15,7 @@ jobs:
         include:
           - dockerfile: ./Dockerfile
             image: ghcr.io/smashgrade/smashgrade-app/react-app
-          - dockerfile: ./dev.Dockerfile
+          - dockerfile: ./Dockerfile
             image: ghcr.io/smashgrade/smashgrade-app/json-server
     permissions:
       packages: write
@@ -44,7 +44,7 @@ jobs:
         include:
           - dockerfile: ./Dockerfile
             image: ghcr.io/smashgrade/smashgrade-app/react-app:latest
-          - dockerfile: ./dev.Dockerfile
+          - dockerfile: ./Dockerfile
             image: ghcr.io/smashgrade/smashgrade-app/json-server:latest
     permissions:
       packages: write

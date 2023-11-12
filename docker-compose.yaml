@@ -2,7 +2,7 @@
 version: "3.8"
 services:
   smash-grade-frontend:
-    image: ghcr.io/smashgrade/smashgrade-app/react-app:latest
+    image: smashgrade-react:latest
     container_name: smash-grade-frontend
     ports:
       - "80:80"
