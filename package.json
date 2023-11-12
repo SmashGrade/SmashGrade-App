@@ -9,8 +9,8 @@
     "scripts": {
         "dev": "vite",
         "build": "tsc && vite build",
+        "build:pr": "tsc && vite build --mode pullrequest",
         "build-local": "tsc && vite build --mode development",
-        "build:azure": "npm run build && tsc api/server.ts --outDir dist",
         "lint": "eslint --ext ts,tsx,css --report-unused-disable-directives --max-warnings 0 src",
         "lint-report": "eslint --ext ts,tsx,css --format json-relative --output-file reports/eslint.json src",
         "format": "prettier --write \"*.{js,jsx,ts,tsx,json,css,scss,md}\"",
