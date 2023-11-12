@@ -42,7 +42,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: json-server
-          path: json-server.zip
+          path: ./api/json-server.zip
 
   deploy:
     runs-on: ubuntu-latest
