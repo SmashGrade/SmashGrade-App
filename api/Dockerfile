@@ -1,6 +1,6 @@
 # ==== BUILD =====
 # Use NodeJS v18.18.2 with Alpine for a slim image
-FROM node:18-alpine as build
+FROM node:18-alpine AS build
 LABEL authors="SmashGrade"
 
 EXPOSE 9000
