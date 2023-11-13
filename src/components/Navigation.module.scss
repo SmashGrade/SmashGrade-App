@@ -1,7 +1,6 @@
 .navigationContainer {
-    //  flex-grow: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     .logo {
@@ -13,6 +12,9 @@
     }
 
     .menuContainer {
+        display: flex;
+        align-items: center;
+        // justify-content: space-evenly;
         min-width: 0;
         flex: auto;
     }
@@ -28,4 +30,5 @@
 
 .accountMenu {
     margin-left: auto;
+    margin-right: 12px;
 }

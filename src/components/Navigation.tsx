@@ -94,7 +94,7 @@ export default function Navigation() {
                         </div>
                     </Link>
                 ),
-                key: 'my-course',
+                key: 'students',
                 disabled: true,
             },
             {
@@ -133,10 +133,15 @@ export default function Navigation() {
                 key: 'onboarding',
                 disabled: false,
             },
+        ];
+    }, []);
+
+    const accountItems: MenuProps['items'] = useMemo(() => {
+        return [
             {
                 label: (
-                    <Link>
-                        <div className={`${styles.menuItemIconAbove} ${styles.accountMenu}`}>
+                    <Link to={'/account'}>
+                        <div className={styles.menuItemIconAbove}>
                             <span className={'material-icons-round'} style={{ fontSize: '36px' }}>
                                 account_circle
                             </span>
@@ -148,8 +153,7 @@ export default function Navigation() {
                         </div>
                     </Link>
                 ),
-                key: 'my-course',
-                disabled: true,
+                key: 'account',
             },
         ];
     }, []);
@@ -163,6 +167,13 @@ export default function Navigation() {
                 mode={'horizontal'}
                 items={items}
                 className={styles.menuContainer}
+            />
+            <Menu
+                onClick={onNavItemClick}
+                selectedKeys={[current]}
+                mode={'horizontal'}
+                items={accountItems}
+                className={styles.accountMenu}
             />
         </div>
     );
