@@ -27,6 +27,14 @@
         "defaultMessage": "My Curriculum",
         "description": "My Curriculum Menu"
     },
+    "students.menu": {
+        "defaultMessage": "Students",
+        "description": "Studenten Menu"
+    },
+    "account.menu": {
+        "defaultMessage": "Account",
+        "description": "Account Menu"
+    },
     "language.english": {
         "defaultMessage": "English",
         "description": "Sprachoption Englisch"

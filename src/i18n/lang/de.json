@@ -8,7 +8,7 @@
         "description": "Lehrplan Dropdown Titel"
     },
     "curriculum.menu": {
-        "defaultMessage": "Studiengang",
+        "defaultMessage": "Studiengänge",
         "description": "Studiengang Menu"
     },
     "language.english": {
@@ -35,6 +35,14 @@
         "defaultMessage": "Mein Studium",
         "description": "Mein Studium Menu"
     },
+    "students.menu": {
+        "defaultMessage": "Studenten",
+        "description": "Studenten Menu"
+    },
+    "account.menu": {
+        "defaultMessage": "Account",
+        "description": "Account Menu"
+    },
     "onboarding.title": {
         "defaultMessage": "Übersicht",
         "description": "Übersicht Titel"
@@ -60,7 +68,7 @@
         "description": "Tab Fachstudium"
     },
     "user-management.menu": {
-        "defaultMessage": "Benutzerverwaltung",
-        "description": "Benutzerverwaltung Menu"
+        "defaultMessage": "Benutzer",
+        "description": "Benutzer Menu"
     }
 }

@@ -1,11 +1,3 @@
-import {
-    AppstoreOutlined,
-    BookOutlined,
-    HeartOutlined,
-    ProfileOutlined,
-    ReadOutlined,
-    UserOutlined,
-} from '@ant-design/icons';
 import { courseRoute, curriculumRoute, onboardingRoute, studentModuleRoute } from '@pages/routes/routes.ts';
 import { Link, useRouter } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
@@ -24,68 +16,103 @@ export default function Navigation() {
     const items: MenuProps['items'] = useMemo(() => {
         return [
             {
-                label: <Link to={onboardingRoute.to}>Onboarding</Link>,
-                key: 'onboarding',
-                icon: <ProfileOutlined />,
-                disabled: false,
-            },
-            {
                 label: (
                     <Link to={curriculumRoute.to}>
-                        <FormattedMessage
-                            id={'curriculum.menu'}
-                            defaultMessage={'Studiengang'}
-                            description={'Studiengang Menu'}
-                        />
+                        <div className={styles.menuItemIconAbove}>
+                            <span className={'material-icons-round'} style={{ fontSize: '36px' }}>
+                                play_lesson
+                            </span>
+                            <FormattedMessage
+                                id={'curriculum.menu'}
+                                defaultMessage={'Studiengänge'}
+                                description={'Studiengang Menu'}
+                            />
+                        </div>
                     </Link>
                 ),
                 key: 'curriculum',
-                icon: <BookOutlined />,
             },
             {
                 label: (
                     <Link>
-                        <FormattedMessage id={'module.menu'} defaultMessage={'Module'} description={'Module Menu'} />
+                        <div className={styles.menuItemIconAbove}>
+                            <span className={'material-icons-round'} style={{ fontSize: '36px' }}>
+                                collections_bookmark
+                            </span>
+                            <FormattedMessage
+                                id={'module.menu'}
+                                defaultMessage={'Module'}
+                                description={'Module Menu'}
+                            />
+                        </div>
                     </Link>
                 ),
                 key: 'modules',
-                icon: <AppstoreOutlined />,
-                disabled: false,
             },
             {
                 label: (
                     <Link to={courseRoute.to}>
-                        <FormattedMessage id={'course.menu'} defaultMessage={'Kurs'} description={'Kurs Menu'} />
+                        <div className={styles.menuItemIconAbove}>
+                            <span className={'material-icons-round'} style={{ fontSize: '36px' }}>
+                                book
+                            </span>
+                            <FormattedMessage id={'course.menu'} defaultMessage={'Kurse'} description={'Kurse Menu'} />
+                        </div>
                     </Link>
                 ),
                 key: 'course',
-                icon: <ReadOutlined />,
             },
             {
                 label: (
                     <Link>
-                        <FormattedMessage
-                            id={'user-management.menu'}
-                            defaultMessage={'Benutzerverwaltung'}
-                            description={'Benutzerverwaltung Menu'}
-                        />
+                        <div className={styles.menuItemIconAbove}>
+                            <span className={'material-icons-round'} style={{ fontSize: '36px' }}>
+                                supervised_user_circle
+                            </span>
+                            <FormattedMessage
+                                id={'user-management.menu'}
+                                defaultMessage={'Benutzer'}
+                                description={'Benutzer Menu'}
+                            />
+                        </div>
                     </Link>
                 ),
                 key: 'user-management',
-                icon: <UserOutlined />,
             },
             {
                 label: (
                     <Link>
-                        <FormattedMessage
-                            id={'my-course.menu'}
-                            defaultMessage={'Meine Kurse'}
-                            description={'Meine Kurse Menu'}
-                        />
+                        <div className={styles.menuItemIconAbove}>
+                            <span className={'material-icons-round'} style={{ fontSize: '36px' }}>
+                                school
+                            </span>
+                            <FormattedMessage
+                                id={'students.menu'}
+                                defaultMessage={'Studenten'}
+                                description={'Studenten Menu'}
+                            />
+                        </div>
                     </Link>
                 ),
                 key: 'my-course',
-                icon: <HeartOutlined />,
+                disabled: true,
+            },
+            {
+                label: (
+                    <Link>
+                        <div className={styles.menuItemIconAbove}>
+                            <span className={'material-icons-round'} style={{ fontSize: '36px' }}>
+                                sticky_note_2
+                            </span>
+                            <FormattedMessage
+                                id={'my-course.menu'}
+                                defaultMessage={'Meine Kurse'}
+                                description={'Meine Kurse Menu'}
+                            />
+                        </div>
+                    </Link>
+                ),
+                key: 'my-course',
                 disabled: true,
             },
             {
@@ -99,8 +126,30 @@ export default function Navigation() {
                     </Link>
                 ),
                 key: 'my-curriculum',
-                icon: <ProfileOutlined />,
                 disabled: false,
+            },
+            {
+                label: <Link to={onboardingRoute.to}>Onboarding</Link>,
+                key: 'onboarding',
+                disabled: false,
+            },
+            {
+                label: (
+                    <Link>
+                        <div className={`${styles.menuItemIconAbove} ${styles.accountMenu}`}>
+                            <span className={'material-icons-round'} style={{ fontSize: '36px' }}>
+                                account_circle
+                            </span>
+                            <FormattedMessage
+                                id={'account.menu'}
+                                defaultMessage={'Account'}
+                                description={'Account Menu'}
+                            />
+                        </div>
+                    </Link>
+                ),
+                key: 'my-course',
+                disabled: true,
             },
         ];
     }, []);
