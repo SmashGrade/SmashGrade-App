@@ -140,7 +140,7 @@ export default function Navigation() {
         return [
             {
                 label: (
-                    <Link to={'/account'}>
+                    <Link>
                         <div className={styles.menuItemIconAbove}>
                             <span className={'material-icons-round'} style={{ fontSize: '36px' }}>
                                 account_circle
