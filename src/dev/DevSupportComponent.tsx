@@ -3,7 +3,7 @@ import { PropsWithChildren } from 'react';
 
 const environment = process.env.NODE_ENV;
 
-function DevSupportComponent({ children }: PropsWithChildren) {
+export default function DevSupportComponent({ children }: PropsWithChildren) {
     if (environment === 'development') {
         import('./index.ts')
             .then((result) => {
@@ -23,5 +23,3 @@ function DevSupportComponent({ children }: PropsWithChildren) {
     }
     return null;
 }
-
-export default DevSupportComponent;
