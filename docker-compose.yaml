@@ -2,7 +2,7 @@
 version: "3.8"
 services:
   smash-grade-frontend:
-    image: smashgrade-react:latest
+    image: ghcr.io/smashgrade/react-app:dev-latest
     container_name: smash-grade-frontend
     ports:
       - "80:80"
@@ -11,7 +11,7 @@ services:
     depends_on:
         - json-server
   json-server:
-    image: ghcr.io/smashgrade/smashgrade-app/json-server:latest
+    image: ghcr.io/smashgrade/json-server:dev-latest
     container_name: json-server
     ports:
       - "3000:3000"

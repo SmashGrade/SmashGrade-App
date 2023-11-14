@@ -1,5 +1,5 @@
 # ==== BUILD =====
-# Use NodeJS v18.18.2 with Alpine for a slim image
+# Use NodeJS v18.x.x with Alpine for a slim image
 FROM node:18-alpine AS build
 LABEL authors="SmashGrade"
 
