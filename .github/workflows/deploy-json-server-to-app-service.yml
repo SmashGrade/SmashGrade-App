@@ -172,11 +172,6 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip json-server.zip
 
-      - name: output directory
-        run: |
-          pwd
-          ls -la
-
       - name: Azure Login
         uses: Azure/login@v1
         with:
@@ -193,7 +188,7 @@ jobs:
       - name: Update comment
         uses: peter-evans/create-or-update-comment@v3
         with:
-          comment-id: ${{ steps.pr-preview-comment.outputs.comment-id }}
+          comment-id: ${{ steps.find-preview-comment.outputs.comment-id }}
           edit-mode: replace
           body: |
             ### Deployment Preview for JSON Server API
