@@ -6,9 +6,6 @@ LABEL authors="SmashGrade"
 # Set the working directory
 WORKDIR /react-docker/
 
-# Set environment variables
-ENV VITE_BACKEND_API_URL=http://localhost:3000
-
 # Copy app files
 COPY . .
 
