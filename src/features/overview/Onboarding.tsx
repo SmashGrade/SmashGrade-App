@@ -1,11 +1,11 @@
-import SelectWithTitle from '@components/SelectWithTitle.tsx';
 import { RocketOutlined } from '@ant-design/icons';
+import SelectWithTitle from '@components/SelectWithTitle.tsx';
 import { useQuery } from '@tanstack/react-query';
+import { Button } from 'antd';
 import axios from 'axios';
 import { useState } from 'react';
-import styles from './Overview.module.scss';
-import { Button } from 'antd';
 import { FormattedMessage, useIntl } from 'react-intl';
+import styles from './Overview.module.scss';
 
 interface YearResponse {
     year: number;
@@ -29,7 +29,7 @@ interface Curriculum {
 }
 
 async function getYears(): Promise<Year[]> {
-    const { data } = await axios.get<YearResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/startYears`);
+    const { data } = await axios.get<YearResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/startYears`, {});
 
     return data.map(({ year }) => ({ value: year, label: year.toString() }));
 }
