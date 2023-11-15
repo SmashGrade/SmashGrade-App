@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     environment:
-      name: ${{ github.event_name == 'pull_request' && 'smashgrade-pr-preview-${{ github.event.pull_request.number}}' || 'production' }}
+      name: ${{ github.event_name == 'pull_request' && 'smashgrade-pr-preview-${{ github.event.pull_request.number}}' || 'Production' }}
       url: ${{ github.event_name == 'pull_request' && 'https://salmon-meadow-0f230d803-${{ github.event.pull_request.number }}.westeurope.3.azurestaticapps.net' || 'https://www.smashgrade.ch' }}
     
     steps:
