@@ -19,8 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     environment:
-      name: ${{ github.event_name == 'pull_request' && smashgrade-pr-preview-${{ github.event.pull_request.number}} || 'Production' }}
-      url: ${{ github.event_name == 'pull_request' && https://salmon-meadow-0f230d803-${{ github.event.pull_request.number }}.westeurope.3.azurestaticapps.net || 'https://www.smashgrade.ch' }}
+      name: ${{ github.event_name == 'pull_request' && format('smashgrade-app-pr-preview-{0}', github.event.pull_request.number) || 'Production' }}
+      url: ${{ github.event_name == 'pull_request' && format('https://salmon-meadow-0f230d803-{0}', github.event.pull_request.number) || 'https://www.smashgrade.ch' }}
     
     steps:
       - uses: actions/checkout@v3
@@ -71,4 +71,4 @@ jobs:
         with:
           # Use a JWT created with your GitHub App's private key
           token: ${{ steps.generate_token.outputs.token }}
-          environment: smashgrade-pr-preview-${{ github.event.pull_request.number}}
+          environment: smashgrade-app-pr-preview-${{ github.event.pull_request.number}}
