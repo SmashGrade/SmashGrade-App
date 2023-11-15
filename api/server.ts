@@ -1,16 +1,13 @@
+import cors from 'cors';
 import * as jsonServer from 'json-server';
 
 const server = jsonServer.create();
+server.use(cors());
 const router = jsonServer.router('db.json');
-const middlewares = jsonServer.defaults({ logger: true, noCors: true });
+const middlewares = jsonServer.defaults({ logger: true });
 
 const port = process.env.PORT ?? 9000;
 
-server.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Accept', '*');
-    next();
-});
 server.use(middlewares);
 server.use(router);
 
