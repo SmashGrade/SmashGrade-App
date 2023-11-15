@@ -28,6 +28,7 @@ jobs:
           submodules: true
 
       - name: Create .env.pullrequest file
+        if: github.event_name == 'pull_request
         run: echo "VITE_BACKEND_API_URL=https://jsonserver-api-preview-pr-${{ github.event.pull_request.number}}.azurewebsites.net" > .env.pullrequest
 
       - name: Remove NPM prepare script
@@ -40,7 +41,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_SALMON_MEADOW_0F230D803 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
-          app_build_command: "npm run build:pr"
+          app_build_command: ${{ github.event_name == 'pull_request && 'npm run build:pr' || 'npm run build' }}
           skip_api_build: true
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/" # App source code path
