@@ -1,5 +1,4 @@
 import { router } from '@pages/routes/routes.ts';
-import { DevSupport } from '@react-buddy/ide-toolbox';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider } from '@tanstack/react-router';
@@ -7,7 +6,7 @@ import { ConfigProvider } from 'antd';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { antdTheme } from './config/antdTheme.ts';
-import { ComponentPreviews, useInitial } from './dev';
+import DevSupportComponent from './dev/DevSupportComponent.tsx';
 import './global.scss';
 import { ReactIntlProvider } from './i18n/ReactIntlProvider.tsx';
 
@@ -19,9 +18,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <ConfigProvider theme={antdTheme}>
                 <QueryClientProvider client={queryClient}>
                     <RouterProvider router={router} />
-                    <DevSupport ComponentPreviews={ComponentPreviews} useInitialHook={useInitial}>
+                    <DevSupportComponent>
                         <ReactQueryDevtools initialIsOpen={false} />
-                    </DevSupport>
+                    </DevSupportComponent>
                 </QueryClientProvider>
             </ConfigProvider>
         </ReactIntlProvider>

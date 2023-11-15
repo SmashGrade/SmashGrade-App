@@ -1,0 +1,73 @@
+name: Build and deploy React App
+
+on:
+  pull_request:
+    types: [ opened, synchronize, closed ]
+    branches:
+      - dev
+  push:
+    branches:
+      - dev
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  build_and_deploy_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    environment:
+      name: 'smashgrade-pr-preview-${{ github.event.pull_request.number}}'
+      url: 'https://salmon-meadow-0f230d803-${{ github.event.pull_request.number }}.westeurope.3.azurestaticapps.net'
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Create .env.pullrequest file
+        run: echo "VITE_BACKEND_API_URL=https://jsonserver-api-preview-pr-${{ github.event.pull_request.number}}.azurewebsites.net" > .env.pullrequest
+
+      - name: Remove NPM prepare script
+        run: npm pkg delete scripts.prepare
+
+      - name: Build And Deploy to Azure Static Web app
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_SALMON_MEADOW_0F230D803 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          action: "upload"
+          app_build_command: "npm run build:pr"
+          skip_api_build: true
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: "/" # App source code path
+          output_location: "dist" # Built app content directory - optional
+
+  close_pull_request_job:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_SALMON_MEADOW_0F230D803 }}
+          action: "close"
+
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.WORKFLOW_APP_APP_ID }}
+          private-key: ${{ secrets.WORKFLOW_APP_PRIVATE_KEY }}
+
+      - name: 🗑 Delete deployment environment
+        uses: strumwolf/delete-deployment-environment@v2.2.3
+        with:
+          # Use a JWT created with your GitHub App's private key
+          token: ${{ steps.generate_token.outputs.token }}
+          environment: smashgrade-pr-preview-${{ github.event.pull_request.number}}
