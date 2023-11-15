@@ -1,0 +1,12 @@
+# General
+node_modules
+*.local
+
+# Git and GitHub
+.github
+.gitignore
+.git
+
+# Docker
+.dockerignore
+Dockerfile
