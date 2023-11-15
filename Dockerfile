@@ -13,7 +13,8 @@ COPY . .
 RUN npm install-clean
 
 # Build the app
-RUN npm run build
+## Use local mode to ensure the .env file which points to localhost is used
+RUN npm run build:local
 
 # ==== RUN =====
 # Use stable Nginx version with Alpine for a slim image
