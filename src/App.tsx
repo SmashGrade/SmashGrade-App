@@ -1,9 +1,6 @@
 import Navigation from '@components/Navigation';
 import { Outlet } from '@tanstack/react-router';
-import axios from 'axios';
 import React from 'react';
-
-axios.defaults.withCredentials = true;
 
 const TanStackRouterDevtools =
     process.env.NODE_ENV === 'production'
