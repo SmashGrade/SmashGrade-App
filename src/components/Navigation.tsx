@@ -1,3 +1,4 @@
+import { MaterialIcon } from '@components/MaterialIcon.tsx';
 import { courseRoute, curriculumRoute, onboardingRoute, studentModuleRoute } from '@pages/routes/routes.ts';
 import { Link, useRouter } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
@@ -19,9 +20,7 @@ export default function Navigation() {
                 label: (
                     <Link to={curriculumRoute.to}>
                         <div className={styles.menuItemIconAbove}>
-                            <span className={'material-icons-round'} style={{ fontSize: '36px' }}>
-                                play_lesson
-                            </span>
+                            <MaterialIcon icon={'play_lesson'} size={'large'} />
                             <FormattedMessage
                                 id={'curriculum.menu'}
                                 defaultMessage={'Studiengänge'}
@@ -36,9 +35,7 @@ export default function Navigation() {
                 label: (
                     <Link>
                         <div className={styles.menuItemIconAbove}>
-                            <span className={'material-icons-round'} style={{ fontSize: '36px' }}>
-                                collections_bookmark
-                            </span>
+                            <MaterialIcon icon={'collections_bookmark'} size={'large'} />
                             <FormattedMessage
                                 id={'module.menu'}
                                 defaultMessage={'Module'}
@@ -53,9 +50,7 @@ export default function Navigation() {
                 label: (
                     <Link to={courseRoute.to}>
                         <div className={styles.menuItemIconAbove}>
-                            <span className={'material-icons-round'} style={{ fontSize: '36px' }}>
-                                book
-                            </span>
+                            <MaterialIcon icon={'developer_guide'} size={'large'} />
                             <FormattedMessage id={'course.menu'} defaultMessage={'Kurse'} description={'Kurse Menu'} />
                         </div>
                     </Link>
@@ -66,9 +61,7 @@ export default function Navigation() {
                 label: (
                     <Link>
                         <div className={styles.menuItemIconAbove}>
-                            <span className={'material-icons-round'} style={{ fontSize: '36px' }}>
-                                supervised_user_circle
-                            </span>
+                            <MaterialIcon icon={'supervised_user_circle'} size={'large'} />
                             <FormattedMessage
                                 id={'user-management.menu'}
                                 defaultMessage={'Benutzer'}
@@ -83,9 +76,7 @@ export default function Navigation() {
                 label: (
                     <Link>
                         <div className={styles.menuItemIconAbove}>
-                            <span className={'material-icons-round'} style={{ fontSize: '36px' }}>
-                                school
-                            </span>
+                            <MaterialIcon icon={'school'} size={'large'} />
                             <FormattedMessage
                                 id={'students.menu'}
                                 defaultMessage={'Studenten'}
@@ -101,9 +92,7 @@ export default function Navigation() {
                 label: (
                     <Link>
                         <div className={styles.menuItemIconAbove}>
-                            <span className={'material-icons-round'} style={{ fontSize: '36px' }}>
-                                sticky_note_2
-                            </span>
+                            <MaterialIcon icon={'sticky_note_2'} size={'large'} />
                             <FormattedMessage
                                 id={'my-course.menu'}
                                 defaultMessage={'Meine Kurse'}
@@ -142,9 +131,7 @@ export default function Navigation() {
                 label: (
                     <Link>
                         <div className={styles.menuItemIconAbove}>
-                            <span className={'material-icons-round'} style={{ fontSize: '36px' }}>
-                                account_circle
-                            </span>
+                            <MaterialIcon icon={'account_circle'} size={'large'} />
                             <FormattedMessage
                                 id={'account.menu'}
                                 defaultMessage={'Account'}
