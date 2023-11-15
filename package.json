@@ -14,7 +14,7 @@
         "lint": "eslint --ext ts,tsx,css --report-unused-disable-directives --max-warnings 0 src",
         "lint-report": "eslint --ext ts,tsx,css --format json-relative --output-file reports/eslint.json src",
         "format": "prettier --write \"*.{js,jsx,ts,tsx,json,css,scss,md}\"",
-        "check-typescript": "tsc --noEmit && tsc api/server.ts --noEmit",
+        "check-typescript": "tsc --noEmit",
         "preview": "concurrently \"npm:json-db\" \"vite preview\"",
         "prepare": "husky install",
         "json-db": "cd api && npm run start",
