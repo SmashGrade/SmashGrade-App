@@ -1,5 +1,5 @@
 interface MaterialIconProps {
-    icon: string;
+    icon?: string;
     size?: 'small' | 'medium' | 'large' | 'extra-large';
     mode?: 'dark';
 }

@@ -1,10 +1,9 @@
-import { MaterialIcon } from '@components/MaterialIcon.tsx';
+import { IconLink } from '@components/IconLink.tsx';
 import { courseRoute, curriculumRoute, onboardingRoute, studentModuleRoute } from '@pages/routes/routes.ts';
-import { Link, useRouter } from '@tanstack/react-router';
+import { useRouter } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 import { useCallback, useMemo, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
 import logo from '../assets/images/SmashGrade-AppIcon.png';
 import styles from './Navigation.module.scss';
 
@@ -18,107 +17,95 @@ export default function Navigation() {
         return [
             {
                 label: (
-                    <Link to={curriculumRoute.to}>
-                        <div className={styles.menuItemIconAbove}>
-                            <MaterialIcon icon={'play_lesson'} size={'large'} />
-                            <FormattedMessage
-                                id={'curriculum.menu'}
-                                defaultMessage={'Studiengänge'}
-                                description={'Studiengang Menu'}
-                            />
-                        </div>
-                    </Link>
+                    <IconLink
+                        to={curriculumRoute.to}
+                        icon={'play_lesson'}
+                        messageId={'curriculum.menu'}
+                        defaultMessage={'Studiengänge'}
+                        description={'Studiengang Menu'}
+                    />
                 ),
                 key: 'curriculum',
             },
             {
                 label: (
-                    <Link>
-                        <div className={styles.menuItemIconAbove}>
-                            <MaterialIcon icon={'collections_bookmark'} size={'large'} />
-                            <FormattedMessage
-                                id={'module.menu'}
-                                defaultMessage={'Module'}
-                                description={'Module Menu'}
-                            />
-                        </div>
-                    </Link>
+                    <IconLink
+                        icon={'collections_bookmark'}
+                        messageId={'module.menu'}
+                        defaultMessage={'Module'}
+                        description={'Module Menu'}
+                    />
                 ),
                 key: 'modules',
             },
             {
                 label: (
-                    <Link to={courseRoute.to}>
-                        <div className={styles.menuItemIconAbove}>
-                            <MaterialIcon icon={'developer_guide'} size={'large'} />
-                            <FormattedMessage id={'course.menu'} defaultMessage={'Kurse'} description={'Kurse Menu'} />
-                        </div>
-                    </Link>
+                    <IconLink
+                        to={courseRoute.to}
+                        icon={'developer_guide'}
+                        messageId={'course.menu'}
+                        defaultMessage={'Kurse'}
+                        description={'Kurse Menu'}
+                    />
                 ),
                 key: 'course',
             },
             {
                 label: (
-                    <Link>
-                        <div className={styles.menuItemIconAbove}>
-                            <MaterialIcon icon={'supervised_user_circle'} size={'large'} />
-                            <FormattedMessage
-                                id={'user-management.menu'}
-                                defaultMessage={'Benutzer'}
-                                description={'Benutzer Menu'}
-                            />
-                        </div>
-                    </Link>
+                    <IconLink
+                        icon={'supervised_user_circle'}
+                        messageId={'user-management.menu'}
+                        defaultMessage={'Benutzer'}
+                        description={'Benutzer Menu'}
+                    />
                 ),
                 key: 'user-management',
             },
             {
                 label: (
-                    <Link>
-                        <div className={styles.menuItemIconAbove}>
-                            <MaterialIcon icon={'school'} size={'large'} />
-                            <FormattedMessage
-                                id={'students.menu'}
-                                defaultMessage={'Studenten'}
-                                description={'Studenten Menu'}
-                            />
-                        </div>
-                    </Link>
+                    <IconLink
+                        icon={'school'}
+                        messageId={'students.menu'}
+                        defaultMessage={'Studenten'}
+                        description={'Studenten Menu'}
+                    />
                 ),
                 key: 'students',
-                disabled: true,
+                disabled: false,
             },
             {
                 label: (
-                    <Link>
-                        <div className={styles.menuItemIconAbove}>
-                            <MaterialIcon icon={'sticky_note_2'} size={'large'} />
-                            <FormattedMessage
-                                id={'my-course.menu'}
-                                defaultMessage={'Meine Kurse'}
-                                description={'Meine Kurse Menu'}
-                            />
-                        </div>
-                    </Link>
+                    <IconLink
+                        icon={'sticky_note_2'}
+                        messageId={'my-course.menu'}
+                        defaultMessage={'Meine Kurse'}
+                        description={'Meine Kurse Menu'}
+                    />
                 ),
                 key: 'my-course',
-                disabled: true,
+                disabled: false,
             },
             {
                 label: (
-                    <Link to={studentModuleRoute.to}>
-                        <FormattedMessage
-                            id={'my-curriculum.menu'}
-                            defaultMessage={'Mein Studium'}
-                            description={'Mein Studium Menu'}
-                        />
-                    </Link>
+                    <IconLink
+                        to={studentModuleRoute.to}
+                        messageId={'my-curriculum.menu'}
+                        defaultMessage={'Mein Studium'}
+                        description={'Mein Studium Menu'}
+                    />
                 ),
                 key: 'my-curriculum',
                 disabled: false,
             },
             {
-                label: <Link to={onboardingRoute.to}>Onboarding</Link>,
+                label: (
+                    <IconLink
+                        to={onboardingRoute.to}
+                        messageId={'onboarding.menu'}
+                        defaultMessage={'Onboarding'}
+                        description={'Onboarding Menu'}
+                    />
+                ),
                 key: 'onboarding',
                 disabled: false,
             },
@@ -129,16 +116,12 @@ export default function Navigation() {
         return [
             {
                 label: (
-                    <Link>
-                        <div className={styles.menuItemIconAbove}>
-                            <MaterialIcon icon={'account_circle'} size={'large'} />
-                            <FormattedMessage
-                                id={'account.menu'}
-                                defaultMessage={'Account'}
-                                description={'Account Menu'}
-                            />
-                        </div>
-                    </Link>
+                    <IconLink
+                        icon={'account_circle'}
+                        messageId={'account.menu'}
+                        defaultMessage={'Account'}
+                        description={'Account Menu'}
+                    />
                 ),
                 key: 'account',
             },

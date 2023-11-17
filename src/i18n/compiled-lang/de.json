@@ -1,11 +1,12 @@
 {
-    "course.menu": "Kurs",
+    "course.menu": "Kurse",
     "curriculum": "Lehrplan",
     "curriculum.menu": "Studiengänge",
     "language.english": "Englisch",
     "language.french": "Französisch",
     "language.german": "Deutsch",
     "module.menu": "Module",
+    "onboarding.menu": "Onboarding",
     "my-course.menu": "Meine Kurse",
     "my-curriculum.menu": "Mein Studium",
     "account.menu": "Account",
