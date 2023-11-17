@@ -23,6 +23,10 @@
         "defaultMessage": "My Courses",
         "description": "My Courses Menu"
     },
+    "onboarding.menu": {
+        "defaultMessage": "Onboarding",
+        "description": "Onboarding Menu"
+    },
     "my-curriculum.menu": {
         "defaultMessage": "My Curriculum",
         "description": "My Curriculum Menu"

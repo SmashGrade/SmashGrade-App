@@ -1,7 +1,7 @@
 {
     "course.menu": {
-        "defaultMessage": "Kurs",
-        "description": "Kurs Menu"
+        "defaultMessage": "Kurse",
+        "description": "Kurse Menu"
     },
     "curriculum": {
         "defaultMessage": "Lehrplan",
@@ -10,6 +10,10 @@
     "curriculum.menu": {
         "defaultMessage": "Studiengänge",
         "description": "Studiengang Menu"
+    },
+    "onboarding.menu": {
+        "defaultMessage": "Onboarding",
+        "description": "Onboarding Menu"
     },
     "language.english": {
         "defaultMessage": "Englisch",
