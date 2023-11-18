@@ -1,18 +1,21 @@
 {
-    "course.menu": "Kurs",
+    "course.menu": "Kurse",
     "curriculum": "Lehrplan",
-    "curriculum.menu": "Studiengang",
+    "curriculum.menu": "Studiengänge",
     "language.english": "Englisch",
     "language.french": "Französisch",
     "language.german": "Deutsch",
     "module.menu": "Module",
+    "onboarding.menu": "Onboarding",
     "my-course.menu": "Meine Kurse",
     "my-curriculum.menu": "Mein Studium",
+    "account.menu": "Account",
     "onboarding.title": "Übersicht",
     "startYear": "Startjahr",
     "student.basicStudies": "Grundstudium",
     "student.focusStudies": "Schwerpunkt",
     "student.noModulesFound": "Es wurden keine Module gefunden",
     "student.specialisedStudies": "Fachstudium",
-    "user-management.menu": "Benutzerverwaltung"
+    "students.menu": "Studenten",
+    "user-management.menu": "Benutzer"
 }

@@ -6,7 +6,10 @@
     "language.french": "French",
     "language.german": "German",
     "module.menu": "Module",
+    "students.menu": "Students",
+    "account.menu": "Account",
     "my-course.menu": "My Courses",
+    "onboarding.menu": "Onboarding",
     "my-curriculum.menu": "My Curriculum",
     "onboarding.title": "Overview",
     "startYear": "Start Year",
@@ -14,5 +17,5 @@
     "student.focusStudies": "Focus studies",
     "student.noModulesFound": "No modules found",
     "student.specialisedStudies": "Specialised studies",
-    "user-management.menu": "Usermanagement"
+    "user-management.menu": "User"
 }

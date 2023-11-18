@@ -1,15 +1,19 @@
 {
     "course.menu": {
-        "defaultMessage": "Kurs",
-        "description": "Kurs Menu"
+        "defaultMessage": "Kurse",
+        "description": "Kurse Menu"
     },
     "curriculum": {
         "defaultMessage": "Lehrplan",
         "description": "Lehrplan Dropdown Titel"
     },
     "curriculum.menu": {
-        "defaultMessage": "Studiengang",
+        "defaultMessage": "Studiengänge",
         "description": "Studiengang Menu"
+    },
+    "onboarding.menu": {
+        "defaultMessage": "Onboarding",
+        "description": "Onboarding Menu"
     },
     "language.english": {
         "defaultMessage": "Englisch",
@@ -34,6 +38,14 @@
     "my-curriculum.menu": {
         "defaultMessage": "Mein Studium",
         "description": "Mein Studium Menu"
+    },
+    "students.menu": {
+        "defaultMessage": "Studenten",
+        "description": "Studenten Menu"
+    },
+    "account.menu": {
+        "defaultMessage": "Account",
+        "description": "Account Menu"
     },
     "onboarding.title": {
         "defaultMessage": "Übersicht",
@@ -60,7 +72,7 @@
         "description": "Tab Fachstudium"
     },
     "user-management.menu": {
-        "defaultMessage": "Benutzerverwaltung",
-        "description": "Benutzerverwaltung Menu"
+        "defaultMessage": "Benutzer",
+        "description": "Benutzer Menu"
     }
 }

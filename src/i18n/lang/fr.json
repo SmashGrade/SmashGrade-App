@@ -27,6 +27,18 @@
         "defaultMessage": "Mon programme",
         "description": "Menu Mon programme"
     },
+    "onboarding.menu": {
+        "defaultMessage": "Onboarding",
+        "description": "Onboarding Menu"
+    },
+    "students.menu": {
+        "defaultMessage": "Étudiants",
+        "description": "Menu Étudiants"
+    },
+    "account.menu": {
+        "defaultMessage": "Compte",
+        "description": "Menu Compte"
+    },
     "language.english": {
         "defaultMessage": "Anglais",
         "description": "Option de langue anglaise"
