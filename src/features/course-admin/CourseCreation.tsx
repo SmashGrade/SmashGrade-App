@@ -11,8 +11,6 @@ import layout from '../../layout.module.scss';
 import { courseEditRoute } from '../../main.tsx';
 import styles from './CourseCreation.module.scss';
 
-const moduleOptions: SelectProps['options'] = [];
-
 interface CourseResponse {
     id: number;
     description: string;
@@ -59,9 +57,14 @@ async function getCourse(courseId: number): Promise<CourseResponse> {
     return data;
 }
 
-async function getModules(): Promise<ModulesResponse[] | null> {
-    const { data } = await axios.get<ModulesResponse[] | null>(`${import.meta.env.VITE_BACKEND_API_URL}/modules`);
-    return data;
+async function getModules(): Promise<SelectProps['options']> {
+    const { data } = await axios.get<ModulesResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/modules`);
+    // Add the course data teachers to the options array
+    // TODO: Transformation direkt im API Request machen
+    return data.map((module) => ({
+        label: module.description,
+        value: module.id,
+    }));
 }
 
 async function getTeachers(): Promise<SelectProps['options']> {
@@ -80,7 +83,8 @@ async function getExams(): Promise<ExamResponse[] | null> {
 // Dropdown with the Version
 
 const handleVersionDropChange = (value: string) => {
-    console.log(value);
+    //console.log(value);
+    value;
     // TODO: Neuer kurs vom backend fetchen basierend auf der version
 };
 
@@ -136,8 +140,9 @@ export default function CourseCreation() {
     }, [fetchedExamData]);
 
     // TODO: any mit dem selben type wie die FormInstance ersetzen
-    const onFormFinish = useCallback((values: any) => {
-        console.log('form finish', values);
+    const onFormFinish = useCallback((values: CourseResponse) => {
+        values;
+        //console.log('form finish', values);
     }, []);
 
     if (isCourseError) return <div>Error when loading courses</div>;
@@ -163,17 +168,6 @@ export default function CourseCreation() {
     //     teacherOptions.length = 0;
     // }
 
-    // Add the course data teachers to the options array
-    // TODO: Transformation direkt im API Request machen
-    if (moduleData) {
-        moduleData?.forEach((module) => {
-            moduleOptions?.push({
-                label: module.description,
-                value: module.description,
-            });
-        });
-    }
-
     const handleAddEmptyField = () => {
         // Create an empty exam data object
         const emptyExam: EmptyExam = {
@@ -189,6 +183,8 @@ export default function CourseCreation() {
     const handleDeleteField = (index: number) => {
         const updatedExamData = [...examData];
         updatedExamData.splice(index, 1); // Remove the element at the given index
+        //console.log('delete', index);
+        //console.log(updatedExamData.map((data) => data.type));
         setExams(updatedExamData);
     };
 
@@ -272,9 +268,7 @@ export default function CourseCreation() {
                                 />
                             </Space>
                         </Form.Item>
-                        <Form.Item />
                     </Form>
-                    <Space style={{ width: '100%' }} direction={'vertical'} />
 
                     <div
                         style={{
@@ -297,8 +291,8 @@ export default function CourseCreation() {
                                 allowClear
                                 style={{ width: '100%' }}
                                 placeholder={'Please select'}
-                                defaultValue={moduleData?.map((value) => value.description)}
-                                options={moduleOptions}
+                                defaultValue={moduleData}
+                                options={moduleData}
                             />
                         </Space>
                     </div>
@@ -325,18 +319,36 @@ export default function CourseCreation() {
                     </p>
 
                     <div>
-                        <p>
-                            <FormattedMessage id={'Titel'} defaultMessage={'Titel'} description={'Titel'} />
-                        </p>
                         <Form form={examForm} name={'exam-form'}>
-                            {examData.map((exam, index) => (
-                                <ExamFormRow
-                                    key={index}
-                                    exam={exam}
-                                    onDeleteClick={handleDeleteField}
-                                    rowIndex={index}
-                                />
-                            ))}
+                            <div style={{ display: 'table' }}>
+                                <div style={{ display: 'table-row' }}>
+                                    <div style={{ display: 'table-cell' }}>
+                                        <FormattedMessage id={'Titel'} defaultMessage={'Titel'} description={'Titel'} />
+                                    </div>
+                                    <div style={{ display: 'table-cell' }}>
+                                        <FormattedMessage
+                                            id={'qualificationCertificate'}
+                                            defaultMessage={'Qualifikationsnachweis'}
+                                            description={'Qualification Certificate'}
+                                        />
+                                    </div>
+                                    <div style={{ display: 'table-cell' }}>
+                                        <FormattedMessage
+                                            id={'weigth'}
+                                            defaultMessage={'Gewichtung'}
+                                            description={'Qualification weight'}
+                                        />
+                                    </div>
+                                </div>
+                                {examData.map((exam, index) => (
+                                    <ExamFormRow
+                                        key={index}
+                                        exam={exam}
+                                        onDeleteClick={handleDeleteField}
+                                        rowIndex={index}
+                                    />
+                                ))}
+                            </div>
                         </Form>
                     </div>
                     <Button type={'text'} style={{ background: 'primary' }} onClick={handleAddEmptyField}>

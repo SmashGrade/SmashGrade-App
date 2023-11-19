@@ -10,29 +10,34 @@ interface ExamFormRowProps {
 
 export function ExamFormRow({ exam, rowIndex, onDeleteClick }: ExamFormRowProps) {
     return (
-        <div style={{ display: 'flex', justifyContent: 'space-between' }} key={rowIndex}>
+        <div style={{ display: 'table-row' }} key={rowIndex}>
             <Form.Item
                 name={`examDesignation-${rowIndex}`}
                 initialValue={exam?.designation}
-                style={{ flex: 1, marginRight: '8px', marginBottom: '0px' }}
+                style={{ display: 'table-cell', marginRight: '8px' }}
             >
                 <Input type={'text'} />
             </Form.Item>
             <Form.Item
                 name={`examType-${rowIndex}`}
                 initialValue={exam?.type}
-                style={{ flex: 1, marginRight: '8px', marginBottom: '0px' }}
+                style={{ display: 'table-cell', marginRight: '8px' }}
             >
                 <Input type={'text'} />
             </Form.Item>
             <Form.Item
                 name={`examWeight-${rowIndex}`}
                 initialValue={exam?.weight}
-                style={{ flex: 1, marginRight: '8px', marginBottom: '0px' }}
+                style={{ display: 'table-cell', marginRight: '8px' }}
             >
                 <Input type={'text'} />
             </Form.Item>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Form.Item
+                name={`examWeight-${rowIndex}`}
+                initialValue={exam?.weight}
+                style={{ display: 'table-cell', marginRight: '8px' }}
+            />
+            <div style={{ display: 'table-cell', alignItems: 'center' }}>
                 <Button type={'text'} style={{ color: 'red' }} onClick={() => onDeleteClick(rowIndex)}>
                     <DeleteOutlined />
                 </Button>

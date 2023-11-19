@@ -150,7 +150,7 @@
             "id": 0,
             "designation": "Projektarbeit",
             "weight": 3,
-            "type": "Schritfliche Arbeit",
+            "type": "Präsentation",
             "course": {
                 "id": 0,
                 "designation": "Projektmanagement",
@@ -162,7 +162,7 @@
             "id": 1,
             "designation": "Moodle Prüfung",
             "weight": 2,
-            "type": "Schritfliche Arbeit",
+            "type": "Schriftliche Arbeit",
             "course": {
                 "id": 0,
                 "designation": "Projektmanagement",

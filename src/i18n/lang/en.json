@@ -59,6 +59,10 @@
         "defaultMessage": "Übersicht",
         "description": "Übersicht Titel"
     },
+    "qualificationCertificate": {
+        "defaultMessage": "Qualifikationsnachweis",
+        "description": "Qualification Certificate"
+    },
     "qualificationCertificatesTitle": {
         "defaultMessage": "Qualifikationsnachweise",
         "description": "Qualification Certificates Title"
@@ -66,5 +70,9 @@
     "startYear": {
         "defaultMessage": "Startjahr",
         "description": "Startjahr Dropdown Titel"
+    },
+    "weigth": {
+        "defaultMessage": "Gewichtung",
+        "description": "Qualification weight"
     }
 }

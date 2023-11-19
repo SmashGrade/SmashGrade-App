@@ -14,6 +14,8 @@
     "lecturerTitle": "Dozent(en)",
     "moduleTitle": "Modul(e)",
     "onboarding.title": "Übersicht",
+    "qualificationCertificate": "Qualifikationsnachweis",
     "qualificationCertificatesTitle": "Qualifikationsnachweise",
-    "startYear": "Startjahr"
+    "startYear": "Startjahr",
+    "weigth": "Gewichtung"
 }
