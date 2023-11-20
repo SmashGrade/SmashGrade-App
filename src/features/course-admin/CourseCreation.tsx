@@ -191,10 +191,10 @@ export default function CourseCreation() {
     // Display
     return (
         // TODO: Alle CSS Styles extern im module.scss File definieren
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-            <h1 style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <span style={{ marginRight: '10px' }}>
+        <div className={styles.overallFlex}>
+            <h1 className={styles.courseTitle}>
+                <div>
+                    <span className={styles.marginRight}>
                         <BookOutlined />
                     </span>
                     <FormattedMessage id={'courseTitle'} defaultMessage={'Kurs'} description={'Übersicht Kurs Titel'} />
@@ -204,7 +204,7 @@ export default function CourseCreation() {
                     <Space wrap>
                         <Select
                             //defaultValue={''}
-                            style={{ width: 120 }}
+                            className={styles.version}
                             onChange={handleVersionDropChange}
                             options={[
                                 { value: 'V1', label: 'V1' },
@@ -215,8 +215,8 @@ export default function CourseCreation() {
                     </Space>
                 </div>
             </h1>
-            <div style={{ display: 'flex', width: '100%' }}>
-                <div style={{ flex: '1', width: '33.33%' }}>
+            <div className={styles.flexOverall}>
+                <div className={styles.flexOneThird}>
                     <Form
                         // mit <> type definieren welche daten das form enthalten soll
                         // TODO: Intial values setzen anstelle von PLaceholder und für alle felder ein "name" property definieren
@@ -253,15 +253,15 @@ export default function CourseCreation() {
                                         defaultMessage={'Dozent(en)'}
                                         description={'Name Dozent'}
                                     />
-                                    <ContactsOutlined style={{ float: 'right' }} />
+                                    <ContactsOutlined className={styles.floatRight} />
                                 </div>
                             }
                         >
-                            <Space style={{ width: '100%' }} direction={'vertical'}>
+                            <Space className={styles.spacerWidth} direction={'vertical'}>
                                 <Select
                                     mode={'multiple'}
                                     allowClear
-                                    style={{ width: '100%' }}
+                                    className={styles.spacerWidth}
                                     placeholder={'Please select'}
                                     defaultValue={courseData?.teachers}
                                     options={teacherData}
@@ -283,13 +283,13 @@ export default function CourseCreation() {
                                 defaultMessage={'Modul(e)'}
                                 description={'Module Title'}
                             />
-                            <AppstoreAddOutlined style={{ float: 'right' }} />
+                            <AppstoreAddOutlined className={styles.floatRight} />
                         </p>
-                        <Space style={{ width: '100%' }} direction={'vertical'}>
+                        <Space className={styles.spacerWidth} direction={'vertical'}>
                             <Select
                                 mode={'multiple'}
                                 allowClear
-                                style={{ width: '100%' }}
+                                className={styles.spacerWidth}
                                 placeholder={'Please select'}
                                 defaultValue={moduleData}
                                 options={moduleData}
@@ -300,13 +300,10 @@ export default function CourseCreation() {
 
                 <div
                     style={{
-                        flex: '2',
-                        width: '66.66%',
                         backgroundColor: colors.colorBgContainerHighlight,
                         borderRadius: layout.borderRadius,
-                        marginLeft: '20px',
                     }}
-                    className={styles.container}
+                    className={styles.container + ' ' + styles.flexTwoThirds}
                 >
                     <p>
                         <b>
@@ -320,19 +317,19 @@ export default function CourseCreation() {
 
                     <div>
                         <Form form={examForm} name={'exam-form'}>
-                            <div style={{ display: 'table' }}>
-                                <div style={{ display: 'table-row' }}>
-                                    <div style={{ display: 'table-cell' }}>
+                            <div className={styles.divTable}>
+                                <div className={styles.divTableRow}>
+                                    <div className={styles.divTableCell}>
                                         <FormattedMessage id={'Titel'} defaultMessage={'Titel'} description={'Titel'} />
                                     </div>
-                                    <div style={{ display: 'table-cell' }}>
+                                    <div className={styles.divTableCell}>
                                         <FormattedMessage
                                             id={'qualificationCertificate'}
                                             defaultMessage={'Qualifikationsnachweis'}
                                             description={'Qualification Certificate'}
                                         />
                                     </div>
-                                    <div style={{ display: 'table-cell' }}>
+                                    <div className={styles.divTableCell}>
                                         <FormattedMessage
                                             id={'weigth'}
                                             defaultMessage={'Gewichtung'}
@@ -351,7 +348,7 @@ export default function CourseCreation() {
                             </div>
                         </Form>
                     </div>
-                    <Button type={'text'} style={{ background: 'primary' }} onClick={handleAddEmptyField}>
+                    <Button type={'text'} onClick={handleAddEmptyField}>
                         <FormattedMessage
                             id={'buttonAdd'}
                             defaultMessage={'+ Hinzufügen'}
@@ -361,7 +358,7 @@ export default function CourseCreation() {
                 </div>
             </div>
 
-            <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end' }}>
+            <div className={styles.divButtons}>
                 <Button type={'primary'} className={styles.buttons}>
                     <FormattedMessage
                         id={'buttonCancel'}
