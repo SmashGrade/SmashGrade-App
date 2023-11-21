@@ -53,21 +53,25 @@ interface TeacherResponse {
     role: 'Student' | 'Teacher' | 'CourseAdmin';
 }
 
-async function getCourse(courseId: number): Promise<CourseResponse> {
+async function getCourse(courseId: number): Promise<SelectProps['value']> {
     const { data } = await axios.get<CourseResponse>(`${import.meta.env.VITE_BACKEND_API_URL}/courses/${courseId}`);
-    return data;
+    return {
+        description: data.description,
+        number: data.number,
+        teachers: data.teachers,
+    };
 }
 
 async function getModules(): Promise<SelectProps['options']> {
     const { data } = await axios.get<ModulesResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/modules`);
     // Add the course data teachers to the options array
-    // TODO: Transformation direkt im API Request machen
     return data.map((module) => ({
         label: module.description,
         value: module.id,
     }));
 }
 
+// TODO: Transformation direkt im API Request machen, here to?
 async function getTeachers(): Promise<SelectProps['options']> {
     const { data } = await axios.get<TeacherResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/users`);
     return data.map((teacher) => ({
@@ -82,7 +86,6 @@ async function getExams(): Promise<ExamResponse[] | null> {
 }
 
 // Dropdown with the Version
-
 const handleVersionDropChange = (value: string) => {
     //console.log(value);
     value;
@@ -101,7 +104,7 @@ export default function CourseCreation() {
         isLoading: isCourseLoading,
         error: isCourseError,
         data: courseData,
-    } = useQuery({
+    } = useQuery<CourseResponse>({
         queryKey: ['courses'],
         queryFn: () => getCourse(courseId),
     });
@@ -140,7 +143,7 @@ export default function CourseCreation() {
         }
     }, [fetchedExamData]);
 
-    // TODO: any mit dem selben type wie die FormInstance ersetzen
+    // TODO: onFormFinish
     const onFormFinish = useCallback((values: CourseResponse) => {
         values;
         //console.log('form finish', values);
@@ -157,17 +160,6 @@ export default function CourseCreation() {
 
     if (isExamError) return <div>Error when loading exams</div>;
     if (isExamLoading) return <Spin />;
-
-    // Clear the Options arrays to avoid doubling entries
-    // if (courseOptions) {
-    //     courseOptions.length = 0;
-    // }
-    // if (moduleOptions) {
-    //     moduleOptions.length = 0;
-    // }
-    // if (teacherOptions) {
-    //     teacherOptions.length = 0;
-    // }
 
     // temp id for the empty exam data
     let idCounter: number = examData.reduce((maxId, exam) => Math.max(maxId, exam.id) + 1, 0);
@@ -195,7 +187,6 @@ export default function CourseCreation() {
 
     // Display
     return (
-        // TODO: Alle CSS Styles extern im module.scss File definieren
         <div className={styles.overallFlex}>
             <h1 className={styles.courseTitle}>
                 <div>
@@ -236,7 +227,7 @@ export default function CourseCreation() {
                                 <FormattedMessage id={'courseName'} defaultMessage={'Kurs'} description={'Kurs Name'} />
                             }
                         >
-                            <Input />
+                            <Input type={'text'} />
                         </Form.Item>
                         <Form.Item
                             name={'number'}
@@ -248,9 +239,10 @@ export default function CourseCreation() {
                                 />
                             }
                         >
-                            <Input placeholder={'input placeholder'} />
+                            <Input />
                         </Form.Item>
                         <Form.Item
+                            name={'teachers'}
                             label={
                                 <div>
                                     <FormattedMessage
@@ -273,34 +265,40 @@ export default function CourseCreation() {
                                 />
                             </Space>
                         </Form.Item>
-                    </Form>
 
-                    <div
-                        style={{
-                            backgroundColor: colors.colorBgContainerHighlight,
-                            borderRadius: layout.borderRadius,
-                        }}
-                        className={styles.container}
-                    >
-                        <p>
-                            <FormattedMessage
-                                id={'moduleTitle'}
-                                defaultMessage={'Modul(e)'}
-                                description={'Module Title'}
-                            />
-                            <AppstoreAddOutlined className={styles.floatRight} />
-                        </p>
-                        <Space className={styles.spacerWidth} direction={'vertical'}>
-                            <Select
-                                mode={'multiple'}
-                                allowClear
-                                className={styles.spacerWidth}
-                                placeholder={'Please select'}
-                                defaultValue={moduleData}
-                                options={moduleData}
-                            />
-                        </Space>
-                    </div>
+                        <div
+                            style={{
+                                backgroundColor: colors.colorBgContainerHighlight,
+                                borderRadius: layout.borderRadius,
+                            }}
+                            className={styles.container}
+                        >
+                            <Form.Item
+                                name={'modules'}
+                                label={
+                                    <p>
+                                        <FormattedMessage
+                                            id={'moduleTitle'}
+                                            defaultMessage={'Modul(e)'}
+                                            description={'Module Title'}
+                                        />
+                                        <AppstoreAddOutlined className={styles.floatRight} />
+                                    </p>
+                                }
+                            >
+                                <Space className={styles.spacerWidth} direction={'vertical'}>
+                                    <Select
+                                        mode={'multiple'}
+                                        allowClear
+                                        className={styles.spacerWidth}
+                                        placeholder={'Please select'}
+                                        defaultValue={moduleData}
+                                        options={moduleData}
+                                    />
+                                </Space>
+                            </Form.Item>
+                        </div>
+                    </Form>
                 </div>
 
                 <div
