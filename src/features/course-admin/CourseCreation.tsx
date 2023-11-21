@@ -38,6 +38,7 @@ export interface ExamResponse {
 }
 
 export interface EmptyExam {
+    id: number;
     designation: string;
     weight: number;
     type: string;
@@ -168,10 +169,15 @@ export default function CourseCreation() {
     //     teacherOptions.length = 0;
     // }
 
+    // temp id for the empty exam data
+    let idCounter: number = examData.reduce((maxId, exam) => Math.max(maxId, exam.id) + 1, 0);
+
     const handleAddEmptyField = () => {
         // Create an empty exam data object
         const emptyExam: EmptyExam = {
-            designation: '', // Initialize other properties as needed
+            // Add temporary id to rerender the list on delete
+            id: idCounter++,
+            designation: '',
             weight: 0,
             type: '',
             course: null,
@@ -180,12 +186,11 @@ export default function CourseCreation() {
         setExams([...examData, emptyExam]);
     };
 
-    const handleDeleteField = (index: number) => {
-        const updatedExamData = [...examData];
-        updatedExamData.splice(index, 1); // Remove the element at the given index
-        //console.log('delete', index);
-        //console.log(updatedExamData.map((data) => data.type));
-        setExams(updatedExamData);
+    const handleDeleteField = (id: number) => {
+        setExams((updatedExamData) => {
+            //console.log(updatedExamData);
+            return updatedExamData.filter((exam) => exam.id !== id);
+        });
     };
 
     // Display
@@ -337,14 +342,18 @@ export default function CourseCreation() {
                                         />
                                     </div>
                                 </div>
-                                {examData.map((exam, index) => (
-                                    <ExamFormRow
-                                        key={index}
-                                        exam={exam}
-                                        onDeleteClick={handleDeleteField}
-                                        rowIndex={index}
-                                    />
-                                ))}
+                                {examData.map((exam) => {
+                                    const total = examData.reduce((acc, curr) => acc + curr.weight, 0);
+                                    return (
+                                        <ExamFormRow
+                                            key={exam.id}
+                                            exam={exam}
+                                            onDeleteClick={handleDeleteField}
+                                            rowIndex={exam.id}
+                                            total={total}
+                                        />
+                                    );
+                                })}
                             </div>
                         </Form>
                     </div>

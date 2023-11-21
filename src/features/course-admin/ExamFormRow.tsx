@@ -6,10 +6,11 @@ import styles from './ExamFormRow.module.scss';
 interface ExamFormRowProps {
     exam: ExamResponse | EmptyExam;
     rowIndex: number;
+    total: number;
     onDeleteClick: (index: number) => void;
 }
 
-export function ExamFormRow({ exam, rowIndex, onDeleteClick }: ExamFormRowProps) {
+export function ExamFormRow({ exam, rowIndex, total, onDeleteClick }: ExamFormRowProps) {
     return (
         <div className={styles.divTableRow} key={rowIndex}>
             <Form.Item
@@ -22,10 +23,14 @@ export function ExamFormRow({ exam, rowIndex, onDeleteClick }: ExamFormRowProps)
             <Form.Item name={`examType-${rowIndex}`} initialValue={exam?.type} className={styles.tableCell}>
                 <Input type={'text'} />
             </Form.Item>
-            <Form.Item name={`examWeight-${rowIndex}`} initialValue={exam?.weight} className={styles.tableCell}>
+            <Form.Item
+                name={`examWeight-${rowIndex}`}
+                initialValue={exam?.weight}
+                className={`${styles.tableCell} ${styles.divWeightSize}`}
+            >
                 <Input type={'text'} />
             </Form.Item>
-            <Form.Item name={`examWeight-${rowIndex}`} initialValue={exam?.weight} className={styles.tableCell} />
+            /{total}
             <div className={styles.divTableCell}>
                 <Button type={'text'} className={styles.iconColor} onClick={() => onDeleteClick(rowIndex)}>
                     <DeleteOutlined />
