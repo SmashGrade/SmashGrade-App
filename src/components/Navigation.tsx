@@ -1,5 +1,11 @@
 import { IconLink } from '@components/IconLink.tsx';
-import { courseRoute, curriculumRoute, onboardingRoute, studentModuleRoute } from '@pages/routes/routes.ts';
+import {
+    courseRoute,
+    curriculumRoute,
+    onboardingRoute,
+    settingsRoute,
+    studentModuleRoute,
+} from '@pages/routes/routes.ts';
 import { useRouter } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
@@ -117,6 +123,7 @@ export default function Navigation() {
             {
                 label: (
                     <IconLink
+                        to={settingsRoute.to}
                         icon={'account_circle'}
                         messageId={'account.menu'}
                         defaultMessage={'Account'}
