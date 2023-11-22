@@ -1,4 +1,5 @@
 import { IconLink } from '@components/IconLink.tsx';
+import { UserProfile } from '@features/profile/UserProfile';
 import { courseRoute, curriculumRoute, onboardingRoute, studentModuleRoute } from '@pages/routes/routes.ts';
 import { useRouter } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
@@ -115,14 +116,7 @@ export default function Navigation() {
     const accountItems: MenuProps['items'] = useMemo(() => {
         return [
             {
-                label: (
-                    <IconLink
-                        icon={'account_circle'}
-                        messageId={'account.menu'}
-                        defaultMessage={'Account'}
-                        description={'Account Menu'}
-                    />
-                ),
+                label: <UserProfile />,
                 key: 'account',
             },
         ];
