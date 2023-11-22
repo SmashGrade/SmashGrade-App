@@ -1,11 +1,12 @@
-import { InteractionRequiredAuthError, IPublicClientApplication } from '@azure/msal-browser';
+import { AccountInfo, IPublicClientApplication } from '@azure/msal-browser';
 import { useMsal } from '@azure/msal-react';
-import styles from '@components/ui-elements/IconLink.module.scss';
-import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
+import styles from '@components/IconLink.module.scss';
+import { MaterialIcon } from '@components/MaterialIcon.tsx';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from '@tanstack/react-router';
 import { Spin } from 'antd';
-import axios, { AxiosError } from 'axios';
-import { loginRequest, msGraphEndpoints } from '../../config/authConfig.ts';
+import axios from 'axios';
+import { graphConfig, loginRequest } from '../../config/authConfig.ts';
 
 interface MeResponse {
     id: string;
@@ -13,88 +14,49 @@ interface MeResponse {
     givenName: string;
     surname: string;
     userPrincipalName: string;
+    // Add other properties as needed
 }
 
-const getAccessToken = async (instance: IPublicClientApplication) => {
-    try {
-        const { accessToken } = await instance.acquireTokenSilent({
-            ...loginRequest,
-        });
-        return accessToken;
-    } catch (error) {
-        if (error instanceof InteractionRequiredAuthError) {
-            await instance.acquireTokenRedirect(loginRequest);
-            const { accessToken } = await instance.acquireTokenSilent({
-                ...loginRequest,
-            });
-            return accessToken;
-        }
-    }
-};
+export async function getUserProfile(instance: IPublicClientApplication, account: AccountInfo) {
+    const { accessToken } = await instance.acquireTokenSilent({
+        ...loginRequest,
+        account,
+    });
 
-async function getUserPicture(instance: IPublicClientApplication) {
-    const accessToken = await getAccessToken(instance);
-    try {
-        const profilePhoto = await axios.get<Blob>(msGraphEndpoints.userProfilePicture, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-            responseType: 'blob',
-        });
-        // Convert blob data to a data URL
-        const imageUrl: string = URL.createObjectURL(profilePhoto.data);
-        return imageUrl;
-    } catch (error) {
-        if (axios.isAxiosError(error)) {
-            const axiosError: AxiosError = error;
-            if (axiosError.response?.status === 404) {
-                return null;
-            }
-        }
-        throw error;
-    }
-}
-
-async function getUserProfile(instance: IPublicClientApplication) {
-    const accessToken = await getAccessToken(instance);
-    const { data } = await axios.get<MeResponse>(msGraphEndpoints.userProfile, {
+    const profileData = await axios.get<MeResponse>(graphConfig.graphMeEndpoint, {
         headers: {
             Authorization: `Bearer ${accessToken}`,
         },
     });
-    return data;
-}
 
+    const profilePhoto = await axios.get(graphConfig.graphPhotoEndpoint, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    console.log(profilePhoto.data);
+
+    return profileData.data;
+}
 export function UserProfile() {
-    const { instance } = useMsal();
+    const { instance, accounts } = useMsal();
     const {
         isLoading,
         error,
         data: userProfile,
     } = useQuery({
         queryKey: ['userProfile'],
-        queryFn: () => getUserProfile(instance),
+        queryFn: () => getUserProfile(instance, accounts[0]),
     });
-    const {
-        isLoading: pictureLoading,
-        error: pictureError,
-        data: profilePicture,
-    } = useQuery({
-        queryKey: ['userPicture'],
-        queryFn: () => getUserPicture(instance),
-    });
-
-    if (isLoading || pictureLoading) return <Spin />;
-    if (error ?? pictureError) return <div>{error?.message}</div>;
+    if (isLoading) return <Spin />;
+    if (error) return <div>{error.message}</div>;
 
     return (
-        <div className={styles.menuItemIconAbove}>
-            {profilePicture ? (
-                <img src={profilePicture} alt={'User Profile'} width={40} height={40} />
-            ) : (
+        <Link>
+            <div className={styles.menuItemIconAbove}>
                 <MaterialIcon icon={'account_circle'} size={'large'} />
-            )}
-            {userProfile?.displayName}
-        </div>
+                {userProfile?.displayName}
+            </div>
+        </Link>
     );
 }

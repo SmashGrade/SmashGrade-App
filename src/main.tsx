@@ -16,29 +16,19 @@ import { ReactIntlProvider } from './i18n/ReactIntlProvider.tsx';
 const queryClient = new QueryClient();
 const msalInstance = new PublicClientApplication(msalConfig);
 
-msalInstance
-    .initialize()
-    .then(() => {
-        const container = document.getElementById('root')!;
-        const root = ReactDOM.createRoot(container);
-
-        root.render(
-            <React.StrictMode>
+ReactDOM.createRoot(document.getElementById('root')!).render(
+    <React.StrictMode>
+        <MsalProvider instance={msalInstance}>
+            <ReactIntlProvider>
                 <ConfigProvider theme={antdTheme}>
-                    <MsalProvider instance={msalInstance}>
-                        <QueryClientProvider client={queryClient}>
-                            <ReactIntlProvider>
-                                <RouterProvider router={router} />
-                            </ReactIntlProvider>
-                            <DevSupportComponent>
-                                <ReactQueryDevtools initialIsOpen={false} />
-                            </DevSupportComponent>
-                        </QueryClientProvider>
-                    </MsalProvider>
+                    <QueryClientProvider client={queryClient}>
+                        <RouterProvider router={router} />
+                        <DevSupportComponent>
+                            <ReactQueryDevtools initialIsOpen={false} />
+                        </DevSupportComponent>
+                    </QueryClientProvider>
                 </ConfigProvider>
-            </React.StrictMode>
-        );
-    })
-    .catch((e) => {
-        console.error(e);
-    });
+            </ReactIntlProvider>
+        </MsalProvider>
+    </React.StrictMode>
+);

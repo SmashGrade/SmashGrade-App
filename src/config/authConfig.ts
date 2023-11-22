@@ -3,7 +3,7 @@
  * Licensed under the MIT License.
  */
 
-import { Configuration, LogLevel, RedirectRequest } from '@azure/msal-browser';
+import { Configuration, LogLevel } from '@azure/msal-browser';
 
 /**
  * Configuration object to be passed to MSAL instance on creation.
@@ -13,8 +13,8 @@ import { Configuration, LogLevel, RedirectRequest } from '@azure/msal-browser';
 
 export const msalConfig: Configuration = {
     auth: {
-        clientId: import.meta.env.VITE_AUTH_CLIENT_ID,
-        authority: `https://login.microsoftonline.com/${import.meta.env.VITE_AUTH_AUTHORITY_ID}`,
+        clientId: '72acf4df-78f6-4e6f-81c6-f5aa1efa8ebc',
+        authority: 'https://login.microsoftonline.com/744b66c4-2df7-4756-905a-c1127799c955',
         redirectUri: import.meta.env.VITE_AUTH_REDIRECT_URL,
     },
     cache: {
@@ -51,17 +51,15 @@ export const msalConfig: Configuration = {
  * For more information about OIDC scopes, visit:
  * https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
  */
-export const loginRequest: RedirectRequest = {
-    scopes: ['User.Read', 'User.Read.All'],
+export const loginRequest = {
+    scopes: ['User.Read.All'],
 };
 
 /**
  * Add here the scopes to request when obtaining an access token for MS Graph API. For more information, see:
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
  */
-
-const msGraphBaseUrl = 'https://graph.microsoft.com/v1.0';
-export const msGraphEndpoints = {
-    userProfile: `${msGraphBaseUrl}/me`,
-    userProfilePicture: `${msGraphBaseUrl}/me/photo/$value`,
+export const graphConfig = {
+    graphMeEndpoint: 'https://graph.microsoft.com/v1.0/me',
+    graphPhotoEndpoint: 'https://graph.microsoft.com/v1.0/me/photo',
 };
