@@ -1,12 +1,11 @@
-import { AccountInfo, IPublicClientApplication } from '@azure/msal-browser';
+import { IPublicClientApplication } from '@azure/msal-browser';
 import { useMsal } from '@azure/msal-react';
-import styles from '@components/IconLink.module.scss';
-import { MaterialIcon } from '@components/MaterialIcon.tsx';
+import styles from '@components/ui-elements/IconLink.module.scss';
+import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
 import { useQuery } from '@tanstack/react-query';
-import { Link } from '@tanstack/react-router';
 import { Spin } from 'antd';
-import axios from 'axios';
-import { graphConfig, loginRequest } from '../../config/authConfig.ts';
+import axios, { AxiosError } from 'axios';
+import { loginRequest, msGraphEndpoints } from '../../config/authConfig.ts';
 
 interface MeResponse {
     id: string;
@@ -14,49 +13,75 @@ interface MeResponse {
     givenName: string;
     surname: string;
     userPrincipalName: string;
-    // Add other properties as needed
 }
 
-export async function getUserProfile(instance: IPublicClientApplication, account: AccountInfo) {
+async function getUserPicture(instance: IPublicClientApplication) {
     const { accessToken } = await instance.acquireTokenSilent({
         ...loginRequest,
-        account,
     });
-
-    const profileData = await axios.get<MeResponse>(graphConfig.graphMeEndpoint, {
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-        },
-    });
-
-    const profilePhoto = await axios.get(graphConfig.graphPhotoEndpoint, {
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-        },
-    });
-    console.log(profilePhoto.data);
-
-    return profileData.data;
+    try {
+        const profilePhoto = await axios.get<Blob>(msGraphEndpoints.userProfilePicture, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+            responseType: 'blob',
+        });
+        // Convert blob data to a data URL
+        const imageUrl: string = URL.createObjectURL(profilePhoto.data);
+        return imageUrl;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            const axiosError: AxiosError = error;
+            if (axiosError.response?.status === 404) {
+                return null;
+            }
+        }
+        throw error;
+    }
 }
+
+async function getUserProfile(instance: IPublicClientApplication) {
+    const { accessToken } = await instance.acquireTokenSilent({
+        ...loginRequest,
+    });
+    const { data } = await axios.get<MeResponse>(msGraphEndpoints.userProfile, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    return data;
+}
+
 export function UserProfile() {
-    const { instance, accounts } = useMsal();
+    const { instance } = useMsal();
     const {
         isLoading,
         error,
         data: userProfile,
     } = useQuery({
         queryKey: ['userProfile'],
-        queryFn: () => getUserProfile(instance, accounts[0]),
+        queryFn: () => getUserProfile(instance),
     });
-    if (isLoading) return <Spin />;
-    if (error) return <div>{error.message}</div>;
+    const {
+        isLoading: pictureLoading,
+        error: pictureError,
+        data: profilePicture,
+    } = useQuery({
+        queryKey: ['userPicture'],
+        queryFn: () => getUserPicture(instance),
+    });
+
+    if (isLoading || pictureLoading) return <Spin />;
+    if (error ?? pictureError) return <div>{error?.message}</div>;
 
     return (
-        <Link>
-            <div className={styles.menuItemIconAbove}>
+        <div className={styles.menuItemIconAbove}>
+            {profilePicture ? (
+                <img src={profilePicture} alt={'User Profile'} width={40} height={40} />
+            ) : (
                 <MaterialIcon icon={'account_circle'} size={'large'} />
-                {userProfile?.displayName}
-            </div>
-        </Link>
+            )}
+            {userProfile?.displayName}
+        </div>
     );
 }

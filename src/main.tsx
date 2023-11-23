@@ -16,19 +16,35 @@ import { ReactIntlProvider } from './i18n/ReactIntlProvider.tsx';
 const queryClient = new QueryClient();
 const msalInstance = new PublicClientApplication(msalConfig);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-        <MsalProvider instance={msalInstance}>
-            <ReactIntlProvider>
+msalInstance
+    .initialize()
+    .then(() => {
+        // Default to using the first account if no account is active on page load
+        if (!msalInstance.getActiveAccount() && msalInstance.getAllAccounts().length > 0) {
+            // Account selection logic is app dependent. Adjust as needed for different use cases.
+            msalInstance.setActiveAccount(msalInstance.getAllAccounts()[0]);
+        }
+
+        const container = document.getElementById('root')!;
+        const root = ReactDOM.createRoot(container);
+
+        root.render(
+            <React.StrictMode>
                 <ConfigProvider theme={antdTheme}>
-                    <QueryClientProvider client={queryClient}>
-                        <RouterProvider router={router} />
-                        <DevSupportComponent>
-                            <ReactQueryDevtools initialIsOpen={false} />
-                        </DevSupportComponent>
-                    </QueryClientProvider>
+                    <MsalProvider instance={msalInstance}>
+                        <QueryClientProvider client={queryClient}>
+                            <ReactIntlProvider>
+                                <RouterProvider router={router} />
+                            </ReactIntlProvider>
+                            <DevSupportComponent>
+                                <ReactQueryDevtools initialIsOpen={false} />
+                            </DevSupportComponent>
+                        </QueryClientProvider>
+                    </MsalProvider>
                 </ConfigProvider>
-            </ReactIntlProvider>
-        </MsalProvider>
-    </React.StrictMode>
-);
+            </React.StrictMode>
+        );
+    })
+    .catch((e) => {
+        console.error(e);
+    });

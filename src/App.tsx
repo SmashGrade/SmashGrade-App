@@ -1,6 +1,6 @@
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from '@azure/msal-react';
-import { Login } from '@components/Login';
-import Navigation from '@components/Navigation';
+import { Login } from '@features/navigation/Login.tsx';
+import Navigation from '@features/navigation/Navigation.tsx';
 import { Outlet } from '@tanstack/react-router';
 import React from 'react';
 

@@ -1,10 +1,17 @@
 import { InteractionType } from '@azure/msal-browser';
-import { useMsalAuthentication } from '@azure/msal-react';
+import { useMsal, useMsalAuthentication } from '@azure/msal-react';
 import { Alert } from 'antd';
-import { loginRequest } from '../../config/authConfig.ts';
+import { useEffect } from 'react';
 
 export function Login() {
-    const { error } = useMsalAuthentication(InteractionType.Redirect, loginRequest);
+    const { instance } = useMsal();
+    const { result, error } = useMsalAuthentication(InteractionType.Redirect);
+
+    useEffect(() => {
+        if (result !== null && !instance.getActiveAccount() && instance.getAllAccounts().length > 0) {
+            instance.setActiveAccount(instance.getAllAccounts()[0]);
+        }
+    }, [instance, result]);
 
     if (error) {
         return (
