@@ -29,7 +29,10 @@ jobs:
 
       - name: Create .env.pullrequest file
         if: github.event_name == 'pull_request'
-        run: echo "VITE_BACKEND_API_URL=https://jsonserver-api-preview-pr-${{ github.event.pull_request.number}}.azurewebsites.net" > .env.pullrequest
+        run: |
+          echo "VITE_BACKEND_API_URL=https://jsonserver-api-preview-pr-${{ github.event.pull_request.number}}.azurewebsites.net" > .env.pullrequest 
+          echo "VITE_AUTH_REDIRECT_URL=https://salmon-meadow-0f230d803-${{ github.event.pull_request.number}}.westeurope.3.azurestaticapps.net" > .env.pullrequest 
+          cat .env.pullrequest 
 
       - name: Remove NPM prepare script
         run: npm pkg delete scripts.prepare
