@@ -96,7 +96,7 @@ export default function CourseCreation() {
     const [courseForm] = Form.useForm();
     const [examForm] = Form.useForm();
     const [examData, setExams] = useState<(ExamResponse | EmptyExam)[]>([]);
-
+    const [totalWeight, setTotalWeight] = useState(0);
     const params = useParams<typeof courseEditRoute>({ from: courseEditRoute.id });
     const courseId = params.courseId ?? 1;
 
@@ -149,6 +149,15 @@ export default function CourseCreation() {
         //console.log('form finish', values);
     }, []);
 
+    // Update set total weight when new exam data is fetched
+    useEffect(() => {
+        if (fetchedExamData) {
+            setExams(fetchedExamData);
+            const initialTotalWeight = fetchedExamData.reduce((acc, curr) => acc + curr.weight, 0);
+            setTotalWeight(initialTotalWeight);
+        }
+    }, [fetchedExamData]);
+
     if (isCourseError) return <div>Error when loading courses</div>;
     if (isCourseLoading) return <Spin />;
 
@@ -164,18 +173,27 @@ export default function CourseCreation() {
     // temp id for the empty exam data
     let idCounter: number = examData.reduce((maxId, exam) => Math.max(maxId, exam.id) + 1, 0);
 
+    // Adds an empty exam if the "add" button is
     const handleAddEmptyField = () => {
-        // Create an empty exam data object
-        const emptyExam: EmptyExam = {
-            // Add temporary id to rerender the list on delete
-            id: idCounter++,
-            designation: '',
-            weight: 0,
-            type: '',
-            course: null,
-        };
+        examForm
+            .validateFields()
+            .then(() => {
+                // Create an empty exam data object
+                const emptyExam: EmptyExam = {
+                    // Add temporary id to rerender the list on delete
+                    id: idCounter++,
+                    designation: '',
+                    weight: 0,
+                    type: '',
+                    course: null,
+                };
 
-        setExams([...examData, emptyExam]);
+                setExams([...examData, emptyExam]);
+            })
+            .catch((error) => {
+                // Handle validation error if needed
+                console.error('Validation failed:', error);
+            });
     };
 
     const handleDeleteField = (id: number) => {
@@ -183,6 +201,17 @@ export default function CourseCreation() {
             //console.log(updatedExamData);
             return updatedExamData.filter((exam) => exam.id !== id);
         });
+    };
+
+    // Updates the total weight of all exams live on input change
+    const onWeightChange = (rowIndex: number, e: React.ChangeEvent<HTMLInputElement>) => {
+        const newWeight = parseFloat(e.target.value);
+        const updatedExams = examData.map((exam) => ({ ...exam }));
+        updatedExams[rowIndex].weight = isNaN(newWeight) ? 0 : newWeight;
+
+        const newTotal = updatedExams.reduce((acc, curr) => acc + curr.weight, 0);
+        setExams(updatedExams);
+        setTotalWeight(newTotal);
     };
 
     // Display
@@ -226,6 +255,12 @@ export default function CourseCreation() {
                             label={
                                 <FormattedMessage id={'courseName'} defaultMessage={'Kurs'} description={'Kurs Name'} />
                             }
+                            rules={[
+                                {
+                                    required: true,
+                                    message: '${label}',
+                                },
+                            ]}
                         >
                             <Input type={'text'} />
                         </Form.Item>
@@ -238,6 +273,12 @@ export default function CourseCreation() {
                                     description={'Kurs Nummer'}
                                 />
                             }
+                            rules={[
+                                {
+                                    required: true,
+                                    message: '${label}',
+                                },
+                            ]}
                         >
                             <Input />
                         </Form.Item>
@@ -245,12 +286,12 @@ export default function CourseCreation() {
                             name={'teachers'}
                             label={
                                 <div>
+                                    <ContactsOutlined className={styles.addSpace} />
                                     <FormattedMessage
                                         id={'lecturerTitle'}
                                         defaultMessage={'Dozent(en)'}
                                         description={'Name Dozent'}
                                     />
-                                    <ContactsOutlined className={styles.floatRight} />
                                 </div>
                             }
                         >
@@ -259,7 +300,6 @@ export default function CourseCreation() {
                                     mode={'multiple'}
                                     allowClear
                                     className={styles.spacerWidth}
-                                    placeholder={'Please select'}
                                     defaultValue={courseData?.teachers}
                                     options={teacherData}
                                 />
@@ -277,12 +317,12 @@ export default function CourseCreation() {
                                 name={'modules'}
                                 label={
                                     <p>
+                                        <AppstoreAddOutlined className={styles.addSpace} />
                                         <FormattedMessage
                                             id={'moduleTitle'}
                                             defaultMessage={'Modul(e)'}
                                             description={'Module Title'}
                                         />
-                                        <AppstoreAddOutlined className={styles.floatRight} />
                                     </p>
                                 }
                             >
@@ -291,7 +331,6 @@ export default function CourseCreation() {
                                         mode={'multiple'}
                                         allowClear
                                         className={styles.spacerWidth}
-                                        placeholder={'Please select'}
                                         defaultValue={moduleData}
                                         options={moduleData}
                                     />
@@ -324,6 +363,7 @@ export default function CourseCreation() {
                                 <div className={styles.divTableRow}>
                                     <div className={styles.divTableCell}>
                                         <FormattedMessage id={'Titel'} defaultMessage={'Titel'} description={'Titel'} />
+                                        <hr />
                                     </div>
                                     <div className={styles.divTableCell}>
                                         <FormattedMessage
@@ -331,6 +371,8 @@ export default function CourseCreation() {
                                             defaultMessage={'Qualifikationsnachweis'}
                                             description={'Qualification Certificate'}
                                         />
+
+                                        <hr />
                                     </div>
                                     <div className={styles.divTableCell}>
                                         <FormattedMessage
@@ -338,17 +380,21 @@ export default function CourseCreation() {
                                             defaultMessage={'Gewichtung'}
                                             description={'Qualification weight'}
                                         />
+
+                                        <hr />
                                     </div>
                                 </div>
+
                                 {examData.map((exam) => {
-                                    const total = examData.reduce((acc, curr) => acc + curr.weight, 0);
+                                    //const total = examData.reduce((acc, curr) => acc + curr.weight, 0);
                                     return (
                                         <ExamFormRow
                                             key={exam.id}
                                             exam={exam}
                                             onDeleteClick={handleDeleteField}
                                             rowIndex={exam.id}
-                                            total={total}
+                                            total={totalWeight}
+                                            onWeightChange={onWeightChange}
                                         />
                                     );
                                 })}
