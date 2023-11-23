@@ -29,14 +29,10 @@ jobs:
 
       - name: Create .env.pullrequest file
         if: github.event_name == 'pull_request'
-        #
         run: |
-          echo "VITE_BACKEND_API_URL=https://jsonserver-api-preview-pr-${{ github.event.pull_request.number}}.azurewebsites.net" > .env.pullrequest
-          # Make sure that >> is used instead of > to append to the file for all lines except the first one
-          echo "VITE_AUTH_REDIRECT_URL=https://salmon-meadow-0f230d803-${{ github.event.pull_request.number}}.westeurope.3.azurestaticapps.net" >> .env.pullrequest
-          echo "VITE_AUTH_CLIENT_ID=72acf4df-78f6-4e6f-81c6-f5aa1efa8ebc" >> .env.pullrequest
-          echo "VITE_AUTH_AUTHORITY_ID=744b66c4-2df7-4756-905a-c1127799c955" >> .env.pullrequest
-          cat .env.pullrequest
+          echo "VITE_BACKEND_API_URL=https://jsonserver-api-preview-pr-${{ github.event.pull_request.number}}.azurewebsites.net" > .env.pullrequest 
+          echo "VITE_AUTH_REDIRECT_URL=https://salmon-meadow-0f230d803-${{ github.event.pull_request.number}}.westeurope.3.azurestaticapps.net" > .env.pullrequest 
+          cat .env.pullrequest 
 
       - name: Remove NPM prepare script
         run: npm pkg delete scripts.prepare
@@ -53,30 +49,6 @@ jobs:
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/" # App source code path
           output_location: "dist" # Built app content directory - optional
-
-
-  add-azure-redirect-uri:
-    if: github.event.action == 'opened'
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-
-      - name: Azure Login
-        uses: Azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Update Redirect URIs
-        uses: Azure/cli@v1.0.8
-        env:
-          PR_NUMBER: ${{ github.event.pull_request.number}}
-        with:
-          inlineScript: |
-            chmod +x $GITHUB_WORKSPACE/.github/workflows/add-azure-redirect-uri.sh
-            $GITHUB_WORKSPACE/.github/workflows/add-azure-redirect-uri.sh
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -103,21 +75,3 @@ jobs:
           # Use a JWT created with your GitHub App's private key
           token: ${{ steps.generate_token.outputs.token }}
           environment: smashgrade-app-pr-preview-${{ github.event.pull_request.number}}
-
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-
-      - name: Azure Login
-        uses: Azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Update Redirect URIs
-        uses: Azure/cli@v1.0.8
-        env:
-          PR_NUMBER: ${{ github.event.pull_request.number}}
-        with:
-          inlineScript: |
-            chmod +x $GITHUB_WORKSPACE/.github/workflows/remove-azure-redirect-uri.sh
-            $GITHUB_WORKSPACE/.github/workflows/remove-azure-redirect-uri.sh
