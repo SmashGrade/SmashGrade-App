@@ -1,8 +1,8 @@
-import LocaleSwitcher from '@components/LocaleSwitcher.tsx';
 import React, { PropsWithChildren, useEffect, useState } from 'react';
 import { IntlProvider as IntlProviderCustom } from 'react-intl';
 import type * as sourceOfTruth from './compiled-lang/de.json';
 import { AvailableLocales } from './Locale';
+import LocaleSwitcher from './LocaleSwitcher.tsx';
 
 export type LocaleMessages = typeof sourceOfTruth;
 export type LocaleKey = keyof LocaleMessages;

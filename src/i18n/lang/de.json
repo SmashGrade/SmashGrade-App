@@ -11,6 +11,10 @@
         "defaultMessage": "Studiengänge",
         "description": "Studiengang Menu"
     },
+    "logout.menu": {
+        "defaultMessage": "Logout",
+        "description": "Logout Menu"
+    },
     "onboarding.menu": {
         "defaultMessage": "Onboarding",
         "description": "Onboarding Menu"

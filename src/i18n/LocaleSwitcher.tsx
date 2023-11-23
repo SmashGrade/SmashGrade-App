@@ -1,6 +1,6 @@
 import { Select, Space } from 'antd';
 import { useIntl } from 'react-intl';
-import { AvailableLocales } from '../i18n/Locale.ts';
+import { AvailableLocales } from './Locale.ts';
 
 interface LocaleSwitcherProps {
     setLocale: (locale: AvailableLocales) => void;

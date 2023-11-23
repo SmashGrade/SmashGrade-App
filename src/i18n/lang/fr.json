@@ -74,5 +74,9 @@
     "student.specialisedStudies": {
         "defaultMessage": "Études spécialisées",
         "description": "Tab Fachstudium"
+    },
+    "logout.menu": {
+        "defaultMessage": "Logout",
+        "description": "Logout Menu"
     }
 }
