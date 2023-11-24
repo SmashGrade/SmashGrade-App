@@ -67,6 +67,10 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number}}
         with:
           inlineScript: |
+            echo "all"
+            ls -la
+            echo "workspace files"
+            ls -la $GITHUB_WORKSPACE
             chmod +x $GITHUB_WORKSPACE/.github/workflows/add-azure-redirect-uri.sh
             $GITHUB_WORKSPACE/.github/workflows/add-azure-redirect-uri.sh
 
