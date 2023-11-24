@@ -26,12 +26,8 @@ updatedRedirectUris=("$existingRedirectUris" "$redirectUrl")
 
 echo "${updatedRedirectUris[*]}"
 
-# Create JSON payload directly
-payload='{
-  "spa": {
-    "redirectUris": '"$(printf '%s\n' "${updatedRedirectUris[@]}" | jq -R . | jq -s .)"'
-  }
-}'
+# Create JSON payload using printf to avoid issues with curly braces
+payload=$(printf '{"spa": {"redirectUris": %s}}' "$(printf '%s\n' "${updatedRedirectUris[@]}" | jq -R . | jq -s .)")
 
 echo "Payload: $payload"
 
