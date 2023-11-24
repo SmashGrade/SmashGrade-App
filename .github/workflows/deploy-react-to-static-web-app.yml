@@ -67,6 +67,7 @@ jobs:
             result=$(az rest --method GET --uri "$graphUrl" --headers "Content-Type=application/json")
             # Extract redirectUris from the result using jq (assuming jq is installed)
             existingRedirectUris=$(echo "$result" | jq -r '.spa.redirectUris[]')
+            echo $existingRedirectUris
             # Add the new redirectUrl to the existing redirectUris
             updatedRedirectUris=("$existingRedirectUris" "$redirectUrl")
             # Using a heredoc for the payload
