@@ -17,7 +17,7 @@
         "check-typescript": "tsc --noEmit",
         "preview": "concurrently \"npm:json-db\" \"vite preview\"",
         "prepare": "husky install",
-        "json-db": "cd api && npm run start",
+        "json-db": "cd api && npm run start:dev",
         "dev-db": "concurrently \"npm:json-db\" \"npm:dev\"",
         "start": "json-server api/db.json --static ./dist",
         "extract-de": "formatjs extract \"src/**/*.{ts,tsx}\" --ignore=\"**/*.d.ts\" --id-interpolation-pattern \"[sha512: contenthash:base64:6]\" --out-file \"src/i18n/lang/de.json\"",

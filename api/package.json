@@ -6,7 +6,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "npm run build && node server.js"
+    "start": "node server.js",
+    "start:dev": "npm run build && node server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
