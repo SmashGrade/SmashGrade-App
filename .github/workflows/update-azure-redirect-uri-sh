@@ -1,11 +1,17 @@
 #!/bin/bash
 
-
 appRegId="fcb522a3-6a27-4c84-b4fb-3871ef2a7986"
 graphUrl="https://graph.microsoft.com/v1.0/applications/$appRegId"
+
+# Check if jq is installed
+if ! command -v jq &> /dev/null; then
+    echo "jq not found. Please install jq."
+    exit 1
+fi
+
 result=$(az rest --method GET --uri "$graphUrl" --headers "Content-Type=application/json")
 
-# Extract redirectUris from the result using jq (assuming jq is installed)
+# Extract redirectUris from the result using jq
 existingRedirectUris=$(echo "$result" | jq -r '.spa.redirectUris[]')
 
 # Print the existing redirectUris
@@ -16,15 +22,14 @@ redirectUrl="https://salmon-meadow-0f230d803-${{ github.event.pull_request.numbe
 # Add the new redirectUrl to the existing redirectUris
 updatedRedirectUris=("$existingRedirectUris" "$redirectUrl")
 
-# Using a heredoc for the payload
-read -r -d '' payload <<EOF
-{
-  "spa": {
-    "redirectUris": $(printf '%s\n' "${updatedRedirectUris[@]}" | jq -R . | jq -s .)
-  }
-}
-EOF
+echo "${updatedRedirectUris[*]}"
 
+# Create JSON payload directly
+payload='{
+  "spa": {
+    "redirectUris": '"$(printf '%s\n' "${updatedRedirectUris[@]}" | jq -R . | jq -s .)"'
+  }
+}'
 
 echo "Payload: $payload"
 
