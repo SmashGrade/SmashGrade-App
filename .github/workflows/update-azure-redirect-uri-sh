@@ -19,7 +19,7 @@ existingRedirectUris=$(echo "$result" | jq -r '.spa.redirectUris[]')
 # Print the existing redirectUris
 echo "Existing redirectUris: $existingRedirectUris"
 
-redirectUrl="https://salmon-meadow-0f230d803-15.westeurope.3.azurestaticapps.net"
+redirectUrl="https://salmon-meadow-0f230d803-5.westeurope.3.azurestaticapps.net"
 
 # Add the new redirectUrl to the existing redirectUris
 updatedRedirectUris=("$existingRedirectUris" "$redirectUrl")
@@ -30,5 +30,7 @@ echo "${updatedRedirectUris[*]}"
 payload=$(printf '{"spa": {"redirectUris": %s}}' "$(printf '%s\n' "${updatedRedirectUris[@]}" | jq -R . | jq -s .)")
 
 echo "Payload: $payload"
+echo "test:"
+echo $payload
 
 az rest --method PATCH --uri "$graphUrl" --headers "Content-Type=application/json" --body "$payload"
