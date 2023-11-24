@@ -77,6 +77,7 @@ jobs:
               }
             }
             EOF
+            echo "$payload"
             az rest --method PATCH --uri "$graphUrl" --headers "Content-Type=application/json" --body "$payload"
 
   add-azure-redirect-uri:
