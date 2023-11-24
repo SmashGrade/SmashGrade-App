@@ -27,6 +27,18 @@ jobs:
         with:
           submodules: true
 
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Get Current Redirect URIs
+        uses: Azure/cli@v1
+        with:
+          inlineScript: |
+            chmod +x $GITHUB_WORKSPACE/.github/workflows/update-azure-redirect-uri-sh
+            $GITHUB_WORKSPACE/.github/workflows/update-azure-redirect-uri-sh
+
       - name: Create .env.pullrequest file
         if: github.event_name == 'pull_request'
         run: |
@@ -50,36 +62,6 @@ jobs:
           app_location: "/" # App source code path
           output_location: "dist" # Built app content directory - optional
 
-
-      - name: Azure Login
-        uses: Azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Get Current Redirect URIs
-        uses: Azure/cli@v1
-        with:
-          inlineScript: |
-            appRegId="fcb522a3-6a27-4c84-b4fb-3871ef2a7986"
-            redirectType="spa"
-            redirectUrl="https://salmon-meadow-0f230d803-${{ github.event.pull_request.number}}.westeurope.3.azurestaticapps.net"
-            graphUrl="https://graph.microsoft.com/v1.0/applications/$appRegId"
-            result=$(az rest --method GET --uri "$graphUrl" --headers "Content-Type=application/json")
-            # Extract redirectUris from the result using jq (assuming jq is installed)
-            existingRedirectUris=$(echo "$result" | jq -r '.spa.redirectUris[]')
-            echo $existingRedirectUris
-            # Add the new redirectUrl to the existing redirectUris
-            updatedRedirectUris=("$existingRedirectUris" "$redirectUrl")
-            # Using a heredoc for the payload
-            read -r -d '' payload <<EOF
-            {
-              "spa": {
-                "redirectUris": $(printf '%s\n' "${updatedRedirectUris[@]}" | jq -R . | jq -s .)
-              }
-            }
-            EOF
-            echo "$payload"
-            az rest --method PATCH --uri "$graphUrl" --headers "Content-Type=application/json" --body "$payload"
 
   add-azure-redirect-uri:
     if: github.event.action == 'opened'
