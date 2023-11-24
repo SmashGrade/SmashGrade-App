@@ -1,12 +1,14 @@
 #!/bin/bash
 
+#az login --tenant 744b66c4-2df7-4756-905a-c1127799c955
+
 appRegId="fcb522a3-6a27-4c84-b4fb-3871ef2a7986"
 graphUrl="https://graph.microsoft.com/v1.0/applications/$appRegId"
 
 # Check if jq is installed
-if ! command -v jq &> /dev/null; then
-    echo "jq not found. Please install jq."
-    exit 1
+if ! command -v jq &>/dev/null; then
+  echo "jq not found. Please install jq."
+  exit 1
 fi
 
 result=$(az rest --method GET --uri "$graphUrl" --headers "Content-Type=application/json")
@@ -17,7 +19,7 @@ existingRedirectUris=$(echo "$result" | jq -r '.spa.redirectUris[]')
 # Print the existing redirectUris
 echo "Existing redirectUris: $existingRedirectUris"
 
-redirectUrl="https://salmon-meadow-0f230d803-${{ github.event.pull_request.number}}.westeurope.3.azurestaticapps.net"
+redirectUrl="https://salmon-meadow-0f230d803-15.westeurope.3.azurestaticapps.net"
 
 # Add the new redirectUrl to the existing redirectUris
 updatedRedirectUris=("$existingRedirectUris" "$redirectUrl")
