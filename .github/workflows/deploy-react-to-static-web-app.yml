@@ -27,24 +27,6 @@ jobs:
         with:
           submodules: true
 
-      - name: Azure Login
-        uses: Azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Update Redirect URIs
-        uses: Azure/cli@v1.0.8
-        env:
-          PR_NUMBER: ${{ github.event.pull_request.number}}
-        with:
-          inlineScript: |
-            chmod +x $GITHUB_WORKSPACE/.github/workflows/add-azure-redirect-uri.sh
-            $GITHUB_WORKSPACE/.github/workflows/add-azure-redirect-uri.sh
-            az rest --method GET --uri "https://graph.microsoft.com/v1.0/applications/fcb522a3-6a27-4c84-b4fb-3871ef2a7986" --headers "Content-Type=application/json"
-            chmod +x $GITHUB_WORKSPACE/.github/workflows/remove-azure-redirect-uri.sh
-            $GITHUB_WORKSPACE/.github/workflows/remove-azure-redirect-uri.sh
-            
-
       - name: Create .env.pullrequest file
         if: github.event_name == 'pull_request'
         run: |
@@ -85,9 +67,8 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number}}
         with:
           inlineScript: |
-            chmod +x $GITHUB_WORKSPACE/.github/workflows/update-azure-redirect-uri.sh
-            $GITHUB_WORKSPACE/.github/workflows/update-azure-redirect-uri.sh
-
+            chmod +x $GITHUB_WORKSPACE/.github/workflows/add-azure-redirect-uri.sh
+            $GITHUB_WORKSPACE/.github/workflows/add-azure-redirect-uri.sh
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -114,3 +95,17 @@ jobs:
           # Use a JWT created with your GitHub App's private key
           token: ${{ steps.generate_token.outputs.token }}
           environment: smashgrade-app-pr-preview-${{ github.event.pull_request.number}}
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Update Redirect URIs
+        uses: Azure/cli@v1.0.8
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number}}
+        with:
+          inlineScript: |
+            chmod +x $GITHUB_WORKSPACE/.github/workflows/remove-azure-redirect-uri.sh
+            $GITHUB_WORKSPACE/.github/workflows/remove-azure-redirect-uri.sh
