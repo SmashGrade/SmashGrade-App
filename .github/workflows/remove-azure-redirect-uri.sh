@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#az login --tenant 744b66c4-2df7-4756-905a-c1127799c955
-
 appRegId="fcb522a3-6a27-4c84-b4fb-3871ef2a7986"
 graphUrl="https://graph.microsoft.com/v1.0/applications/$appRegId"
 
@@ -13,16 +11,17 @@ fi
 
 result=$(az rest --method GET --uri "$graphUrl" --headers "Content-Type=application/json")
 
-# Extract redirectUris from the result using jq
+# Extract existing redirectUris from the result using jq
 existingRedirectUris=$(echo "$result" | jq -r '.spa.redirectUris[]')
 
 # Print the existing redirectUris
 echo "Existing redirectUris: $existingRedirectUris"
 
-redirectUrl="https://salmon-meadow-0f230d803-5.westeurope.3.azurestaticapps.net"
+# Redirect URI to be removed
+redirectUrlToRemove="https://salmon-meadow-0f230d803-$PR_NUMBER.westeurope.3.azurestaticapps.net"
 
-# Add the new redirectUrl to the existing redirectUris
-updatedRedirectUris=("$existingRedirectUris" "$redirectUrl")
+# Remove the specified redirectUrl from the existing redirectUris
+updatedRedirectUris=($(echo "${existingRedirectUris[@]}" | tr ' ' '\n' | grep -v "$redirectUrlToRemove"))
 
 echo "${updatedRedirectUris[*]}"
 
@@ -30,7 +29,6 @@ echo "${updatedRedirectUris[*]}"
 payload=$(printf '{"spa": {"redirectUris": %s}}' "$(printf '%s\n' "${updatedRedirectUris[@]}" | jq -R . | jq -s .)")
 
 echo "Payload: $payload"
-echo "test:"
-echo $payload
 
+# Update the redirectUris via PATCH request
 az rest --method PATCH --uri "$graphUrl" --headers "Content-Type=application/json" --body "$payload"
