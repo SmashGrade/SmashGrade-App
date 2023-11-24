@@ -1,4 +1,4 @@
-import { AuthenticatedTemplate, UnauthenticatedTemplate } from '@azure/msal-react';
+import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from '@azure/msal-react';
 import { Login } from '@features/navigation/Login.tsx';
 import Navigation from '@features/navigation/Navigation.tsx';
 import { Outlet } from '@tanstack/react-router';
@@ -17,6 +17,13 @@ const TanStackRouterDevtoolsAsync =
           );
 
 function App() {
+    const { instance: msalInstance } = useMsal();
+    // Default to using the first account if no account is active on page load
+    if (!msalInstance.getActiveAccount() && msalInstance.getAllAccounts().length > 0) {
+        // Account selection logic is app dependent. Adjust as needed for different use cases.
+        msalInstance.setActiveAccount(msalInstance.getAllAccounts()[0]);
+    }
+
     return (
         <>
             <AuthenticatedTemplate>
