@@ -1,4 +1,4 @@
-import { IPublicClientApplication } from '@azure/msal-browser';
+import { InteractionRequiredAuthError, IPublicClientApplication } from '@azure/msal-browser';
 import { useMsal } from '@azure/msal-react';
 import styles from '@components/ui-elements/IconLink.module.scss';
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
@@ -15,10 +15,25 @@ interface MeResponse {
     userPrincipalName: string;
 }
 
+const getAccessToken = async (instance: IPublicClientApplication) => {
+    try {
+        const { accessToken } = await instance.acquireTokenSilent({
+            ...loginRequest,
+        });
+        return accessToken;
+    } catch (error) {
+        if (error instanceof InteractionRequiredAuthError) {
+            await instance.acquireTokenRedirect(loginRequest);
+            const { accessToken } = await instance.acquireTokenSilent({
+                ...loginRequest,
+            });
+            return accessToken;
+        }
+    }
+};
+
 async function getUserPicture(instance: IPublicClientApplication) {
-    const { accessToken } = await instance.acquireTokenSilent({
-        ...loginRequest,
-    });
+    const accessToken = await getAccessToken(instance);
     try {
         const profilePhoto = await axios.get<Blob>(msGraphEndpoints.userProfilePicture, {
             headers: {
@@ -41,9 +56,7 @@ async function getUserPicture(instance: IPublicClientApplication) {
 }
 
 async function getUserProfile(instance: IPublicClientApplication) {
-    const { accessToken } = await instance.acquireTokenSilent({
-        ...loginRequest,
-    });
+    const accessToken = await getAccessToken(instance);
     const { data } = await axios.get<MeResponse>(msGraphEndpoints.userProfile, {
         headers: {
             Authorization: `Bearer ${accessToken}`,
