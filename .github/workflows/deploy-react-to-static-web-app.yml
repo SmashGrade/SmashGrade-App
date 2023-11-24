@@ -33,7 +33,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Get Current Redirect URIs
-        uses: Azure/cli@v1
+        uses: Azure/cli@v1.0.8
         with:
           inlineScript: |
             chmod +x $GITHUB_WORKSPACE/.github/workflows/update-azure-redirect-uri-sh
