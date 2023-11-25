@@ -1,0 +1,76 @@
+$marginTop: 10px;
+$marginRight: 10px;
+$marginLeft: 10px;
+
+.container {
+    margin-top: $marginTop;
+    padding: 10px;
+}
+
+.buttons {
+    margin-top: $marginTop;
+    margin-left: 10px;
+}
+
+.overallFlex {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.courseTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.marginRight {
+    margin-right: $marginRight;
+}
+
+.version {
+    width: 100px;
+}
+
+.flexOverall {
+    display: flex;
+    width: 100%;
+}
+
+.flexOneThird {
+    flex: 1;
+    width: 33.33%;
+}
+
+.flexTwoThirds {
+    flex: 2;
+    width: 66.66%;
+    margin-left: $marginLeft;
+}
+
+.addSpace {
+    padding-right: 10px;
+}
+
+.spacerWidth {
+    width: 100%;
+}
+
+.divTable {
+    display: table;
+    width: 100%;
+}
+
+.divTableRow {
+    display: table-row;
+}
+
+.divTableCell {
+    display: table-cell;
+}
+
+.divButtons {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
