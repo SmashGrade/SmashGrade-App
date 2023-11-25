@@ -13,6 +13,9 @@ export const antdTheme: ThemeConfig = {
             headerBg: colors.colorPrimary,
             colorTextHeading: colors.colorTextHeading,
         },
+        Card: {
+            lineHeight: 0.1,
+        },
     },
     token: {
         colorPrimary: colors.colorPrimary,

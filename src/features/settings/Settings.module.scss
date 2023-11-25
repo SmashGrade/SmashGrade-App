@@ -1,0 +1,11 @@
+.settingsContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.settingsPersonaRow {
+    display: flex;
+    justify-content: space-between;
+}
