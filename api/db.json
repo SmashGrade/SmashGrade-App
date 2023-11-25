@@ -750,5 +750,35 @@
                 }
             ]
         }
+    ],
+    "courseStudent": [
+        {
+            "id": 1,
+            "course": {
+                "id": 1,
+                "version": 0,
+                "description": "Projektmanagement",
+                "number": "3.121",
+                "exams": [
+                    {
+                        "id": 0,
+                        "description": "Projektarbeit",
+                        "weight": 0.3,
+                        "type": "Schritfliche Arbeit",
+                        "grade": {
+                            "id": 0,
+                            "date": "2023-11-20T14:36:02.335Z",
+                            "gradesPerType": [
+                                {
+                                    "id": 0,
+                                    "description": "CH-Note",
+                                    "grade": 4.3
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
     ]
 }
