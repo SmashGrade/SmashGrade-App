@@ -1,9 +1,11 @@
-import { AuditOutlined, BookFilled, DownOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Divider, Dropdown, Input, Menu, Space } from 'antd';
+import { BookFilled, DownOutlined } from '@ant-design/icons';
+import { Button, Dropdown, Menu, Space } from 'antd';
 import type { MenuProps } from 'antd';
 
 import styles from './MyCoursePage.module.scss';
-import Rating from '@features/student/modules/Rating.tsx';
+import Grade from '@features/teacher/courses/Grade.tsx';
+import GradeInput from '@features/teacher/courses/GradeInput.tsx';
+import Qualification from '@features/teacher/courses/Qualification.tsx';
 
 const handleMenuClick: MenuProps['onClick'] = (e) => {
     console.info('click', e);
@@ -65,7 +67,7 @@ export default function MyCoursePage() {
     return (
         <>
             <div className={styles.myCoursePage}>
-                <div title={'Kurse'} className={`${styles.courseNavigation} ${styles.background}`}>
+                <div className={`${styles.courseNavigation} ${styles.background}`}>
                     <h3>Kurse</h3>
                     <Dropdown menu={menuProps}>
                         <Button>
@@ -77,80 +79,16 @@ export default function MyCoursePage() {
                     </Dropdown>
                     <Menu onClick={menuOnClick} items={menuItems} className={styles.menu} style={{ width: '90%' }} />
                 </div>
-                <div title={'Kurs XYZ'} className={`${styles.proofOfQualification} ${styles.background}`}>
-                    <h3>Kurs XYZ</h3>
-                    <p>Qualifikationsnachweise</p>
-                    <div className={styles.setWidth}>
-                        <div className={`${styles.outlined} ${styles.flexRow} ${styles.componentChildren}`}>
-                            <div className={styles.flexCol}>
-                                <h3>Test #1</h3>
-                                <div className={styles.flexRow}>
-                                    <AuditOutlined />
-                                    <p>30%</p>
-                                </div>
-                            </div>
-                            <Rating rating={5.0} />
-                        </div>
-                        <div className={`${styles.outlined} ${styles.flexRow} ${styles.componentChildren}`}>
-                            <div className={styles.flexCol}>
-                                <h3>Test #1</h3>
-                                <div className={styles.flexRow}>
-                                    <AuditOutlined />
-                                    <p>30%</p>
-                                </div>
-                            </div>
-                            <Rating rating={5.0} />
-                        </div>
-                        <div className={`${styles.outlined} ${styles.flexRow} ${styles.componentChildren}`}>
-                            <div className={styles.flexCol}>
-                                <h3>Test #1</h3>
-                                <div className={styles.flexRow}>
-                                    <AuditOutlined />
-                                    <p>30%</p>
-                                </div>
-                            </div>
-                            <Rating rating={5.0} />
-                        </div>
-                    </div>
-                </div>
+                <Qualification field={'Wirtschaftsinformatik'} subheading={'Qualifikationsnachweise'} />
                 <div className={styles.gradeContainer}>
                     <div className={`${styles.setWidth} ${styles.background}`}>
                         <h3>Test #1</h3>
                         <div className={styles.flexRowStart}>
-                            <div className={styles.flexCol}>
-                                <p>Bewertung</p>
-                                <Input placeholder={'Schriftliche Prüfung'} />
-                            </div>
-                            <div className={styles.flexCol}>
-                                <p>Gewichtung</p>
-                                <Input placeholder={'50%'} />
-                            </div>
+                            <GradeInput description={'Bewertung'} placeholder={'Schriftliche Prüfung'} />
+                            <GradeInput description={'Gewichtung'} placeholder={'30%'} />
                         </div>
                     </div>
-                    <div className={`${styles.background} ${styles.setWidth}`}>
-                        <div className={`${styles.outlined} ${styles.gradeComponent}`}>
-                            <div className={styles.gradeComponent}>
-                                <UserOutlined />
-                                <div className={styles.componentChildren}>
-                                    <h3>John Doe</h3>
-                                    <p>Wirtschaftsinformatik</p>
-                                </div>
-                            </div>
-                            <Rating rating={5.0} />
-                        </div>
-                        <div className={`${styles.outlined} ${styles.gradeComponent}`}>
-                            <div className={styles.gradeComponent}>
-                                <UserOutlined />
-                                <div className={styles.componentChildren}>
-                                    <h3>Jane Doe</h3>
-                                    <p>Softwareentwicklung</p>
-                                </div>
-                            </div>
-                            <Rating rating={3.0} />
-                        </div>
-                        <Divider className={styles.divider} />
-                        <Rating rating={5.0} />
-                    </div>
+                    <Grade />
                 </div>
             </div>
         </>
