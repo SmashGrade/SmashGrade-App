@@ -8,13 +8,13 @@ import ReactDOM from 'react-dom/client';
 import { antdTheme } from './config/antdTheme.ts';
 import DevSupportComponent from './dev/DevSupportComponent.tsx';
 import './global.scss';
-import { ReactIntlProvider } from './i18n/ReactIntlProvider.tsx';
+import { LocaleProvider } from './i18n/ReactIntlProvider.tsx';
 
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <ReactIntlProvider>
+        <LocaleProvider>
             <ConfigProvider theme={antdTheme}>
                 <QueryClientProvider client={queryClient}>
                     <RouterProvider router={router} />
@@ -23,6 +23,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                     </DevSupportComponent>
                 </QueryClientProvider>
             </ConfigProvider>
-        </ReactIntlProvider>
+        </LocaleProvider>
     </React.StrictMode>
 );

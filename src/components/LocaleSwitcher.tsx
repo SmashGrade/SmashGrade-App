@@ -1,18 +1,15 @@
 import { Select, Space } from 'antd';
 import { useIntl } from 'react-intl';
 import { AvailableLocales } from '../i18n/Locale.ts';
+import { LocaleContextProps } from '../i18n/ReactIntlProvider.tsx';
 
-interface LocaleSwitcherProps {
-    setLocale: (locale: AvailableLocales) => void;
-}
-
-function LocaleSwitcher({ setLocale }: Readonly<LocaleSwitcherProps>) {
+function LocaleSwitcher({ setLocale, locale }: Readonly<LocaleContextProps>) {
     const intl = useIntl();
 
     return (
         <Space wrap>
             <Select
-                value={intl.locale}
+                value={locale}
                 style={{ width: 120 }}
                 bordered={false}
                 options={[
