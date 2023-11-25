@@ -1,7 +1,7 @@
 import StudentModulePage from '@pages/ModulesPage.tsx';
 import { courseDetailRoute, courseIndexRoute, newCourseRoute } from '@pages/routes/courseRoutes.ts';
-import { studentIndexRoute } from '@pages/routes/studentRoutes.ts';
 import { lazyRouteComponent, RootRoute, Route, Router, RouterMeta } from '@tanstack/react-router';
+import { z } from 'zod';
 import App from '../../App.tsx';
 import OnboardingPage from '../OnboardingPage.tsx';
 
@@ -41,9 +41,10 @@ export const studentModuleRoute = new Route({
     component: StudentModulePage,
 });
 
-export const studentRoute = new Route({
+export const studentDetailRoute = new Route({
     getParentRoute: () => rootRoute,
-    path: 'student',
+    path: 'student/$id',
+    parseParams: (params) => ({ id: z.number().int().parse(parseInt(params.id)) }),
     component: lazyRouteComponent(() => import('@pages/StudentPage.tsx')),
 });
 
@@ -52,7 +53,7 @@ const routeTree = rootRoute.addChildren([
     onboardingRoute,
     curriculumRoute,
     studentModuleRoute,
-    studentRoute.addChildren([studentIndexRoute]),
+    studentDetailRoute,
     courseRoute.addChildren([courseIndexRoute.addChildren([courseDetailRoute, newCourseRoute])]),
 ]);
 export const router = new Router({ routeTree });

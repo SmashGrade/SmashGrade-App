@@ -1,5 +1,4 @@
-import { courseDetailRoute } from '@pages/routes/courseRoutes.ts';
-import { studentIndexRoute } from '@pages/routes/studentRoutes.ts';
+import { studentDetailRoute } from '@pages/routes/routes.ts';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 import { Spin } from 'antd';
@@ -24,15 +23,14 @@ async function getExams(id: number) {
 }
 
 export default function StudentCourseDetailPage() {
-    const { id } = useParams({ from: studentIndexRoute.id });
-    console.log(id);
+    const { id } = useParams<typeof studentDetailRoute>({ from: studentDetailRoute.id });
     const {
         isLoading: examsLoading,
         error: examsError,
         data: exams,
     } = useQuery({
-        queryKey: ['studentExams', 1],
-        //queryFn: () => getExams(id),
+        queryKey: ['studentExams', id],
+        queryFn: () => getExams(id),
     });
 
     if (examsLoading) {
@@ -41,6 +39,10 @@ export default function StudentCourseDetailPage() {
 
     if (examsError) {
         return <h2>Error</h2>;
+    }
+
+    if (!exams?.length) {
+        return <h2>No exams found</h2>;
     }
 
     return <>{exams[0].description}</>;
