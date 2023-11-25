@@ -74,5 +74,53 @@
     "student.specialisedStudies": {
         "defaultMessage": "Specialised studies",
         "description": "Tab Fachstudium"
+    },
+    "course.ButtonActivate": {
+        "defaultMessage": "Aktivieren",
+        "description": "Speichern Button"
+    },
+    "course.ButtonAdd": {
+        "defaultMessage": "+ Hinzufügen",
+        "description": "Hinzufuegen Button"
+    },
+    "course.ButtonCancel": {
+        "defaultMessage": "Abbrechen",
+        "description": "Abbrechen Button"
+    },
+    "course.ButtonSave": {
+        "defaultMessage": "Speichern",
+        "description": "Speichern Button"
+    },
+    "course.Course": {
+        "defaultMessage": "Kurs",
+        "description": "Kurs Name"
+    },
+    "course.LecturerTitle": {
+        "defaultMessage": "Dozent(en)",
+        "description": "Name Dozent"
+    },
+    "course.ModuleTitle": {
+        "defaultMessage": "Modul(e)",
+        "description": "Module Title"
+    },
+    "course.Number": {
+        "defaultMessage": "Nummer",
+        "description": "Kurs Nummer"
+    },
+    "course.QualificationCertificate": {
+        "defaultMessage": "Qualifikationsnachweis",
+        "description": "Qualification Certificate"
+    },
+    "course.QualificationCertificatesTitle": {
+        "defaultMessage": "Qualifikationsnachweise",
+        "description": "Qualification Certificates Title"
+    },
+    "course.Title": {
+        "defaultMessage": "Titel",
+        "description": "Titel"
+    },
+    "course.Weight": {
+        "defaultMessage": "Gewichtung",
+        "description": "Qualification weight"
     }
 }

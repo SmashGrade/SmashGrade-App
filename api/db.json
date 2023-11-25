@@ -204,5 +204,97 @@
             "id": 3,
             "modules": []
         }
+    ],
+    "modules": [
+        {
+            "id": 0,
+            "description": "2023 - Schnittstellen-Technologien ||",
+            "number": "string",
+            "status": "Active",
+            "bewertungstyp_beschreibung": "Wenn alle Kurse erfuellt sind",
+            "bewertungstyp_bezeichnung": "E",
+            "courses": [
+                {
+                    "id": 0,
+                    "description": "Projektmanagement",
+                    "number": "3.121",
+                    "teacher": [["Kurt Munter", "Lancelot"]],
+                    "evaluationType": "M"
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "description": "2024 - Datenbanken ||",
+            "number": "string",
+            "status": "Active",
+            "bewertungstyp_beschreibung": "Wenn alle Kurse erfuellt sind",
+            "bewertungstyp_bezeichnung": "E",
+            "courses": [
+                {
+                    "id": 0,
+                    "description": "Projektmanagement",
+                    "number": "3.121",
+                    "teacher": [["Kurt Munter", "Lancelot"]],
+                    "evaluationType": "M"
+                }
+            ]
+        }
+    ],
+    "users": [
+        {
+            "id": 0,
+            "class-startyear": 0,
+            "name": "Max Musterschueler",
+            "email": "Max.Musterschueler@hftm.ch",
+            "role": "Student"
+        },
+        {
+            "id": 1,
+            "class-startyear": 0,
+            "name": "Simeon Liniger",
+            "email": "Simeon.Liniger@hftm.ch",
+            "role": "Teacher"
+        },
+        {
+            "id": 2,
+            "class-startyear": 0,
+            "name": "Alice Smith",
+            "email": "Alice.Smith@hftm.ch",
+            "role": "Teacher"
+        },
+        {
+            "id": 3,
+            "class-startyear": 0,
+            "name": "Bob Johnson",
+            "email": "Bob.Johnson@hftm.ch",
+            "role": "Teacher"
+        }
+    ],
+    "exams": [
+        {
+            "id": 0,
+            "designation": "Projektarbeit",
+            "weight": 3,
+            "type": "Präsentation",
+            "course": {
+                "id": 0,
+                "designation": "Projektmanagement",
+                "number": "3.121",
+                "professor": [["Kurt Munter", "Lancelot"]]
+            }
+        },
+        {
+            "id": 1,
+            "designation": "Moodle Prüfung",
+            "weight": 2,
+            "type": "Schriftliche Arbeit",
+            "course": {
+                "id": 0,
+                "designation": "Projektmanagement",
+                "number": "3.121",
+                "professor": [["Kurt Munter", "Lancelot"]]
+            }
+        }
     ]
 }

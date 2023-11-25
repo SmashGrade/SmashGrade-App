@@ -1,4 +1,17 @@
 {
+    "account.menu": "Compte",
+    "course.ButtonActivate": "Aktivieren",
+    "course.ButtonAdd": "+ Hinzufügen",
+    "course.ButtonCancel": "Abbrechen",
+    "course.ButtonSave": "Speichern",
+    "course.Course": "Kurs",
+    "course.LecturerTitle": "Dozent(en)",
+    "course.ModuleTitle": "Modul(e)",
+    "course.Number": "Nummer",
+    "course.QualificationCertificate": "Qualifikationsnachweis",
+    "course.QualificationCertificatesTitle": "Qualifikationsnachweise",
+    "course.Title": "Title",
+    "course.Weight": "Gewichtung",
     "course.menu": "Cours",
     "curriculum": "Plan d'études",
     "curriculum.menu": "Programme",
@@ -8,8 +21,6 @@
     "module.menu": "Modules",
     "my-course.menu": "Mes cours",
     "my-curriculum.menu": "Mon programme",
-    "students.menu": "Étudiants",
-    "account.menu": "Compte",
     "onboarding.menu": "Onboarding",
     "onboarding.title": "Aperçu",
     "startYear": "Année de début",
@@ -17,5 +28,6 @@
     "student.focusStudies": "Priorité aux études",
     "student.noModulesFound": "Aucun module n'a été trouvé",
     "student.specialisedStudies": "Études spécialisées",
+    "students.menu": "Étudiants",
     "user-management.menu": "Gestion des utilisateurs"
 }

@@ -1,6 +1,8 @@
+import CourseCreation from '@features/course-admin/CourseCreation.tsx';
 import StudentModulePage from '@pages/ModulesPage.tsx';
 import { courseDetailRoute, courseIndexRoute, newCourseRoute } from '@pages/routes/courseRoutes.ts';
 import { lazyRouteComponent, RootRoute, Route, Router, RouterMeta } from '@tanstack/react-router';
+import { z } from 'zod';
 import App from '../../App.tsx';
 import OnboardingPage from '../OnboardingPage.tsx';
 
@@ -40,12 +42,23 @@ export const studentModuleRoute = new Route({
     component: StudentModulePage,
 });
 
+export const courseEditRoute = new Route({
+    getParentRoute: () => rootRoute,
+    path: '/course/edit/$courseId',
+    parseParams: (params) => ({
+        // validate courseId is a number
+        courseId: z.number().parse(Number(params.courseId)),
+    }),
+    stringifyParams: ({ courseId }) => ({ courseId: `${courseId}` }),
+    component: CourseCreation,
+});
+
 const routeTree = rootRoute.addChildren([
     indexRoute,
     onboardingRoute,
     curriculumRoute,
     studentModuleRoute,
-    courseRoute.addChildren([courseIndexRoute.addChildren([courseDetailRoute, newCourseRoute])]),
+    courseRoute.addChildren([courseIndexRoute.addChildren([courseDetailRoute, newCourseRoute, courseEditRoute])]),
 ]);
 export const router = new Router({ routeTree });
 
