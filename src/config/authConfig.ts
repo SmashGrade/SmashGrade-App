@@ -13,8 +13,8 @@ import { Configuration, LogLevel, RedirectRequest } from '@azure/msal-browser';
 
 export const msalConfig: Configuration = {
     auth: {
-        clientId: '72acf4df-78f6-4e6f-81c6-f5aa1efa8ebc',
-        authority: 'https://login.microsoftonline.com/744b66c4-2df7-4756-905a-c1127799c955',
+        clientId: import.meta.env.VITE_AUTH_CLIENT_ID,
+        authority: `https://login.microsoftonline.com/${import.meta.env.VITE_AUTH_AUTHORITY_ID}`,
         redirectUri: import.meta.env.VITE_AUTH_REDIRECT_URL,
     },
     cache: {
