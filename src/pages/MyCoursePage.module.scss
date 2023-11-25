@@ -60,14 +60,33 @@
     border-radius: 10px;
 }
 
+@mixin base-insets-left-right {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.baseInsetsLeftRight {
+    @include base-insets-left-right;
+}
+
+@mixin base-insets {
+    padding: 10px;
+    margin: 10px;
+}
+
+.baseInsets {
+    @include base-insets;
+}
+
 .baseBackground {
     @include base-background;
 }
 
 .background {
     @include base-background;
-    padding: 10px;
-    margin: 10px;
+    @include base-insets;
 }
 
 .divider {
