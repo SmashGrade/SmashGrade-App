@@ -13,7 +13,7 @@ export default function QualificationCard(props: QualificationCardProps) {
         <div className={`${styles.outlined} ${styles.flexRow} ${styles.componentChildren}`}>
             <div className={styles.flexCol}>
                 <h3>{props.name}</h3>
-                <div className={styles.flexRow}>
+                <div className={styles.flexRowStart}>
                     <AuditOutlined />
                     <p>{props.weight}</p>
                 </div>
