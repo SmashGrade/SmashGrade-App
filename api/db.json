@@ -281,6 +281,41 @@
             "modules": []
         }
     ],
+    "courseTeacher": {
+        "id": 0,
+        "version": 0,
+        "description": "Projektmanagement",
+        "number": "3.121",
+        "exams": [
+            {
+                "id": 0,
+                "description": "Projektarbeit",
+                "weight": 0.3,
+                "type": "Schritfliche Arbeit",
+                "avgGrades": [
+                    {
+                        "id": 0,
+                        "description": "CH-Note",
+                        "grade": 4.3
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "description": "Projektpräsentation",
+                "weight": 0.7,
+                "type": "Mündliche Prüfung",
+                "avgGrades": [
+                    {
+                        "id": 1,
+                        "description": "CH-Note",
+                        "grade": 5.5
+                    }
+                ]
+            }
+        ]
+    }
+    ],
     "modules": [
         {
             "id": 2,
