@@ -1,8 +1,10 @@
-import Navigation from '@components/Navigation';
+import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from '@azure/msal-react';
+import { Login } from '@features/navigation/Login.tsx';
+import Navigation from '@features/navigation/Navigation.tsx';
 import { Outlet } from '@tanstack/react-router';
 import React from 'react';
 
-const TanStackRouterDevtools =
+const TanStackRouterDevtoolsAsync =
     process.env.NODE_ENV === 'production'
         ? () => null // Render nothing in production
         : React.lazy(() =>
@@ -15,11 +17,23 @@ const TanStackRouterDevtools =
           );
 
 function App() {
+    const { instance: msalInstance } = useMsal();
+    // Default to using the first account if no account is active on page load
+    if (!msalInstance.getActiveAccount() && msalInstance.getAllAccounts().length > 0) {
+        // Account selection logic is app dependent. Adjust as needed for different use cases.
+        msalInstance.setActiveAccount(msalInstance.getAllAccounts()[0]);
+    }
+
     return (
         <>
-            <Navigation />
-            <Outlet />
-            <TanStackRouterDevtools position={'bottom-left'} />
+            <AuthenticatedTemplate>
+                <Navigation />
+                <Outlet />
+                <TanStackRouterDevtoolsAsync position={'bottom-left'} />
+            </AuthenticatedTemplate>
+            <UnauthenticatedTemplate>
+                <Login />
+            </UnauthenticatedTemplate>
         </>
     );
 }

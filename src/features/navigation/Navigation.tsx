@@ -1,4 +1,6 @@
-import { IconLink } from '@components/IconLink.tsx';
+import { useMsal } from '@azure/msal-react';
+import { IconLink } from '@components/ui-elements/IconLink.tsx';
+
 import {
     courseRoute,
     curriculumRoute,
@@ -6,11 +8,17 @@ import {
     settingsRoute,
     studentModuleRoute,
 } from '@pages/routes/routes.ts';
+import { useMsal } from '@azure/msal-react';
+import { IconLink } from '@components/ui-elements/IconLink.tsx';
+import { UserProfile } from '@features/profile/UserProfile.tsx';
+import useUserRoles from '@hooks/useUserRoles.ts';
+import { courseRoute, curriculumRoute, onboardingRoute, studentModuleRoute } from '@pages/routes/routes.ts';
 import { useRouter } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 import { useCallback, useMemo, useState } from 'react';
-import logo from '../assets/images/SmashGrade-AppIcon.png';
+import { FormattedMessage } from 'react-intl';
+import logo from '../../assets/images/SmashGrade-AppIcon.png';
 import styles from './Navigation.module.scss';
 
 export default function Navigation() {
@@ -18,6 +26,8 @@ export default function Navigation() {
     const currentPath = router.state.location.pathname;
     const [current, setCurrent] = useState(currentPath.substring(1) || 'onboarding');
     const onNavItemClick = useCallback<MenuClickEventHandler>((e) => setCurrent(e.key), []);
+    const userRoles = useUserRoles();
+    const { instance } = useMsal();
 
     const items: MenuProps['items'] = useMemo(() => {
         return [
@@ -131,13 +141,38 @@ export default function Navigation() {
                     />
                 ),
                 key: 'account',
+                children: [
+                    {
+                        label: (
+                            <div
+                                onClick={() => {
+                                    void instance.logout();
+                                }}
+                            >
+                                <FormattedMessage
+                                    id={'logout.menu'}
+                                    defaultMessage={'Logout'}
+                                    description={'Logout Menu'}
+                                />
+                            </div>
+                        ),
+                        key: 'logout',
+                    },
+                ],
             },
         ];
-    }, []);
+    }, [instance]);
 
     return (
         <div className={styles.navigationContainer}>
-            <img src={logo} alt={'SmashGrade - Höhere Fachschule für Technik Mittelland'} className={styles.logo} />
+            <div className={styles.logoContainer}>
+                <img src={logo} alt={'SmashGrade - Höhere Fachschule für Technik Mittelland'} className={styles.logo} />
+                <div className={styles.titleContainer}>
+                    <h3 className={styles.title}>SmashGrade</h3>
+                    <p className={styles.title}>{userRoles?.[0]}</p>
+                </div>
+            </div>
+
             <Menu
                 onClick={onNavItemClick}
                 selectedKeys={[current]}
@@ -147,7 +182,7 @@ export default function Navigation() {
             />
             <Menu
                 onClick={onNavItemClick}
-                selectedKeys={[current]}
+                selectedKeys={['logout']}
                 mode={'horizontal'}
                 items={accountItems}
                 className={styles.accountMenu}

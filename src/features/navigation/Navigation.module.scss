@@ -4,9 +4,6 @@
     align-items: center;
 
     .logo {
-        margin-left: 20px;
-        margin-right: 20px;
-        margin-bottom: 30px;
         height: 70px;
         width: auto;
     }
@@ -23,4 +20,23 @@
 .accountMenu {
     margin-left: auto;
     padding-right: 10px;
+}
+
+.logoContainer {
+    display: flex;
+    min-width: 0;
+    flex: auto;
+    gap: 4px;
+
+    .titleContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-width: 0;
+        flex: auto;
+
+        .title {
+            margin: 0;
+        }
+    }
 }

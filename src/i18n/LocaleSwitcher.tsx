@@ -1,7 +1,7 @@
 import { Select, Space } from 'antd';
 import { useIntl } from 'react-intl';
-import { AvailableLocales } from '../i18n/Locale.ts';
-import { LocaleContextProps } from '../i18n/ReactIntlProvider.tsx';
+import { AvailableLocales } from './Locale.ts';
+import { LocaleContextProps } from './ReactIntlProvider.tsx';
 
 function LocaleSwitcher({ setLocale, locale }: Readonly<LocaleContextProps>) {
     const intl = useIntl();

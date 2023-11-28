@@ -1,7 +1,7 @@
-import { MaterialIcon } from '@components/MaterialIcon.tsx';
+import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
 import { Link, MakeLinkOptions } from '@tanstack/react-router';
 import { FormattedMessage } from 'react-intl';
-import { LocaleKey } from '../i18n/ReactIntlProvider.tsx';
+import { LocaleKey } from '../../i18n/ReactIntlProvider.tsx';
 import styles from './IconLink.module.scss';
 
 interface IconLinkProps {
