@@ -1,21 +1,22 @@
 {
+    "account.menu": "Account",
     "course.menu": "Course",
     "curriculum": "Curriculum",
     "curriculum.menu": "Curriculum",
     "language.english": "English",
     "language.french": "French",
     "language.german": "German",
+    "logout.menu": "Logout",
     "module.menu": "Module",
-    "students.menu": "Students",
-    "account.menu": "Account",
     "my-course.menu": "My Courses",
-    "onboarding.menu": "Onboarding",
     "my-curriculum.menu": "My Curriculum",
+    "onboarding.menu": "Onboarding",
     "onboarding.title": "Overview",
     "startYear": "Start Year",
     "student.basicStudies": "Basic studies",
     "student.focusStudies": "Focus studies",
     "student.noModulesFound": "No modules found",
     "student.specialisedStudies": "Specialised studies",
-    "user-management.menu": "User"
+    "students.menu": "Students",
+    "user-management.menu": "Usermanagement"
 }

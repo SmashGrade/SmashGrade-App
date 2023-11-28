@@ -17,7 +17,7 @@
         "check-typescript": "tsc --noEmit",
         "preview": "concurrently \"npm:json-db\" \"vite preview\"",
         "prepare": "husky install",
-        "json-db": "cd api && npm run start",
+        "json-db": "cd api && npm run start:dev",
         "dev-db": "concurrently \"npm:json-db\" \"npm:dev\"",
         "start": "json-server api/db.json --static ./dist",
         "extract-de": "formatjs extract \"src/**/*.{ts,tsx}\" --ignore=\"**/*.d.ts\" --id-interpolation-pattern \"[sha512: contenthash:base64:6]\" --out-file \"src/i18n/lang/de.json\"",
@@ -36,6 +36,9 @@
         ]
     },
     "dependencies": {
+        "@azure/msal-browser": "^3.5.0",
+        "@azure/msal-common": "^14.4.0",
+        "@azure/msal-react": "^2.0.7",
         "@tanstack/react-query": "^5.0.0",
         "@tanstack/react-query-devtools": "^5.0.3",
         "@tanstack/react-router": "^0.0.1-beta.207",
