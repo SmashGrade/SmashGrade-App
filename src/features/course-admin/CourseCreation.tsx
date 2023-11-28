@@ -14,77 +14,87 @@ import styles from './CourseCreation.module.scss';
 interface CourseResponse {
     id: number;
     description: string;
+    version: number;
     number: string;
-    teachers: string[];
-    evaluationType: 'E' | 'M' | 'P';
+    versions: VersionResponse[];
+    modules: ModuleResponse[];
+    exams: ExamResponse[];
+    teachers: TeacherResponse[];
 }
 
-interface ModulesResponse {
+export interface ModuleResponse {
     id: number;
+    version: string;
     description: string;
     number: string;
-    status: string;
-    bewertungstyp_beschreibung: string;
-    bewertungstyp_bezeichnung: string;
-    courses: CourseResponse[];
+    isActiv: boolean;
+}
+
+export interface TeacherResponse {
+    id: number;
+    name: string;
 }
 
 export interface ExamResponse {
     id: number;
-    designation: string;
+    description: string;
     weight: number;
     type: string;
-    course: CourseResponse[];
 }
 
-export interface EmptyExam {
-    id: number;
-    designation: string;
-    weight: number;
-    type: string;
-    course: null;
+export interface CourseFilter {
+    modules: ModuleResponse[];
+    teachers: TeacherResponse[];
 }
 
-interface TeacherResponse {
-    id: number;
-    classstartyear: string;
-    name: string;
-    email: string;
-    role: 'Student' | 'Teacher' | 'CourseAdmin';
+export interface VersionResponse {
+    version: number;
 }
 
+// TODO: change Path getCourseByID to course
 async function getCourse(courseId: number): Promise<SelectProps['value']> {
-    const { data } = await axios.get<CourseResponse>(`${import.meta.env.VITE_BACKEND_API_URL}/courses/${courseId}`);
+    const { data } = await axios.get<CourseResponse>(
+        `${import.meta.env.VITE_BACKEND_API_URL}/getCourseByID/${courseId}`
+    );
     return {
         description: data.description,
+        version: data.version,
         number: data.number,
+        versions: data.versions,
+        modules: data.modules,
+        exams: data.exams,
         teachers: data.teachers,
     };
 }
 
 async function getModules(): Promise<SelectProps['options']> {
-    const { data } = await axios.get<ModulesResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/modules`);
-    // Add the course data teachers to the options array
-    return data.map((module) => ({
+    const { data } = await axios.get<CourseFilter[]>(`${import.meta.env.VITE_BACKEND_API_URL}/coursefilter`);
+    const modules = data.length > 0 ? data[0].modules : [];
+    return modules.map((module: ModuleResponse) => ({
         label: module.description,
         value: module.id,
     }));
 }
 
-// TODO: Transformation direkt im API Request machen, here to?
 async function getTeachers(): Promise<SelectProps['options']> {
-    const { data } = await axios.get<TeacherResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/users`);
-    return data.map((teacher) => ({
+    const { data } = await axios.get<CourseFilter[]>(`${import.meta.env.VITE_BACKEND_API_URL}/coursefilter`);
+    const teachers = data.length > 0 ? data[0].teachers : [];
+    return teachers.map((teacher: TeacherResponse) => ({
         label: teacher.name,
-        value: teacher.name,
+        value: teacher.id,
     }));
 }
 
-async function getExams(): Promise<ExamResponse[] | null> {
-    const { data } = await axios.get<ExamResponse[] | null>(`${import.meta.env.VITE_BACKEND_API_URL}/exams`);
-    return data;
+async function getExams(courseId: number): Promise<ExamResponse[]> {
+    const course: CourseResponse = (await getCourse(courseId)) as CourseResponse;
+    return course.exams;
 }
 
+// TODO: Not working
+async function getVersions(courseId: number): Promise<VersionResponse[]> {
+    const course: CourseResponse = (await getCourse(courseId)) as CourseResponse;
+    return course.versions;
+}
 // Dropdown with the Version
 const handleVersionDropChange = (value: string) => {
     //console.log(value);
@@ -95,7 +105,7 @@ const handleVersionDropChange = (value: string) => {
 export default function CourseCreation() {
     const [courseForm] = Form.useForm();
     const [examForm] = Form.useForm();
-    const [examData, setExams] = useState<(ExamResponse | EmptyExam)[]>([]);
+    const [examData, setExams] = useState<ExamResponse[]>([]);
     const [totalWeight, setTotalWeight] = useState(0);
     const params = useParams<typeof courseEditRoute>({ from: courseEditRoute.id });
     const courseId = params.courseId ?? 1;
@@ -131,9 +141,18 @@ export default function CourseCreation() {
         isLoading: isExamLoading,
         error: isExamError,
         data: fetchedExamData,
-    } = useQuery({
+    } = useQuery<ExamResponse[]>({
         queryKey: ['exams'],
-        queryFn: getExams,
+        queryFn: () => getExams(courseId),
+    });
+
+    const {
+        isLoading: isVersionLoading,
+        error: isVersionError,
+        data: versionData,
+    } = useQuery({
+        queryKey: ['versions'],
+        queryFn: () => getVersions(courseId),
     });
 
     // Use an effect to update the state when new exam data is fetched
@@ -170,6 +189,9 @@ export default function CourseCreation() {
     if (isExamError) return <div>Error when loading exams</div>;
     if (isExamLoading) return <Spin />;
 
+    if (isVersionError) return <div>Error when loading versions</div>;
+    if (isVersionLoading) return <Spin />;
+
     // temp id for the empty exam data
     let idCounter: number = examData.reduce((maxId, exam) => Math.max(maxId, exam.id) + 1, 0);
 
@@ -179,13 +201,12 @@ export default function CourseCreation() {
             .validateFields()
             .then(() => {
                 // Create an empty exam data object
-                const emptyExam: EmptyExam = {
+                const emptyExam: ExamResponse = {
                     // Add temporary id to rerender the list on delete
                     id: idCounter++,
-                    designation: '',
+                    description: '',
                     weight: 0,
                     type: '',
-                    course: null,
                 };
 
                 setExams([...examData, emptyExam]);
@@ -220,14 +241,10 @@ export default function CourseCreation() {
             <div className={styles.flexEnd}>
                 <Space wrap>
                     <Select
-                        //defaultValue={''}
+                        // TODO: Not working -> defaultValue={courseData?.version}
                         className={styles.version}
                         onChange={handleVersionDropChange}
-                        options={[
-                            { value: 'V1', label: 'V1' },
-                            { value: 'V2', label: 'V2' },
-                            { value: 'V3', label: 'V3' },
-                        ]}
+                        options={versionData}
                     />
                 </Space>
             </div>
@@ -295,7 +312,7 @@ export default function CourseCreation() {
                                     mode={'multiple'}
                                     allowClear
                                     className={styles.spacerWidth}
-                                    defaultValue={courseData?.teachers}
+                                    defaultValue={courseData?.teachers.map((teacher) => teacher.id)}
                                     options={teacherData}
                                 />
                             </Space>
@@ -326,7 +343,7 @@ export default function CourseCreation() {
                                         mode={'multiple'}
                                         allowClear
                                         className={styles.spacerWidth}
-                                        defaultValue={moduleData}
+                                        defaultValue={courseData?.modules.map((module) => module.id)}
                                         options={moduleData}
                                     />
                                 </Space>
@@ -385,7 +402,6 @@ export default function CourseCreation() {
                                 </div>
 
                                 {examData.map((exam) => {
-                                    //const total = examData.reduce((acc, curr) => acc + curr.weight, 0);
                                     return (
                                         <ExamFormRow
                                             key={exam.id}

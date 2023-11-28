@@ -1,10 +1,10 @@
 import { DeleteOutlined } from '@ant-design/icons';
-import { EmptyExam, ExamResponse } from '@features/course-admin/CourseCreation.tsx';
+import { ExamResponse } from '@features/course-admin/CourseCreation.tsx';
 import { Button, Form, Input } from 'antd';
 import styles from './ExamFormRow.module.scss';
 
 interface ExamFormRowProps {
-    exam: ExamResponse | EmptyExam;
+    exam: ExamResponse;
     rowIndex: number;
     total: number;
     onWeightChange: (index: number, e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -22,8 +22,8 @@ export function ExamFormRow({ exam, rowIndex, total, onWeightChange, onDeleteCli
     return (
         <div className={styles.divTableRow} key={rowIndex}>
             <Form.Item
-                name={`examDesignation-${rowIndex}`}
-                initialValue={exam?.designation}
+                name={`examDescrption-${rowIndex}`}
+                initialValue={exam?.description}
                 className={styles.tableCell}
                 rules={[notNullValidator]}
             >
