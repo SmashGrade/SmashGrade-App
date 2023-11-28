@@ -28,6 +28,12 @@ $marginLeft: 10px;
     margin-right: $marginRight;
 }
 
+.flexEnd {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 .version {
     width: 100px;
 }

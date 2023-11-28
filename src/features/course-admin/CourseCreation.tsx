@@ -1,4 +1,4 @@
-import { AppstoreAddOutlined, BookOutlined, ContactsOutlined, SaveOutlined } from '@ant-design/icons';
+import { AppstoreAddOutlined, ContactsOutlined, SaveOutlined } from '@ant-design/icons';
 import { ExamFormRow } from '@features/course-admin/ExamFormRow.tsx';
 import { courseEditRoute } from '@pages/routes/routes.ts';
 import { useQuery } from '@tanstack/react-query';
@@ -217,33 +217,20 @@ export default function CourseCreation() {
     // Display
     return (
         <div className={styles.overallFlex}>
-            <h1 className={styles.courseTitle}>
-                <div>
-                    <span className={styles.marginRight}>
-                        <BookOutlined />
-                    </span>
-                    <FormattedMessage
-                        id={'course.Title'}
-                        defaultMessage={'Kurs'}
-                        description={'Übersicht Kurs Titel'}
+            <div className={styles.flexEnd}>
+                <Space wrap>
+                    <Select
+                        //defaultValue={''}
+                        className={styles.version}
+                        onChange={handleVersionDropChange}
+                        options={[
+                            { value: 'V1', label: 'V1' },
+                            { value: 'V2', label: 'V2' },
+                            { value: 'V3', label: 'V3' },
+                        ]}
                     />
-                </div>
-
-                <div>
-                    <Space wrap>
-                        <Select
-                            //defaultValue={''}
-                            className={styles.version}
-                            onChange={handleVersionDropChange}
-                            options={[
-                                { value: 'V1', label: 'V1' },
-                                { value: 'V2', label: 'V2' },
-                                { value: 'V3', label: 'V3' },
-                            ]}
-                        />
-                    </Space>
-                </div>
-            </h1>
+                </Space>
+            </div>
             <div className={styles.flexOverall}>
                 <div className={styles.flexOneThird}>
                     <Form
