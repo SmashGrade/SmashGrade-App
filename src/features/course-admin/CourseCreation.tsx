@@ -58,7 +58,7 @@ async function getCourse(courseId: number): Promise<SelectProps['value']> {
     );
     return {
         description: data.description,
-        version: data.version,
+        activeVersion: data.version,
         number: data.number,
         versions: data.versions,
         modules: data.modules,
@@ -90,11 +90,14 @@ async function getExams(courseId: number): Promise<ExamResponse[]> {
     return course.exams;
 }
 
-// TODO: Not working
-async function getVersions(courseId: number): Promise<VersionResponse[]> {
+/*async function getVersions(courseId: number): Promise<SelectProps['options']> {
     const course: CourseResponse = (await getCourse(courseId)) as CourseResponse;
-    return course.versions;
-}
+    return course.versions.map((version: VersionResponse) => ({
+        label: version,
+        value: version,
+    }));
+}*/
+
 // Dropdown with the Version
 const handleVersionDropChange = (value: string) => {
     //console.log(value);
@@ -146,14 +149,14 @@ export default function CourseCreation() {
         queryFn: () => getExams(courseId),
     });
 
-    const {
+    /*const {
         isLoading: isVersionLoading,
         error: isVersionError,
         data: versionData,
     } = useQuery({
         queryKey: ['versions'],
         queryFn: () => getVersions(courseId),
-    });
+    });*/
 
     // Use an effect to update the state when new exam data is fetched
     useEffect(() => {
@@ -189,8 +192,8 @@ export default function CourseCreation() {
     if (isExamError) return <div>Error when loading exams</div>;
     if (isExamLoading) return <Spin />;
 
-    if (isVersionError) return <div>Error when loading versions</div>;
-    if (isVersionLoading) return <Spin />;
+    /* if (isVersionError) return <div>Error when loading versions</div>;
+    if (isVersionLoading) return <Spin />;*/
 
     // temp id for the empty exam data
     let idCounter: number = examData.reduce((maxId, exam) => Math.max(maxId, exam.id) + 1, 0);
@@ -241,10 +244,24 @@ export default function CourseCreation() {
             <div className={styles.flexEnd}>
                 <Space wrap>
                     <Select
-                        // TODO: Not working -> defaultValue={courseData?.version}
+                        // TODO: defaultValue not working
                         className={styles.version}
                         onChange={handleVersionDropChange}
-                        options={versionData}
+                        defaultValue={courseData?.version?.toString()}
+                        options={[
+                            {
+                                value: '1',
+                                label: '1',
+                            },
+                            {
+                                value: '2',
+                                label: '2',
+                            },
+                            {
+                                value: '3',
+                                label: '3',
+                            },
+                        ]}
                     />
                 </Space>
             </div>
@@ -252,7 +269,6 @@ export default function CourseCreation() {
                 <div className={styles.flexOneThird}>
                     <Form
                         // mit <> type definieren welche daten das form enthalten soll
-                        // TODO: Intial values setzen anstelle von PLaceholder und für alle felder ein "name" property definieren
                         layout={'vertical'}
                         form={courseForm}
                         initialValues={courseData}
