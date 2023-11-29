@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 import { Button, Form, Input, Select, SelectProps, Space, Spin } from 'antd';
 import axios from 'axios';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import colors from '../../colors.module.scss';
 import layout from '../../layout.module.scss';
@@ -51,6 +51,31 @@ export interface VersionResponse {
     version: number;
 }
 
+/*
+interface CourseFormData {
+    description: string;
+    number: string;
+    modules: ModuleResponse[]; // Array of module references
+    teachers: TeacherResponse[]; // Array of teacher references
+    exams: ExamCreateData[];
+}
+
+interface FormDataPostRequest {
+    description: string;
+    number: string;
+    moduleRef: number[]; // Array of module references
+    teacherRef: number[]; // Array of teacher references
+    exams: ExamCreateData[];
+}
+
+
+interface ExamCreateData {
+    id: number;
+    description: string;
+    weight: number;
+    type: string;
+}
+*/
 // TODO: change Path getCourseByID to course
 async function getCourse(courseId: number): Promise<SelectProps['value']> {
     const { data } = await axios.get<CourseResponse>(
@@ -97,6 +122,16 @@ async function getExams(courseId: number): Promise<ExamResponse[]> {
         value: version,
     }));
 }*/
+
+// Todo Post Request
+/* async function createCourse(courseData: CourseCreateData): Promise<void> {
+    try {
+        await axios.post(`${import.meta.env.VITE_BACKEND_API_URL}/courses`, courseData);
+    } catch (error) {
+        console.error('Error creating course:', error);
+        throw error;
+    }
+} */
 
 // Dropdown with the Version
 const handleVersionDropChange = (value: string) => {
@@ -158,18 +193,39 @@ export default function CourseCreation() {
         queryFn: () => getVersions(courseId),
     });*/
 
+    // TODO: onFormFinish
+    /*
+    const onFormFinish = useCallback(() => {
+        //values;
+        onst formValues: CourseFormData = courseForm.getFieldsValue();
+
+        console.log('API formValues:', formValues.modules);
+
+        // Extract module and teacher IDs
+        const moduleIds: number[] = formValues.modules.map((module: { id: number }) => module.id);
+        const teacherIds: number[] = formValues.teachers.map((teacher: { id: number }) => teacher.id);
+        console.log(teacherIds);
+
+        // Create the payload for your API request
+        const payload: FormDataPostRequest = {
+            description: formValues.description,
+            number: formValues.number,
+            moduleRef: moduleIds,
+            teacherRef: teacherIds,
+            exams: formValues.exams, // Include your exams as needed
+        };
+
+        // Log the payload for demonstration (you can handle the data as needed)
+        console.log('API Payload:', payload);
+        // Now you can send the formValues to your API or perform any other actions
+    }, [courseForm]);*/
+
     // Use an effect to update the state when new exam data is fetched
     useEffect(() => {
         if (fetchedExamData) {
             setExams(fetchedExamData);
         }
     }, [fetchedExamData]);
-
-    // TODO: onFormFinish
-    const onFormFinish = useCallback((values: CourseResponse) => {
-        values;
-        //console.log('form finish', values);
-    }, []);
 
     // Update set total weight when new exam data is fetched
     useEffect(() => {
@@ -272,7 +328,7 @@ export default function CourseCreation() {
                         layout={'vertical'}
                         form={courseForm}
                         initialValues={courseData}
-                        onFinish={onFormFinish}
+                        /*onFinish={onFormFinish}*/
                     >
                         <Form.Item
                             name={'description'}
@@ -463,7 +519,10 @@ export default function CourseCreation() {
                     type={'primary'}
                     icon={<SaveOutlined />}
                     className={styles.buttons}
-                    onClick={() => courseForm.submit()}
+                    onClick={() => {
+                        courseForm.submit();
+                        examForm.submit();
+                    }}
                 >
                     <FormattedMessage
                         id={'course.ButtonSave'}
