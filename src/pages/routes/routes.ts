@@ -45,11 +45,11 @@ export const studentModuleRoute = new Route({
     component: StudentModulePage,
 });
 
-export const studentDetailRoute = new Route({
+export const studentCourseRoute = new Route({
     getParentRoute: () => rootRoute,
     path: 'student/$id',
     parseParams: (params) => ({ id: z.number().int().parse(parseInt(params.id)) }),
-    component: lazyRouteComponent(() => import('@pages/StudentPage.tsx')),
+    component: lazyRouteComponent(() => import('@pages/StudentCourseDetailPage.tsx')),
 });
 
 export const myCourseRoute = new Route({
@@ -63,6 +63,7 @@ const routeTree = rootRoute.addChildren([
     onboardingRoute,
     curriculumRoute,
     studentModuleRoute,
+    studentCourseRoute,
     studentDetailRoute,
     settingsRoute,
     studentRoute.addChildren([studentIndexRoute]),
