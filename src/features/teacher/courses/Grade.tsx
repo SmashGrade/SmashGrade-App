@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Rating from '@features/student/modules/Rating.tsx';
 import GradeCard from '@features/teacher/courses/GradeCard.tsx';
@@ -11,7 +11,27 @@ interface grade {
     rating: number;
 }
 
+function getWindowHeight() {
+    return window.innerHeight;
+}
+
+function useWindowHeight() {
+    const [windowHeight, setWindowHeight] = useState(getWindowHeight());
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowHeight(getWindowHeight());
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    return windowHeight;
+}
+
 export default function Grade() {
+    const calcHeight = useWindowHeight() * 0.25;
     const [grades, setGrades] = useState<grade[]>([
         {
             studentName: 'John Doe',
@@ -27,11 +47,18 @@ export default function Grade() {
 
     return (
         <div className={`${styles.background} ${styles.setWidth}`}>
-            {grades.map((grade, index) => {
-                return (
-                    <GradeCard studentName={grade.studentName} field={grade.field} rating={grade.rating} key={index} />
-                );
-            })}
+            <div style={{ overflowY: 'auto', height: grades.length > 6 ? calcHeight : 'auto' }}>
+                {grades.map((grade, index) => {
+                    return (
+                        <GradeCard
+                            studentName={grade.studentName}
+                            field={grade.field}
+                            rating={grade.rating}
+                            key={index}
+                        />
+                    );
+                })}
+            </div>
             <Divider className={styles.divider} />
             <div className={`${styles.flexRow} ${styles.baseInsetsLeftRight}`}>
                 <h3>Durchschnitt:</h3>
