@@ -1,11 +1,9 @@
 import { AppstoreAddOutlined, ContactsOutlined, SaveOutlined } from '@ant-design/icons';
 import { ExamFormRow } from '@features/course-admin/ExamFormRow.tsx';
-import { courseEditRoute } from '@pages/routes/routes.ts';
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from '@tanstack/react-router';
 import { Button, Form, Input, Select, SelectProps, Space, Spin } from 'antd';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import colors from '../../colors.module.scss';
 import layout from '../../layout.module.scss';
@@ -51,7 +49,6 @@ export interface VersionResponse {
     version: number;
 }
 
-/*
 interface CourseFormData {
     description: string;
     number: string;
@@ -68,14 +65,13 @@ interface FormDataPostRequest {
     exams: ExamCreateData[];
 }
 
-
 interface ExamCreateData {
     id: number;
     description: string;
     weight: number;
     type: string;
 }
-*/
+
 // TODO: change Path getCourseByID to course
 async function getCourse(courseId: number): Promise<SelectProps['value']> {
     const { data } = await axios.get<CourseResponse>(
@@ -135,7 +131,7 @@ async function getExams(courseId: number): Promise<ExamResponse[]> {
 
 // Dropdown with the Version
 const handleVersionDropChange = (value: string) => {
-    //console.log(value);
+    //console.info(value);
     value;
     // TODO: Neuer kurs vom backend fetchen basierend auf der version
 };
@@ -145,8 +141,8 @@ export default function CourseCreation() {
     const [examForm] = Form.useForm();
     const [examData, setExams] = useState<ExamResponse[]>([]);
     const [totalWeight, setTotalWeight] = useState(0);
-    const params = useParams<typeof courseEditRoute>({ from: courseEditRoute.id });
-    const courseId = params.courseId ?? 1;
+    // const params = useParams<typeof courseEditRoute>({ from: courseEditRoute.id });
+    const courseId = 1;
 
     const {
         isLoading: isCourseLoading,
@@ -194,17 +190,13 @@ export default function CourseCreation() {
     });*/
 
     // TODO: onFormFinish
-    /*
-    const onFormFinish = useCallback(() => {
-        //values;
-        onst formValues: CourseFormData = courseForm.getFieldsValue();
-
-        console.log('API formValues:', formValues.modules);
+    const onFormFinish = useCallback((formValues: CourseFormData) => {
+        console.info('formValues:', formValues);
 
         // Extract module and teacher IDs
         const moduleIds: number[] = formValues.modules.map((module: { id: number }) => module.id);
         const teacherIds: number[] = formValues.teachers.map((teacher: { id: number }) => teacher.id);
-        console.log(teacherIds);
+        console.info(teacherIds);
 
         // Create the payload for your API request
         const payload: FormDataPostRequest = {
@@ -216,9 +208,9 @@ export default function CourseCreation() {
         };
 
         // Log the payload for demonstration (you can handle the data as needed)
-        console.log('API Payload:', payload);
+        console.info('API Payload:', payload);
         // Now you can send the formValues to your API or perform any other actions
-    }, [courseForm]);*/
+    }, []);
 
     // Use an effect to update the state when new exam data is fetched
     useEffect(() => {
@@ -278,7 +270,7 @@ export default function CourseCreation() {
 
     const handleDeleteField = (id: number) => {
         setExams((updatedExamData) => {
-            //console.log(updatedExamData);
+            //console.info(updatedExamData);
             return updatedExamData.filter((exam) => exam.id !== id);
         });
     };
@@ -323,12 +315,11 @@ export default function CourseCreation() {
             </div>
             <div className={styles.flexOverall}>
                 <div className={styles.flexOneThird}>
-                    <Form
-                        // mit <> type definieren welche daten das form enthalten soll
+                    <Form<CourseFormData>
                         layout={'vertical'}
                         form={courseForm}
                         initialValues={courseData}
-                        /*onFinish={onFormFinish}*/
+                        onFinish={onFormFinish}
                     >
                         <Form.Item
                             name={'description'}
