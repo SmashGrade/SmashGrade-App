@@ -1,0 +1,26 @@
+@import '../../../colors.module.scss';
+
+.examContainer {
+    display: flex;
+    justify-content: space-between;
+    background-color: $colorSecondary;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border-radius: 12px;
+}
+
+.examInputContainer {
+    display: flex;
+    padding: 5px 0;
+    width: 50px;
+}
+
+.examLabelContainer {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.examInput {
+    text-align: center !important;
+}
