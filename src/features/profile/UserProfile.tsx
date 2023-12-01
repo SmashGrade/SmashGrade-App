@@ -1,9 +1,8 @@
 import { InteractionRequiredAuthError, IPublicClientApplication } from '@azure/msal-browser';
 import { useMsal } from '@azure/msal-react';
 import styles from '@components/ui-elements/IconLink.module.scss';
-import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
 import { useQuery } from '@tanstack/react-query';
-import { Spin } from 'antd';
+import { Avatar, Spin } from 'antd';
 import axios, { AxiosError } from 'axios';
 import { loginRequest, msGraphEndpoints } from '../../config/authConfig.ts';
 
@@ -69,7 +68,7 @@ export function UserProfile() {
     const { instance } = useMsal();
     const {
         isLoading,
-        error,
+        error: userProfileError,
         data: userProfile,
     } = useQuery({
         queryKey: ['userProfile'],
@@ -84,16 +83,19 @@ export function UserProfile() {
         queryFn: () => getUserPicture(instance),
     });
 
-    if (isLoading || pictureLoading) return <Spin />;
-    if (error ?? pictureError) return <div>{error?.message}</div>;
+    if (isLoading || pictureLoading || userProfile === undefined) return <Spin />;
+    if (pictureError) return <div>{pictureError.message}</div>;
+    if (userProfileError) return <div>{userProfileError.message}</div>;
+
+    const nameParts = userProfile.displayName.split(' ');
+    const initials = `${nameParts[0][0]}${nameParts[nameParts.length - 1][0]}`;
 
     return (
         <div className={styles.menuItemIconAbove}>
-            {profilePicture ? (
-                <img src={profilePicture} alt={'User Profile'} width={40} height={40} />
-            ) : (
-                <MaterialIcon icon={'account_circle'} size={'large'} />
-            )}
+            <Avatar src={profilePicture} shape={'circle'} size={40} alt={'User Profile'}>
+                {/*Initials are a fallback for profile picture (for example if no picture is found)*/}
+                {initials}
+            </Avatar>
             {userProfile?.displayName}
         </div>
     );
