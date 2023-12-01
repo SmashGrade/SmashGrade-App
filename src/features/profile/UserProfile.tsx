@@ -28,6 +28,7 @@ const getAccessToken = async (instance: IPublicClientApplication) => {
             });
             return accessToken;
         }
+        console.error(error);
     }
 };
 
