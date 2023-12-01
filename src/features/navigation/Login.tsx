@@ -15,7 +15,7 @@ export function Login() {
 
     useEffect(() => {
         if (error instanceof InteractionRequiredAuthError) {
-            login(InteractionType.Popup, loginRequest)
+            login(InteractionType.Redirect, loginRequest)
                 .then((response) => {
                     if (!instance.getActiveAccount() && response?.account) {
                         instance.setActiveAccount(response.account);
@@ -41,14 +41,5 @@ export function Login() {
         );
     }
 
-    return (
-        <div className={styles.loginContainer}>
-            <Alert
-                message={'Login in Progress'}
-                description={`You need to complete the Login PopUp before you can access the Site`}
-                type={'info'}
-                closable
-            />
-        </div>
-    );
+    return null;
 }
