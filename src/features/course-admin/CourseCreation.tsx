@@ -1,138 +1,34 @@
 import { AppstoreAddOutlined, ContactsOutlined, SaveOutlined } from '@ant-design/icons';
+import { getCourse, getCourseFormFilters, getExams } from '@features/course-admin/courseCreationApi.ts';
 import { ExamFormRow } from '@features/course-admin/ExamFormRow.tsx';
+import {
+    CourseResponse,
+    ExamCreateData,
+    ExamResponse,
+    FormDataPostRequest,
+} from '@features/course-admin/interfaces/CourseData.ts';
+import { courseEditRoute } from '@pages/routes/routes.ts';
+
 import { useQuery } from '@tanstack/react-query';
-import { Button, Form, Input, Select, SelectProps, Space, Spin } from 'antd';
-import axios from 'axios';
+import { useParams } from '@tanstack/react-router';
+import { Button, Form, Input, Select, Space, Spin } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import colors from '../../colors.module.scss';
 import layout from '../../layout.module.scss';
 import styles from './CourseCreation.module.scss';
 
-interface CourseResponse {
-    id: number;
-    description: string;
-    version: number;
-    number: string;
-    versions: VersionResponse[];
-    modules: ModuleResponse[];
-    exams: ExamResponse[];
-    teachers: TeacherResponse[];
-}
-
-export interface ModuleResponse {
-    id: number;
-    version: string;
-    description: string;
-    number: string;
-    isActiv: boolean;
-}
-
-export interface TeacherResponse {
-    id: number;
-    name: string;
-}
-
-export interface ExamResponse {
-    id: number;
-    description: string;
-    weight: number;
-    type: string;
-}
-
-export interface CourseFilter {
-    modules: ModuleResponse[];
-    teachers: TeacherResponse[];
-}
-
-export interface VersionResponse {
-    version: number;
-}
-
 interface CourseFormData {
     description: string;
     number: string;
-    modules: ModuleResponse[]; // Array of module references
-    teachers: TeacherResponse[]; // Array of teacher references
+    modules: number[]; // Array of module ids
+    teachers: number[]; // Array of teacher ids
     exams: ExamCreateData[];
 }
-
-interface FormDataPostRequest {
-    description: string;
-    number: string;
-    moduleRef: number[]; // Array of module references
-    teacherRef: number[]; // Array of teacher references
-    exams: ExamCreateData[];
-}
-
-interface ExamCreateData {
-    id: number;
-    description: string;
-    weight: number;
-    type: string;
-}
-
-// TODO: change Path getCourseByID to course
-async function getCourse(courseId: number): Promise<SelectProps['value']> {
-    const { data } = await axios.get<CourseResponse>(
-        `${import.meta.env.VITE_BACKEND_API_URL}/getCourseByID/${courseId}`
-    );
-    return {
-        description: data.description,
-        activeVersion: data.version,
-        number: data.number,
-        versions: data.versions,
-        modules: data.modules,
-        exams: data.exams,
-        teachers: data.teachers,
-    };
-}
-
-async function getModules(): Promise<SelectProps['options']> {
-    const { data } = await axios.get<CourseFilter[]>(`${import.meta.env.VITE_BACKEND_API_URL}/coursefilter`);
-    const modules = data.length > 0 ? data[0].modules : [];
-    return modules.map((module: ModuleResponse) => ({
-        label: module.description,
-        value: module.id,
-    }));
-}
-
-async function getTeachers(): Promise<SelectProps['options']> {
-    const { data } = await axios.get<CourseFilter[]>(`${import.meta.env.VITE_BACKEND_API_URL}/coursefilter`);
-    const teachers = data.length > 0 ? data[0].teachers : [];
-    return teachers.map((teacher: TeacherResponse) => ({
-        label: teacher.name,
-        value: teacher.id,
-    }));
-}
-
-async function getExams(courseId: number): Promise<ExamResponse[]> {
-    const course: CourseResponse = (await getCourse(courseId)) as CourseResponse;
-    return course.exams;
-}
-
-/*async function getVersions(courseId: number): Promise<SelectProps['options']> {
-    const course: CourseResponse = (await getCourse(courseId)) as CourseResponse;
-    return course.versions.map((version: VersionResponse) => ({
-        label: version,
-        value: version,
-    }));
-}*/
-
-// Todo Post Request
-/* async function createCourse(courseData: CourseCreateData): Promise<void> {
-    try {
-        await axios.post(`${import.meta.env.VITE_BACKEND_API_URL}/courses`, courseData);
-    } catch (error) {
-        console.error('Error creating course:', error);
-        throw error;
-    }
-} */
 
 // Dropdown with the Version
 const handleVersionDropChange = (value: string) => {
-    //console.info(value);
-    value;
+    console.info(value);
     // TODO: Neuer kurs vom backend fetchen basierend auf der version
 };
 
@@ -141,8 +37,8 @@ export default function CourseCreation() {
     const [examForm] = Form.useForm();
     const [examData, setExams] = useState<ExamResponse[]>([]);
     const [totalWeight, setTotalWeight] = useState(0);
-    // const params = useParams<typeof courseEditRoute>({ from: courseEditRoute.id });
-    const courseId = 1;
+    const params = useParams({ from: courseEditRoute.id });
+    const courseId = params.courseId ?? 1;
 
     const {
         isLoading: isCourseLoading,
@@ -154,21 +50,12 @@ export default function CourseCreation() {
     });
 
     const {
-        isLoading: isModuleLoading,
-        error: isModuleError,
-        data: moduleData,
+        isLoading: isCourseFormFilterLoading,
+        error: courseFormFilterError,
+        data: courseFormFilterData,
     } = useQuery({
-        queryKey: ['modules'],
-        queryFn: getModules,
-    });
-
-    const {
-        isLoading: isTeacherLoading,
-        error: isTeacherError,
-        data: teacherData,
-    } = useQuery({
-        queryKey: ['teachers'],
-        queryFn: getTeachers,
+        queryKey: ['formFilters'],
+        queryFn: getCourseFormFilters,
     });
 
     const {
@@ -194,8 +81,8 @@ export default function CourseCreation() {
         console.info('formValues:', formValues);
 
         // Extract module and teacher IDs
-        const moduleIds: number[] = formValues.modules.map((module: { id: number }) => module.id);
-        const teacherIds: number[] = formValues.teachers.map((teacher: { id: number }) => teacher.id);
+        const moduleIds: number[] = formValues.modules;
+        const teacherIds: number[] = formValues.teachers;
         console.info(teacherIds);
 
         // Create the payload for your API request
@@ -227,21 +114,6 @@ export default function CourseCreation() {
             setTotalWeight(initialTotalWeight);
         }
     }, [fetchedExamData]);
-
-    if (isCourseError) return <div>Error when loading courses</div>;
-    if (isCourseLoading) return <Spin />;
-
-    if (isModuleError) return <div>Error when loading modules</div>;
-    if (isModuleLoading) return <Spin />;
-
-    if (isTeacherError) return <div>Error when loading teachers</div>;
-    if (isTeacherLoading) return <Spin />;
-
-    if (isExamError) return <div>Error when loading exams</div>;
-    if (isExamLoading) return <Spin />;
-
-    /* if (isVersionError) return <div>Error when loading versions</div>;
-    if (isVersionLoading) return <Spin />;*/
 
     // temp id for the empty exam data
     let idCounter: number = examData.reduce((maxId, exam) => Math.max(maxId, exam.id) + 1, 0);
@@ -285,17 +157,42 @@ export default function CourseCreation() {
         setExams(updatedExams);
         setTotalWeight(newTotal);
     };
+    console.info('courseData', courseData);
 
-    // Display
+    const initialData: Partial<CourseFormData> = {
+        description: courseData?.description,
+        number: courseData?.number,
+        teachers: courseData?.teachers.map((teacher) => teacher.id),
+        modules: courseData?.modules.map((module) => module.id),
+    };
+
+    console.log('initialData', initialData);
+
+    // Display loading and error states
+
+    if (isCourseError) return <div>Error when loading courses</div>;
+    if (isCourseLoading) return <Spin />;
+
+    if (courseFormFilterError) return <div>Error when loading filters</div>;
+    if (isCourseFormFilterLoading) return <Spin />;
+
+    if (isExamError) return <div>Error when loading exams</div>;
+    if (isExamLoading) return <Spin />;
+
+    /* if (isVersionError) return <div>Error when loading versions</div>;
+    if (isVersionLoading) return <Spin />;*/
+
+    console.log('module values:', courseFormFilterData?.modules, 'init', initialData.modules);
+
+    // Display the form
     return (
         <div className={styles.overallFlex}>
             <div className={styles.flexEnd}>
                 <Space wrap>
                     <Select
-                        // TODO: defaultValue not working
                         className={styles.version}
                         onChange={handleVersionDropChange}
-                        defaultValue={courseData?.version?.toString()}
+                        defaultValue={courseData?.activeVersion?.toString()}
                         options={[
                             {
                                 value: '1',
@@ -318,7 +215,7 @@ export default function CourseCreation() {
                     <Form<CourseFormData>
                         layout={'vertical'}
                         form={courseForm}
-                        initialValues={courseData}
+                        initialValues={initialData}
                         onFinish={onFormFinish}
                     >
                         <Form.Item
@@ -370,15 +267,12 @@ export default function CourseCreation() {
                                 </div>
                             }
                         >
-                            <Space className={styles.spacerWidth} direction={'vertical'}>
-                                <Select
-                                    mode={'multiple'}
-                                    allowClear
-                                    className={styles.spacerWidth}
-                                    defaultValue={courseData?.teachers.map((teacher) => teacher.id)}
-                                    options={teacherData}
-                                />
-                            </Space>
+                            <Select
+                                mode={'multiple'}
+                                allowClear
+                                className={styles.spacerWidth}
+                                options={courseFormFilterData?.teachers}
+                            />
                         </Form.Item>
 
                         <div
@@ -401,15 +295,14 @@ export default function CourseCreation() {
                                     </p>
                                 }
                             >
-                                <Space className={styles.spacerWidth} direction={'vertical'}>
-                                    <Select
-                                        mode={'multiple'}
-                                        allowClear
-                                        className={styles.spacerWidth}
-                                        defaultValue={courseData?.modules.map((module) => module.id)}
-                                        options={moduleData}
-                                    />
-                                </Space>
+                                {/*<Space className={styles.spacerWidth} direction={'vertical'}>*/}
+                                <Select
+                                    mode={'multiple'}
+                                    allowClear
+                                    className={styles.spacerWidth}
+                                    options={courseFormFilterData?.modules}
+                                />
+                                {/*</Space>*/}
                             </Form.Item>
                         </div>
                     </Form>

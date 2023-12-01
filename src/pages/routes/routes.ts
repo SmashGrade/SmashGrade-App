@@ -1,4 +1,4 @@
-import CourseCreation from '@features/course-admin/CourseCreation.tsx';
+import CourseCreationPage from '@pages/CourseCreationPage.tsx';
 import StudentModulePage from '@pages/ModulesPage.tsx';
 import { courseDetailRoute, courseIndexRoute, newCourseRoute } from '@pages/routes/courseRoutes.ts';
 import { lazyRouteComponent, RootRoute, Route, Router, RouterMeta } from '@tanstack/react-router';
@@ -50,7 +50,7 @@ export const courseEditRoute = new Route({
         courseId: z.number().parse(Number(params.courseId)),
     }),
     stringifyParams: ({ courseId }) => ({ courseId: `${courseId}` }),
-    component: CourseCreation,
+    component: CourseCreationPage,
 });
 
 const routeTree = rootRoute.addChildren([
