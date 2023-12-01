@@ -1,11 +1,38 @@
 {
-    "startYears": [{ "year": 2022 }, { "year": 2023 }, { "year": 2024 }, { "year": 2025 }, { "year": 2026 }],
-    "curriculums": [
-        { "id": 1, "title": "1. Lehrgang", "year": 2023 },
-        { "id": 2, "title": "2. Lehrgang", "year": 2023 },
-        { "id": 3, "title": "3. Lehrgang", "year": 2024 },
-        { "id": 4, "title": "4. Lehrgang", "year": 2026 }
-    ],
+    "onboardingFilter": {
+        "curriculumTypes": [
+            {
+                "id": 1,
+                "description": "Vollzeit",
+                "durationYears": 3
+            },
+            {
+                "id": 2,
+                "description": "Berufsbegleitend",
+                "durationYears": 3
+            }
+        ],
+        "curriculums": [
+            {
+                "id": 1,
+                "focus": "Softwareentwicklung",
+                "field": "Informatik",
+                "curriculumType": "Berufsbegleitend",
+                "isActiv": true,
+                "startDate": "2023-11-29T17:13:23.819Z",
+                "endDate": "2023-11-29T17:13:23.819Z"
+            },
+            {
+                "id": 2,
+                "focus": "Gebäudeautomation",
+                "field": "Elektrotechnik",
+                "curriculumType": "Berufsbegleitend",
+                "isActiv": true,
+                "startDate": "2023-11-29T17:13:23.819Z",
+                "endDate": "2023-11-29T17:13:23.819Z"
+            }
+        ]
+    },
     "courses": [
         {
             "id": 1,
