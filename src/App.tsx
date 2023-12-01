@@ -19,7 +19,7 @@ function App() {
 
     useEffect(() => {
         if (!instance.getActiveAccount() && accounts.length === 1) {
-            if (accounts[0].tenantId != import.meta.env.VITE_AUTH_AUTHORITY_ID) {
+            if (accounts[0].tenantId !== import.meta.env.VITE_AUTH_AUTHORITY_ID) {
                 console.error('The tenant ID of the account does not match the tenant ID of the application.');
                 throw new Error('The tenant ID of the account does not match the tenant ID of the application.');
             }
