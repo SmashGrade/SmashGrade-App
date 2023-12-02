@@ -149,7 +149,7 @@
                     "version": 0,
                     "description": "Mathematik",
                     "number": "3.112",
-                    "isActive": true,
+                    "isActivee": true,
                     "grade": 5.5,
                     "studyStage": {
                         "id": 1,
@@ -193,7 +193,7 @@
                     "version": 0,
                     "description": "Programmierung",
                     "number": "3.112",
-                    "isActive": true,
+                    "isActivee": true,
                     "grade": 5.5,
                     "studyStage": {
                         "id": 2,
@@ -225,7 +225,7 @@
                     "version": 0,
                     "description": "Datentechnik",
                     "number": "3.112",
-                    "isActive": true,
+                    "isActivee": true,
                     "grade": 0,
                     "studyStage": {
                         "id": 2,
@@ -395,7 +395,7 @@
                     "version": 0,
                     "description": "Schnittstellen-Technologien",
                     "number": "string",
-                    "isActiv": true
+                    "isActive": true
                 }
             ],
             "exams": [
@@ -420,7 +420,7 @@
             ]
         }
     ],
-    "coursefilter": [
+    "coursefilter":
         {
             "modules": [
                 {
@@ -428,21 +428,21 @@
                     "version": 0,
                     "description": "Schnittstellen-Technologien",
                     "number": "string",
-                    "isActiv": true
+                    "isActive": true
                 },
                 {
                     "id": 1,
                     "version": 0,
                     "description": "Datenbanken",
                     "number": "string",
-                    "isActiv": false
+                    "isActive": false
                 },
                 {
                     "id": 2,
                     "version": 0,
                     "description": "Projektmanagement",
                     "number": "string",
-                    "isActiv": true
+                    "isActive": true
                 }
             ],
             "teachers": [
@@ -453,8 +453,12 @@
                 {
                     "id": 2,
                     "name": "Kurt Munter"
+                },
+                {
+                    "id": 3,
+                    "name": "Richard Moor"
                 }
             ]
         }
-    ]
+
 }
