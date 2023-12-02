@@ -38,7 +38,7 @@ interface TeacherCourseResponse {
     exams: Exam[];
 }
 
-const getCourses = async (activeFilter: string): Promise<Qualification[]> => {
+const getExams = async (activeFilter: string): Promise<Qualification[]> => {
     const teacherCourseResponse = await axios.get<TeacherCourseResponse>(
         `${import.meta.env.VITE_BACKEND_API_URL}/courseTeacher/${activeFilter}`
     );
@@ -56,7 +56,7 @@ export default function Qualification(props: QualificationProps) {
         data: data,
     } = useQuery({
         queryKey: [],
-        queryFn: () => getCourses(''),
+        queryFn: () => getExams(''),
     });
 
     if (loading) {
