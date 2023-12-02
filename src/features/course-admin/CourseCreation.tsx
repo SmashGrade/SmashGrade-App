@@ -7,6 +7,7 @@ import {
     ExamResponse,
     FormDataPostRequest,
 } from '@features/course-admin/interfaces/CourseData.ts';
+import { courseDetailRoute } from '@pages/routes/courseRoutes.ts';
 import { courseEditRoute } from '@pages/routes/routes.ts';
 
 import { useQuery } from '@tanstack/react-query';
@@ -37,8 +38,8 @@ export default function CourseCreation() {
     const [examForm] = Form.useForm();
     const [examData, setExams] = useState<ExamResponse[]>([]);
     const [totalWeight, setTotalWeight] = useState(0);
-    const params = useParams({ from: courseEditRoute.id });
-    const courseId = params.courseId ?? 1;
+    const { id } = useParams({ from: courseDetailRoute.id });
+    const courseId = id ?? 1;
 
     const {
         isLoading: isCourseLoading,
@@ -157,16 +158,6 @@ export default function CourseCreation() {
         setExams(updatedExams);
         setTotalWeight(newTotal);
     };
-    console.info('courseData', courseData);
-
-    const initialData: Partial<CourseFormData> = {
-        description: courseData?.description,
-        number: courseData?.number,
-        teachers: courseData?.teachers.map((teacher) => teacher.id),
-        modules: courseData?.modules.map((module) => module.id),
-    };
-
-    console.log('initialData', initialData);
 
     // Display loading and error states
 
@@ -181,6 +172,17 @@ export default function CourseCreation() {
 
     /* if (isVersionError) return <div>Error when loading versions</div>;
     if (isVersionLoading) return <Spin />;*/
+
+    console.info('courseData', courseData);
+
+    const initialData: Partial<CourseFormData> = {
+        description: courseData?.description,
+        number: courseData?.number,
+        teachers: courseData?.teachers.map((teacher) => teacher.id),
+        modules: courseData?.modules.map((module) => module.id),
+    };
+
+    console.log('initialData', initialData);
 
     console.log('module values:', courseFormFilterData?.modules, 'init', initialData.modules);
 
