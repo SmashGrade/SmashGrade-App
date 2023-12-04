@@ -10,7 +10,7 @@ function LocaleSwitcher({ setLocale, locale }: Readonly<LocaleContextProps>) {
         <Space wrap>
             <Select
                 value={locale}
-                style={{ width: 120 }}
+                style={{ width: 300 }}
                 bordered={false}
                 options={[
                     {

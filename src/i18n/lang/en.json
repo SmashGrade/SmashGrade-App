@@ -78,5 +78,9 @@
     "logout.menu": {
         "defaultMessage": "Logout",
         "description": "Logout Menu"
+    },
+    "settings.title": {
+        "defaultMessage": "Settings",
+        "description": "Settings Titel"
     }
 }

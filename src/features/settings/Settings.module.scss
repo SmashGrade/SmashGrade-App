@@ -9,3 +9,13 @@
     display: flex;
     justify-content: space-between;
 }
+
+.selectWithTitleContainer {
+    text-align: left;
+    margin-bottom: 8px;
+
+    .title {
+        margin-bottom: 8px;
+        margin-top: 12px;
+    }
+}

@@ -55,6 +55,10 @@
         "defaultMessage": "Übersicht",
         "description": "Übersicht Titel"
     },
+    "settings.title": {
+        "defaultMessage": "Einstellungen",
+        "description": "Einstellungen Titel"
+    },
     "startYear": {
         "defaultMessage": "Startjahr",
         "description": "Startjahr Dropdown Titel"
