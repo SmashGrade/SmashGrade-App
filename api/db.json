@@ -30,6 +30,15 @@
                 "isActiv": true,
                 "startDate": "2023-11-29T17:13:23.819Z",
                 "endDate": "2023-11-29T17:13:23.819Z"
+            },
+            {
+                "id": 2,
+                "focus": "Systemtechnik",
+                "field": "Informatik",
+                "curriculumType": "Vollzeit",
+                "isActiv": true,
+                "startDate": "2023-11-29T17:13:23.819Z",
+                "endDate": "2023-11-29T17:13:23.819Z"
             }
         ]
     },

@@ -1,7 +1,7 @@
 import { RocketOutlined } from '@ant-design/icons';
 import SelectWithTitle from '@components/ui-elements/SelectWithTitle.tsx';
 import { useQuery } from '@tanstack/react-query';
-import { Button } from 'antd';
+import { Button, Spin } from 'antd';
 import axios from 'axios';
 import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -76,14 +76,21 @@ export default function Onboarding({ isReadonly }: Readonly<OnboardingProps>) {
 
     const yearData: Year[] = getYears();
 
+    const firstCurriculumType = onboardingData?.curriculumTypes?.[0];
+    const defaultCurriculumTypeDescription = firstCurriculumType?.description ?? '';
+
     const [currentYear, setCurrentYear] = useState(yearData?.length ? yearData[0].value : 0);
-    const [selectedCurriculumType, setSelectedCurriculumType] = useState(
-        onboardingData?.curriculumTypes?.length ? onboardingData?.curriculumTypes[0].description : ''
-    );
+
+    const [selectedCurriculumType, setSelectedCurriculumType] = useState(defaultCurriculumTypeDescription);
+
+    if (defaultCurriculumTypeDescription !== '' && selectedCurriculumType === '') {
+        setSelectedCurriculumType(defaultCurriculumTypeDescription);
+    }
+
     const intl = useIntl();
 
     if (onboardingLoading) {
-        return <h2>Loading</h2>;
+        return <Spin />;
     }
 
     if (onboardingError) {
