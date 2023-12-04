@@ -1,15 +1,5 @@
 import { useMsal } from '@azure/msal-react';
 import { IconLink } from '@components/ui-elements/IconLink.tsx';
-
-import {
-    courseRoute,
-    curriculumRoute,
-    onboardingRoute,
-    settingsRoute,
-    studentModuleRoute,
-} from '@pages/routes/routes.ts';
-import { useMsal } from '@azure/msal-react';
-import { IconLink } from '@components/ui-elements/IconLink.tsx';
 import { UserProfile } from '@features/profile/UserProfile.tsx';
 import useUserRoles from '@hooks/useUserRoles.ts';
 import { courseRoute, curriculumRoute, onboardingRoute, studentModuleRoute } from '@pages/routes/routes.ts';
@@ -131,15 +121,7 @@ export default function Navigation() {
     const accountItems: MenuProps['items'] = useMemo(() => {
         return [
             {
-                label: (
-                    <IconLink
-                        to={settingsRoute.to}
-                        icon={'account_circle'}
-                        messageId={'account.menu'}
-                        defaultMessage={'Account'}
-                        description={'Account Menu'}
-                    />
-                ),
+                label: <UserProfile />,
                 key: 'account',
                 children: [
                     {

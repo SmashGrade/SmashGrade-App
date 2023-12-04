@@ -34,9 +34,7 @@ msalInstance
                     <ConfigProvider theme={antdTheme}>
                         <MsalProvider instance={msalInstance}>
                             <QueryClientProvider client={queryClient}>
-                                <ReactIntlProvider>
-                                    <RouterProvider router={router} />
-                                </ReactIntlProvider>
+                                <RouterProvider router={router} />
                                 <DevSupportComponent>
                                     <ReactQueryDevtools initialIsOpen={false} />
                                 </DevSupportComponent>

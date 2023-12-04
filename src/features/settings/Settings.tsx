@@ -1,7 +1,7 @@
-import LocaleSwitcher from '@components/LocaleSwitcher.tsx';
 import { Card } from 'antd';
 import Title from 'antd/lib/typography/Title';
-import { useLocale } from '../../hooks/useLocale.ts';
+import { useLocale } from '@hooks/useLocale.ts';
+import LocaleSwitcher from '../../i18n/LocaleSwitcher.tsx';
 
 import styles from './Settings.module.scss';
 
