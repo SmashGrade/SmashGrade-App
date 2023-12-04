@@ -35,9 +35,9 @@
         "defaultMessage": "Étudiants",
         "description": "Menu Étudiants"
     },
-    "account.menu": {
-        "defaultMessage": "Compte",
-        "description": "Menu Compte"
+    "settings.menu": {
+        "defaultMessage": "Configurations",
+        "description": "Menu Configurations"
     },
     "language.english": {
         "defaultMessage": "Anglais",

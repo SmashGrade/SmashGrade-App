@@ -47,7 +47,7 @@
         "defaultMessage": "Studenten",
         "description": "Studenten Menu"
     },
-    "account.menu": {
+    "settings.menu": {
         "defaultMessage": "Account",
         "description": "Account Menu"
     },
