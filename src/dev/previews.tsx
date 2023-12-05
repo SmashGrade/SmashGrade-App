@@ -7,7 +7,7 @@ const ComponentPreviews = () => {
     return (
         <Previews palette={<PaletteTree />}>
             <ComponentPreview path={'/Onboarding'}>
-                <Onboarding />
+                <Onboarding isReadonly={false} />
             </ComponentPreview>
             <ComponentPreview path={'/SelectWithTitle'}>
                 <SelectWithTitle title={'Sample Title'} />
