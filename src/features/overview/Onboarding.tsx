@@ -1,14 +1,14 @@
 import { RocketOutlined } from '@ant-design/icons';
 import SelectWithTitle from '@components/ui-elements/SelectWithTitle.tsx';
 import { useQuery } from '@tanstack/react-query';
-import { Button } from 'antd';
+import { Button, Spin } from 'antd';
 import axios from 'axios';
 import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import styles from './Overview.module.scss';
 
-interface YearResponse {
-    year: number;
+interface OnboardingProps {
+    isReadonly: boolean;
 }
 
 interface Year {
@@ -16,65 +16,106 @@ interface Year {
     label: string;
 }
 
+interface OnboardingFilterResponse {
+    curriculumTypes: CurriculumType[];
+    curriculums: CurriculumResponse[];
+}
+
+interface CurriculumType {
+    id: number;
+    description: string;
+    durationYears: number;
+}
+
 interface CurriculumResponse {
     id: number;
-    title: string;
-    year: number;
+    focus: string;
+    field: string;
+    curriculumType: string;
+    isActive: boolean;
+    startDate: string | Date;
+    endDate: string | Date;
 }
 
-interface Curriculum {
-    value: string;
-    label: string;
-    year: number;
+function getYears(): Year[] {
+    const currentYear = new Date().getFullYear();
+
+    return Array.from({ length: 5 }, (_, i) => currentYear - i).map((year) => ({
+        value: year,
+        label: year.toString(),
+    }));
 }
 
-async function getYears(): Promise<Year[]> {
-    const { data } = await axios.get<YearResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/startYears`, {});
+async function getOnboardingFilter(): Promise<OnboardingFilterResponse> {
+    const response = await axios.get<OnboardingFilterResponse>(
+        `${import.meta.env.VITE_BACKEND_API_URL}/onboardingFilter`
+    );
 
-    return data.map(({ year }) => ({ value: year, label: year.toString() }));
+    if (response.status !== 200) {
+        throw new Error('Error while getting onboarding filter');
+    }
+
+    response.data.curriculums = response.data.curriculums.map((curr) => ({
+        ...curr,
+        startDate: new Date(curr.startDate),
+        endDate: new Date(curr.endDate),
+    }));
+
+    return response.data;
 }
 
-async function getCurriculums(): Promise<Curriculum[]> {
-    const { data } = await axios.get<CurriculumResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/curriculums`);
-
-    return data.map((curriculum) => ({ value: curriculum.title, label: curriculum.title, year: curriculum.year }));
-}
-
-export default function Onboarding() {
+export default function Onboarding({ isReadonly }: Readonly<OnboardingProps>) {
     const {
-        isLoading: yearsLoading,
-        error: yearsError,
-        data: yearData,
+        isLoading: onboardingLoading,
+        error: onboardingError,
+        data: onboardingData,
     } = useQuery({
-        queryKey: ['startYears'],
-        queryFn: getYears,
+        queryKey: ['onboarding'],
+        queryFn: getOnboardingFilter,
     });
 
-    const {
-        isLoading: curriculumsLoading,
-        error: curriculumsError,
-        data: curriculumsData,
-    } = useQuery({
-        queryKey: ['curriculums'],
-        queryFn: getCurriculums,
-    });
+    const yearData: Year[] = getYears();
+
+    const firstCurriculumType = onboardingData?.curriculumTypes?.[0];
+    const defaultCurriculumTypeDescription = firstCurriculumType?.description ?? '';
 
     const [currentYear, setCurrentYear] = useState(yearData?.length ? yearData[0].value : 0);
+
+    const [selectedCurriculumType, setSelectedCurriculumType] = useState(defaultCurriculumTypeDescription);
+
+    if (defaultCurriculumTypeDescription !== '' && selectedCurriculumType === '') {
+        setSelectedCurriculumType(defaultCurriculumTypeDescription);
+    }
+
     const intl = useIntl();
 
-    if (yearsLoading || curriculumsLoading) {
-        return <h2>Loading</h2>;
-    }
-    if (yearsError) {
-        return <h2>Error while getting years</h2>;
+    if (onboardingLoading) {
+        return <Spin />;
     }
 
-    if (curriculumsError) {
-        return <h2>Error while getting curriculums </h2>;
+    if (onboardingError) {
+        return <h2>Error while getting onboarding filter</h2>;
     }
 
-    const availableCurriculums = curriculumsData?.length
-        ? curriculumsData.filter((curriculum) => curriculum.year === currentYear)
+    const curriculumTypes = onboardingData?.curriculumTypes.map((curriculumType) => ({
+        value: curriculumType.description,
+        label: curriculumType.description,
+    }));
+
+    const availableCurriculums = onboardingData?.curriculums?.length
+        ? onboardingData?.curriculums
+              .filter((curriculum) => {
+                  const startDate = curriculum.startDate;
+                  const endDate = curriculum.endDate;
+
+                  if (startDate instanceof Date && endDate instanceof Date) {
+                      return startDate.getFullYear() <= currentYear && endDate.getFullYear() >= currentYear;
+                  }
+
+                  return false;
+              })
+              .filter((curriculum) => curriculum.curriculumType === selectedCurriculumType)
+              .map((curriculum) => ({ value: curriculum.id, label: curriculum.focus }))
         : [];
 
     return (
@@ -88,12 +129,18 @@ export default function Onboarding() {
             </h1>
             <SelectWithTitle
                 key={'startYear'}
-                selectProps={{ options: yearData, onChange: setCurrentYear }}
+                selectProps={{ options: getYears(), onChange: setCurrentYear, disabled: isReadonly }}
                 title={intl.formatMessage({
                     id: 'startYear',
                     defaultMessage: 'Startjahr',
                     description: 'Startjahr Dropdown Titel',
                 })}
+            />
+
+            <SelectWithTitle
+                key={'studyType'}
+                selectProps={{ options: curriculumTypes, onChange: setSelectedCurriculumType, disabled: isReadonly }}
+                title={'Test'}
             />
 
             <SelectWithTitle
@@ -103,12 +150,13 @@ export default function Onboarding() {
                     defaultMessage: 'Lehrplan',
                     description: 'Lehrplan Dropdown Titel',
                 })}
-                selectProps={{ options: availableCurriculums }}
+                selectProps={{ options: availableCurriculums, disabled: isReadonly }}
             />
-
-            <Button type={'primary'} icon={<RocketOutlined />}>
-                Studium starten
-            </Button>
+            {!isReadonly && (
+                <Button type={'primary'} icon={<RocketOutlined />}>
+                    Studium starten
+                </Button>
+            )}
         </div>
     );
 }
