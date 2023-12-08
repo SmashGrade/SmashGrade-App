@@ -280,5 +280,40 @@
             "id": 3,
             "modules": []
         }
+    ],
+    "modules": [
+        {
+            "id": 2,
+            "version": 0,
+            "description": "Management 2",
+            "number": "????",
+            "isActive": true,
+            "valuationCategory": {
+                "description": "string",
+                "code": "M"
+            }
+        },
+        {
+            "id": 3,
+            "version": 0,
+            "description": "Betriebs- und Organisationstechnik I",
+            "number": "VZGS1-2m",
+            "isActive": true,
+            "valuationCategory": {
+                "description": "string",
+                "code": "M"
+            }
+        },
+        {
+            "id": 1,
+            "version": 0,
+            "description": "Mathematik",
+            "number": "VZGS1-4m",
+            "isActive": true,
+            "valuationCategory": {
+                "description": "string",
+                "code": "M"
+            }
+        }
     ]
 }
