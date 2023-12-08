@@ -23,7 +23,6 @@ interface UserResponse {
     };
     department?: string;
 }
-
  */
 
 export default function Settings() {
@@ -31,7 +30,9 @@ export default function Settings() {
     const userRoles = useUserRoles();
     const { userProfile, isLoading, error } = useUserProfile();
 
+    // Todo Settings: implement isLoading Spinner
     if (isLoading) return <p>Laden...</p>;
+    // Todo Settings: implement error handling
     if (error) return <p>Fehler beim Laden des Benutzerprofils</p>;
 
     return (
