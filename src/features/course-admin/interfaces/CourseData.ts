@@ -1,6 +1,6 @@
 export interface CourseResponse {
     description: string;
-    activeVersion: number;
+    version: number;
     number: string;
     versions: number[];
     modules: ModuleResponse[];

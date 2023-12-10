@@ -52,7 +52,7 @@
       "modules": [
         {
           "id": 0,
-          "version": 0,
+          "version": 1,
           "description": "Schnittstellen-Technologien",
           "number": "string",
           "isActive": true
@@ -95,16 +95,16 @@
     },
     {
       "id": 2,
-      "version": 0,
+      "version": 2,
       "description": "Data Structures",
       "number": "3.122",
       "versions": [
-        0
+        1,2
       ],
       "modules": [
         {
           "id": 1,
-          "version": 0,
+          "version": 1,
           "description": "Data Analysis",
           "number": "string",
           "isActiv": true
@@ -127,16 +127,16 @@
     },
     {
       "id": 3,
-      "version": 0,
+      "version": 1,
       "description": "Web Development",
       "number": "3.123",
       "versions": [
-        0
+        1
       ],
       "modules": [
         {
           "id": 2,
-          "version": 0,
+          "version": 1,
           "description": "Frontend Development",
           "number": "string",
           "isActiv": true
@@ -159,16 +159,16 @@
     },
     {
       "id": 4,
-      "version": 0,
+      "version": 1,
       "description": "Machine Learning",
       "number": "3.124",
       "versions": [
-        0
+        1
       ],
       "modules": [
         {
           "id": 3,
-          "version": 0,
+          "version": 1,
           "description": "Deep Learning",
           "number": "string",
           "isActiv": true
@@ -191,16 +191,16 @@
     },
     {
       "id": 5,
-      "version": 0,
+      "version": 1,
       "description": "Network Security",
       "number": "3.125",
       "versions": [
-        0
+        1
       ],
       "modules": [
         {
           "id": 4,
-          "version": 0,
+          "version": 1,
           "description": "Cryptography",
           "number": "string",
           "isActiv": true
@@ -228,7 +228,7 @@
       "modules": [
         {
           "id": 1,
-          "version": 0,
+          "version": 1,
           "description": "Mathematik",
           "number": "3.112",
           "isActivee": true,
@@ -244,21 +244,21 @@
           "courses": [
             {
               "id": 1,
-              "version": 0,
+              "version": 1,
               "description": "Mathematik I",
               "number": "3.121",
               "grade": 3.6
             },
             {
               "id": 2,
-              "version": 0,
+              "version": 1,
               "description": "Mathematik II",
               "number": "3.121",
               "grade": 4.8
             },
             {
               "id": 3,
-              "version": 0,
+              "version": 1,
               "description": "Mathematik III",
               "number": "3.121",
               "grade": 5.5
@@ -272,7 +272,7 @@
       "modules": [
         {
           "id": 2,
-          "version": 0,
+          "version": 1,
           "description": "Programmierung",
           "number": "3.112",
           "isActivee": true,
@@ -288,14 +288,14 @@
           "courses": [
             {
               "id": 7,
-              "version": 0,
+              "version": 1,
               "description": "OOP I",
               "number": "3.121",
               "grade": 4.6
             },
             {
               "id": 8,
-              "version": 0,
+              "version": 1,
               "description": "OOP II",
               "number": "3.121",
               "grade": 5.5
@@ -304,7 +304,7 @@
         },
         {
           "id": 3,
-          "version": 0,
+          "version": 1,
           "description": "Datentechnik",
           "number": "3.112",
           "isActivee": true,
@@ -320,21 +320,21 @@
           "courses": [
             {
               "id": 9,
-              "version": 0,
+              "version": 1,
               "description": "Datenbanken 1",
               "number": "3.121",
               "grade": 0
             },
             {
               "id": 10,
-              "version": 0,
+              "version": 1,
               "description": "Datenbanken 2",
               "number": "3.121",
               "grade": 5.5
             },
             {
               "id": 11,
-              "version": 0,
+              "version": 1,
               "description": "XML-Grundlagen",
               "number": "3.121",
               "grade": 5.5
@@ -446,7 +446,7 @@
       "id": 1,
       "designation": "Moodle Prüfung",
       "weight": 2,
-      "type": "Schriftliche Arbeit",
+      "type": "Schriftliche Arbeit 2",
       "course": {
         "id": 0,
         "designation": "Projektmanagement",
@@ -474,7 +474,7 @@
       "modules": [
         {
           "id": 0,
-          "version": 0,
+          "version": 1,
           "description": "Schnittstellen-Technologien",
           "number": "string",
           "isActive": true
@@ -482,16 +482,21 @@
       ],
       "exams": [
         {
-          "id": 0,
+          "id": 1,
           "description": "Projektarbeit",
-          "weight": 1,
-          "type": "Schriftliche Arbeit"
+          "weight": 2,
+          "type": "Schriftliche Arbeit 2"
         },
         {
-          "id": 1,
+          "id": 2,
           "description": "Abschlusspräsentation",
-          "weight": 1,
+          "weight": 2,
           "type": "Präsentation"
+        },   {
+          "id": 3,
+          "description": "Zusammenfassung",
+          "weight": 1,
+          "type": "Credits Aufgabe"
         }
       ],
       "teachers": [
@@ -506,21 +511,21 @@
     "modules": [
       {
         "id": 0,
-        "version": 0,
+        "version": 1,
         "description": "Schnittstellen-Technologien",
         "number": "string",
         "isActive": true
       },
       {
         "id": 1,
-        "version": 0,
+        "version": 1,
         "description": "Datenbanken",
         "number": "string",
         "isActive": false
       },
       {
         "id": 2,
-        "version": 0,
+        "version": 1,
         "description": "Projektmanagement",
         "number": "string",
         "isActive": true

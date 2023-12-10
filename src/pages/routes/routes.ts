@@ -1,21 +1,19 @@
 import CourseCreationPage from '@pages/CourseCreationPage.tsx';
 import StudentModulePage from '@pages/ModulesPage.tsx';
 import { courseDetailRoute, courseIndexRoute, newCourseRoute } from '@pages/routes/courseRoutes.ts';
-import { lazyRouteComponent, RootRoute, Route, Router, RouterMeta } from '@tanstack/react-router';
+import { lazyRouteComponent, RootRoute, Route, Router } from '@tanstack/react-router';
 import { z } from 'zod';
 import App from '../../App.tsx';
 import OnboardingPage from '../OnboardingPage.tsx';
 
-const routerMeta = new RouterMeta();
+const rootRoute = new RootRoute({
+    component: App,
+});
 
 export const onboardingRoute = new Route({
     getParentRoute: () => rootRoute,
     path: '/onboarding',
     component: OnboardingPage,
-});
-
-const rootRoute: RootRoute = routerMeta.createRootRoute({
-    component: App,
 });
 
 const indexRoute = new Route({

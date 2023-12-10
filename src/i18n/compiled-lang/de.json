@@ -1,5 +1,4 @@
 {
-    "account.menu": "Account",
     "course.ButtonActivate": "Aktivieren",
     "course.ButtonAdd": "+ Hinzufügen",
     "course.ButtonCancel": "Abbrechen",
@@ -13,6 +12,7 @@
     "course.Title": "Titel",
     "course.Weight": "Gewichtung",
     "course.menu": "Kurse",
+    "courseDetail.Title": "Kurs",
     "curriculum": "Lehrplan",
     "curriculum.menu": "Studiengänge",
     "language.english": "Englisch",
