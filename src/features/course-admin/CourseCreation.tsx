@@ -1,7 +1,7 @@
 import { SaveOutlined } from '@ant-design/icons';
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
 import { getCourse, getCourseFormFilters } from '@features/course-admin/courseCreationApi.ts';
-import { CourseFormData } from '@features/course-admin/CourseDetailForm.tsx';
+import { CourseDetailForm, CourseFormData } from '@features/course-admin/CourseDetailForm.tsx';
 import { ExamForm } from '@features/course-admin/ExamForm.tsx';
 import { CourseResponse, FormDataPostRequest } from '@features/course-admin/interfaces/CourseData.ts';
 import { courseDetailRoute } from '@pages/routes/courseRoutes.ts';
@@ -15,7 +15,6 @@ import styles from './CourseCreation.module.scss';
 
 export default function CourseCreation() {
     const [courseForm] = Form.useForm();
-    const [examForm] = Form.useForm();
 
     const { id } = useParams({ from: courseDetailRoute.id });
     const courseId = id ?? 1;
@@ -75,6 +74,7 @@ export default function CourseCreation() {
         number: courseData?.number,
         teachers: courseData?.teachers.map((teacher) => teacher.id),
         modules: courseData?.modules.map((module) => module.id),
+        exams: courseData?.exams,
     };
 
     console.info('initialData', initialData);
@@ -108,13 +108,36 @@ export default function CourseCreation() {
             </div>
 
             {courseData && (
-                <ExamForm
-                    courseFormFilterData={courseFormFilterData}
+                <Form<CourseFormData>
+                    name={'courseForm'}
+                    layout={'vertical'}
+                    form={courseForm}
                     initialValues={initialData}
                     onFinish={onCourseFormFinish}
-                    form={examForm}
-                    courseExams={courseData.exams}
-                />
+                    style={{ width: '100%' }}
+                >
+                    <div className={styles.flexOverall}>
+                        {courseFormFilterData ? (
+                            <div className={styles.flexOneThird}>
+                                <CourseDetailForm
+                                    form={courseForm}
+                                    initialValues={initialData}
+                                    onFinish={onCourseFormFinish}
+                                    courseFormFilterData={courseFormFilterData}
+                                />
+                            </div>
+                        ) : (
+                            <Spin />
+                        )}
+                        <div className={styles.flexTwoThirds}>
+                            <ExamForm
+                                courseFormFilterData={courseFormFilterData}
+                                initialValues={initialData}
+                                courseExams={courseData.exams}
+                            />
+                        </div>
+                    </div>
+                </Form>
             )}
 
             <div className={styles.divButtons}>
@@ -140,7 +163,6 @@ export default function CourseCreation() {
                     className={styles.buttons}
                     onClick={() => {
                         courseForm.submit();
-                        examForm.submit();
                     }}
                 >
                     <FormattedMessage

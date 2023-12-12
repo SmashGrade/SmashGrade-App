@@ -22,12 +22,7 @@ interface CourseDetailFormProps {
 
 export function CourseDetailForm(props: Readonly<CourseDetailFormProps>) {
     return (
-        <Form<CourseFormData>
-            layout={'vertical'}
-            form={props.form}
-            initialValues={props.initialValues}
-            onFinish={props.onFinish}
-        >
+        <>
             <Form.Item
                 name={'description'}
                 label={<FormattedMessage id={'course.Course'} defaultMessage={'Kurs'} description={'Kurs Name'} />}
@@ -99,6 +94,6 @@ export function CourseDetailForm(props: Readonly<CourseDetailFormProps>) {
                     />
                 </Form.Item>
             </div>
-        </Form>
+        </>
     );
 }

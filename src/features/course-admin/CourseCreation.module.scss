@@ -87,3 +87,11 @@ $marginLeft: 10px;
     width: 100%;
     justify-content: flex-end;
 }
+
+.weightContainer {
+    min-height: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
