@@ -1,4 +1,5 @@
-import Grid from '@components/Grid.tsx';
+import { getValueGetter } from '@components/grid/columnFormatter.ts';
+import Grid from '@components/grid/Grid.tsx';
 import { LinkButtonCellRenderer } from '@features/course/LinkButtonCellRenderer.tsx';
 import { newCourseRoute } from '@pages/routes/courseRoutes.ts';
 import { courseRoute } from '@pages/routes/routes.ts';
@@ -11,12 +12,35 @@ import { Button, Spin } from 'antd';
 import axios from 'axios';
 import styles from './Course.module.scss';
 
-export interface CourseResponse {
+interface Module {
     id: number;
+    version: number;
     description: string;
     number: string;
-    teachers: string[];
-    evaluationType: 'E' | 'M' | 'P';
+    isActive: boolean;
+}
+
+interface Exam {
+    id: number;
+    description: string;
+    weight: number;
+    type: string;
+}
+
+interface Teacher {
+    id: number;
+    name: string;
+}
+
+export interface CourseResponse {
+    id: number;
+    version: number;
+    description: string;
+    number: string;
+    versions: number[];
+    modules: Module[];
+    exams: Exam[];
+    teachers: Teacher[];
 }
 
 const defaultCourseColDef: ColDef<CourseResponse> = { sortable: true, filter: 'agTextColumnFilter' };
@@ -26,15 +50,31 @@ const courseColumnDefs: ColDef<CourseResponse>[] = [
     { field: 'id', headerName: 'ID', filter: 'agNumberColumnFilter', sort: 'asc' },
     { field: 'number', headerName: 'Course Number' },
     { field: 'description', headerName: 'Course Name', flex: 1 },
-    { field: 'teachers', headerName: 'Teachers', flex: 1 },
-    { field: 'evaluationType', headerName: 'Evaluation Type' },
+    {
+        field: 'teachers',
+        headerName: 'Teachers',
+        flex: 1,
+        valueGetter: getValueGetter('teachers', 'name'),
+    },
+    {
+        field: 'modules',
+        headerName: 'Modules',
+        flex: 1,
+        valueGetter: getValueGetter('modules', 'description'),
+    },
+    {
+        field: 'exams',
+        headerName: 'Exams',
+        flex: 1,
+        valueGetter: getValueGetter('exams', 'description'),
+    },
 ];
 
 export default function CourseList() {
     const { isPending, isError, data } = useQuery({
         queryKey: ['courses'],
         queryFn: async () => {
-            const { data } = await axios.get<CourseResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/courses`);
+            const { data } = await axios.get<CourseResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/course`);
             return data;
         },
     });

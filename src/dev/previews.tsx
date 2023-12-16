@@ -1,4 +1,4 @@
-import SelectWithTitle from '@components/SelectWithTitle.tsx';
+import SelectWithTitle from '@components/ui-elements/SelectWithTitle.tsx';
 import Onboarding from '@features/overview/Onboarding';
 import { ComponentPreview, Previews } from '@react-buddy/ide-toolbox';
 import { PaletteTree } from './palette';

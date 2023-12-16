@@ -1,13 +1,15 @@
 import { DeleteOutlined } from '@ant-design/icons';
-import { ExamResponse } from '@features/course-admin/CourseCreation.tsx';
+import { ExamResponse } from '@features/course-admin/interfaces/CourseData.ts';
+
 import { Button, Form, Input } from 'antd';
+import { ChangeEvent } from 'react';
 import styles from './ExamFormRow.module.scss';
 
 interface ExamFormRowProps {
     exam: ExamResponse;
     rowIndex: number;
     total: number;
-    onWeightChange: (index: number, e: React.ChangeEvent<HTMLInputElement>) => void;
+    onWeightChange: (index: number, e: ChangeEvent<HTMLInputElement>) => void;
     onDeleteClick: (index: number) => void;
 }
 
@@ -18,7 +20,7 @@ const notNullValidator: Rule = {
     message: '!= null',
 };
 
-export function ExamFormRow({ exam, rowIndex, total, onWeightChange, onDeleteClick }: ExamFormRowProps) {
+export function ExamFormRow({ exam, rowIndex, total, onWeightChange, onDeleteClick }: Readonly<ExamFormRowProps>) {
     return (
         <div className={styles.divTableRow} key={rowIndex}>
             <Form.Item

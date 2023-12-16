@@ -44,7 +44,7 @@ module.exports = {
         'no-console': [
             'warn',
             {
-                allow: ['warn', 'info', 'error'],
+                allow: ['warn', 'info', 'error', 'debug'],
             },
         ],
         'no-unneeded-ternary': 'warn',

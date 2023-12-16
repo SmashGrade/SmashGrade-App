@@ -1,5 +1,5 @@
 import { RocketOutlined } from '@ant-design/icons';
-import SelectWithTitle from '@components/SelectWithTitle.tsx';
+import SelectWithTitle from '@components/ui-elements/SelectWithTitle.tsx';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from 'antd';
 import axios from 'axios';

@@ -1,7 +1,59 @@
 {
+    "course.ButtonActivate": {
+        "defaultMessage": "Aktivieren",
+        "description": "Speichern Button"
+    },
+    "course.ButtonAdd": {
+        "defaultMessage": "+ Hinzufügen",
+        "description": "Qualifikation hinzufügen Button"
+    },
+    "course.ButtonCancel": {
+        "defaultMessage": "Abbrechen",
+        "description": "Abbrechen Button"
+    },
+    "course.ButtonSave": {
+        "defaultMessage": "Speichern",
+        "description": "Speichern Button"
+    },
+    "course.Course": {
+        "defaultMessage": "Kurs",
+        "description": "Kurs Name"
+    },
+    "course.LecturerTitle": {
+        "defaultMessage": "Dozent(en)",
+        "description": "Name Dozent"
+    },
+    "course.ModuleTitle": {
+        "defaultMessage": "Modul(e)",
+        "description": "Module Title"
+    },
+    "course.Number": {
+        "defaultMessage": "Nummer",
+        "description": "Kurs Nummer"
+    },
+    "course.QualificationCertificate": {
+        "defaultMessage": "Qualifikationsnachweis",
+        "description": "Qualification Certificate"
+    },
+    "course.QualificationCertificatesTitle": {
+        "defaultMessage": "Qualifikationsnachweise",
+        "description": "Qualification Certificates Title"
+    },
+    "course.Title": {
+        "defaultMessage": "Titel",
+        "description": "Titel"
+    },
+    "course.Weight": {
+        "defaultMessage": "Gewichtung",
+        "description": "Qualification weight"
+    },
     "course.menu": {
         "defaultMessage": "Kurse",
         "description": "Kurse Menu"
+    },
+    "courseDetail.Title": {
+        "defaultMessage": "Kurs",
+        "description": "Kursdetail Titel"
     },
     "curriculum": {
         "defaultMessage": "Lehrplan",
@@ -10,10 +62,6 @@
     "curriculum.menu": {
         "defaultMessage": "Studiengänge",
         "description": "Studiengang Menu"
-    },
-    "onboarding.menu": {
-        "defaultMessage": "Onboarding",
-        "description": "Onboarding Menu"
     },
     "language.english": {
         "defaultMessage": "Englisch",
@@ -27,6 +75,10 @@
         "defaultMessage": "Deutsch",
         "description": "Sprachoption Deutsch"
     },
+    "logout.menu": {
+        "defaultMessage": "Logout",
+        "description": "Logout Menu"
+    },
     "module.menu": {
         "defaultMessage": "Module",
         "description": "Module Menu"
@@ -39,13 +91,9 @@
         "defaultMessage": "Mein Studium",
         "description": "Mein Studium Menu"
     },
-    "students.menu": {
-        "defaultMessage": "Studenten",
-        "description": "Studenten Menu"
-    },
-    "account.menu": {
-        "defaultMessage": "Account",
-        "description": "Account Menu"
+    "onboarding.menu": {
+        "defaultMessage": "Onboarding",
+        "description": "Onboarding Menu"
     },
     "onboarding.title": {
         "defaultMessage": "Übersicht",
@@ -70,6 +118,10 @@
     "student.specialisedStudies": {
         "defaultMessage": "Fachstudium",
         "description": "Tab Fachstudium"
+    },
+    "students.menu": {
+        "defaultMessage": "Studenten",
+        "description": "Studenten Menu"
     },
     "user-management.menu": {
         "defaultMessage": "Benutzer",

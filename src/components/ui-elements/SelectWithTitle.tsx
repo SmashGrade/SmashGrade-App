@@ -6,7 +6,7 @@ export interface SelectWithTitleProps {
     selectProps?: SelectProps;
 }
 
-export default function SelectWithTitle({ title, selectProps }: SelectWithTitleProps) {
+export default function SelectWithTitle({ title, selectProps }: Readonly<SelectWithTitleProps>) {
     return (
         <div className={styles.selectWithTitleContainer}>
             <div className={styles.title}>{title}</div>
