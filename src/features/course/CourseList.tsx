@@ -71,13 +71,15 @@ const courseColumnDefs: ColDef<CourseResponse>[] = [
 ];
 
 export default function CourseList() {
-    const { isPending, isError, data } = useQuery({
+    const { isPending, isError, data, status } = useQuery({
         queryKey: ['courses'],
         queryFn: async () => {
             const { data } = await axios.get<CourseResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/course`);
             return data;
         },
     });
+
+    console.info('isPending', isPending, 'status', status, 'data', data);
 
     if (isError) return <div>Error when loading courses</div>;
     if (isPending) return <Spin />;
