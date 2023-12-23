@@ -140,7 +140,11 @@ export default function Onboarding({ isReadonly }: Readonly<OnboardingProps>) {
             <SelectWithTitle
                 key={'studyType'}
                 selectProps={{ options: curriculumTypes, onChange: setSelectedCurriculumType, disabled: isReadonly }}
-                title={'Test'}
+                title={intl.formatMessage({
+                    id: 'studyType',
+                    defaultMessage: 'Studiengang',
+                    description: 'Studiengang Dropdown Titel',
+                })}
             />
 
             <SelectWithTitle
@@ -150,7 +154,12 @@ export default function Onboarding({ isReadonly }: Readonly<OnboardingProps>) {
                     defaultMessage: 'Lehrplan',
                     description: 'Lehrplan Dropdown Titel',
                 })}
-                selectProps={{ options: availableCurriculums, disabled: isReadonly }}
+                selectProps={{
+                    defaultValue: availableCurriculums?.length ? availableCurriculums[0].value : null,
+                    value: availableCurriculums?.length ? availableCurriculums[0].value : null,
+                    options: availableCurriculums,
+                    disabled: isReadonly,
+                }}
             />
             {!isReadonly && (
                 <Button type={'primary'} icon={<RocketOutlined />}>
