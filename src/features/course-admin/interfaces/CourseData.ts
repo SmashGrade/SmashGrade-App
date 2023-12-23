@@ -1,4 +1,5 @@
 export interface CourseResponse {
+    id: number;
     description: string;
     version: number;
     number: string;
@@ -37,7 +38,9 @@ export interface VersionResponse {
     version: number;
 }
 
-export interface FormDataPostRequest {
+export interface CourseUpdateRequest {
+    id: number;
+    version: number;
     description: string;
     number: string;
     moduleRef: number[]; // Array of module references

@@ -138,6 +138,7 @@ export function ExamForm(props: Readonly<ExamFormProps>) {
                                     }));
 
                                     add({
+                                        id: props.courseExams[props.courseExams.length - 1].id + 1,
                                         description: '',
                                         type: '',
                                         weight: 1,

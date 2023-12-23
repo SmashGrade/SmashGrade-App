@@ -41,55 +41,45 @@
   "course": [
     {
       "id": 1,
-      "version": 3,
+      "version": 1,
       "description": "Projektmanagement",
       "number": "3.121",
-      "versions": [
-        1,
-        2,
-        3
+      "moduleRef": [
+        0
       ],
-      "modules": [
-        {
-          "id": 0,
-          "version": 1,
-          "description": "Schnittstellen-Technologien",
-          "number": "string",
-          "isActive": true
-        }
+      "teacherRef": [
+        1
       ],
       "exams": [
         {
-          "id": 0,
+          "id": 1,
           "description": "Projektarbeit",
-          "weight": 1,
-          "type": "Schriftliche Arbeit"
+          "weight": 2,
+          "type": "Schriftliche Arbeit 2"
         },
         {
-          "id": 1,
+          "id": 2,
           "description": "Abschlusspräsentation",
-          "weight": 1,
+          "weight": 2,
           "type": "Präsentation"
         },
         {
-          "id": 2,
-          "description": "Midterm Exam",
-          "weight": 2,
-          "type": "Schriftliche Arbeit"
-        }
-      ],
-      "teachers": [
-        {
-          "id": 1,
-          "name": "Simeon Liniger"
-        },
-        {
-          "id": 2,
-          "name": "John Doe"
+          "id": 3,
+          "description": "Zusammenfassung",
+          "weight": 1,
+          "type": "Credits Aufgabe"
         },
         {
           "id": 3,
-          "name": "Jane Smith"
+          "description": "Test",
+          "type": "123",
+          "weight": 1
+        },
+        {
+          "id": 4,
+          "description": "New Exam!",
+          "type": "Test",
+          "weight": "3"
         }
       ]
     },
@@ -99,7 +89,8 @@
       "description": "Data Structures",
       "number": "3.122",
       "versions": [
-        1,2
+        1,
+        2
       ],
       "modules": [
         {
@@ -492,7 +483,8 @@
           "description": "Abschlusspräsentation",
           "weight": 2,
           "type": "Präsentation"
-        },   {
+        },
+        {
           "id": 3,
           "description": "Zusammenfassung",
           "weight": 1,

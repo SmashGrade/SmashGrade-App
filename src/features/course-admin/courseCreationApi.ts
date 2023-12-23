@@ -1,6 +1,7 @@
 import {
     CourseFilter,
     CourseResponse,
+    CourseUpdateRequest,
     ModuleResponse,
     TeacherResponse,
 } from '@features/course-admin/interfaces/CourseData.ts';
@@ -36,4 +37,8 @@ export async function getCourseFormFilters(): Promise<FormFilters> {
             value: teacher.id,
         })),
     };
+}
+
+export async function updateCourse(course: CourseUpdateRequest): Promise<void> {
+    await axios.put(`${import.meta.env.VITE_BACKEND_API_URL}/course/${course.id}`, course);
 }
