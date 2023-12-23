@@ -78,5 +78,9 @@
     "logout.menu": {
         "defaultMessage": "Logout",
         "description": "Logout Menu"
+    },
+    "studyType": {
+        "defaultMessage": "Type d'étude",
+        "description": "Studiengang Dropdown Titel"
     }
 }
