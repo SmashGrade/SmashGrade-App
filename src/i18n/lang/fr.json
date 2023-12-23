@@ -28,7 +28,7 @@
         "description": "Module Title"
     },
     "course.Number": {
-        "defaultMessage": "Nummer",
+        "defaultMessage": "Nombre",
         "description": "Kurs Nummer"
     },
     "course.QualificationCertificate": {

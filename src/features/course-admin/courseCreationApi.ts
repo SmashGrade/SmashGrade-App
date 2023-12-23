@@ -10,9 +10,7 @@ import { SelectProps } from 'antd';
 import axios from 'axios';
 
 export async function getCourse(courseId: number): Promise<SelectProps['value']> {
-    const { data } = await axios.get<CourseResponse>(
-        `${import.meta.env.VITE_BACKEND_API_URL}/getCourseByID/${courseId}`
-    );
+    const { data } = await axios.get<CourseResponse>(`${import.meta.env.VITE_BACKEND_API_URL}/course/${courseId}`);
     return {
         description: data.description,
         version: data.version,
@@ -24,15 +22,16 @@ export async function getCourse(courseId: number): Promise<SelectProps['value']>
     };
 }
 
-export async function getCourseFormFilters(): Promise<FormFilters> {
-    const { data } = await axios.get<CourseFilter>(`${import.meta.env.VITE_BACKEND_API_URL}/coursefilter`);
+export async function getCourseFilter(): Promise<FormFilters> {
+    const { data } = await axios.get<CourseFilter>(`${import.meta.env.VITE_BACKEND_API_URL}/courseFilter`);
 
     return {
-        modules: data.modules.map((module: ModuleResponse) => ({
+        ...data,
+        moduleOptions: data.modules.map((module: ModuleResponse) => ({
             label: module.description,
             value: module.id,
         })),
-        teachers: data.teachers.map((teacher: TeacherResponse) => ({
+        teacherOptions: data.teachers.map((teacher: TeacherResponse) => ({
             label: teacher.name,
             value: teacher.id,
         })),

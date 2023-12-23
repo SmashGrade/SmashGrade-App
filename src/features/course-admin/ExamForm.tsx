@@ -106,7 +106,7 @@ export function ExamForm(props: Readonly<ExamFormProps>) {
                                         </Col>
                                         <Col span={1} style={{ verticalAlign: 'center', textAlign: 'center' }}>
                                             <div className={styles.weightContainer}>
-                                                {weights.weights[field.name]}/{weights.totalWeight}
+                                                {`${weights.weights[field.name]}/${weights.totalWeight}`}
                                             </div>
                                         </Col>
                                         <Col span={2}>

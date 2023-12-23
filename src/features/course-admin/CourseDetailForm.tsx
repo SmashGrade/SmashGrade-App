@@ -1,7 +1,8 @@
 import styles from '@features/course-admin/CourseCreation.module.scss';
 import { ExamCreateData } from '@features/course-admin/interfaces/CourseData.ts';
-import { Form, FormInstance, Input, Select, SelectProps } from 'antd';
-import { FormattedMessage } from 'react-intl';
+import { FormFilters } from '@features/course-admin/interfaces/FormFilters.ts';
+import { Form, FormInstance, Input, Select } from 'antd';
+import { useIntl } from 'react-intl';
 import colors from '../../colors.module.scss';
 import layout from '../../layout.module.scss';
 
@@ -17,19 +18,23 @@ interface CourseDetailFormProps {
     form: FormInstance<CourseFormData>;
     initialValues: Partial<CourseFormData>;
     onFinish: (formValues: CourseFormData) => void;
-    courseFormFilterData: { modules: SelectProps['options'] | undefined; teachers: SelectProps['options'] | undefined };
+    courseFormFilterData: FormFilters;
 }
 
 export function CourseDetailForm(props: Readonly<CourseDetailFormProps>) {
+    const intl = useIntl();
     return (
         <>
             <Form.Item
                 name={'description'}
-                label={<FormattedMessage id={'course.Course'} defaultMessage={'Kurs'} description={'Kurs Name'} />}
+                label={intl.formatMessage({
+                    id: 'courseForm.description',
+                    defaultMessage: 'Kurs',
+                    description: 'Kurs Name',
+                })}
                 rules={[
                     {
                         required: true,
-                        message: '${label}',
                     },
                 ]}
             >
@@ -37,11 +42,14 @@ export function CourseDetailForm(props: Readonly<CourseDetailFormProps>) {
             </Form.Item>
             <Form.Item
                 name={'number'}
-                label={<FormattedMessage id={'course.Number'} defaultMessage={'Nummer'} description={'Kurs Nummer'} />}
+                label={intl.formatMessage({
+                    id: 'courseForm.number',
+                    defaultMessage: 'Nummer',
+                    description: 'Kurs Nummer',
+                })}
                 rules={[
                     {
                         required: true,
-                        message: '${label}',
                     },
                 ]}
             >
@@ -49,21 +57,22 @@ export function CourseDetailForm(props: Readonly<CourseDetailFormProps>) {
             </Form.Item>
             <Form.Item
                 name={'teachers'}
-                label={
-                    <div>
-                        <FormattedMessage
-                            id={'course.LecturerTitle'}
-                            defaultMessage={'Dozent(en)'}
-                            description={'Name Dozent'}
-                        />
-                    </div>
-                }
+                label={intl.formatMessage({
+                    id: 'courseForm.teachers',
+                    defaultMessage: 'Dozent(en)',
+                    description: 'Name Dozent',
+                })}
+                rules={[
+                    {
+                        required: true,
+                    },
+                ]}
             >
                 <Select
                     mode={'multiple'}
                     allowClear
                     className={styles.spacerWidth}
-                    options={props.courseFormFilterData?.teachers}
+                    options={props.courseFormFilterData?.teacherOptions}
                 />
             </Form.Item>
 
@@ -76,21 +85,17 @@ export function CourseDetailForm(props: Readonly<CourseDetailFormProps>) {
             >
                 <Form.Item
                     name={'modules'}
-                    label={
-                        <p>
-                            <FormattedMessage
-                                id={'course.ModuleTitle'}
-                                defaultMessage={'Modul(e)'}
-                                description={'Module Title'}
-                            />
-                        </p>
-                    }
+                    label={intl.formatMessage({
+                        id: 'courseForm.modules',
+                        defaultMessage: 'Modul(e)',
+                        description: 'Module Title',
+                    })}
                 >
                     <Select
                         mode={'multiple'}
                         allowClear
                         className={styles.spacerWidth}
-                        options={props.courseFormFilterData?.modules}
+                        options={props.courseFormFilterData?.moduleOptions}
                     />
                 </Form.Item>
             </div>

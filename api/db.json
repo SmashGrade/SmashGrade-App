@@ -44,11 +44,35 @@
       "version": 1,
       "description": "Projektmanagement",
       "number": "3.121",
-      "moduleRef": [
-        0
+      "modules": [
+        {
+          "id": 0,
+          "version": 1,
+          "description": "Schnittstellen-Technologien",
+          "number": "string",
+          "isActive": true
+        },
+        {
+          "id": 1,
+          "version": 1,
+          "description": "Datenbanken",
+          "number": "string",
+          "isActive": false
+        }
       ],
-      "teacherRef": [
-        1
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Simeon Liniger"
+        },
+        {
+          "id": 2,
+          "name": "Kurt Munter"
+        },
+        {
+          "id": 3,
+          "name": "Richard Moor"
+        }
       ],
       "exams": [
         {
@@ -70,17 +94,22 @@
           "type": "Credits Aufgabe"
         },
         {
-          "id": 3,
-          "description": "Test",
-          "type": "123",
-          "weight": 1
+          "id": 4,
+          "description": "Test 2",
+          "type": "Prüfung",
+          "weight": 2
         },
         {
-          "id": 4,
-          "description": "New Exam!",
-          "type": "Test",
-          "weight": "3"
+          "id": 5,
+          "description": "Test 3",
+          "type": "Moodle Test",
+          "weight": 1
         }
+      ],
+      "versions": [
+        1,
+        2,
+        3
       ]
     },
     {
@@ -98,7 +127,7 @@
           "version": 1,
           "description": "Data Analysis",
           "number": "string",
-          "isActiv": true
+          "isActive": true
         }
       ],
       "exams": [
@@ -130,7 +159,7 @@
           "version": 1,
           "description": "Frontend Development",
           "number": "string",
-          "isActiv": true
+          "isActive": true
         }
       ],
       "exams": [
@@ -162,7 +191,7 @@
           "version": 1,
           "description": "Deep Learning",
           "number": "string",
-          "isActiv": true
+          "isActive": true
         }
       ],
       "exams": [
@@ -194,7 +223,7 @@
           "version": 1,
           "description": "Cryptography",
           "number": "string",
-          "isActiv": true
+          "isActive": true
         }
       ],
       "exams": [
@@ -213,6 +242,45 @@
       ]
     }
   ],
+  "courseFilter": {
+    "modules": [
+      {
+        "id": 0,
+        "version": 1,
+        "description": "Schnittstellen-Technologien",
+        "number": "string",
+        "isActive": true
+      },
+      {
+        "id": 1,
+        "version": 1,
+        "description": "Datenbanken",
+        "number": "string",
+        "isActive": false
+      },
+      {
+        "id": 2,
+        "version": 1,
+        "description": "Projektmanagement",
+        "number": "string",
+        "isActive": true
+      }
+    ],
+    "teachers": [
+      {
+        "id": 1,
+        "name": "Simeon Liniger"
+      },
+      {
+        "id": 2,
+        "name": "Kurt Munter"
+      },
+      {
+        "id": 3,
+        "name": "Richard Moor"
+      }
+    ]
+  },
   "moduleStudent": [
     {
       "id": 1,
@@ -222,7 +290,7 @@
           "version": 1,
           "description": "Mathematik",
           "number": "3.112",
-          "isActivee": true,
+          "isActive": true,
           "grade": 5.5,
           "studyStage": {
             "id": 1,
@@ -266,7 +334,7 @@
           "version": 1,
           "description": "Programmierung",
           "number": "3.112",
-          "isActivee": true,
+          "isActive": true,
           "grade": 5.5,
           "studyStage": {
             "id": 2,
@@ -298,7 +366,7 @@
           "version": 1,
           "description": "Datentechnik",
           "number": "3.112",
-          "isActivee": true,
+          "isActive": true,
           "grade": 0,
           "studyStage": {
             "id": 2,
@@ -450,92 +518,5 @@
         ]
       }
     }
-  ],
-  "getCourseByID": [
-    {
-      "id": 1,
-      "version": 3,
-      "description": "Projektmanagement",
-      "number": "3.121",
-      "versions": [
-        1,
-        2,
-        3
-      ],
-      "modules": [
-        {
-          "id": 0,
-          "version": 1,
-          "description": "Schnittstellen-Technologien",
-          "number": "string",
-          "isActive": true
-        }
-      ],
-      "exams": [
-        {
-          "id": 1,
-          "description": "Projektarbeit",
-          "weight": 2,
-          "type": "Schriftliche Arbeit 2"
-        },
-        {
-          "id": 2,
-          "description": "Abschlusspräsentation",
-          "weight": 2,
-          "type": "Präsentation"
-        },
-        {
-          "id": 3,
-          "description": "Zusammenfassung",
-          "weight": 1,
-          "type": "Credits Aufgabe"
-        }
-      ],
-      "teachers": [
-        {
-          "id": 1,
-          "name": "Simeon Liniger"
-        }
-      ]
-    }
-  ],
-  "coursefilter": {
-    "modules": [
-      {
-        "id": 0,
-        "version": 1,
-        "description": "Schnittstellen-Technologien",
-        "number": "string",
-        "isActive": true
-      },
-      {
-        "id": 1,
-        "version": 1,
-        "description": "Datenbanken",
-        "number": "string",
-        "isActive": false
-      },
-      {
-        "id": 2,
-        "version": 1,
-        "description": "Projektmanagement",
-        "number": "string",
-        "isActive": true
-      }
-    ],
-    "teachers": [
-      {
-        "id": 1,
-        "name": "Simeon Liniger"
-      },
-      {
-        "id": 2,
-        "name": "Kurt Munter"
-      },
-      {
-        "id": 3,
-        "name": "Richard Moor"
-      }
-    ]
-  }
+  ]
 }

@@ -14,7 +14,7 @@ export interface ModuleResponse {
     version: string;
     description: string;
     number: string;
-    isActivee: boolean;
+    isActive: boolean;
 }
 
 export interface TeacherResponse {
@@ -41,10 +41,11 @@ export interface VersionResponse {
 export interface CourseUpdateRequest {
     id: number;
     version: number;
+    versions: number[];
     description: string;
     number: string;
-    moduleRef: number[]; // Array of module references
-    teacherRef: number[]; // Array of teacher references
+    modules: ModuleResponse[];
+    teachers: TeacherResponse[];
     exams: ExamCreateData[];
 }
 
@@ -53,4 +54,8 @@ export interface ExamCreateData {
     description: string;
     weight: number;
     type: string;
+}
+export interface CourseFilterResponse {
+    modules: ModuleResponse[];
+    teachers: TeacherResponse[];
 }

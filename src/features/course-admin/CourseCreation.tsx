@@ -1,6 +1,6 @@
 import { SaveOutlined } from '@ant-design/icons';
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
-import { getCourse, getCourseFormFilters, updateCourse } from '@features/course-admin/courseCreationApi.ts';
+import { getCourse, getCourseFilter, updateCourse } from '@features/course-admin/courseCreationApi.ts';
 import { CourseDetailForm, CourseFormData } from '@features/course-admin/CourseDetailForm.tsx';
 import { ExamForm } from '@features/course-admin/ExamForm.tsx';
 import { CourseResponse, CourseUpdateRequest } from '@features/course-admin/interfaces/CourseData.ts';
@@ -12,6 +12,12 @@ import { Button, Form, Select, Space, Spin } from 'antd';
 import { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import styles from './CourseCreation.module.scss';
+
+/* eslint-disable no-template-curly-in-string */
+const validateMessages = {
+    required: '${label} is required!',
+};
+/* eslint-enable no-template-curly-in-string */
 
 export default function CourseCreation() {
     const queryClient = useQueryClient();
@@ -42,29 +48,50 @@ export default function CourseCreation() {
         data: courseFormFilterData,
     } = useQuery({
         queryKey: ['formFilters'],
-        queryFn: getCourseFormFilters,
+        queryFn: getCourseFilter,
     });
 
     const onCourseFormFinish = useCallback(
         (formValues: CourseFormData) => {
             console.info('formValues:', formValues);
+            if (!courseFormFilterData) {
+                console.error('courseFilter is not defined');
+                return;
+            }
 
-            // Create the payload for your API request
+            // Get an array of teacher objects from the teacher ids from the form (will be removed later when real backend is there since it will only need the ID's)
+            const teachers = formValues.teachers.map((teacherId) => {
+                const teacher = courseFormFilterData.teachers.find((teacher) => teacher.id === teacherId);
+                if (!teacher) {
+                    throw new Error(`Teacher with id ${teacherId} not found`);
+                }
+                return teacher;
+            });
+
+            // Get an array of module objects from the module ids from the form (will be removed later when real backend is there since it will only need the ID's)
+            const modules = formValues.modules.map((moduleId) => {
+                const module = courseFormFilterData.modules.find((module) => module.id === moduleId);
+                if (!module) {
+                    throw new Error(`Module with id ${moduleId} not found`);
+                }
+                return module;
+            });
+
             const payload: CourseUpdateRequest = {
                 id: courseId,
                 version: 1,
                 description: formValues.description,
                 number: formValues.number,
-                moduleRef: formValues.modules,
-                teacherRef: formValues.teachers,
+                modules: modules,
+                teachers: teachers,
                 exams: formValues.exams,
+                versions: [1, 2, 3],
             };
 
-            // Log the payload for demonstration (you can handle the data as needed)
             console.info('API Payload:', payload);
             updateCourseMutation.mutate(payload);
         },
-        [courseId, updateCourseMutation]
+        [courseFormFilterData, courseId, updateCourseMutation]
     );
 
     // Display loading and error states
@@ -120,6 +147,7 @@ export default function CourseCreation() {
                     name={'courseForm'}
                     layout={'vertical'}
                     form={courseForm}
+                    validateMessages={validateMessages}
                     initialValues={initialData}
                     onFinish={onCourseFormFinish}
                     style={{ width: '100%' }}
@@ -154,14 +182,6 @@ export default function CourseCreation() {
                         id={'course.ButtonCancel'}
                         defaultMessage={'Abbrechen'}
                         description={'Abbrechen Button'}
-                    />
-                </Button>
-
-                <Button className={styles.buttons}>
-                    <FormattedMessage
-                        id={'course.ButtonActivate'}
-                        defaultMessage={'Aktivieren'}
-                        description={'Speichern Button'}
                     />
                 </Button>
 
