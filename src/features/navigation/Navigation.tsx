@@ -2,7 +2,13 @@ import { useMsal } from '@azure/msal-react';
 import { IconLink } from '@components/ui-elements/IconLink.tsx';
 import { UserProfile } from '@features/profile/UserProfile.tsx';
 import useUserRoles from '@hooks/useUserRoles.ts';
-import { courseRoute, curriculumRoute, onboardingRoute, studentModuleRoute } from '@pages/routes/routes.ts';
+import {
+    courseRoute,
+    curriculumRoute,
+    moduleRoute,
+    onboardingRoute,
+    studentModuleRoute,
+} from '@pages/routes/routes.ts';
 import { useRouter } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
@@ -36,6 +42,7 @@ export default function Navigation() {
             {
                 label: (
                     <IconLink
+                        to={moduleRoute.to}
                         icon={'collections_bookmark'}
                         messageId={'module.menu'}
                         defaultMessage={'Module'}

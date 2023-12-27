@@ -1,0 +1,23 @@
+.moduleContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.isActive {
+    background-color: limegreen;
+    color: white;
+    display: inline;
+    padding-inline: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.isInactive {
+    background-color: indianred;
+    color: white;
+    display: inline;
+    padding-inline: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
