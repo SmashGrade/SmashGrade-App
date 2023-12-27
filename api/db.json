@@ -240,5 +240,103 @@
             "id": 3,
             "modules": []
         }
+    ],
+
+    "modules": [
+        {
+            "id": 1,
+            "version": 0,
+            "description": "Schnittstellen-Technologien",
+            "number": "string",
+            "isActive": true,
+            "studyStage": {
+                "id": 0,
+                "description": "Fachstudium"
+            },
+            "valuationCategory": {
+                "description": "string",
+                "code": "E"
+            },
+            "courses": [
+                {
+                    "id": 0,
+                    "version": 0,
+                    "description": "Projektmanagement",
+                    "number": "3.121",
+                    "versions": [0],
+                    "modules": [
+                        {
+                            "id": 0,
+                            "version": 0,
+                            "description": "Schnittstellen-Technologien",
+                            "number": "string",
+                            "isActive": true
+                        }
+                    ],
+                    "exams": [
+                        {
+                            "id": 0,
+                            "description": "Projektarbeit",
+                            "weight": 3,
+                            "type": "Schritfliche Arbeit"
+                        }
+                    ],
+                    "teachers": [
+                        {
+                            "id": 0,
+                            "name": "Simeon Liniger"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "version": 0,
+            "description": "Web Development",
+            "number": "string",
+            "isActive": false,
+            "studyStage": {
+                "id": 1,
+                "description": "Fortgeschrittenes Studium"
+            },
+            "valuationCategory": {
+                "description": "string",
+                "code": "A"
+            },
+            "courses": [
+                {
+                    "id": 1,
+                    "version": 0,
+                    "description": "Advanced Web Programming",
+                    "number": "3.122",
+                    "versions": [0],
+                    "modules": [
+                        {
+                            "id": 1,
+                            "version": 0,
+                            "description": "Web Development",
+                            "number": "string",
+                            "isActive": true
+                        }
+                    ],
+                    "exams": [
+                        {
+                            "id": 1,
+                            "description": "Advanced Project",
+                            "weight": 2,
+                            "type": "Coding Challenge"
+                        }
+                    ],
+                    "teachers": [
+                        {
+                            "id": 1,
+                            "name": "Elena Rodriguez"
+                        }
+                    ]
+                }
+            ]
+        }
     ]
+
 }
