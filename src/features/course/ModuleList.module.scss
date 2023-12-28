@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    padding-top: 20px;
 }
 .isActive {
     background-color: limegreen;
@@ -20,4 +21,18 @@
     padding-inline: 10px;
     border-radius: 10px;
     text-align: center;
+}
+
+.spaceBetweenButtonAndSearch {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.searchbar {
+    width: 300px;
+}
+
+.table {
+    height: 100%;
 }
