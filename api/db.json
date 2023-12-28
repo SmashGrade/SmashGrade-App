@@ -47,74 +47,103 @@
             "id": 1,
             "description": "Introduction to Programming",
             "number": "1.101",
-            "teachers": ["Alice Smith", "Bob Johnson"],
+            "teachers": [
+                "Alice Smith",
+                "Bob Johnson"
+            ],
             "evaluationType": "E"
         },
         {
             "id": 2,
             "description": "Data Structures and Algorithms",
             "number": "2.201",
-            "teachers": ["David Brown", "Emma White"],
+            "teachers": [
+                "David Brown",
+                "Emma White"
+            ],
             "evaluationType": "E"
         },
         {
             "id": 3,
             "description": "Digital Marketing",
             "number": "4.401",
-            "teachers": ["Grace Miller", "Henry Davis"],
+            "teachers": [
+                "Grace Miller",
+                "Henry Davis"
+            ],
             "evaluationType": "M"
         },
         {
             "id": 4,
             "description": "Art History",
             "number": "5.321",
-            "teachers": ["Olivia Green", "Samuel Clark"],
+            "teachers": [
+                "Olivia Green",
+                "Samuel Clark"
+            ],
             "evaluationType": "E"
         },
         {
             "id": 5,
             "description": "Psychology 101",
             "number": "3.001",
-            "teachers": ["Sophia Wilson", "Michael Turner"],
+            "teachers": [
+                "Sophia Wilson",
+                "Michael Turner"
+            ],
             "evaluationType": "E"
         },
         {
             "id": 6,
             "description": "Business Finance",
             "number": "4.501",
-            "teachers": ["Liam Anderson", "Ava Hall"],
+            "teachers": [
+                "Liam Anderson",
+                "Ava Hall"
+            ],
             "evaluationType": "M"
         },
         {
             "id": 7,
             "description": "Environmental Science",
             "number": "2.301",
-            "teachers": ["Noah Lee", "Ella Harris"],
+            "teachers": [
+                "Noah Lee",
+                "Ella Harris"
+            ],
             "evaluationType": "E"
         },
         {
             "id": 8,
             "description": "Chemistry Lab",
             "number": "6.112",
-            "teachers": ["Lucas Taylor", "Mia King"],
+            "teachers": [
+                "Lucas Taylor",
+                "Mia King"
+            ],
             "evaluationType": "M"
         },
         {
             "id": 9,
             "description": "World History",
             "number": "5.201",
-            "teachers": ["William Brown", "Charlotte Young"],
+            "teachers": [
+                "William Brown",
+                "Charlotte Young"
+            ],
             "evaluationType": "E"
         },
         {
             "id": 10,
             "description": "Physical Education",
             "number": "1.501",
-            "teachers": ["James Moore", "Emily Adams"],
+            "teachers": [
+                "James Moore",
+                "Emily Adams"
+            ],
             "evaluationType": "P"
         }
     ],
-
     "moduleStudent": [
         {
             "id": 1,
@@ -241,50 +270,76 @@
             "modules": []
         }
     ],
-
-    "modules": [
+    "curriculum": [
         {
             "id": 1,
-            "version": 0,
-            "description": "Schnittstellen-Technologien",
-            "number": "string",
+            "focus": "Softwareentwicklung",
+            "field": "Informatik",
+            "curriculumType": "Berufsbegleitend",
             "isActive": true,
-            "studyStage": {
-                "id": 0,
-                "description": "Fachstudium"
-            },
-            "valuationCategory": {
-                "description": "string",
-                "code": "E"
-            },
-            "courses": [
+            "startDate": "2023-12-28T18:49:49.630Z",
+            "endDate": "2023-12-28T18:49:49.630Z",
+            "description": "2023-12-28 Informatik Softwareentwicklung",
+            "fieldmanagers": [
+                {
+                    "id": 0,
+                    "name": "Kurt Munter"
+                }
+            ],
+            "modules": [
                 {
                     "id": 0,
                     "version": 0,
-                    "description": "Projektmanagement",
-                    "number": "3.121",
-                    "versions": [0],
-                    "modules": [
+                    "description": "Schnittstellen-Technologien",
+                    "number": "string",
+                    "isActive": true,
+                    "studyStage": {
+                        "id": 0,
+                        "description": "Fachstudium"
+                    },
+                    "valuationCategory": {
+                        "description": "string",
+                        "code": "E"
+                    },
+                    "courses": [
                         {
                             "id": 0,
                             "version": 0,
-                            "description": "Schnittstellen-Technologien",
-                            "number": "string",
-                            "isActive": true
-                        }
-                    ],
-                    "exams": [
-                        {
-                            "id": 0,
-                            "description": "Projektarbeit",
-                            "weight": 3,
-                            "type": "Schritfliche Arbeit"
-                        }
-                    ],
-                    "teachers": [
-                        {
-                            "id": 0,
-                            "name": "Simeon Liniger"
+                            "description": "Projektmanagement",
+                            "number": "3.121",
+                            "versions": [
+                                0
+                            ],
+                            "modules": [
+                                {
+                                    "id": 1,
+                                    "version": 0,
+                                    "description": "Schnittstellen-Technologien",
+                                    "number": "string",
+                                    "isActive": true
+                                },
+                                {
+                                    "id": 2,
+                                    "version": 0,
+                                    "description": "DB 1",
+                                    "number": "string",
+                                    "isActive": true
+                                }
+                            ],
+                            "exams": [
+                                {
+                                    "id": 0,
+                                    "description": "Projektarbeit",
+                                    "weight": 3,
+                                    "type": "Schriftliche Arbeit"
+                                }
+                            ],
+                            "teachers": [
+                                {
+                                    "id": 0,
+                                    "name": "Simeon Liniger"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -292,51 +347,77 @@
         },
         {
             "id": 2,
-            "version": 0,
-            "description": "Web Development",
-            "number": "string",
-            "isActive": false,
-            "studyStage": {
-                "id": 1,
-                "description": "Fortgeschrittenes Studium"
-            },
-            "valuationCategory": {
-                "description": "string",
-                "code": "A"
-            },
-            "courses": [
+            "focus": "Data Science",
+            "field": "Computer Science",
+            "curriculumType": "Vollzeit",
+            "isActive": true,
+            "startDate": "2022-12-28T18:49:49.630Z",
+            "endDate": "2025-12-28T18:49:49.630Z",
+            "description": "2022-12-28 Informatik Wirtschaftsinformatik",
+            "fieldmanagers": [
+                {
+                    "id": 1,
+                    "name": "Kurt Munter"
+                }
+            ],
+            "modules": [
                 {
                     "id": 1,
                     "version": 0,
-                    "description": "Advanced Web Programming",
-                    "number": "3.122",
-                    "versions": [0],
-                    "modules": [
+                    "description": "Machine Learning Basics",
+                    "number": "ML101",
+                    "isActive": true,
+                    "studyStage": {
+                        "id": 1,
+                        "description": "Grundstudium"
+                    },
+                    "valuationCategory": {
+                        "description": "Advanced",
+                        "code": "A"
+                    },
+                    "courses": [
                         {
                             "id": 1,
                             "version": 0,
-                            "description": "Web Development",
-                            "number": "string",
-                            "isActive": true
-                        }
-                    ],
-                    "exams": [
-                        {
-                            "id": 1,
-                            "description": "Advanced Project",
-                            "weight": 2,
-                            "type": "Coding Challenge"
-                        }
-                    ],
-                    "teachers": [
-                        {
-                            "id": 1,
-                            "name": "Elena Rodriguez"
+                            "description": "Introduction to Neural Networks",
+                            "number": "NN201",
+                            "versions": [
+                                0
+                            ],
+                            "modules": [
+                                {
+                                    "id": 1,
+                                    "version": 0,
+                                    "description": "Machine Learning Basics",
+                                    "number": "ML101",
+                                    "isActive": true
+                                },
+                                {
+                                    "id": 2,
+                                    "version": 0,
+                                    "description": "BWL",
+                                    "number": "BWL100",
+                                    "isActive": false
+                                }
+                            ],
+                            "exams": [
+                                {
+                                    "id": 1,
+                                    "description": "Neural Networks Exam",
+                                    "weight": 4,
+                                    "type": "Written Exam"
+                                }
+                            ],
+                            "teachers": [
+                                {
+                                    "id": 1,
+                                    "name": "Bob Smith"
+                                }
+                            ]
                         }
                     ]
                 }
             ]
         }
     ]
-
 }
