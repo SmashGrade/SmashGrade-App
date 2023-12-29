@@ -82,5 +82,25 @@
     "studyType": {
         "defaultMessage": "Study Type",
         "description": "Studiengang Dropdown Titel"
+    },
+    "moduleList.edit": {
+        "defaultMessage": "Edit",
+        "description": "Menupunkt um Module zu Editieren"
+    },
+    "moduleList.copy": {
+        "defaultMessage": "Copy",
+        "description": "Menupunkt um Module zu kopieren"
+    },
+    "moduleList.delete": {
+        "defaultMessage": "Delete",
+        "description": "Menupunkt um Module zu Löschen"
+    },
+    "moduleList.deleteMessage": {
+        "defaultMessage": "Do you really want to delete the module?",
+        "description": "Popup Text to delete a module"
+    },
+    "moduleList.addModuleButton": {
+        "defaultMessage": "Create Module",
+        "description": "Create Module Button"
     }
 }

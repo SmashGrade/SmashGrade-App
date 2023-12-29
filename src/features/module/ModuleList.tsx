@@ -13,6 +13,7 @@ import axios from 'axios';
 import { MoreOutlined, EditOutlined, DeleteOutlined, CopyOutlined } from '@ant-design/icons';
 import { useCallback, useRef } from 'react';
 import styles from './ModuleList.module.scss';
+import { defineMessages, FormattedMessage } from 'react-intl';
 
 export interface ModuleResponse {
     id: number;
@@ -77,21 +78,48 @@ interface ModuleObject {
 }
 
 interface ModuleWithActions extends ModuleObject {
-    actions?: 'Edit' | 'Copy' | 'Delete';
+    actions: 'Edit' | 'Copy' | 'Delete';
 }
 
-export interface StudyStage {
-    id: number;
-    description: string;
-}
+// Internationalization to use it without intl
+const messages = defineMessages({
+    edit: {
+        id: 'moduleList.edit',
+        defaultMessage: 'Editieren',
+    },
+    copy: {
+        id: 'moduleList.copy',
+        defaultMessage: 'Kopieren',
+        description: 'Menu item to copy a module',
+    },
+    delete: {
+        id: 'moduleList.delete',
+        defaultMessage: 'Löschen',
+        description: 'Menu item to delete a module',
+    },
+    deleteMessage: {
+        id: 'moduleList.deleteMessage',
+        defaultMessage: 'Möchtest du das Module wirklich löschen?',
+        description: 'Popup Message to confirm deletion of a module',
+    },
+    addModuleButton: {
+        id: 'moduleList.addModuleButton',
+        defaultMessage: 'Modul hinzufügen',
+        description: 'Button for creating a new module',
+    },
+});
 
 // Function to generate menu items dynamically based on id
-const getMenuItems = (id: number): MenuProps['items'] => [
+const getMenuItems = (
+    id: number,
+    itemToDeleteDescription: string,
+    handleDelete: (id: number) => void
+): MenuProps['items'] => [
     {
         key: 'edit',
         label: (
             <Link from={moduleRoute.to} to={moduleDetailRoute.to} params={{ id }}>
-                <EditOutlined /> Editieren
+                <EditOutlined /> <FormattedMessage {...messages.edit} />
             </Link>
         ),
     },
@@ -99,49 +127,35 @@ const getMenuItems = (id: number): MenuProps['items'] => [
         key: 'copy',
         label: (
             <Link from={moduleRoute.to} to={copyModuleRoute.to} params={{ id }}>
-                <CopyOutlined /> Kopieren
+                <CopyOutlined /> <FormattedMessage {...messages.copy} />
             </Link>
         ),
     },
     {
         key: 'delete',
         label: (
-            <Link from={moduleRoute.to} to={copyModuleRoute.to} params={{ id }}>
-                <DeleteOutlined /> Löschen
-            </Link>
+            <span
+                style={{ color: 'red' }}
+                onClick={() => {
+                    if (window.confirm('Wirklich Löschen?' + '\n' + itemToDeleteDescription)) {
+                        handleDelete(id);
+                    }
+                }}
+            >
+                <DeleteOutlined /> <FormattedMessage {...messages.delete} />
+            </span>
         ),
     },
 ];
 
-//const menuItems = getMenuItems(0); // Pass the actual id here
-
 const { Search } = Input;
-/*const handleMenuClick = (action: string, id: number) => {
-    // handle the action here
-    switch (action) {
-        case 'edit':
-            console.debug('edit' + id);
-            break;
-        case 'copy':
-            console.debug('copy' + id);
-            break;
-        case 'delete':
-            console.debug('delete' + id);
-            break;
-        default:
-            break;
-    }
-};*/
 
 const defaultModuleColDef: ColDef<ModuleResponse> = { sortable: true, filter: 'agTextColumnFilter' };
 
 const moduleColumnDefs: ColDef<ModuleWithActions>[] = [
-    //{ field: 'id', headerName: '', filter: null, cellRenderer: LinkButtonCellRenderer },
-    //{ field: 'id', headerName: 'ID', filter: 'agNumberColumnFilter', sort: 'asc' },
     { field: 'moduleDescription', headerName: 'Module', flex: 1 },
     { field: 'curriculumDescription', headerName: 'Studiengang', flex: 1 },
     { field: 'studyStage', headerName: 'Lehrgang' },
-    //{ field: 'isActive', headerName: 'Status' },
     {
         field: 'moduleIsActive',
         headerName: 'Status',
@@ -165,8 +179,8 @@ const moduleColumnDefs: ColDef<ModuleWithActions>[] = [
             return (
                 <Dropdown
                     menu={{
-                        items: getMenuItems(params.data.moduleId),
-                        //onClick: ({ key }) => handleMenuClick(key, params.data.id),
+                        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                        items: getMenuItems(params.data.moduleId, params.data.moduleDescription, handleDelete),
                     }}
                 >
                     <a onClick={(e) => e.preventDefault()}>
@@ -180,9 +194,6 @@ const moduleColumnDefs: ColDef<ModuleWithActions>[] = [
 
 // fetch data from curriculum to get all needed data for the module overview
 async function getModules(): Promise<ModuleObject[]> {
-    /*const { data } = await axios.get<ModuleResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/curriculum`);
-    return data;*/
-
     const { data: curriculumData } = await axios.get<Curriculum[]>(
         `${import.meta.env.VITE_BACKEND_API_URL}/curriculum`
     );
@@ -206,32 +217,30 @@ async function getModules(): Promise<ModuleObject[]> {
     return moduleObjects;
 }
 
-/*async function deleteModuleById(id: number): Promise<void> {
+async function deleteModuleById(id: number): Promise<void> {
+    await axios.delete(`${import.meta.env.VITE_BACKEND_API_URL}/modules/${id}`);
+}
+
+async function handleDelete(id: number) {
     try {
-        await axios.delete(`${import.meta.env.VITE_BACKEND_API_URL}/modules/${id}`);
+        await deleteModuleById(id);
+        await getModules();
     } catch (error) {
-        console.error(`Error deleting module with ID ${id}:`, error);
-        throw error; // Propagate the error for error handling
+        console.debug("Can't delete module with ID: " + id);
     }
-}*/
+}
 
 export default function ModuleList() {
     const gridRef = useRef<AgGridReact>(null);
 
-    const { isPending, isError, data } = useQuery({
+    const {
+        isLoading: isGetModulePending,
+        isError: isGetModuleError,
+        data: data,
+    } = useQuery({
         queryKey: ['modules'],
         queryFn: getModules,
     });
-
-    /*const { isPending, isError, idData } = useQuery({
-        queryKey: ['deleteModules'],
-        queryFn: async () => {
-            const { data } = await axios.delete<ModuleResponse[]>(
-                `${import.meta.env.VITE_BACKEND_API_URL}/modules/${id}`
-            );
-            return data;
-        },
-    });*/
 
     // Filter for the searchbar
     const onFilterTextBoxChanged = useCallback((value: string) => {
@@ -240,14 +249,20 @@ export default function ModuleList() {
         }
     }, []);
 
-    if (isError) return <div>Error when loading courses</div>;
-    if (isPending) return <Spin />;
+    if (isGetModuleError) return <div>Error when loading courses</div>;
+    if (isGetModulePending) return <Spin />;
+
+    /*    if (isDeleteModulePending) return <div>Error when loading courses</div>;
+    if (isDeleteModuleError) return <Spin />;*/
 
     return (
         <div className={styles.moduleContainer}>
             <div className={styles.spaceBetweenButtonAndSearch}>
                 <Link from={moduleRoute.to} to={newModuleRoute.to}>
-                    <Button type={'primary'}>+ New Module</Button>
+                    <Button type={'primary'}>
+                        + &nbsp;
+                        <FormattedMessage {...messages.addModuleButton} />
+                    </Button>
                 </Link>
 
                 <Search
