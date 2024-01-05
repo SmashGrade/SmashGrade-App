@@ -1,4 +1,3 @@
-//import Grid from '@components/Grid.tsx';
 import { copyModuleRoute, moduleDetailRoute, newModuleRoute } from '@pages/routes/moduleRoutes.ts';
 import { moduleRoute } from '@pages/routes/routes.ts';
 import { useQuery } from '@tanstack/react-query';
@@ -141,6 +140,7 @@ const getMenuItems = (
                         handleDelete(id);
                     }
                 }}
+                role={'button'}
             >
                 <DeleteOutlined /> <FormattedMessage {...messages.delete} />
             </span>
@@ -183,7 +183,7 @@ const moduleColumnDefs: ColDef<ModuleWithActions>[] = [
                         items: getMenuItems(params.data.moduleId, params.data.moduleDescription, handleDelete),
                     }}
                 >
-                    <a onClick={(e) => e.preventDefault()}>
+                    <a onClick={(e) => e.preventDefault()} role={'button'}>
                         <MoreOutlined />
                     </a>
                 </Dropdown>
@@ -236,7 +236,7 @@ export default function ModuleList() {
     const {
         isLoading: isGetModulePending,
         isError: isGetModuleError,
-        data: data,
+        data: moduleData,
     } = useQuery({
         queryKey: ['modules'],
         queryFn: getModules,
@@ -274,7 +274,7 @@ export default function ModuleList() {
             <div className={`ag-theme-alpine ${styles.table}`}>
                 <AgGridReact
                     ref={gridRef}
-                    rowData={data}
+                    rowData={moduleData}
                     columnDefs={moduleColumnDefs}
                     defaultColDef={defaultModuleColDef}
                 />
