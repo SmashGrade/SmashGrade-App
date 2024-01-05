@@ -12,6 +12,7 @@ import axios from 'axios';
 export async function getCourse(courseId: number): Promise<SelectProps['value']> {
     const { data } = await axios.get<CourseResponse>(`${import.meta.env.VITE_BACKEND_API_URL}/course/${courseId}`);
     return {
+        id: data.id,
         description: data.description,
         version: data.version,
         number: data.number,

@@ -43,7 +43,7 @@
       "id": 1,
       "version": 1,
       "description": "Projektmanagement",
-      "number": "3.121",
+      "number": "3.12111",
       "modules": [
         {
           "id": 0,
@@ -53,11 +53,11 @@
           "isActive": true
         },
         {
-          "id": 1,
+          "id": 2,
           "version": 1,
-          "description": "Datenbanken",
+          "description": "Projektmanagement",
           "number": "string",
-          "isActive": false
+          "isActive": true
         }
       ],
       "teachers": [
@@ -68,10 +68,6 @@
         {
           "id": 2,
           "name": "Kurt Munter"
-        },
-        {
-          "id": 3,
-          "name": "Richard Moor"
         }
       ],
       "exams": [
@@ -95,15 +91,15 @@
         },
         {
           "id": 4,
-          "description": "Test 2",
-          "type": "Prüfung",
-          "weight": 2
+          "description": "Prüfung 1",
+          "type": "Moodle Test",
+          "weight": 3
         },
         {
           "id": 5,
-          "description": "Test 3",
-          "type": "Moodle Test",
-          "weight": 1
+          "description": "Prüfung 2",
+          "type": "Test 2",
+          "weight": 2
         }
       ],
       "versions": [

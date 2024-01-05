@@ -33,12 +33,11 @@ msalInstance
                 <ConfigProvider theme={antdTheme}>
                     <MsalProvider instance={msalInstance}>
                         <QueryClientProvider client={queryClient}>
+                            <ReactQueryDevtools initialIsOpen={false} />
                             <ReactIntlProvider>
                                 <RouterProvider router={router} />
                             </ReactIntlProvider>
-                            <DevSupportComponent>
-                                <ReactQueryDevtools initialIsOpen={false} />
-                            </DevSupportComponent>
+                            <DevSupportComponent />
                         </QueryClientProvider>
                     </MsalProvider>
                 </ConfigProvider>

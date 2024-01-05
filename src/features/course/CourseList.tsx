@@ -1,5 +1,6 @@
 import { getValueGetter } from '@components/grid/columnFormatter.ts';
 import Grid from '@components/grid/Grid.tsx';
+import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
 import { LinkButtonCellRenderer } from '@features/course/LinkButtonCellRenderer.tsx';
 import { newCourseRoute } from '@pages/routes/courseRoutes.ts';
 import { courseRoute } from '@pages/routes/routes.ts';
@@ -86,9 +87,12 @@ export default function CourseList() {
 
     return (
         <div className={styles.courseContainer}>
-            <Link from={courseRoute.to} to={newCourseRoute.to}>
-                <Button type={'primary'}>New Course</Button>
-            </Link>
+            <Button type={'primary'} className={styles.addButton}>
+                <Link from={courseRoute.to} to={newCourseRoute.to} className={styles.addLink}>
+                    <MaterialIcon icon={'add'} size={'small'} />
+                    New Course
+                </Link>
+            </Button>
 
             <Grid<CourseResponse> columnDefs={courseColumnDefs} rowData={data} defaultColDef={defaultCourseColDef} />
         </div>

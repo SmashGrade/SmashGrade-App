@@ -1,45 +1,42 @@
 import { SaveOutlined } from '@ant-design/icons';
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
-import { getCourse, getCourseFilter, updateCourse } from '@features/course-admin/courseCreationApi.ts';
+import { getCourseFilter, updateCourse } from '@features/course-admin/courseApi.ts';
 import { CourseDetailForm, CourseFormData } from '@features/course-admin/CourseDetailForm.tsx';
 import { ExamForm } from '@features/course-admin/ExamForm.tsx';
 import { CourseResponse, CourseUpdateRequest } from '@features/course-admin/interfaces/CourseData.ts';
-import { courseDetailRoute } from '@pages/routes/courseRoutes.ts';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useParams } from '@tanstack/react-router';
-import { Button, Form, Select, Space, Spin } from 'antd';
+import { Button, Form, message, Select, Space, Spin } from 'antd';
 import { useCallback } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import styles from './CourseCreation.module.scss';
 
-/* eslint-disable no-template-curly-in-string */
 const validateMessages = {
     required: '${label} is required!',
 };
-/* eslint-enable no-template-curly-in-string */
 
-export default function CourseCreation() {
+interface EditCourseProps {
+    courseData: CourseResponse;
+}
+
+export default function CourseForm({ courseData }: Readonly<EditCourseProps>) {
     const queryClient = useQueryClient();
+    const intl = useIntl();
 
     const [courseForm] = Form.useForm();
     const updateCourseMutation = useMutation({
         mutationFn: updateCourse,
         onSuccess: () => {
+            void queryClient.invalidateQueries({ queryKey: ['courses', courseData.id] });
             void queryClient.invalidateQueries({ queryKey: ['courses'] });
+            void message.success(
+                intl.formatMessage({
+                    id: 'courseForm.updateSuccessMessage',
+                    description: 'Course Update success message',
+                    defaultMessage: 'Kurse erfolgreich gespeichert',
+                })
+            );
         },
-    });
-
-    const { id } = useParams({ from: courseDetailRoute.id });
-    const courseId = id ?? 1;
-
-    const {
-        isLoading: isCourseLoading,
-        error: isCourseError,
-        data: courseData,
-    } = useQuery<CourseResponse>({
-        queryKey: ['courses'],
-        queryFn: () => getCourse(courseId),
     });
 
     const {
@@ -78,7 +75,7 @@ export default function CourseCreation() {
             });
 
             const payload: CourseUpdateRequest = {
-                id: courseId,
+                id: courseData.id,
                 version: 1,
                 description: formValues.description,
                 number: formValues.number,
@@ -89,27 +86,23 @@ export default function CourseCreation() {
             };
 
             console.info('API Payload:', payload);
+            // TODO: Make dynamic to either POST OR PUT based on if it is a new course or an existing one
             updateCourseMutation.mutate(payload);
         },
-        [courseFormFilterData, courseId, updateCourseMutation]
+        [courseFormFilterData, courseData.id, updateCourseMutation]
     );
-
-    // Display loading and error states
-
-    if (isCourseError) return <div>Error when loading courses</div>;
-    if (isCourseLoading) return <Spin />;
 
     if (courseFormFilterError) return <div>Error when loading filters</div>;
     if (isCourseFormFilterLoading) return <Spin />;
 
-    console.info('courseData', courseData);
+    console.info('courseData Passed', courseData);
 
     const initialData: Partial<CourseFormData> = {
-        description: courseData?.description,
-        number: courseData?.number,
-        teachers: courseData?.teachers.map((teacher) => teacher.id),
-        modules: courseData?.modules.map((module) => module.id),
-        exams: courseData?.exams,
+        description: courseData.description,
+        number: courseData.number,
+        teachers: courseData.teachers.map((teacher) => teacher.id),
+        modules: courseData.modules.map((module) => module.id),
+        exams: courseData.exams,
     };
 
     console.info('initialData', initialData);

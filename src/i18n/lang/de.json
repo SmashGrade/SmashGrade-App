@@ -47,6 +47,10 @@
     "defaultMessage": "Dozent(en)",
     "description": "Name Dozent"
   },
+  "courseForm.updateSuccessMessage": {
+    "defaultMessage": "Kurse erfolgreich gespeichert",
+    "description": "Course Update success message"
+  },
   "curriculum": {
     "defaultMessage": "Lehrplan",
     "description": "Lehrplan Dropdown Titel"

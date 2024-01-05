@@ -3,8 +3,8 @@ import styles from '@features/course-admin/CourseCreation.module.scss';
 import { CourseFormData } from '@features/course-admin/CourseDetailForm.tsx';
 import { ExamResponse } from '@features/course-admin/interfaces/CourseData.ts';
 import { FormFilters } from '@features/course-admin/interfaces/FormFilters.ts';
-import { Button, Col, Divider, Form, Input, Row } from 'antd';
-import React, { useState } from 'react';
+import { Button, Col, Divider, Form, Input, InputNumber, Row } from 'antd';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import colors from '../../colors.module.scss';
 import layout from '../../layout.module.scss';
@@ -23,8 +23,10 @@ export function ExamForm(props: Readonly<ExamFormProps>) {
     });
 
     // Updates the total weight of all exams live on input change
-    const onWeightChange = (rowIndex: number, e: React.ChangeEvent<HTMLInputElement>) => {
-        const newWeight = parseFloat(e.target.value);
+    const onWeightChange = (rowIndex: number, newWeight: number | null) => {
+        if (newWeight === null) {
+            return;
+        }
         const updatedWeights = weights.weights.map((weight, index) => (index === rowIndex ? newWeight : weight));
         const newTotal = updatedWeights.reduce((acc, curr) => acc + curr, 0);
         setWeights({ totalWeight: newTotal, weights: updatedWeights });
@@ -98,9 +100,13 @@ export function ExamForm(props: Readonly<ExamFormProps>) {
                                         </Col>
                                         <Col span={2}>
                                             <Form.Item name={[field.name, 'weight']}>
-                                                <Input
-                                                    type={'number'}
-                                                    onChange={(e) => onWeightChange(field.name, e)}
+                                                <InputNumber
+                                                    style={{ width: '100%' }}
+                                                    min={1}
+                                                    max={100}
+                                                    onChange={(value: number | null) =>
+                                                        onWeightChange(field.name, value)
+                                                    }
                                                 />
                                             </Form.Item>
                                         </Col>
@@ -138,7 +144,9 @@ export function ExamForm(props: Readonly<ExamFormProps>) {
                                     }));
 
                                     add({
-                                        id: props.courseExams[props.courseExams.length - 1].id + 1,
+                                        id: props.courseExams.length
+                                            ? props.courseExams[props.courseExams.length - 1].id + 1
+                                            : 1,
                                         description: '',
                                         type: '',
                                         weight: 1,

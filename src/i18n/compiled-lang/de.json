@@ -11,6 +11,7 @@
   "courseForm.modules": "Modul(e)",
   "courseForm.number": "Nummer",
   "courseForm.teachers": "Dozent(en)",
+  "courseForm.updateSuccessMessage": "Kurse erfolgreich gespeichert",
   "curriculum": "Lehrplan",
   "curriculum.menu": "Studiengänge",
   "language.english": "Englisch",
