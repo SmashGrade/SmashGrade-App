@@ -5,6 +5,7 @@ import useUserRoles from '@hooks/useUserRoles.ts';
 import {
     courseRoute,
     curriculumRoute,
+    myCourseRoute,
     onboardingRoute,
     settingsRoute,
     studentModuleRoute,
@@ -89,6 +90,7 @@ export default function Navigation() {
                 label: (
                     <IconLink
                         icon={'sticky_note_2'}
+                        to={myCourseRoute.to}
                         messageId={'my-course.menu'}
                         defaultMessage={'Meine Kurse'}
                         description={'Meine Kurse Menu'}
