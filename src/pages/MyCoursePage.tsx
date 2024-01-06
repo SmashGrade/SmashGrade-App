@@ -2,6 +2,7 @@ import { BookFilled } from '@ant-design/icons';
 import { Menu, Select } from 'antd';
 import type { MenuProps } from 'antd';
 import { MenuItemType } from 'antd/es/menu/hooks/useItems';
+import { useIntl } from 'react-intl';
 import React, { useEffect, useState } from 'react';
 
 import styles from './MyCoursePage.module.scss';
@@ -264,6 +265,7 @@ export default function MyCoursePage() {
         );
     }
 
+    const intl = useIntl();
     const [menuItems, setMenuItems] = useState<MenuItem[]>(getMenuItems(0));
     const [current, setCurrent] = useState<MenuItemType>(menuItems[0] as MenuItemType);
 
@@ -275,7 +277,11 @@ export default function MyCoursePage() {
     return (
         <div className={styles.myCoursePage}>
             <div className={`${styles.courseNavigation} ${styles.background}`}>
-                <h3>Kurse</h3>
+                <h3>
+                    {intl.formatMessage({
+                        id: 'course.menu',
+                    })}
+                </h3>
                 <Select defaultValue={0} options={dropdownItems} onChange={handleOnChange} />
                 <Menu
                     onClick={menuOnClick}
@@ -285,7 +291,14 @@ export default function MyCoursePage() {
                     style={{ width: '90%' }}
                 />
             </div>
-            <Qualification field={current?.label as string} subheading={'Qualifikationsnachweise'} />
+            <Qualification
+                field={current?.label as string}
+                subheading={intl.formatMessage({
+                    id: 'course.qualification',
+                    description: 'Qualifikationsnachweise eines Kurses',
+                    defaultMessage: 'Qualifikationsnachweise',
+                })}
+            />
             <div className={styles.gradeContainer}>
                 <div className={`${styles.setWidth} ${styles.background}`}>
                     <h3>Test #1</h3>

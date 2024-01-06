@@ -3,6 +3,10 @@
         "defaultMessage": "Kurse",
         "description": "Kurse Menu"
     },
+    "course.qualification": {
+        "defaultMessage": "Qualifikationsnachweise",
+        "description": "Qualifikationsnachweise eines Kurses"
+    },
     "curriculum": {
         "defaultMessage": "Lehrplan",
         "description": "Lehrplan Dropdown Titel"
@@ -10,6 +14,10 @@
     "curriculum.menu": {
         "defaultMessage": "Studiengänge",
         "description": "Studiengang Menu"
+    },
+    "grade.average": {
+        "defaultMessage": "Durchschnitt",
+        "description": "Durchschnitt einer Prüfung, Kurses, etc"
     },
     "logout.menu": {
         "defaultMessage": "Logout",

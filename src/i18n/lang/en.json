@@ -15,6 +15,14 @@
         "defaultMessage": "Course",
         "description": "Kurs Menu"
     },
+    "course.qualification": {
+        "defaultMessage": "Qualifications",
+        "description": "Qualifikationsnachweise eines Kurses"
+    },
+    "grade.average": {
+        "defaultMessage": "Average",
+        "description": "Durchschnitt einer Prüfung, Kurses, etc"
+    },
     "user-management.menu": {
         "defaultMessage": "Usermanagement",
         "description": "Benutzerverwaltung Menu"

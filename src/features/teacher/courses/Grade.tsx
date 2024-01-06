@@ -4,6 +4,7 @@ import Rating from '@features/student/modules/Rating.tsx';
 import GradeCard from '@features/teacher/courses/GradeCard.tsx';
 import styles from '@pages/MyCoursePage.module.scss';
 import { Divider } from 'antd';
+import { FormattedMessage } from 'react-intl';
 
 interface grade {
     studentName: string;
@@ -61,7 +62,13 @@ export default function Grade() {
             </div>
             <Divider className={styles.divider} />
             <div className={`${styles.flexRow} ${styles.baseInsetsLeftRight}`}>
-                <h3>Durchschnitt:</h3>
+                <h3>
+                    <FormattedMessage
+                        id={'grade.average'}
+                        description={'Durchschnitt einer Prüfung, Kurses, etc'}
+                        defaultMessage={'Durchschnitt'}
+                    />
+                </h3>
                 <Rating rating={3.8} />
             </div>
         </div>
