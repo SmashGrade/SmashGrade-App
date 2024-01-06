@@ -2,7 +2,13 @@ import { useMsal } from '@azure/msal-react';
 import { IconLink } from '@components/ui-elements/IconLink.tsx';
 import { UserProfile } from '@features/profile/UserProfile.tsx';
 import useUserRoles from '@hooks/useUserRoles.ts';
-import { courseRoute, curriculumRoute, onboardingRoute, studentModuleRoute } from '@pages/routes/routes.ts';
+import {
+    courseRoute,
+    curriculumRoute,
+    myCourseRoute,
+    onboardingRoute,
+    studentModuleRoute,
+} from '@pages/routes/routes.ts';
 import { useRouter } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
@@ -83,6 +89,7 @@ export default function Navigation() {
                 label: (
                     <IconLink
                         icon={'sticky_note_2'}
+                        to={myCourseRoute.to}
                         messageId={'my-course.menu'}
                         defaultMessage={'Meine Kurse'}
                         description={'Meine Kurse Menu'}
