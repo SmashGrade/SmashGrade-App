@@ -32,7 +32,7 @@ function useWindowHeight() {
 
 export default function Grade() {
     const calcHeight = useWindowHeight() * 0.25;
-    const [grades, setGrades] = useState<grade[]>([
+    const grades: grade[] = [
         {
             studentName: 'John Doe',
             field: 'Wirtschaftsinformatik',
@@ -43,7 +43,7 @@ export default function Grade() {
             field: 'Softwareentwicklung',
             rating: 3.1,
         },
-    ]);
+    ];
 
     return (
         <div className={`${styles.background} ${styles.setWidth}`}>
