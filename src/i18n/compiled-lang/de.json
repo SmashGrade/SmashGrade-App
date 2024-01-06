@@ -1,8 +1,10 @@
 {
     "account.menu": "Account",
     "course.menu": "Kurse",
+    "course.qualification": "Qualifikationsnachweise",
     "curriculum": "Lehrplan",
     "curriculum.menu": "Studiengänge",
+    "grade.average": "Durchschnitt",
     "language.english": "Englisch",
     "language.french": "Französisch",
     "language.german": "Deutsch",

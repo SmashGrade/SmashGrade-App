@@ -1,8 +1,10 @@
 {
     "account.menu": "Account",
     "course.menu": "Course",
+    "course.qualification": "Qualifications",
     "curriculum": "Curriculum",
     "curriculum.menu": "Curriculum",
+    "grade.average": "Average",
     "language.english": "English",
     "language.french": "French",
     "language.german": "German",
