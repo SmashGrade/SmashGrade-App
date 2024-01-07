@@ -4,6 +4,7 @@ import type { MenuProps } from 'antd';
 import { MenuItemType } from 'antd/es/menu/hooks/useItems';
 import { useIntl } from 'react-intl';
 import React, { useEffect, useState } from 'react';
+import { MenuInfo } from 'node_modules/rc-menu/lib/interface';
 
 import styles from './MyCoursePage.module.scss';
 import Grade from '@features/teacher/courses/Grade.tsx';
@@ -228,13 +229,13 @@ export default function MyCoursePage() {
         },
     ];
 
-    const handleOnChange = (e: number) => {
+    function handleOnChange(e: number) {
         setMenuItems(getMenuItems(e));
-    };
+    }
 
-    const menuOnClick: MenuProps['onClick'] = (e) => {
+    function menuOnClick(e: MenuInfo) {
         setCurrent(menuItems[parseInt(e.key)] as MenuItemType);
-    };
+    }
 
     const dropdownItems = customCourses.map((customCourse, index) => ({
         label: customCourse.startDate,
