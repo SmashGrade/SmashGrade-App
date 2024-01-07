@@ -10,6 +10,8 @@ import {
     settingsRoute,
     studentModuleRoute,
 } from '@pages/routes/routes.ts';
+import { courseRoute, curriculumRoute, onboardingRoute } from '@pages/routes/routes.ts';
+import { studentModuleRoute } from '@pages/routes/studentRoutes.ts';
 import { useRouter } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';

@@ -1,5 +1,5 @@
-import StudentCourseDetailPage from '@pages/StudentCourseDetailPage.tsx';
+import { Outlet } from '@tanstack/react-router';
 
 export default function StudentPage() {
-    return <StudentCourseDetailPage />;
+    return <Outlet />;
 }
