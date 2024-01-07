@@ -31,7 +31,7 @@ export function Exam({ exam }: Readonly<ExamProps>) {
                     min={1}
                     max={6}
                     className={styles.examInput}
-                    onBlur={(value) => {
+                    onBlur={function (value) {
                         saveExam(parseFloat(value.target.value));
                     }}
                 />
