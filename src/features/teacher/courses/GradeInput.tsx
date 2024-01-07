@@ -2,8 +2,8 @@ import styles from '@pages/MyCoursePage.module.scss';
 import { Input } from 'antd';
 
 interface GradeInputProps {
-    description: string;
-    placeholder: string;
+    readonly description: string;
+    readonly placeholder: string;
 }
 
 export default function GradeInput(props: GradeInputProps) {

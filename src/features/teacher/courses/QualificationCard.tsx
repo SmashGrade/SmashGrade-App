@@ -3,9 +3,9 @@ import Rating from '@features/student/modules/Rating.tsx';
 import styles from '@pages/MyCoursePage.module.scss';
 
 interface QualificationCardProps {
-    name: string;
-    weight: string;
-    rating: number;
+    readonly name: string;
+    readonly weight: string;
+    readonly rating: number;
 }
 
 export default function QualificationCard(props: QualificationCardProps) {

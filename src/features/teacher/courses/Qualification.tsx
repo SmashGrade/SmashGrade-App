@@ -9,11 +9,12 @@ interface Qualification {
     name: string;
     weight: string;
     rating: number;
+    key: number;
 }
 
 interface QualificationProps {
-    field: string;
-    subheading: string;
+    readonly field: string;
+    readonly subheading: string;
 }
 
 interface AvgGrade {
@@ -46,14 +47,15 @@ const getExams = async (activeFilter: string): Promise<Qualification[]> => {
         name: exam.description,
         weight: exam.weight.toString(),
         rating: exam.avgGrades[0].grade,
+        key: exam.id,
     }));
 };
 
 export default function Qualification(props: QualificationProps) {
     const {
         isLoading: loading,
-        error: error,
-        data: data,
+        error,
+        data,
     } = useQuery({
         queryKey: [],
         queryFn: () => getExams(''),
@@ -73,13 +75,13 @@ export default function Qualification(props: QualificationProps) {
                 <h3>{props.field}</h3>
                 <p>{props.subheading}</p>
                 <div className={styles.setWidth}>
-                    {data.map((qualification, index) => {
+                    {data.map((qualification) => {
                         return (
                             <QualificationCard
                                 name={qualification.name}
                                 weight={qualification.weight}
                                 rating={qualification.rating}
-                                key={index}
+                                key={qualification.key}
                             />
                         );
                     })}

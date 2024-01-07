@@ -3,9 +3,9 @@ import Rating from '@features/student/modules/Rating.tsx';
 import styles from '@pages/MyCoursePage.module.scss';
 
 interface GradeCardProps {
-    studentName: string;
-    field: string;
-    rating: number;
+    readonly studentName: string;
+    readonly field: string;
+    readonly rating: number;
 }
 
 export default function GradeCard(props: GradeCardProps) {
