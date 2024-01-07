@@ -1,7 +1,7 @@
-import { MaterialIcon } from '@components/MaterialIcon.tsx';
+import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
 import { Exam } from '@features/student/course/Exam.tsx';
 import Rating from '@features/student/modules/Rating.tsx';
-import { studentModuleRoute } from '@pages/routes/routes.ts';
+import { studentModuleRoute } from '@pages/routes/studentRoutes.ts';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { Divider, Spin } from 'antd';

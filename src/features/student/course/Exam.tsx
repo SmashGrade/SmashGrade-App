@@ -11,8 +11,10 @@ interface ExamProps {
 }
 
 function saveExam(value: number) {
-    // send to backend
-    console.error(value);
+    if (value) {
+        // send to backend
+        console.error(value);
+    }
 }
 
 export function Exam({ exam }: Readonly<ExamProps>) {
