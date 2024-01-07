@@ -6,10 +6,11 @@ import styles from '@pages/MyCoursePage.module.scss';
 import { Divider } from 'antd';
 import { FormattedMessage } from 'react-intl';
 
-interface grade {
+interface Grade {
     studentName: string;
     field: string;
     rating: number;
+    key: number;
 }
 
 function getWindowHeight() {
@@ -33,29 +34,31 @@ function useWindowHeight() {
 
 export default function Grade() {
     const calcHeight = useWindowHeight() * 0.25;
-    const grades: grade[] = [
+    const grades: Grade[] = [
         {
             studentName: 'John Doe',
             field: 'Wirtschaftsinformatik',
             rating: 4.5,
+            key: 1,
         },
         {
             studentName: 'Jane Doe',
             field: 'Softwareentwicklung',
             rating: 3.1,
+            key: 2,
         },
     ];
 
     return (
         <div className={`${styles.background} ${styles.setWidth}`}>
             <div style={{ overflowY: 'auto', height: grades.length > 6 ? calcHeight : 'auto' }}>
-                {grades.map((grade, index) => {
+                {grades.map((grade) => {
                     return (
                         <GradeCard
                             studentName={grade.studentName}
                             field={grade.field}
                             rating={grade.rating}
-                            key={index}
+                            key={grade.key}
                         />
                     );
                 })}
