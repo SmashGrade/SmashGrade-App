@@ -35,208 +35,200 @@ interface Course {
     teachers: Teacher[];
 }
 
+const customCourses: CustomCourse[] = [
+    {
+        startDate: '2020',
+        course: [
+            {
+                id: 0,
+                description: 'Datenbanken I',
+                exams: [
+                    {
+                        id: 1,
+                        description: 'Test #1',
+                        weight: 30,
+                        type: 'Schriftliche Prüfung',
+                    },
+                    {
+                        id: 2,
+                        description: 'Test #2',
+                        weight: 30,
+                        type: 'Schriftliche Prüfung',
+                    },
+                    {
+                        id: 3,
+                        description: 'Test #3',
+                        weight: 30,
+                        type: 'Schriftliche Prüfung',
+                    },
+                ],
+                teachers: [
+                    {
+                        id: 1,
+                        name: 'Max Mustermann',
+                    },
+                ],
+            },
+            {
+                id: 2,
+                description: 'Datenbanken II',
+                exams: [
+                    {
+                        id: 4,
+                        description: 'Test #1',
+                        weight: 30,
+                        type: 'Schriftliche Prüfung',
+                    },
+                    {
+                        id: 5,
+                        description: 'Test #2',
+                        weight: 30,
+                        type: 'Schriftliche Prüfung',
+                    },
+                    {
+                        id: 6,
+                        description: 'Test #3',
+                        weight: 30,
+                        type: 'Schriftliche Prüfung',
+                    },
+                ],
+                teachers: [
+                    {
+                        id: 1,
+                        name: 'Max Mustermann',
+                    },
+                ],
+            },
+            {
+                id: 3,
+                description: 'Datenstrukturen und Algorithmen',
+                exams: [
+                    {
+                        id: 7,
+                        description: 'Test #1',
+                        weight: 30,
+                        type: 'Schriftliche Prüfung',
+                    },
+                    {
+                        id: 8,
+                        description: 'Test #2',
+                        weight: 30,
+                        type: 'Schriftliche Prüfung',
+                    },
+                    {
+                        id: 9,
+                        description: 'Test #3',
+                        weight: 30,
+                        type: 'Schriftliche Prüfung',
+                    },
+                ],
+                teachers: [
+                    {
+                        id: 1,
+                        name: 'Max Mustermann',
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        startDate: '2021',
+        course: [
+            {
+                id: 0,
+                description: 'Objektorientierte Programmierung I',
+                exams: [
+                    {
+                        id: 1,
+                        description: 'Test #1',
+                        weight: 30,
+                        type: 'Mündliche Prüfung',
+                    },
+                    {
+                        id: 2,
+                        description: 'Test #2',
+                        weight: 60,
+                        type: 'Schriftliche Prüfung',
+                    },
+                    {
+                        id: 3,
+                        description: 'Test #3',
+                        weight: 10,
+                        type: 'Mündliche Prüfung',
+                    },
+                ],
+                teachers: [
+                    {
+                        id: 2,
+                        name: 'John Doe',
+                    },
+                ],
+            },
+            {
+                id: 2,
+                description: 'Objektorientierte Programmierung II',
+                exams: [
+                    {
+                        id: 4,
+                        description: 'Test #1',
+                        weight: 40,
+                        type: 'Mündliche Prüfung',
+                    },
+                    {
+                        id: 5,
+                        description: 'Test #2',
+                        weight: 20,
+                        type: 'Mündliche Prüfung',
+                    },
+                    {
+                        id: 6,
+                        description: 'Test #3',
+                        weight: 40,
+                        type: 'Schriftliche Prüfung',
+                    },
+                ],
+                teachers: [
+                    {
+                        id: 2,
+                        name: 'John Doe',
+                    },
+                ],
+            },
+            {
+                id: 3,
+                description: 'Software-Architektur',
+                exams: [
+                    {
+                        id: 7,
+                        description: 'Test #1',
+                        weight: 50,
+                        type: 'Schriftliche Prüfung',
+                    },
+                    {
+                        id: 8,
+                        description: 'Test #2',
+                        weight: 30,
+                        type: 'Mündliche Prüfung',
+                    },
+                    {
+                        id: 9,
+                        description: 'Test #3',
+                        weight: 20,
+                        type: 'Mündliche Prüfung',
+                    },
+                ],
+                teachers: [
+                    {
+                        id: 2,
+                        name: 'John Doe',
+                    },
+                ],
+            },
+        ],
+    },
+];
+
 export default function MyCoursePage() {
-    const customCourses: CustomCourse[] = [
-        {
-            startDate: '2020',
-            course: [
-                {
-                    id: 0,
-                    description: 'Datenbanken I',
-                    exams: [
-                        {
-                            id: 1,
-                            description: 'Test #1',
-                            weight: 30,
-                            type: 'Schriftliche Prüfung',
-                        },
-                        {
-                            id: 2,
-                            description: 'Test #2',
-                            weight: 30,
-                            type: 'Schriftliche Prüfung',
-                        },
-                        {
-                            id: 3,
-                            description: 'Test #3',
-                            weight: 30,
-                            type: 'Schriftliche Prüfung',
-                        },
-                    ],
-                    teachers: [
-                        {
-                            id: 1,
-                            name: 'Max Mustermann',
-                        },
-                    ],
-                },
-                {
-                    id: 2,
-                    description: 'Datenbanken II',
-                    exams: [
-                        {
-                            id: 4,
-                            description: 'Test #1',
-                            weight: 30,
-                            type: 'Schriftliche Prüfung',
-                        },
-                        {
-                            id: 5,
-                            description: 'Test #2',
-                            weight: 30,
-                            type: 'Schriftliche Prüfung',
-                        },
-                        {
-                            id: 6,
-                            description: 'Test #3',
-                            weight: 30,
-                            type: 'Schriftliche Prüfung',
-                        },
-                    ],
-                    teachers: [
-                        {
-                            id: 1,
-                            name: 'Max Mustermann',
-                        },
-                    ],
-                },
-                {
-                    id: 3,
-                    description: 'Datenstrukturen und Algorithmen',
-                    exams: [
-                        {
-                            id: 7,
-                            description: 'Test #1',
-                            weight: 30,
-                            type: 'Schriftliche Prüfung',
-                        },
-                        {
-                            id: 8,
-                            description: 'Test #2',
-                            weight: 30,
-                            type: 'Schriftliche Prüfung',
-                        },
-                        {
-                            id: 9,
-                            description: 'Test #3',
-                            weight: 30,
-                            type: 'Schriftliche Prüfung',
-                        },
-                    ],
-                    teachers: [
-                        {
-                            id: 1,
-                            name: 'Max Mustermann',
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            startDate: '2021',
-            course: [
-                {
-                    id: 0,
-                    description: 'Objektorientierte Programmierung I',
-                    exams: [
-                        {
-                            id: 1,
-                            description: 'Test #1',
-                            weight: 30,
-                            type: 'Mündliche Prüfung',
-                        },
-                        {
-                            id: 2,
-                            description: 'Test #2',
-                            weight: 60,
-                            type: 'Schriftliche Prüfung',
-                        },
-                        {
-                            id: 3,
-                            description: 'Test #3',
-                            weight: 10,
-                            type: 'Mündliche Prüfung',
-                        },
-                    ],
-                    teachers: [
-                        {
-                            id: 2,
-                            name: 'John Doe',
-                        },
-                    ],
-                },
-                {
-                    id: 2,
-                    description: 'Objektorientierte Programmierung II',
-                    exams: [
-                        {
-                            id: 4,
-                            description: 'Test #1',
-                            weight: 40,
-                            type: 'Mündliche Prüfung',
-                        },
-                        {
-                            id: 5,
-                            description: 'Test #2',
-                            weight: 20,
-                            type: 'Mündliche Prüfung',
-                        },
-                        {
-                            id: 6,
-                            description: 'Test #3',
-                            weight: 40,
-                            type: 'Schriftliche Prüfung',
-                        },
-                    ],
-                    teachers: [
-                        {
-                            id: 2,
-                            name: 'John Doe',
-                        },
-                    ],
-                },
-                {
-                    id: 3,
-                    description: 'Software-Architektur',
-                    exams: [
-                        {
-                            id: 7,
-                            description: 'Test #1',
-                            weight: 50,
-                            type: 'Schriftliche Prüfung',
-                        },
-                        {
-                            id: 8,
-                            description: 'Test #2',
-                            weight: 30,
-                            type: 'Mündliche Prüfung',
-                        },
-                        {
-                            id: 9,
-                            description: 'Test #3',
-                            weight: 20,
-                            type: 'Mündliche Prüfung',
-                        },
-                    ],
-                    teachers: [
-                        {
-                            id: 2,
-                            name: 'John Doe',
-                        },
-                    ],
-                },
-            ],
-        },
-    ];
-
-    function handleOnChange(e: number) {
-        setMenuItems(getMenuItems(e));
-    }
-
-    function menuOnClick(e: MenuInfo) {
-        setCurrent(menuItems[parseInt(e.key)] as MenuItemType);
-    }
-
     const dropdownItems = customCourses.map((customCourse, index) => ({
         label: customCourse.startDate,
         value: index,
@@ -244,31 +236,51 @@ export default function MyCoursePage() {
 
     type MenuItem = Required<MenuProps>['items'][number];
 
-    function getItem(
-        label: React.ReactNode,
-        key: React.Key,
-        icon?: React.ReactNode,
-        children?: MenuItem[],
-        type?: 'group'
-    ): MenuItem {
-        return {
-            key,
-            icon,
-            children,
-            label,
-            type,
-        } as MenuItem;
-    }
+    const getItem = React.useCallback(
+        (
+            label: React.ReactNode,
+            key: React.Key,
+            icon?: React.ReactNode,
+            children?: MenuItem[],
+            type?: 'group'
+        ): MenuItem => {
+            return {
+                key,
+                icon,
+                children,
+                label,
+                type,
+            } as MenuItem;
+        },
+        []
+    );
 
-    function getMenuItems(key: number) {
-        return customCourses[key].course.map((course, index) =>
-            getItem(course.description, index.toString(), <BookFilled />)
-        );
-    }
+    const getMenuItems = React.useCallback(
+        (key: number) => {
+            return customCourses[key].course.map((course, index) =>
+                getItem(course.description, index.toString(), <BookFilled />)
+            );
+        },
+        [getItem]
+    );
 
     const intl = useIntl();
     const [menuItems, setMenuItems] = useState<MenuItem[]>(getMenuItems(0));
     const [current, setCurrent] = useState<MenuItemType>(menuItems[0] as MenuItemType);
+
+    const handleOnChange = React.useCallback(
+        (e: number) => {
+            setMenuItems(getMenuItems(e));
+        },
+        [getMenuItems]
+    );
+
+    const menuOnClick = React.useCallback(
+        (e: MenuInfo) => {
+            setCurrent(menuItems[parseInt(e.key)] as MenuItemType);
+        },
+        [menuItems]
+    );
 
     // Automatically select the first menu item when the selected year changes
     useEffect(() => {
