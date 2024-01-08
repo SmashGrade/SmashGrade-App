@@ -1,8 +1,10 @@
 {
     "account.menu": "Compte",
     "course.menu": "Cours",
+    "course.qualification": "Attestations de qualification",
     "curriculum": "Plan d'études",
     "curriculum.menu": "Programme",
+    "grade.average": "Moyenne",
     "language.english": "Anglais",
     "language.french": "Français",
     "language.german": "Allemand",

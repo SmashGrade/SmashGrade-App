@@ -40,12 +40,19 @@ export const studentModuleRoute = new Route({
     component: StudentModulePage,
 });
 
+export const myCourseRoute = new Route({
+    getParentRoute: () => rootRoute,
+    path: 'my-course',
+    component: lazyRouteComponent(() => import('@pages/MyCoursePage.tsx')),
+});
+
 const routeTree = rootRoute.addChildren([
     indexRoute,
     onboardingRoute,
     curriculumRoute,
     studentModuleRoute,
     courseRoute.addChildren([courseIndexRoute.addChildren([courseDetailRoute, newCourseRoute])]),
+    myCourseRoute,
 ]);
 export const router = new Router({ routeTree });
 
