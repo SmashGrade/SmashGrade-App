@@ -107,7 +107,7 @@ const getMenuItems = (id: number, handleDelete: (id: number) => void): MenuProps
         key: 'delete',
         label: (
             <span
-                style={{ color: 'red' }}
+                className={styles.deleteButton}
                 onClick={() => {
                     handleDelete(id);
                 }}
@@ -230,13 +230,12 @@ export default function ModuleList() {
             cellRenderer: (params: { data: ModuleObject }) => {
                 return (
                     <Dropdown
+                        className={styles.alignSubmenu}
                         menu={{
                             items: getMenuItems(params.data.moduleId, handleDelete),
                         }}
                     >
-                        <a onClick={(e) => e.preventDefault()} role={'button'}>
-                            <MoreOutlined />
-                        </a>
+                        <Button type={'link'} icon={<MoreOutlined />} />
                     </Dropdown>
                 );
             },
