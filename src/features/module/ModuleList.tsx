@@ -10,7 +10,7 @@ import { Button, Spin, Dropdown, Input, message } from 'antd';
 import type { MenuProps } from 'antd';
 import axios from 'axios';
 import { MoreOutlined, EditOutlined, DeleteOutlined, CopyOutlined } from '@ant-design/icons';
-import { useCallback, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import styles from './ModuleList.module.scss';
 import { FormattedMessage } from 'react-intl';
 
@@ -106,7 +106,7 @@ const getMenuItems = (id: number, handleDelete: (id: number) => void): MenuProps
     {
         key: 'delete',
         label: (
-            <span
+            <Button
                 className={styles.deleteButton}
                 onClick={() => {
                     handleDelete(id);
@@ -119,7 +119,7 @@ const getMenuItems = (id: number, handleDelete: (id: number) => void): MenuProps
                     defaultMessage={'Löschen'}
                     description={'Menu item to delete a module'}
                 />
-            </span>
+            </Button>
         ),
     },
 ];
