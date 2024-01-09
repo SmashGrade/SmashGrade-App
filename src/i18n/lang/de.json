@@ -82,5 +82,9 @@
     "user-management.menu": {
         "defaultMessage": "Benutzer",
         "description": "Benutzer Menu"
+    },
+    "studyType": {
+        "defaultMessage": "Studiengang",
+        "description": "Studiengang Dropdown Titel"
     }
 }

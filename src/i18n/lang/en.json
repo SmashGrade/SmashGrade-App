@@ -82,5 +82,9 @@
     "settings.title": {
         "defaultMessage": "Settings",
         "description": "Settings Titel"
+    },
+    "studyType": {
+        "defaultMessage": "Study Type",
+        "description": "Studiengang Dropdown Titel"
     }
 }
