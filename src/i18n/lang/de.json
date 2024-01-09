@@ -1,23 +1,7 @@
 {
-    "course.menu": {
-        "defaultMessage": "Kurse",
-        "description": "Kurse Menu"
-    },
     "curriculum": {
         "defaultMessage": "Lehrplan",
         "description": "Lehrplan Dropdown Titel"
-    },
-    "curriculum.menu": {
-        "defaultMessage": "Studiengänge",
-        "description": "Studiengang Menu"
-    },
-    "logout.menu": {
-        "defaultMessage": "Logout",
-        "description": "Logout Menu"
-    },
-    "onboarding.menu": {
-        "defaultMessage": "Onboarding",
-        "description": "Onboarding Menu"
     },
     "language.english": {
         "defaultMessage": "Englisch",
@@ -31,25 +15,28 @@
         "defaultMessage": "Deutsch",
         "description": "Sprachoption Deutsch"
     },
-    "module.menu": {
-        "defaultMessage": "Module",
-        "description": "Module Menu"
+    "logout.menu": {
+        "defaultMessage": "Logout",
+        "description": "Logout Menu"
     },
-    "my-course.menu": {
-        "defaultMessage": "Meine Kurse",
-        "description": "Meine Kurse Menu"
+    "moduleList.addModuleButton": {
+        "defaultMessage": "Modul hinzufügen",
+        "description": "Button for creating a new module"
     },
-    "my-curriculum.menu": {
-        "defaultMessage": "Mein Studium",
-        "description": "Mein Studium Menu"
+    "moduleList.copy": {
+        "defaultMessage": "Kopieren",
+        "description": "Menu item to copy a module"
     },
-    "students.menu": {
-        "defaultMessage": "Studenten",
-        "description": "Studenten Menu"
+    "moduleList.delete": {
+        "defaultMessage": "Löschen",
+        "description": "Menu item to delete a module"
     },
-    "account.menu": {
-        "defaultMessage": "Account",
-        "description": "Account Menu"
+    "moduleList.deleteSuccessMessage": {
+        "defaultMessage": "Modul erfolgreich gelöscht",
+        "description": "Module Delete success message"
+    },
+    "moduleList.edit": {
+        "defaultMessage": "Editieren"
     },
     "onboarding.title": {
         "defaultMessage": "Übersicht",
@@ -75,32 +62,8 @@
         "defaultMessage": "Fachstudium",
         "description": "Tab Fachstudium"
     },
-    "user-management.menu": {
-        "defaultMessage": "Benutzer",
-        "description": "Benutzer Menu"
-    },
     "studyType": {
         "defaultMessage": "Studiengang",
         "description": "Studiengang Dropdown Titel"
-    },
-    "moduleList.edit": {
-        "defaultMessage": "Editieren",
-        "description": "Menupunkt um Module zu Editieren"
-    },
-    "moduleList.copy": {
-        "defaultMessage": "Kopieren",
-        "description": "Menupunkt um Module zu kopieren"
-    },
-    "moduleList.delete": {
-        "defaultMessage": "Löschen",
-        "description": "Menupunkt um Module zu Löschen"
-    },
-    "moduleList.deleteMessage": {
-        "defaultMessage": "Möchtest du das Module wirklich löschen?",
-        "description": "Popup Text beim Löschen eines Modules"
-    },
-    "moduleList.addModuleButton": {
-        "defaultMessage": "Modul hinzufügen",
-        "description": "Button um neues Modul hinzuzufügen"
     }
 }

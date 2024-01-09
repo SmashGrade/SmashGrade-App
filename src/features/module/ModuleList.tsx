@@ -1,18 +1,18 @@
 import { copyModuleRoute, moduleDetailRoute, newModuleRoute } from '@pages/routes/moduleRoutes.ts';
 import { moduleRoute } from '@pages/routes/routes.ts';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { ColDef } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { AgGridReact } from 'ag-grid-react';
-import { Button, Spin, Dropdown, Input } from 'antd';
+import { Button, Spin, Dropdown, Input, message } from 'antd';
 import type { MenuProps } from 'antd';
 import axios from 'axios';
 import { MoreOutlined, EditOutlined, DeleteOutlined, CopyOutlined } from '@ant-design/icons';
 import { useCallback, useRef } from 'react';
 import styles from './ModuleList.module.scss';
-import { defineMessages, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 export interface ModuleResponse {
     id: number;
@@ -80,45 +80,13 @@ interface ModuleWithActions extends ModuleObject {
     actions: 'Edit' | 'Copy' | 'Delete';
 }
 
-// Internationalization to use it without intl
-const messages = defineMessages({
-    edit: {
-        id: 'moduleList.edit',
-        defaultMessage: 'Editieren',
-    },
-    copy: {
-        id: 'moduleList.copy',
-        defaultMessage: 'Kopieren',
-        description: 'Menu item to copy a module',
-    },
-    delete: {
-        id: 'moduleList.delete',
-        defaultMessage: 'Löschen',
-        description: 'Menu item to delete a module',
-    },
-    deleteMessage: {
-        id: 'moduleList.deleteMessage',
-        defaultMessage: 'Möchtest du das Module wirklich löschen?',
-        description: 'Popup Message to confirm deletion of a module',
-    },
-    addModuleButton: {
-        id: 'moduleList.addModuleButton',
-        defaultMessage: 'Modul hinzufügen',
-        description: 'Button for creating a new module',
-    },
-});
-
 // Function to generate menu items dynamically based on id
-const getMenuItems = (
-    id: number,
-    itemToDeleteDescription: string,
-    handleDelete: (id: number) => void
-): MenuProps['items'] => [
+const getMenuItems = (id: number, handleDelete: (id: number) => void): MenuProps['items'] => [
     {
         key: 'edit',
         label: (
             <Link from={moduleRoute.to} to={moduleDetailRoute.to} params={{ id }}>
-                <EditOutlined /> <FormattedMessage {...messages.edit} />
+                <EditOutlined /> <FormattedMessage id={'moduleList.edit'} defaultMessage={'Editieren'} />
             </Link>
         ),
     },
@@ -126,7 +94,12 @@ const getMenuItems = (
         key: 'copy',
         label: (
             <Link from={moduleRoute.to} to={copyModuleRoute.to} params={{ id }}>
-                <CopyOutlined /> <FormattedMessage {...messages.copy} />
+                <CopyOutlined />{' '}
+                <FormattedMessage
+                    id={'moduleList.copy'}
+                    defaultMessage={'Kopieren'}
+                    description={'Menu item to copy a module'}
+                />
             </Link>
         ),
     },
@@ -136,13 +109,16 @@ const getMenuItems = (
             <span
                 style={{ color: 'red' }}
                 onClick={() => {
-                    if (window.confirm('Wirklich Löschen?' + '\n' + itemToDeleteDescription)) {
-                        handleDelete(id);
-                    }
+                    handleDelete(id);
                 }}
                 role={'button'}
             >
-                <DeleteOutlined /> <FormattedMessage {...messages.delete} />
+                <DeleteOutlined />{' '}
+                <FormattedMessage
+                    id={'moduleList.delete'}
+                    defaultMessage={'Löschen'}
+                    description={'Menu item to delete a module'}
+                />
             </span>
         ),
     },
@@ -151,46 +127,6 @@ const getMenuItems = (
 const { Search } = Input;
 
 const defaultModuleColDef: ColDef<ModuleResponse> = { sortable: true, filter: 'agTextColumnFilter' };
-
-const moduleColumnDefs: ColDef<ModuleWithActions>[] = [
-    { field: 'moduleDescription', headerName: 'Module', flex: 1 },
-    { field: 'curriculumDescription', headerName: 'Studiengang', flex: 1 },
-    { field: 'studyStage', headerName: 'Lehrgang' },
-    {
-        field: 'moduleIsActive',
-        headerName: 'Status',
-        cellStyle: { textAlign: 'center' },
-        cellRenderer: (params: { value: boolean }) => {
-            if (params.value) {
-                return <div className={styles.isActive}>Aktiv</div>;
-            } else {
-                return <div className={styles.isInactive}>Inaktiv</div>;
-            }
-        },
-    },
-    {
-        field: 'actions',
-        headerName: '',
-        resizable: false,
-        width: 50,
-        sortable: false,
-        filter: '',
-        cellRenderer: (params: { data: ModuleObject }) => {
-            return (
-                <Dropdown
-                    menu={{
-                        // eslint-disable-next-line @typescript-eslint/no-misused-promises
-                        items: getMenuItems(params.data.moduleId, params.data.moduleDescription, handleDelete),
-                    }}
-                >
-                    <a onClick={(e) => e.preventDefault()} role={'button'}>
-                        <MoreOutlined />
-                    </a>
-                </Dropdown>
-            );
-        },
-    },
-];
 
 // fetch data from curriculum to get all needed data for the module overview
 async function getModules(): Promise<ModuleObject[]> {
@@ -221,17 +157,9 @@ async function deleteModuleById(id: number): Promise<void> {
     await axios.delete(`${import.meta.env.VITE_BACKEND_API_URL}/modules/${id}`);
 }
 
-async function handleDelete(id: number) {
-    try {
-        await deleteModuleById(id);
-        await getModules();
-    } catch (error) {
-        console.debug("Can't delete module with ID: " + id);
-    }
-}
-
 export default function ModuleList() {
     const gridRef = useRef<AgGridReact>(null);
+    const queryClient = useQueryClient();
 
     const {
         isLoading: isGetModulePending,
@@ -241,6 +169,27 @@ export default function ModuleList() {
         queryKey: ['modules'],
         queryFn: getModules,
     });
+
+    const deleteModuleMutation = useMutation({
+        mutationFn: deleteModuleById,
+        onSuccess: () => {
+            void queryClient.invalidateQueries({ queryKey: ['modules'] });
+            void message.success(
+                <FormattedMessage
+                    id={'moduleList.deleteSuccessMessage'}
+                    description={'Module Delete success message'}
+                    defaultMessage={'Modul erfolgreich gelöscht'}
+                />
+            );
+        },
+    });
+
+    const handleDelete = (id: number) => {
+        if (window.confirm('Wirklich Löschen?')) {
+            // Call the mutation function with the module id
+            deleteModuleMutation.mutate(id);
+        }
+    };
 
     // Filter for the searchbar
     const onFilterTextBoxChanged = useCallback((value: string) => {
@@ -255,13 +204,56 @@ export default function ModuleList() {
     /*    if (isDeleteModulePending) return <div>Error when loading courses</div>;
     if (isDeleteModuleError) return <Spin />;*/
 
+    const moduleColumnDefs: ColDef<ModuleWithActions>[] = [
+        { field: 'moduleDescription', headerName: 'Module', flex: 1 },
+        { field: 'curriculumDescription', headerName: 'Studiengang', flex: 1 },
+        { field: 'studyStage', headerName: 'Lehrgang' },
+        {
+            field: 'moduleIsActive',
+            headerName: 'Status',
+            cellStyle: { textAlign: 'center' },
+            cellRenderer: (params: { value: boolean }) => {
+                if (params.value) {
+                    return <div className={styles.isActive}>Aktiv</div>;
+                } else {
+                    return <div className={styles.isInactive}>Inaktiv</div>;
+                }
+            },
+        },
+        {
+            field: 'actions',
+            headerName: '',
+            resizable: false,
+            width: 50,
+            sortable: false,
+            filter: '',
+            cellRenderer: (params: { data: ModuleObject }) => {
+                return (
+                    <Dropdown
+                        menu={{
+                            items: getMenuItems(params.data.moduleId, handleDelete),
+                        }}
+                    >
+                        <a onClick={(e) => e.preventDefault()} role={'button'}>
+                            <MoreOutlined />
+                        </a>
+                    </Dropdown>
+                );
+            },
+        },
+    ];
+
     return (
         <div className={styles.moduleContainer}>
             <div className={styles.spaceBetweenButtonAndSearch}>
                 <Link from={moduleRoute.to} to={newModuleRoute.to}>
                     <Button type={'primary'}>
                         + &nbsp;
-                        <FormattedMessage {...messages.addModuleButton} />
+                        <FormattedMessage
+                            id={'moduleList.addModuleButton'}
+                            defaultMessage={'Modul hinzufügen'}
+                            description={'Button for creating a new module'}
+                        />
                     </Button>
                 </Link>
 

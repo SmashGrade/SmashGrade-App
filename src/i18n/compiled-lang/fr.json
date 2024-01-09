@@ -12,6 +12,7 @@
     "moduleList.copy": "Kopieren",
     "moduleList.delete": "Löschen",
     "moduleList.deleteMessage": "Möchtest du das Module wirklich löschen?",
+    "moduleList.deleteSuccessMessage": "Modul erfolgreich gelöscht",
     "moduleList.edit": "Editieren",
     "my-course.menu": "Mes cours",
     "my-curriculum.menu": "Mon programme",
