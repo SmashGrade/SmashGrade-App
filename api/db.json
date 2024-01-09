@@ -1,4 +1,44 @@
 {
+    "users": [
+        {
+            "firstName": "Max",
+            "lastName": "Müller",
+            "email": "max.mueller@hftm.ch",
+            "role": "Student:in",
+            "curriculum": {
+                "id": 1,
+                "field": "Systemtechnik",
+                "focus": "Automation/ICT",
+                "year": 2023
+            }
+        },
+        {
+            "firstName": "Kurt",
+            "lastName": "Munter",
+            "email": "kurt.munter@hftm.ch",
+            "role": "Fachbereichsleitung",
+            "field": "Informatik"
+        },
+        {
+            "firstName": "Simeon",
+            "lastName": "Liniger",
+            "email": "simeon.liniger@hftm.ch",
+            "role": "Dozent:in"
+        },
+        {
+            "firstName": "Stefan",
+            "lastName": "Brandenberger",
+            "email": "stefan.brandenberger@hftm.ch",
+            "role": "Kursadministrator:in"
+        }
+    ],
+    "startYears": [{ "year": 2022 }, { "year": 2023 }, { "year": 2024 }, { "year": 2025 }, { "year": 2026 }],
+    "curriculums": [
+        { "id": 1, "title": "1. Lehrgang", "year": 2023 },
+        { "id": 2, "title": "2. Lehrgang", "year": 2023 },
+        { "id": 3, "title": "3. Lehrgang", "year": 2024 },
+        { "id": 4, "title": "4. Lehrgang", "year": 2026 }
+    ],
     "onboardingFilter": {
         "curriculumTypes": [
             {
@@ -239,6 +279,41 @@
         {
             "id": 3,
             "modules": []
+        }
+    ],
+    "modules": [
+        {
+            "id": 2,
+            "version": 0,
+            "description": "Management 2",
+            "number": "????",
+            "isActive": true,
+            "valuationCategory": {
+                "description": "string",
+                "code": "M"
+            }
+        },
+        {
+            "id": 3,
+            "version": 0,
+            "description": "Betriebs- und Organisationstechnik I",
+            "number": "VZGS1-2m",
+            "isActive": true,
+            "valuationCategory": {
+                "description": "string",
+                "code": "M"
+            }
+        },
+        {
+            "id": 1,
+            "version": 0,
+            "description": "Mathematik",
+            "number": "VZGS1-4m",
+            "isActive": true,
+            "valuationCategory": {
+                "description": "string",
+                "code": "M"
+            }
         }
     ]
 }

@@ -12,7 +12,7 @@ export default function SelectWithTitle({ title, selectProps }: Readonly<SelectW
             <div className={styles.title}>{title}</div>
             <Select
                 className={styles.selectElement}
-                // This always sets the first value as default value, but can be overwritten by setting defaultValue inside selectProps
+                // This always sets the first value as default value, but can be overwritten by settings defaultValue inside selectProps
                 defaultValue={selectProps?.options?.[0] ? selectProps?.options[0].value : null}
                 {...selectProps}
             />

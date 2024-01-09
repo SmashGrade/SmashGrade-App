@@ -47,13 +47,17 @@
         "defaultMessage": "Studenten",
         "description": "Studenten Menu"
     },
-    "account.menu": {
+    "settings.menu": {
         "defaultMessage": "Account",
         "description": "Account Menu"
     },
     "onboarding.title": {
         "defaultMessage": "Übersicht",
         "description": "Übersicht Titel"
+    },
+    "settings.title": {
+        "defaultMessage": "Einstellungen",
+        "description": "Einstellungen Titel"
     },
     "startYear": {
         "defaultMessage": "Startjahr",

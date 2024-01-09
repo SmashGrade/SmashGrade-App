@@ -1,5 +1,6 @@
 {
-    "account.menu": "Account",
+    "settings.menu": "Einstellungen",
+    "settings.title": "Einstellungen",
     "course.menu": "Kurse",
     "curriculum": "Lehrplan",
     "curriculum.menu": "Studiengänge",
