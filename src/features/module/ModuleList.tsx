@@ -111,7 +111,6 @@ const getMenuItems = (id: number, handleDelete: (id: number) => void): MenuProps
                 onClick={() => {
                     handleDelete(id);
                 }}
-                role={'button'}
             >
                 <DeleteOutlined />{' '}
                 <FormattedMessage
