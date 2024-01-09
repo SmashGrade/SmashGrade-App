@@ -242,6 +242,10 @@ export default function ModuleList() {
         },
     ];
 
+    const onFilterInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+        onFilterTextBoxChanged(e.target.value);
+    };
+
     return (
         <div className={styles.moduleContainer}>
             <div className={styles.spaceBetweenButtonAndSearch}>
@@ -256,11 +260,7 @@ export default function ModuleList() {
                     </Button>
                 </Link>
 
-                <Search
-                    placeholder={'Filter...'}
-                    onChange={(e) => onFilterTextBoxChanged(e.target.value)}
-                    className={styles.searchbar}
-                />
+                <Search placeholder={'Filter...'} onChange={onFilterInputChange} className={styles.searchbar} />
             </div>
             <div className={`ag-theme-alpine ${styles.table}`}>
                 <AgGridReact
