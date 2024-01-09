@@ -13,6 +13,8 @@
     "moduleList.delete": "Löschen",
     "moduleList.deleteMessage": "Möchtest du das Module wirklich löschen?",
     "moduleList.deleteSuccessMessage": "Modul erfolgreich gelöscht",
+    "moduleList.activeModule": "Aktiv",
+    "moduleList.inactiveModule": "Inaktiv",
     "moduleList.edit": "Editieren",
     "my-course.menu": "Meine Kurse",
     "my-curriculum.menu": "Mein Studium",

@@ -19,6 +19,10 @@
         "defaultMessage": "Logout",
         "description": "Logout Menu"
     },
+    "moduleList.activeModule": {
+        "defaultMessage": "Aktiv",
+        "description": "Displays the module status"
+    },
     "moduleList.addModuleButton": {
         "defaultMessage": "Modul hinzufügen",
         "description": "Button for creating a new module"
@@ -37,6 +41,10 @@
     },
     "moduleList.edit": {
         "defaultMessage": "Editieren"
+    },
+    "moduleList.inactiveModule": {
+        "defaultMessage": "Inaktiv",
+        "description": "Displays the module status"
     },
     "onboarding.title": {
         "defaultMessage": "Übersicht",

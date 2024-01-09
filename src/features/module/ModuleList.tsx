@@ -211,13 +211,7 @@ export default function ModuleList() {
             field: 'moduleIsActive',
             headerName: 'Status',
             cellStyle: { textAlign: 'center' },
-            cellRenderer: (params: { value: boolean }) => {
-                if (params.value) {
-                    return <div className={styles.isActive}>Aktiv</div>;
-                } else {
-                    return <div className={styles.isInactive}>Inaktiv</div>;
-                }
-            },
+            cellRenderer: (params: { value: boolean }) => <StatusCellRenderer value={params.value} />,
         },
         {
             field: 'actions',
@@ -226,23 +220,41 @@ export default function ModuleList() {
             width: 50,
             sortable: false,
             filter: '',
-            cellRenderer: (params: { data: ModuleObject }) => {
-                return (
-                    <Dropdown
-                        className={styles.alignSubmenu}
-                        menu={{
-                            items: getMenuItems(params.data.moduleId, handleDelete),
-                        }}
-                    >
-                        <Button type={'link'} icon={<MoreOutlined />} />
-                    </Dropdown>
-                );
-            },
+            cellRenderer: (params: { data: ModuleObject }) => <ActionsCellRenderer data={params.data} />,
         },
     ];
 
     const onFilterInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         onFilterTextBoxChanged(e.target.value);
+    };
+
+    // Renders the active/inactive Values
+    const StatusCellRenderer: React.FC<{ value: boolean }> = ({ value }) => {
+        return (
+            <div className={value ? styles.isActive : styles.isInactive}>
+                {value ? (
+                    <FormattedMessage
+                        id={'moduleList.activeModule'}
+                        defaultMessage={'Aktiv'}
+                        description={'Displays the module status'}
+                    />
+                ) : (
+                    <FormattedMessage
+                        id={'moduleList.inactiveModule'}
+                        defaultMessage={'Inaktiv'}
+                        description={'Displays the module status'}
+                    />
+                )}
+            </div>
+        );
+    };
+
+    const ActionsCellRenderer: React.FC<{ data: ModuleObject }> = ({ data }) => {
+        return (
+            <Dropdown className={styles.alignSubmenu} menu={{ items: getMenuItems(data.moduleId, handleDelete) }}>
+                <Button type={'link'} icon={<MoreOutlined />} />
+            </Dropdown>
+        );
     };
 
     return (
