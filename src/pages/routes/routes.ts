@@ -1,5 +1,6 @@
 import StudentModulePage from '@pages/ModulesPage.tsx';
 import { courseDetailRoute, courseIndexRoute, newCourseRoute } from '@pages/routes/courseRoutes.ts';
+import { copyModuleRoute, moduleDetailRoute, moduleIndexRoute, newModuleRoute } from '@pages/routes/moduleRoutes.ts';
 import { lazyRouteComponent, RootRoute, Route, Router, RouterMeta } from '@tanstack/react-router';
 import App from '../../App.tsx';
 import OnboardingPage from '../OnboardingPage.tsx';
@@ -34,6 +35,12 @@ export const courseRoute = new Route({
     component: lazyRouteComponent(() => import('@pages/CoursePage.tsx')),
 });
 
+export const moduleRoute = new Route({
+    getParentRoute: () => rootRoute,
+    path: '/module',
+    component: lazyRouteComponent(() => import('@pages/ModulePage.tsx')),
+});
+
 export const studentModuleRoute = new Route({
     getParentRoute: () => rootRoute,
     path: 'modules',
@@ -44,6 +51,7 @@ const routeTree = rootRoute.addChildren([
     indexRoute,
     onboardingRoute,
     curriculumRoute,
+    moduleRoute.addChildren([moduleIndexRoute.addChildren([moduleDetailRoute, newModuleRoute, copyModuleRoute])]),
     studentModuleRoute,
     courseRoute.addChildren([courseIndexRoute.addChildren([courseDetailRoute, newCourseRoute])]),
 ]);
