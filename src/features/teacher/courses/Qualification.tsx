@@ -57,7 +57,7 @@ export default function Qualification(props: QualificationProps) {
         error,
         data,
     } = useQuery({
-        queryKey: [],
+        queryKey: ['qualifications'],
         queryFn: () => getExams(''),
     });
 
