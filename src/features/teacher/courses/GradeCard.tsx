@@ -3,12 +3,12 @@ import Rating from '@features/student/modules/Rating.tsx';
 import styles from '@pages/MyCoursePage.module.scss';
 
 interface GradeCardProps {
-    readonly studentName: string;
-    readonly field: string;
-    readonly rating: number;
+    studentName: string;
+    field: string;
+    rating: number;
 }
 
-export default function GradeCard(props: GradeCardProps) {
+export default function GradeCard(props: Readonly<GradeCardProps>) {
     return (
         <div className={`${styles.outlined} ${styles.gradeComponent}`}>
             <div className={styles.gradeComponent}>
