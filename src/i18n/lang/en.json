@@ -19,9 +19,17 @@
         "defaultMessage": "Qualifications",
         "description": "Qualifikationsnachweise eines Kurses"
     },
+    "grade.assessment": {
+        "defaultMessage": "Assessment",
+        "description": "Bewertung eines Qualifikationsnachweises"
+    },
     "grade.average": {
         "defaultMessage": "Average",
         "description": "Durchschnitt einer Prüfung, Kurses, etc"
+    },
+    "grade.weighting": {
+        "defaultMessage": "Weighting",
+        "description": "Gewichtung eines Qualifikationsnachweises"
     },
     "user-management.menu": {
         "defaultMessage": "Usermanagement",

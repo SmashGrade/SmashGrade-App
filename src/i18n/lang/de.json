@@ -15,9 +15,17 @@
         "defaultMessage": "Studiengänge",
         "description": "Studiengang Menu"
     },
+    "grade.assessment": {
+        "defaultMessage": "Bewertung",
+        "description": "Bewertung eines Qualifikationsnachweises"
+    },
     "grade.average": {
         "defaultMessage": "Durchschnitt",
         "description": "Durchschnitt einer Prüfung, Kurses, etc"
+    },
+    "grade.weighting": {
+        "defaultMessage": "Gewichtung",
+        "description": "Gewichtung eines Qualifikationsnachweises"
     },
     "logout.menu": {
         "defaultMessage": "Logout",

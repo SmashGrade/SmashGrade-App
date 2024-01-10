@@ -3,12 +3,12 @@ import { Menu, Select } from 'antd';
 import type { MenuProps } from 'antd';
 import { MenuItemType } from 'antd/es/menu/hooks/useItems';
 import { useIntl } from 'react-intl';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { MenuInfo } from 'node_modules/rc-menu/lib/interface';
 
 import styles from './MyCoursePage.module.scss';
 import Grade from '@features/teacher/courses/Grade.tsx';
-import GradeInput from '@features/teacher/courses/GradeInput.tsx';
+import GradeProperty from '@features/teacher/courses/GradeProperty.tsx';
 import Qualification from '@features/teacher/courses/Qualification.tsx';
 
 interface Exam {
@@ -228,15 +228,15 @@ const customCourses: CustomCourse[] = [
     },
 ];
 
-export default function MyCoursePage() {
-    const dropdownItems = customCourses.map((customCourse, index) => ({
-        label: customCourse.startDate,
-        value: index,
-    }));
+const dropdownItems = customCourses.map((customCourse, index) => ({
+    label: customCourse.startDate,
+    value: index,
+}));
 
+export default function MyCoursePage() {
     type MenuItem = Required<MenuProps>['items'][number];
 
-    const getItem = React.useCallback(
+    const getItem = useCallback(
         (
             label: React.ReactNode,
             key: React.Key,
@@ -255,7 +255,7 @@ export default function MyCoursePage() {
         []
     );
 
-    const getMenuItems = React.useCallback(
+    const getMenuItems = useCallback(
         (key: number) => {
             return customCourses[key].course.map((course, index) =>
                 getItem(course.description, index.toString(), <BookFilled />)
@@ -268,14 +268,14 @@ export default function MyCoursePage() {
     const [menuItems, setMenuItems] = useState<MenuItem[]>(getMenuItems(0));
     const [current, setCurrent] = useState<MenuItemType>(menuItems[0] as MenuItemType);
 
-    const handleOnChange = React.useCallback(
+    const handleOnChange = useCallback(
         (e: number) => {
             setMenuItems(getMenuItems(e));
         },
         [getMenuItems]
     );
 
-    const menuOnClick = React.useCallback(
+    const menuOnClick = useCallback(
         (e: MenuInfo) => {
             setCurrent(menuItems[parseInt(e.key)] as MenuItemType);
         },
@@ -316,8 +316,22 @@ export default function MyCoursePage() {
                 <div className={`${styles.setWidth} ${styles.background}`}>
                     <h3>Test #1</h3>
                     <div className={styles.flexRowStart}>
-                        <GradeInput description={'Bewertung'} placeholder={'Schriftliche Prüfung'} />
-                        <GradeInput description={'Gewichtung'} placeholder={'30%'} />
+                        <GradeProperty
+                            description={intl.formatMessage({
+                                id: 'grade.assessment',
+                                defaultMessage: 'Bewertung',
+                                description: 'Bewertung eines Qualifikationsnachweises',
+                            })}
+                            placeholder={'Schriftliche Prüfung'}
+                        />
+                        <GradeProperty
+                            description={intl.formatMessage({
+                                id: 'grade.weighting',
+                                defaultMessage: 'Gewichtung',
+                                description: 'Gewichtung eines Qualifikationsnachweises',
+                            })}
+                            placeholder={'30%'}
+                        />
                     </div>
                 </div>
                 <Grade />
