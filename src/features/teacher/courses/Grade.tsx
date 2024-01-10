@@ -64,7 +64,7 @@ export default function Grade() {
                 })}
             </div>
             <Divider className={styles.divider} />
-            <div className={`${styles.flexRow} ${styles.baseInsetsLeftRight}`}>
+            <div className={`${styles.flexRowCenter} ${styles.baseInsetsLeftRight}`}>
                 <h3>
                     <FormattedMessage
                         id={'grade.average'}

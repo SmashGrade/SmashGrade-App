@@ -8,7 +8,7 @@ interface GradePropertyProps {
 
 export default function GradeProperty(props: Readonly<GradePropertyProps>) {
     return (
-        <div className={styles.flexCol}>
+        <div className={styles.baseFlexCol}>
             <p>{props.description}</p>
             <Tag style={{ fontSize: 'inherit', padding: 5 }}>{props.placeholder}</Tag>
         </div>
