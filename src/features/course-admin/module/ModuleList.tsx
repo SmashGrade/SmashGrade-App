@@ -9,73 +9,12 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { AgGridReact } from 'ag-grid-react';
 import { Button, Spin, Dropdown, Input, message } from 'antd';
 import type { MenuProps } from 'antd';
-import axios from 'axios';
 import { MoreOutlined, EditOutlined, DeleteOutlined, CopyOutlined } from '@ant-design/icons';
 import React, { useCallback, useRef } from 'react';
 import styles from './ModuleList.module.scss';
 import { FormattedMessage } from 'react-intl';
-
-export interface ModuleResponse {
-    id: number;
-    version: number;
-    description: string;
-    number: string;
-    isActive: boolean;
-    studyStage: {
-        id: number;
-        description: string;
-    };
-    valuationCategory: {
-        description: string;
-        code: string;
-    };
-    courses: Course[];
-}
-
-interface Curriculum {
-    id: number;
-    focus: string;
-    field: string;
-    curriculumType: string;
-    isActive: boolean;
-    startDate: string;
-    endDate: string;
-    description: string;
-    fieldmanagers: { id: number; name: string }[];
-    modules: ModuleResponse[];
-}
-
-interface Course {
-    id: number;
-    version: number;
-    description: string;
-    number: string;
-    versions: number[];
-    modules: ModuleResponse[];
-    exams: Exam[];
-    teachers: Teacher[];
-}
-
-interface Exam {
-    id: number;
-    description: string;
-    weight: number;
-    type: string;
-}
-
-interface Teacher {
-    id: number;
-    name: string;
-}
-
-interface ModuleObject {
-    curriculumId: number;
-    curriculumDescription: string;
-    moduleId: number;
-    moduleDescription: string;
-    moduleIsActive: boolean;
-    studyStage: string;
-}
+import { ModuleObject } from '@features/course-admin/interfaces/ModuleData.ts';
+import { getModules, deleteModuleById } from '@features/course-admin/module/moduleApi.ts';
 
 // Function to generate menu items dynamically based on id
 const getMenuItems = (id: number, handleDelete: (id: number) => void): MenuProps['items'] => [
@@ -125,33 +64,6 @@ const { Search } = Input;
 const defaultModuleColDef: ColDef<ModuleObject> = { sortable: true, filter: 'agTextColumnFilter' };
 
 // fetch data from curriculum to get all needed data for the module overview
-async function getModules(): Promise<ModuleObject[]> {
-    const { data: curriculumData } = await axios.get<Curriculum[]>(
-        `${import.meta.env.VITE_BACKEND_API_URL}/curriculum`
-    );
-
-    // Flatten the array of curriculum with modules and create an array of module objects
-    const moduleObjects: ModuleObject[] = curriculumData.flatMap((curriculum) =>
-        curriculum.modules.flatMap((module) =>
-            module.courses.flatMap((course) =>
-                course.modules.map((courseModule) => ({
-                    curriculumId: curriculum.id,
-                    curriculumDescription: curriculum.description,
-                    moduleId: courseModule.id,
-                    moduleDescription: courseModule.description,
-                    moduleIsActive: courseModule.isActive,
-                    studyStage: module.studyStage.description,
-                }))
-            )
-        )
-    );
-    console.debug(moduleObjects);
-    return moduleObjects;
-}
-
-async function deleteModuleById(id: number): Promise<void> {
-    await axios.delete(`${import.meta.env.VITE_BACKEND_API_URL}/modules/${id}`);
-}
 
 export default function ModuleList() {
     const gridRef = useRef<AgGridReact>(null);
@@ -215,6 +127,7 @@ export default function ModuleList() {
             headerName: '',
             resizable: false,
             width: 50,
+            cellStyle: { padding: '0px', textAlign: 'center' },
             sortable: false,
             filter: '',
             cellRenderer: (params: { data: ModuleObject }) => <ActionsCellRenderer data={params.data} />,
