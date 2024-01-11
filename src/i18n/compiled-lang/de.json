@@ -21,5 +21,6 @@
     "students.menu": "Studenten",
     "user-management.menu": "Benutzer",
     "settings.language": "Sprache",
-    "settings.myModules": "Meine Module"
+    "settings.myModules": "Meine Module",
+    "studyType": "Studiengang"
 }

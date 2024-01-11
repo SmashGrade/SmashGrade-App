@@ -90,5 +90,9 @@
     "settings.myModules": {
         "defaultMessage": "My Modules",
         "description": "My Modules"
+    },
+    "studyType": {
+        "defaultMessage": "Study Type",
+        "description": "Studiengang Dropdown Titel"
     }
 }

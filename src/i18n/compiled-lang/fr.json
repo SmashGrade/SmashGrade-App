@@ -21,5 +21,6 @@
     "students.menu": "Étudiants",
     "user-management.menu": "Gestion des utilisateurs",
     "settings.language": "Langue",
-    "settings.myModules": "Mes modules"
+    "settings.myModules": "Mes modules",
+    "studyType": "Type d'étude"
 }
