@@ -134,10 +134,6 @@ export default function ModuleList() {
         },
     ];
 
-    const onFilterInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-        onFilterTextBoxChanged(e.target.value);
-    };
-
     // Renders the active/inactive Values
     const StatusCellRenderer: React.FC<{ value: boolean }> = ({ value }) => {
         return (
@@ -181,7 +177,11 @@ export default function ModuleList() {
                     </Button>
                 </Link>
 
-                <Search placeholder={'Filter...'} onChange={onFilterInputChange} className={styles.searchbar} />
+                <Search
+                    placeholder={'Filter...'}
+                    onChange={(e) => onFilterTextBoxChanged(e.target.value)}
+                    className={styles.searchbar}
+                />
             </div>
             <Grid<ModuleObject>
                 gridRef={gridRef}
