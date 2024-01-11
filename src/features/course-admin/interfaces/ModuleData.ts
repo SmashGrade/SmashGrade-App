@@ -52,6 +52,7 @@ export interface Teacher {
 }
 
 export interface ModuleObject {
+    routingId: number;
     curriculumId: number;
     curriculumDescription: string;
     moduleId: number;

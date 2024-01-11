@@ -1,4 +1,6 @@
 import Grid from '@components/Grid.tsx';
+import DropdownCellRenderer from '@components/grid/DropdownCellRenderer.tsx';
+import StatusCellRenderer from '@components/grid/StatusCellRenderer.tsx';
 import { copyModuleRoute, moduleDetailRoute, newModuleRoute } from '@pages/routes/moduleRoutes.ts';
 import { moduleRoute } from '@pages/routes/routes.ts';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -7,17 +9,17 @@ import { ColDef } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { AgGridReact } from 'ag-grid-react';
-import { Button, Spin, Dropdown, Input, message } from 'antd';
+import { Button, Spin, Input, message } from 'antd';
 import type { MenuProps } from 'antd';
-import { MoreOutlined, EditOutlined, DeleteOutlined, CopyOutlined } from '@ant-design/icons';
-import React, { useCallback, useRef } from 'react';
+import { EditOutlined, DeleteOutlined, CopyOutlined } from '@ant-design/icons';
+import { useCallback, useRef } from 'react';
 import styles from './ModuleList.module.scss';
 import { FormattedMessage } from 'react-intl';
 import { ModuleObject } from '@features/course-admin/interfaces/ModuleData.ts';
 import { getModules, deleteModuleById } from '@features/course-admin/module/moduleApi.ts';
 
 // Function to generate menu items dynamically based on id
-const getMenuItems = (id: number, handleDelete: (id: number) => void): MenuProps['items'] => [
+const menuItems = (id: number, handleDelete: (id: number) => void): MenuProps['items'] => [
     {
         key: 'edit',
         label: (
@@ -62,8 +64,6 @@ const getMenuItems = (id: number, handleDelete: (id: number) => void): MenuProps
 const { Search } = Input;
 
 const defaultModuleColDef: ColDef<ModuleObject> = { sortable: true, filter: 'agTextColumnFilter' };
-
-// fetch data from curriculum to get all needed data for the module overview
 
 export default function ModuleList() {
     const gridRef = useRef<AgGridReact>(null);
@@ -130,38 +130,11 @@ export default function ModuleList() {
             cellStyle: { padding: '0px', textAlign: 'center' },
             sortable: false,
             filter: '',
-            cellRenderer: (params: { data: ModuleObject }) => <ActionsCellRenderer data={params.data} />,
+            cellRenderer: (params: { data: ModuleObject }) => (
+                <DropdownCellRenderer data={params.data} handleDelete={handleDelete} menuItems={menuItems} />
+            ),
         },
     ];
-
-    // Renders the active/inactive Values
-    const StatusCellRenderer: React.FC<{ value: boolean }> = ({ value }) => {
-        return (
-            <div className={value ? styles.isActive : styles.isInactive}>
-                {value ? (
-                    <FormattedMessage
-                        id={'moduleList.activeModule'}
-                        defaultMessage={'Aktiv'}
-                        description={'Displays the module status'}
-                    />
-                ) : (
-                    <FormattedMessage
-                        id={'moduleList.inactiveModule'}
-                        defaultMessage={'Inaktiv'}
-                        description={'Displays the module status'}
-                    />
-                )}
-            </div>
-        );
-    };
-
-    const ActionsCellRenderer: React.FC<{ data: ModuleObject }> = ({ data }) => {
-        return (
-            <Dropdown className={styles.alignSubmenu} menu={{ items: getMenuItems(data.moduleId, handleDelete) }}>
-                <Button type={'link'} icon={<MoreOutlined />} />
-            </Dropdown>
-        );
-    };
 
     return (
         <div className={styles.moduleContainer}>

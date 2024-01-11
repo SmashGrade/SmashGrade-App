@@ -11,6 +11,7 @@ export async function getModules(): Promise<ModuleObject[]> {
         curriculum.modules.flatMap((module) =>
             module.courses.flatMap((course) =>
                 course.modules.map((courseModule) => ({
+                    routingId: courseModule.id,
                     curriculumId: curriculum.id,
                     curriculumDescription: curriculum.description,
                     moduleId: courseModule.id,
