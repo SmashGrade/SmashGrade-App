@@ -1,3 +1,4 @@
+import Grid from '@components/Grid.tsx';
 import { copyModuleRoute, moduleDetailRoute, newModuleRoute } from '@pages/routes/moduleRoutes.ts';
 import { moduleRoute } from '@pages/routes/routes.ts';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -76,10 +77,6 @@ interface ModuleObject {
     studyStage: string;
 }
 
-interface ModuleWithActions extends ModuleObject {
-    actions: 'Edit' | 'Copy' | 'Delete';
-}
-
 // Function to generate menu items dynamically based on id
 const getMenuItems = (id: number, handleDelete: (id: number) => void): MenuProps['items'] => [
     {
@@ -125,7 +122,7 @@ const getMenuItems = (id: number, handleDelete: (id: number) => void): MenuProps
 
 const { Search } = Input;
 
-const defaultModuleColDef: ColDef<ModuleResponse> = { sortable: true, filter: 'agTextColumnFilter' };
+const defaultModuleColDef: ColDef<ModuleObject> = { sortable: true, filter: 'agTextColumnFilter' };
 
 // fetch data from curriculum to get all needed data for the module overview
 async function getModules(): Promise<ModuleObject[]> {
@@ -203,7 +200,7 @@ export default function ModuleList() {
     /*    if (isDeleteModulePending) return <div>Error when loading courses</div>;
     if (isDeleteModuleError) return <Spin />;*/
 
-    const moduleColumnDefs: ColDef<ModuleWithActions>[] = [
+    const moduleColumnDefs: ColDef<ModuleObject>[] = [
         { field: 'moduleDescription', headerName: 'Module', flex: 1 },
         { field: 'curriculumDescription', headerName: 'Studiengang', flex: 1 },
         { field: 'studyStage', headerName: 'Lehrgang' },
@@ -214,7 +211,7 @@ export default function ModuleList() {
             cellRenderer: (params: { value: boolean }) => <StatusCellRenderer value={params.value} />,
         },
         {
-            field: 'actions',
+            colId: 'actions',
             headerName: '',
             resizable: false,
             width: 50,
@@ -273,14 +270,12 @@ export default function ModuleList() {
 
                 <Search placeholder={'Filter...'} onChange={onFilterInputChange} className={styles.searchbar} />
             </div>
-            <div className={`ag-theme-alpine ${styles.table}`}>
-                <AgGridReact
-                    ref={gridRef}
-                    rowData={moduleData}
-                    columnDefs={moduleColumnDefs}
-                    defaultColDef={defaultModuleColDef}
-                />
-            </div>
+            <Grid<ModuleObject>
+                gridRef={gridRef}
+                rowData={moduleData}
+                columnDefs={moduleColumnDefs}
+                defaultColDef={defaultModuleColDef}
+            />
         </div>
     );
 }
