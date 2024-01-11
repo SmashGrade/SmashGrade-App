@@ -45,9 +45,14 @@
     cursor: pointer;
     outline: inherit;
     box-shadow: none;
-    padding-left: 0;
+    font-size: unset;
+    padding: 0;
 }
 
 .alignSubmenu {
     text-align: center;
+}
+
+.iconTextSpaceBetween {
+    margin-right: 5px;
 }

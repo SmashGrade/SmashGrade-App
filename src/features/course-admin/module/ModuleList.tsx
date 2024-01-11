@@ -30,7 +30,7 @@ const getMenuItems = (id: number, handleDelete: (id: number) => void): MenuProps
         key: 'copy',
         label: (
             <Link from={moduleRoute.to} to={copyModuleRoute.to} params={{ id }}>
-                <CopyOutlined />{' '}
+                <CopyOutlined className={styles.iconTextSpaceBetween} />
                 <FormattedMessage
                     id={'moduleList.copy'}
                     defaultMessage={'Kopieren'}
@@ -47,8 +47,8 @@ const getMenuItems = (id: number, handleDelete: (id: number) => void): MenuProps
                 onClick={() => {
                     handleDelete(id);
                 }}
+                icon={<DeleteOutlined className={styles.iconTextSpaceBetween} />}
             >
-                <DeleteOutlined />{' '}
                 <FormattedMessage
                     id={'moduleList.delete'}
                     defaultMessage={'Löschen'}
