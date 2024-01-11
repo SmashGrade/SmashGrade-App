@@ -10,6 +10,7 @@ interface MeResponse {
     givenName: string;
     surname: string;
     userPrincipalName: string;
+    mail: string;
 }
 
 const getAccessToken = async (instance: IPublicClientApplication) => {

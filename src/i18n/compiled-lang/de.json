@@ -19,5 +19,7 @@
     "student.noModulesFound": "Es wurden keine Module gefunden",
     "student.specialisedStudies": "Fachstudium",
     "students.menu": "Studenten",
-    "user-management.menu": "Benutzer"
+    "user-management.menu": "Benutzer",
+    "settings.language": "Sprache",
+    "settings.myModules": "Meine Module"
 }

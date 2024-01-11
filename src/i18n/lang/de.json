@@ -82,5 +82,13 @@
     "user-management.menu": {
         "defaultMessage": "Benutzer",
         "description": "Benutzer Menu"
+    },
+    "settings.language": {
+        "defaultMessage": "Sprache",
+        "description": "Sprachoption"
+    },
+    "settings.myModules": {
+        "defaultMessage": "Meine Module",
+        "description": "Meine Module"
     }
 }

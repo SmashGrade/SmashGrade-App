@@ -52,16 +52,12 @@ export function UserProfile() {
     const { instance } = useMsal();
     const { userProfile, isLoading, error } = useUserProfile();
 
-    const {
-        isLoading: pictureLoading,
-        error: pictureError,
-        data: profilePicture,
-    } = useQuery({
+    const { error: pictureError, data: profilePicture } = useQuery({
         queryKey: ['userPicture'],
         queryFn: () => getUserPicture(instance),
     });
 
-    if (isLoading || pictureLoading) return <Spin />;
+    if (isLoading) return <Spin />;
     if (error) return <div>Fehler beim Laden des Benutzerprofils: {error.message}</div>;
     if (pictureError) return <div>Fehler beim Laden des Profilbildes: {pictureError.message}</div>;
 
@@ -71,6 +67,7 @@ export function UserProfile() {
     return (
         <div className={styles.menuItemIconAbove}>
             <Avatar src={profilePicture} shape={'circle'} size={40} alt={'User Profile'}>
+                {/*Initials are a fallback for profile picture (for example if no picture is found)*/}
                 {!profilePicture && initials}
             </Avatar>
             {userProfile?.displayName}

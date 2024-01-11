@@ -82,5 +82,13 @@
     "settings.title": {
         "defaultMessage": "Settings",
         "description": "Settings Titel"
+    },
+    "settings.language": {
+        "defaultMessage": "Language",
+        "description": "Language option"
+    },
+    "settings.myModules": {
+        "defaultMessage": "My Modules",
+        "description": "My Modules"
     }
 }
