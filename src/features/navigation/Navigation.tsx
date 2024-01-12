@@ -16,14 +16,15 @@ import { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import logo from '../../assets/images/SmashGrade-AppIcon.png';
 import {
+    courseMenu,
     curriculumMenu,
     moduleMenu,
-    courseMenu,
-    userManagementMenu,
-    studentsMenu,
     myCourseMenu,
     myCurriculumMenu,
     onboardingMenu,
+    settingsMenu,
+    studentsMenu,
+    userManagementMenu,
 } from '../../i18n/dynamic-messages/menuMessages.ts';
 import styles from './Navigation.module.scss';
 
@@ -83,14 +84,7 @@ export default function Navigation() {
                 key: 'account',
                 children: [
                     {
-                        label: (
-                            <IconLink
-                                to={settingsRoute.to}
-                                messageId={'settings.menu'}
-                                defaultMessage={'Settings'}
-                                description={'Settings Menu'}
-                            />
-                        ),
+                        label: <IconLink to={settingsRoute.to} messageProps={settingsMenu} />,
                         key: 'settings',
                         disabled: false,
                     },

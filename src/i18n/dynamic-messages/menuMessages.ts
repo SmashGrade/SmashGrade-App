@@ -47,3 +47,9 @@ export const onboardingMenu = defineMessage({
     defaultMessage: 'Onboarding',
     description: 'Onboarding Menu',
 });
+
+export const settingsMenu = defineMessage({
+    id: 'settings.menu',
+    defaultMessage: 'Settings',
+    description: 'Settings Menu',
+});
