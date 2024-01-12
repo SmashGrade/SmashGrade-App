@@ -1,5 +1,6 @@
 {
-    "account.menu": "Account",
+    "settings.menu": "Settings",
+    "settings.title": "Settings",
     "course.menu": "Course",
     "curriculum": "Curriculum",
     "curriculum.menu": "Curriculum",
@@ -18,6 +19,8 @@
     "student.noModulesFound": "No modules found",
     "student.specialisedStudies": "Specialised studies",
     "students.menu": "Students",
-    "studyType": "Study Type",
-    "user-management.menu": "Usermanagement"
+    "user-management.menu": "Usermanagement",
+    "settings.language": "Language",
+    "settings.myModules": "My Modules",
+    "studyType": "Study Type"
 }

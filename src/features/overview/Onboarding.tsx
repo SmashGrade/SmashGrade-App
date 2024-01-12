@@ -120,13 +120,15 @@ export default function Onboarding({ isReadonly }: Readonly<OnboardingProps>) {
 
     return (
         <div className={styles.overviewContainer}>
-            <h1>
-                <FormattedMessage
-                    id={'onboarding.title'}
-                    defaultMessage={'Übersicht'}
-                    description={'Übersicht Titel'}
-                />
-            </h1>
+            {!isReadonly && (
+                <h1>
+                    <FormattedMessage
+                        id={'onboarding.title'}
+                        defaultMessage={'Übersicht'}
+                        description={'Übersicht Titel'}
+                    />
+                </h1>
+            )}
             <SelectWithTitle
                 key={'startYear'}
                 selectProps={{ options: getYears(), onChange: setCurrentYear, disabled: isReadonly }}

@@ -35,9 +35,9 @@
         "defaultMessage": "Students",
         "description": "Studenten Menu"
     },
-    "account.menu": {
-        "defaultMessage": "Account",
-        "description": "Account Menu"
+    "settings.menu": {
+        "defaultMessage": "Settings",
+        "description": "Settings Menu"
     },
     "language.english": {
         "defaultMessage": "English",
@@ -78,6 +78,18 @@
     "logout.menu": {
         "defaultMessage": "Logout",
         "description": "Logout Menu"
+    },
+    "settings.title": {
+        "defaultMessage": "Settings",
+        "description": "Settings Titel"
+    },
+    "settings.language": {
+        "defaultMessage": "Language",
+        "description": "Language option"
+    },
+    "settings.myModules": {
+        "defaultMessage": "My Modules",
+        "description": "My Modules"
     },
     "studyType": {
         "defaultMessage": "Study Type",

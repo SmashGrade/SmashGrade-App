@@ -2,7 +2,13 @@ import { useMsal } from '@azure/msal-react';
 import { IconLink } from '@components/ui-elements/IconLink.tsx';
 import { UserProfile } from '@features/profile/UserProfile.tsx';
 import useUserRoles from '@hooks/useUserRoles.ts';
-import { courseRoute, curriculumRoute, onboardingRoute, studentModuleRoute } from '@pages/routes/routes.ts';
+import {
+    courseRoute,
+    curriculumRoute,
+    onboardingRoute,
+    settingsRoute,
+    studentModuleRoute,
+} from '@pages/routes/routes.ts';
 import { useRouter } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
@@ -124,6 +130,18 @@ export default function Navigation() {
                 label: <UserProfile />,
                 key: 'account',
                 children: [
+                    {
+                        label: (
+                            <IconLink
+                                to={settingsRoute.to}
+                                messageId={'settings.menu'}
+                                defaultMessage={'Settings'}
+                                description={'Settings Menu'}
+                            />
+                        ),
+                        key: 'settings',
+                        disabled: false,
+                    },
                     {
                         label: (
                             <div

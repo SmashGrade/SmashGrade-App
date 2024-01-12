@@ -1,5 +1,6 @@
 {
-    "account.menu": "Compte",
+    "settings.menu": "Configurations",
+    "settings.title": "Configurations",
     "course.menu": "Cours",
     "curriculum": "Plan d'études",
     "curriculum.menu": "Programme",
@@ -18,6 +19,8 @@
     "student.noModulesFound": "Aucun module n'a été trouvé",
     "student.specialisedStudies": "Études spécialisées",
     "students.menu": "Étudiants",
-    "studyType": "Type d'étude",
-    "user-management.menu": "Gestion des utilisateurs"
+    "user-management.menu": "Gestion des utilisateurs",
+    "settings.language": "Langue",
+    "settings.myModules": "Mes modules",
+    "studyType": "Type d'étude"
 }

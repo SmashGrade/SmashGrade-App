@@ -1,5 +1,6 @@
 {
-    "account.menu": "Account",
+    "settings.menu": "Einstellungen",
+    "settings.title": "Einstellungen",
     "course.menu": "Kurse",
     "curriculum": "Lehrplan",
     "curriculum.menu": "Studiengänge",
@@ -18,6 +19,8 @@
     "student.noModulesFound": "Es wurden keine Module gefunden",
     "student.specialisedStudies": "Fachstudium",
     "students.menu": "Studenten",
-    "studyType": "Studiengang",
-    "user-management.menu": "Benutzer"
+    "user-management.menu": "Benutzer",
+    "settings.language": "Sprache",
+    "settings.myModules": "Meine Module",
+    "studyType": "Studiengang"
 }

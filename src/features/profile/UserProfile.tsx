@@ -5,14 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Avatar, Spin } from 'antd';
 import axios, { AxiosError } from 'axios';
 import { loginRequest, msGraphEndpoints } from '../../config/authConfig.ts';
-
-interface MeResponse {
-    id: string;
-    displayName: string;
-    givenName: string;
-    surname: string;
-    userPrincipalName: string;
-}
+import { useUserProfile } from '@hooks/useUserProfile.ts';
 
 const getAccessToken = async (instance: IPublicClientApplication) => {
     try {
@@ -55,47 +48,27 @@ async function getUserPicture(instance: IPublicClientApplication) {
     }
 }
 
-async function getUserProfile(instance: IPublicClientApplication) {
-    const accessToken = await getAccessToken(instance);
-    const { data } = await axios.get<MeResponse>(msGraphEndpoints.userProfile, {
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-        },
-    });
-    return data;
-}
-
 export function UserProfile() {
     const { instance } = useMsal();
-    const {
-        isLoading,
-        error: userProfileError,
-        data: userProfile,
-    } = useQuery({
-        queryKey: ['userProfile'],
-        queryFn: () => getUserProfile(instance),
-    });
-    const {
-        isLoading: pictureLoading,
-        error: pictureError,
-        data: profilePicture,
-    } = useQuery({
+    const { userProfile, isLoading, error } = useUserProfile();
+
+    const { error: pictureError, data: profilePicture } = useQuery({
         queryKey: ['userPicture'],
         queryFn: () => getUserPicture(instance),
     });
 
-    if (isLoading || pictureLoading || userProfile === undefined) return <Spin />;
-    if (pictureError) return <div>{pictureError.message}</div>;
-    if (userProfileError) return <div>{userProfileError.message}</div>;
+    if (isLoading) return <Spin />;
+    if (error) return <div>Fehler beim Laden des Benutzerprofils: {error.message}</div>;
+    if (pictureError) return <div>Fehler beim Laden des Profilbildes: {pictureError.message}</div>;
 
-    const nameParts = userProfile.displayName.split(' ');
-    const initials = `${nameParts[0][0]}${nameParts[nameParts.length - 1][0]}`;
+    const nameParts = userProfile?.displayName.split(' ');
+    const initials = nameParts ? `${nameParts[0][0]}${nameParts[nameParts.length - 1][0]}` : '';
 
     return (
         <div className={styles.menuItemIconAbove}>
             <Avatar src={profilePicture} shape={'circle'} size={40} alt={'User Profile'}>
                 {/*Initials are a fallback for profile picture (for example if no picture is found)*/}
-                {initials}
+                {!profilePicture && initials}
             </Avatar>
             {userProfile?.displayName}
         </div>
