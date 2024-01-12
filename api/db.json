@@ -87,7 +87,7 @@
       "id": 1,
       "version": 1,
       "description": "Projektmanagement",
-      "number": "3.12111",
+      "number": "555",
       "modules": [
         {
           "id": 0,
@@ -98,6 +98,51 @@
         }
       ],
       "teachers": [
+        {
+          "id": 1,
+          "name": "Simeon Liniger"
+        },
+        {
+          "id": 2,
+          "name": "Kurt Munter"
+        },
+        {
+          "id": 3,
+          "name": "Richard Moor"
+        }
+      ],
+      "exams": [
+        {
+          "id": 1,
+          "description": "Projektarbeit",
+          "weight": 2,
+          "type": "Schriftliche Arbeit 2"
+        },
+        {
+          "id": 2,
+          "description": "Abschlusspräsentation",
+          "weight": 2,
+          "type": "Präsentation"
+        },
+        {
+          "id": 3,
+          "description": "Zusammenfassung",
+          "weight": 1,
+          "type": "Credits Aufgabe"
+        },
+        {
+          "id": 4,
+          "description": "Prüfung 1",
+          "type": "Moodle Test",
+          "weight": 3
+        }
+      ],
+      "versions": [
+        1,
+        2,
+        3
+      ]
+    },
     {
       "id": 2,
       "version": 2,
@@ -314,16 +359,9 @@
     },
     {
       "version": 1,
-      "description": "Neuer Kurs",
-      "number": "123",
+      "description": "NEW COURSE",
+      "number": "12",
       "modules": [
-        {
-          "id": 0,
-          "version": 1,
-          "description": "Schnittstellen-Technologien",
-          "number": "string",
-          "isActive": true
-        },
         {
           "id": 1,
           "version": 1,
@@ -336,21 +374,13 @@
         {
           "id": 1,
           "name": "Simeon Liniger"
-        },
-        {
-          "id": 2,
-          "name": "Kurt Munter"
-        },
-        {
-          "id": 3,
-          "name": "Richard Moor"
         }
       ],
       "exams": [
         {
           "id": 1,
           "description": "Test",
-          "type": "ttest",
+          "type": "test",
           "weight": 1
         }
       ],
