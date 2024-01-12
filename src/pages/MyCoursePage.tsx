@@ -3,7 +3,7 @@ import { Menu, Select } from 'antd';
 import type { MenuProps } from 'antd';
 import { MenuItemType } from 'antd/es/menu/hooks/useItems';
 import { useIntl } from 'react-intl';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { MenuInfo } from 'node_modules/rc-menu/lib/interface';
 
 import styles from './MyCoursePage.module.scss';
@@ -34,6 +34,8 @@ interface Course {
     exams: Exam[];
     teachers: Teacher[];
 }
+
+type MenuItem = Required<MenuProps>['items'][number];
 
 const customCourses: CustomCourse[] = [
     {
@@ -233,37 +235,29 @@ const dropdownItems = customCourses.map((customCourse, index) => ({
     value: index,
 }));
 
+const getItem = (
+    label: React.ReactNode,
+    key: React.Key,
+    icon?: React.ReactNode,
+    children?: MenuItem[],
+    type?: 'group'
+): MenuItem => {
+    return {
+        key,
+        icon,
+        children,
+        label,
+        type,
+    } as MenuItem;
+};
+
+const getMenuItems = (key: number) => {
+    return customCourses[key].course.map((course, index) =>
+        getItem(course.description, index.toString(), <BookFilled />)
+    );
+};
+
 export default function MyCoursePage() {
-    type MenuItem = Required<MenuProps>['items'][number];
-
-    const getItem = useCallback(
-        (
-            label: React.ReactNode,
-            key: React.Key,
-            icon?: React.ReactNode,
-            children?: MenuItem[],
-            type?: 'group'
-        ): MenuItem => {
-            return {
-                key,
-                icon,
-                children,
-                label,
-                type,
-            } as MenuItem;
-        },
-        []
-    );
-
-    const getMenuItems = useCallback(
-        (key: number) => {
-            return customCourses[key].course.map((course, index) =>
-                getItem(course.description, index.toString(), <BookFilled />)
-            );
-        },
-        [getItem]
-    );
-
     const intl = useIntl();
     const [menuItems, setMenuItems] = useState<MenuItem[]>(getMenuItems(0));
     const [current, setCurrent] = useState<MenuItemType>(menuItems[0] as MenuItemType);
@@ -271,8 +265,10 @@ export default function MyCoursePage() {
     const handleOnChange = useCallback(
         (e: number) => {
             setMenuItems(getMenuItems(e));
+            // Automatically select the first menu item when the selected year changes
+            setCurrent(menuItems[0] as MenuItemType);
         },
-        [getMenuItems]
+        [menuItems]
     );
 
     const menuOnClick = useCallback(
@@ -281,11 +277,6 @@ export default function MyCoursePage() {
         },
         [menuItems]
     );
-
-    // Automatically select the first menu item when the selected year changes
-    useEffect(() => {
-        setCurrent(menuItems[0] as MenuItemType);
-    }, [menuItems]);
 
     return (
         <div className={styles.myCoursePage}>
