@@ -99,6 +99,10 @@ export default function CourseForm(props: Readonly<CourseFormProps>) {
         [courseFormFilterData, props.courseData, props.mutation, props.newCourse]
     );
 
+    const onSave = useCallback(() => {
+        courseForm.submit();
+    }, [courseForm]);
+
     if (courseFormFilterError) return <div>Error when loading filters</div>;
     if (isCourseFormFilterLoading) return <Spin />;
 
@@ -179,14 +183,7 @@ export default function CourseForm(props: Readonly<CourseFormProps>) {
                     />
                 </Button>
 
-                <Button
-                    type={'primary'}
-                    icon={<SaveOutlined />}
-                    className={styles.buttons}
-                    onClick={() => {
-                        courseForm.submit();
-                    }}
-                >
+                <Button type={'primary'} icon={<SaveOutlined />} className={styles.buttons} onClick={onSave}>
                     <FormattedMessage
                         id={'course.ButtonSave'}
                         defaultMessage={'Speichern'}

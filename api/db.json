@@ -127,14 +127,8 @@
         {
           "id": 3,
           "description": "Zusammenfassung",
-          "weight": 1,
+          "weight": 4,
           "type": "Credits Aufgabe"
-        },
-        {
-          "id": 4,
-          "description": "Prüfung 1",
-          "type": "Moodle Test",
-          "weight": 3
         }
       ],
       "versions": [

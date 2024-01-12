@@ -3,8 +3,8 @@ import styles from '@features/course-admin/CourseCreation.module.scss';
 import { CourseFormData } from '@features/course-admin/CourseDetailForm.tsx';
 import { ExamResponse } from '@features/course-admin/interfaces/CourseData.ts';
 import { FormFilters } from '@features/course-admin/interfaces/FormFilters.ts';
-import { Button, Col, Divider, Form, Input, InputNumber, Row } from 'antd';
-import { useState } from 'react';
+import { Button, Col, Divider, Form, FormListOperation, Input, InputNumber, Row } from 'antd';
+import { useCallback, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import colors from '../../colors.module.scss';
 import layout from '../../layout.module.scss';
@@ -23,7 +23,7 @@ export function ExamForm(props: Readonly<ExamFormProps>) {
     });
 
     // Updates the total weight of all exams live on input change
-    const onWeightChange = (rowIndex: number, newWeight: number | null) => {
+    const updateWeight = (rowIndex: number, newWeight: number | null) => {
         if (newWeight === null) {
             return;
         }
@@ -31,6 +31,25 @@ export function ExamForm(props: Readonly<ExamFormProps>) {
         const newTotal = updatedWeights.reduce((acc, curr) => acc + curr, 0);
         setWeights({ totalWeight: newTotal, weights: updatedWeights });
     };
+
+    const addExam = useCallback(
+        (add: FormListOperation['add']) => {
+            return () => {
+                setWeights((prev) => ({
+                    totalWeight: prev.totalWeight + 1,
+                    weights: [...prev.weights, 1],
+                }));
+
+                add({
+                    id: props.courseExams.length ? props.courseExams[props.courseExams.length - 1].id + 1 : 1,
+                    description: '',
+                    type: '',
+                    weight: 1,
+                });
+            };
+        },
+        [props.courseExams]
+    );
 
     return (
         <div
@@ -76,6 +95,19 @@ export function ExamForm(props: Readonly<ExamFormProps>) {
                     {(fields, { add, remove }) => (
                         <>
                             {fields.map((field) => {
+                                const onExamDelete = () => {
+                                    setWeights((prev) => ({
+                                        totalWeight: prev.totalWeight - 1,
+                                        weights: prev.weights.filter((_, index) => index !== field.name),
+                                    }));
+
+                                    remove(field.name);
+                                };
+
+                                const onWeightChange = (value: number | null) => {
+                                    updateWeight(field.name, value);
+                                };
+
                                 return (
                                     <Row gutter={16} key={'row-' + field.key}>
                                         <Col span={11}>
@@ -104,9 +136,7 @@ export function ExamForm(props: Readonly<ExamFormProps>) {
                                                     style={{ width: '100%' }}
                                                     min={1}
                                                     max={100}
-                                                    onChange={(value: number | null) =>
-                                                        onWeightChange(field.name, value)
-                                                    }
+                                                    onChange={onWeightChange}
                                                 />
                                             </Form.Item>
                                         </Col>
@@ -116,43 +146,14 @@ export function ExamForm(props: Readonly<ExamFormProps>) {
                                             </div>
                                         </Col>
                                         <Col span={2}>
-                                            <Button
-                                                onClick={() => {
-                                                    setWeights((prev) => ({
-                                                        totalWeight: prev.totalWeight - 1,
-                                                        weights: prev.weights.filter(
-                                                            (_, index) => index !== field.name
-                                                        ),
-                                                    }));
-
-                                                    remove(field.name);
-                                                }}
-                                                type={'primary'}
-                                            >
+                                            <Button onClick={onExamDelete} type={'primary'}>
                                                 <MaterialIcon icon={'delete'} size={'small'} />
                                             </Button>
                                         </Col>
                                     </Row>
                                 );
                             })}
-                            <Button
-                                type={'dashed'}
-                                onClick={() => {
-                                    setWeights((prev) => ({
-                                        totalWeight: prev.totalWeight + 1,
-                                        weights: [...prev.weights, 1],
-                                    }));
-
-                                    add({
-                                        id: props.courseExams.length
-                                            ? props.courseExams[props.courseExams.length - 1].id + 1
-                                            : 1,
-                                        description: '',
-                                        type: '',
-                                        weight: 1,
-                                    });
-                                }}
-                            >
+                            <Button type={'dashed'} onClick={addExam(add)}>
                                 Add Exam
                             </Button>
                         </>
