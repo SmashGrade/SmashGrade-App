@@ -281,6 +281,40 @@
             "modules": []
         }
     ],
+    "courseTeacher": {
+        "id": 0,
+        "version": 0,
+        "description": "Projektmanagement",
+        "number": "3.121",
+        "exams": [
+            {
+                "id": 0,
+                "description": "Projektarbeit",
+                "weight": 0.3,
+                "type": "Schritfliche Arbeit",
+                "avgGrades": [
+                    {
+                        "id": 0,
+                        "description": "CH-Note",
+                        "grade": 4.3
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "description": "Projektpräsentation",
+                "weight": 0.7,
+                "type": "Mündliche Prüfung",
+                "avgGrades": [
+                    {
+                        "id": 1,
+                        "description": "CH-Note",
+                        "grade": 5.5
+                    }
+                ]
+            }
+        ]
+    },
     "modules": [
         {
             "id": 2,
@@ -314,6 +348,74 @@
                 "description": "string",
                 "code": "M"
             }
+        }
+    ],
+    "curriculum":[
+        {
+            "id": 0,
+            "focus": "Softwareentwicklung",
+            "field": "Informatik",
+            "curriculumType": "Berufsbegleitend",
+            "isActiv": true,
+            "startDate": "2023-11-29T20:26:25.859Z",
+            "endDate": "2023-11-29T20:26:25.859Z",
+            "fieldmanagers": [
+                {
+                    "id": 0,
+                    "name": "Kurt Munter"
+                }
+            ],
+            "modules": [
+                {
+                    "id": 0,
+                    "version": 0,
+                    "description": "Schnittstellen-Technologien",
+                    "number": "string",
+                    "isActiv": true,
+                    "studyStage": {
+                        "id": 0,
+                        "description": "Fachstudium"
+                    },
+                    "valuationCategory": {
+                        "description": "string",
+                        "code": "E"
+                    },
+                    "courses": [
+                        {
+                            "id": 0,
+                            "version": 0,
+                            "description": "Projektmanagement",
+                            "number": "3.121",
+                            "versions": [
+                                0
+                            ],
+                            "modules": [
+                                {
+                                    "id": 0,
+                                    "version": 0,
+                                    "description": "Schnittstellen-Technologien",
+                                    "number": "string",
+                                    "isActiv": true
+                                }
+                            ],
+                            "exams": [
+                                {
+                                    "id": 0,
+                                    "description": "Projektarbeit",
+                                    "weight": 3,
+                                    "type": "Schritfliche Arbeit"
+                                }
+                            ],
+                            "teachers": [
+                                {
+                                    "id": 0,
+                                    "name": "Simeon Liniger"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

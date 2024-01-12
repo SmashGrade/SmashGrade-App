@@ -15,6 +15,22 @@
         "defaultMessage": "Cours",
         "description": "Menu des cours"
     },
+    "course.qualification": {
+        "defaultMessage": "Attestations de qualification",
+        "description": "Qualifikationsnachweise eines Kurses"
+    },
+    "grade.assessment": {
+        "defaultMessage": "Évaluation",
+        "description": "Bewertung eines Qualifikationsnachweises"
+    },
+    "grade.average": {
+        "defaultMessage": "Moyenne",
+        "description": "Durchschnitt einer Prüfung, Kurses, etc"
+    },
+    "grade.weighting": {
+        "defaultMessage": "Pondération",
+        "description": "Gewichtung eines Qualifikationsnachweises"
+    },
     "user-management.menu": {
         "defaultMessage": "Gestion des utilisateurs",
         "description": "Menu de la gestion des utilisateurs"

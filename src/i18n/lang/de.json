@@ -3,6 +3,10 @@
         "defaultMessage": "Kurse",
         "description": "Kurse Menu"
     },
+    "course.qualification": {
+        "defaultMessage": "Qualifikationsnachweise",
+        "description": "Qualifikationsnachweise eines Kurses"
+    },
     "curriculum": {
         "defaultMessage": "Lehrplan",
         "description": "Lehrplan Dropdown Titel"
@@ -10,6 +14,18 @@
     "curriculum.menu": {
         "defaultMessage": "Studiengänge",
         "description": "Studiengang Menu"
+    },
+    "grade.assessment": {
+        "defaultMessage": "Bewertung",
+        "description": "Bewertung eines Qualifikationsnachweises"
+    },
+    "grade.average": {
+        "defaultMessage": "Durchschnitt",
+        "description": "Durchschnitt einer Prüfung, Kurses, etc"
+    },
+    "grade.weighting": {
+        "defaultMessage": "Gewichtung",
+        "description": "Gewichtung eines Qualifikationsnachweises"
     },
     "logout.menu": {
         "defaultMessage": "Logout",
