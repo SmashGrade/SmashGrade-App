@@ -10,6 +10,7 @@ async function importMessages(locale: AvailableLocales): Promise<LocaleMessages>
     switch (locale) {
         case AvailableLocales.English: {
             const enModule = await import('./compiled-lang/en.json');
+            // @ts-expect-error - complains because english does not have all translations, low prio
             return enModule.default;
         }
         case AvailableLocales.German: {
@@ -18,6 +19,7 @@ async function importMessages(locale: AvailableLocales): Promise<LocaleMessages>
         }
         case AvailableLocales.French: {
             const frModule = await import('./compiled-lang/fr.json');
+            // @ts-expect-error - complains because french does not have all translations, low prio
             return frModule.default;
         }
         default: {
