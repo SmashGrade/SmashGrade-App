@@ -82,203 +82,471 @@
             }
         ]
     },
-    "courses": [
+  "course": [
+    {
+      "id": 1,
+      "version": 1,
+      "description": "Projektmanagement",
+      "number": "3.12111",
+      "modules": [
         {
-            "id": 1,
-            "description": "Introduction to Programming",
-            "number": "1.101",
-            "teachers": ["Alice Smith", "Bob Johnson"],
-            "evaluationType": "E"
-        },
-        {
-            "id": 2,
-            "description": "Data Structures and Algorithms",
-            "number": "2.201",
-            "teachers": ["David Brown", "Emma White"],
-            "evaluationType": "E"
-        },
-        {
-            "id": 3,
-            "description": "Digital Marketing",
-            "number": "4.401",
-            "teachers": ["Grace Miller", "Henry Davis"],
-            "evaluationType": "M"
-        },
-        {
-            "id": 4,
-            "description": "Art History",
-            "number": "5.321",
-            "teachers": ["Olivia Green", "Samuel Clark"],
-            "evaluationType": "E"
-        },
-        {
-            "id": 5,
-            "description": "Psychology 101",
-            "number": "3.001",
-            "teachers": ["Sophia Wilson", "Michael Turner"],
-            "evaluationType": "E"
-        },
-        {
-            "id": 6,
-            "description": "Business Finance",
-            "number": "4.501",
-            "teachers": ["Liam Anderson", "Ava Hall"],
-            "evaluationType": "M"
-        },
-        {
-            "id": 7,
-            "description": "Environmental Science",
-            "number": "2.301",
-            "teachers": ["Noah Lee", "Ella Harris"],
-            "evaluationType": "E"
-        },
-        {
-            "id": 8,
-            "description": "Chemistry Lab",
-            "number": "6.112",
-            "teachers": ["Lucas Taylor", "Mia King"],
-            "evaluationType": "M"
-        },
-        {
-            "id": 9,
-            "description": "World History",
-            "number": "5.201",
-            "teachers": ["William Brown", "Charlotte Young"],
-            "evaluationType": "E"
-        },
-        {
-            "id": 10,
-            "description": "Physical Education",
-            "number": "1.501",
-            "teachers": ["James Moore", "Emily Adams"],
-            "evaluationType": "P"
+          "id": 0,
+          "version": 1,
+          "description": "Schnittstellen-Technologien",
+          "number": "string",
+          "isActive": true
         }
+      ],
+      "teachers": [
+    {
+      "id": 2,
+      "version": 2,
+      "description": "Data Structures",
+      "number": "3.122",
+      "versions": [
+        1,
+        2
+      ],
+      "modules": [
+        {
+          "id": 1,
+          "version": 1,
+          "description": "Data Analysis",
+          "number": "string",
+          "isActive": true
+        }
+      ],
+      "exams": [
+        {
+          "id": 1,
+          "description": "Final Exam",
+          "weight": 3,
+          "type": "Schritfliche Arbeit"
+        }
+      ],
+      "teachers": [
+        {
+          "id": 1,
+          "name": "John Doe"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "version": 1,
+      "description": "Web Development",
+      "number": "3.123",
+      "versions": [
+        1
+      ],
+      "modules": [
+        {
+          "id": 2,
+          "version": 1,
+          "description": "Frontend Development",
+          "number": "string",
+          "isActive": true
+        }
+      ],
+      "exams": [
+        {
+          "id": 2,
+          "description": "Project Presentation",
+          "weight": 3,
+          "type": "Schritfliche Arbeit"
+        }
+      ],
+      "teachers": [
+        {
+          "id": 2,
+          "name": "Jane Doe"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "version": 1,
+      "description": "Machine Learning",
+      "number": "3.124",
+      "versions": [
+        1
+      ],
+      "modules": [
+        {
+          "id": 3,
+          "version": 1,
+          "description": "Deep Learning",
+          "number": "string",
+          "isActive": true
+        }
+      ],
+      "exams": [
+        {
+          "id": 3,
+          "description": "Final Project",
+          "weight": 3,
+          "type": "Schritfliche Arbeit"
+        }
+      ],
+      "teachers": [
+        {
+          "id": 3,
+          "name": "Alice Johnson"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "version": 1,
+      "description": "Network Security",
+      "number": "3.125",
+      "versions": [
+        1
+      ],
+      "modules": [
+        {
+          "id": 4,
+          "version": 1,
+          "description": "Cryptography",
+          "number": "string",
+          "isActive": true
+        }
+      ],
+      "exams": [
+        {
+          "id": 4,
+          "description": "Final Exam",
+          "weight": 3,
+          "type": "Schritfliche Arbeit"
+        }
+      ],
+      "teachers": [
+        {
+          "id": 4,
+          "name": "Bob Smith"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "description": "Projektmanagement NEW NEW",
+      "number": "afefeafea",
+      "modules": [
+        {
+          "id": 0,
+          "version": 1,
+          "description": "Schnittstellen-Technologien",
+          "number": "string",
+          "isActive": true
+        }
+      ],
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Simeon Liniger"
+        }
+      ],
+      "exams": [
+        {
+          "id": 1,
+          "description": "Test Exam",
+          "type": "Test",
+          "weight": 1
+        }
+      ],
+      "versions": [
+        1,
+        2,
+        3
+      ],
+      "id": 6
+    },
+    {
+      "version": 1,
+      "description": "New Kurs",
+      "number": "455",
+      "modules": [
+        {
+          "id": 0,
+          "version": 1,
+          "description": "Schnittstellen-Technologien",
+          "number": "string",
+          "isActive": true
+        },
+        {
+          "id": 1,
+          "version": 1,
+          "description": "Datenbanken",
+          "number": "string",
+          "isActive": false
+        }
+      ],
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Simeon Liniger"
+        },
+        {
+          "id": 2,
+          "name": "Kurt Munter"
+        }
+      ],
+      "exams": [
+        {
+          "id": 1,
+          "description": "Test",
+          "type": "Test",
+          "weight": 1
+        },
+        {
+          "id": 1,
+          "description": "Test 2",
+          "type": "xxx",
+          "weight": 5
+        }
+      ],
+      "versions": [
+        1,
+        2,
+        3
+      ],
+      "id": 7
+    },
+    {
+      "version": 1,
+      "description": "Neuer Kurs",
+      "number": "123",
+      "modules": [
+        {
+          "id": 0,
+          "version": 1,
+          "description": "Schnittstellen-Technologien",
+          "number": "string",
+          "isActive": true
+        },
+        {
+          "id": 1,
+          "version": 1,
+          "description": "Datenbanken",
+          "number": "string",
+          "isActive": false
+        }
+      ],
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Simeon Liniger"
+        },
+        {
+          "id": 2,
+          "name": "Kurt Munter"
+        },
+        {
+          "id": 3,
+          "name": "Richard Moor"
+        }
+      ],
+      "exams": [
+        {
+          "id": 1,
+          "description": "Test",
+          "type": "ttest",
+          "weight": 1
+        }
+      ],
+      "versions": [
+        1,
+        2,
+        3
+      ],
+      "id": 8
+    }
+  ],
+  "courseFilter": {
+    "modules": [
+      {
+        "id": 0,
+        "version": 1,
+        "description": "Schnittstellen-Technologien",
+        "number": "string",
+        "isActive": true
+      },
+      {
+        "id": 1,
+        "version": 1,
+        "description": "Datenbanken",
+        "number": "string",
+        "isActive": false
+      },
+      {
+        "id": 2,
+        "version": 1,
+        "description": "Projektmanagement",
+        "number": "string",
+        "isActive": true
+      }
     ],
-
-    "moduleStudent": [
+    "teachers": [
+      {
+        "id": 1,
+        "name": "Simeon Liniger"
+      },
+      {
+        "id": 2,
+        "name": "Kurt Munter"
+      },
+      {
+        "id": 3,
+        "name": "Richard Moor"
+      }
+    ]
+  },
+  "moduleStudent": [
+    {
+      "id": 1,
+      "modules": [
         {
+          "id": 1,
+          "version": 1,
+          "description": "Mathematik",
+          "number": "3.112",
+          "isActive": true,
+          "grade": 5.5,
+          "studyStage": {
             "id": 1,
-            "modules": [
-                {
-                    "id": 1,
-                    "version": 0,
-                    "description": "Mathematik",
-                    "number": "3.112",
-                    "isActive": true,
-                    "grade": 5.5,
-                    "studyStage": {
-                        "id": 1,
-                        "description": "Grundstudium"
-                    },
-                    "valuationCategory": {
-                        "description": "string",
-                        "code": "E"
-                    },
-                    "courses": [
-                        {
-                            "id": 1,
-                            "version": 0,
-                            "description": "Mathematik I",
-                            "number": "3.121",
-                            "grade": 3.6
-                        },
-                        {
-                            "id": 2,
-                            "version": 0,
-                            "description": "Mathematik II",
-                            "number": "3.121",
-                            "grade": 4.8
-                        },
-                        {
-                            "id": 3,
-                            "version": 0,
-                            "description": "Mathematik III",
-                            "number": "3.121",
-                            "grade": 5.5
-                        }
-                    ]
-                }
-            ]
-        },
+            "description": "Grundstudium"
+          },
+          "valuationCategory": {
+            "description": "string",
+            "code": "E"
+          },
+          "courses": [
+            {
+              "id": 1,
+              "version": 1,
+              "description": "Mathematik I",
+              "number": "3.121",
+              "grade": 3.6
+            },
+            {
+              "id": 2,
+              "version": 1,
+              "description": "Mathematik II",
+              "number": "3.121",
+              "grade": 4.8
+            },
+            {
+              "id": 3,
+              "version": 1,
+              "description": "Mathematik III",
+              "number": "3.121",
+              "grade": 5.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "modules": [
         {
+          "id": 2,
+          "version": 1,
+          "description": "Programmierung",
+          "number": "3.112",
+          "isActive": true,
+          "grade": 5.5,
+          "studyStage": {
             "id": 2,
-            "modules": [
-                {
-                    "id": 2,
-                    "version": 0,
-                    "description": "Programmierung",
-                    "number": "3.112",
-                    "isActive": true,
-                    "grade": 5.5,
-                    "studyStage": {
-                        "id": 2,
-                        "description": "Fachstudium"
-                    },
-                    "valuationCategory": {
-                        "description": "string",
-                        "code": "E"
-                    },
-                    "courses": [
-                        {
-                            "id": 7,
-                            "version": 0,
-                            "description": "OOP I",
-                            "number": "3.121",
-                            "grade": 4.6
-                        },
-                        {
-                            "id": 8,
-                            "version": 0,
-                            "description": "OOP II",
-                            "number": "3.121",
-                            "grade": 5.5
-                        }
-                    ]
-                },
-                {
-                    "id": 3,
-                    "version": 0,
-                    "description": "Datentechnik",
-                    "number": "3.112",
-                    "isActive": true,
-                    "grade": 0,
-                    "studyStage": {
-                        "id": 2,
-                        "description": "Fachstudium"
-                    },
-                    "valuationCategory": {
-                        "description": "string",
-                        "code": "E"
-                    },
-                    "courses": [
-                        {
-                            "id": 9,
-                            "version": 0,
-                            "description": "Datenbanken 1",
-                            "number": "3.121",
-                            "grade": 0
-                        },
-                        {
-                            "id": 10,
-                            "version": 0,
-                            "description": "Datenbanken 2",
-                            "number": "3.121",
-                            "grade": 5.5
-                        },
-                        {
-                            "id": 11,
-                            "version": 0,
-                            "description": "XML-Grundlagen",
-                            "number": "3.121",
-                            "grade": 5.5
-                        }
-                    ]
-                }
-            ]
+            "description": "Fachstudium"
+          },
+          "valuationCategory": {
+            "description": "string",
+            "code": "E"
+          },
+          "courses": [
+            {
+              "id": 7,
+              "version": 1,
+              "description": "OOP I",
+              "number": "3.121",
+              "grade": 4.6
+            },
+            {
+              "id": 8,
+              "version": 1,
+              "description": "OOP II",
+              "number": "3.121",
+              "grade": 5.5
+            }
+          ]
         },
         {
-            "id": 3,
-            "modules": []
+          "id": 3,
+          "version": 1,
+          "description": "Datentechnik",
+          "number": "3.112",
+          "isActive": true,
+          "grade": 0,
+          "studyStage": {
+            "id": 2,
+            "description": "Fachstudium"
+          },
+          "valuationCategory": {
+            "description": "string",
+            "code": "E"
+          },
+          "courses": [
+            {
+              "id": 9,
+              "version": 1,
+              "description": "Datenbanken 1",
+              "number": "3.121",
+              "grade": 0
+            },
+            {
+              "id": 10,
+              "version": 1,
+              "description": "Datenbanken 2",
+              "number": "3.121",
+              "grade": 5.5
+            },
+            {
+              "id": 11,
+              "version": 1,
+              "description": "XML-Grundlagen",
+              "number": "3.121",
+              "grade": 5.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "modules": []
+    }
+  ],
+  "modules": [
+    {
+      "id": 0,
+      "description": "2023 - Schnittstellen-Technologien ||",
+      "number": "string",
+      "status": "Active",
+      "bewertungstyp_beschreibung": "Wenn alle Kurse erfuellt sind",
+      "bewertungstyp_bezeichnung": "E",
+      "courses": [
+        {
+          "id": 0,
+          "description": "Projektmanagement",
+          "number": "3.121",
+          "teacher": [
+            [
+              "Kurt Munter",
+              "Lancelot"
+            ]
+          ],
+          "evaluationType": "M"
         }
     ],
     "modules": [
