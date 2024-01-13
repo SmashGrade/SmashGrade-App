@@ -16,6 +16,17 @@ import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 import { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import logo from '../../assets/images/SmashGrade-AppIcon.png';
+import {
+    courseMenu,
+    curriculumMenu,
+    moduleMenu,
+    myCourseMenu,
+    myCurriculumMenu,
+    onboardingMenu,
+    settingsMenu,
+    studentsMenu,
+    userManagementMenu,
+} from '../../i18n/dynamic-messages/menuMessages.ts';
 import styles from './Navigation.module.scss';
 
 export default function Navigation() {
@@ -29,97 +40,38 @@ export default function Navigation() {
     const items: MenuProps['items'] = useMemo(() => {
         return [
             {
-                label: (
-                    <IconLink
-                        to={curriculumRoute.to}
-                        icon={'play_lesson'}
-                        messageId={'curriculum.menu'}
-                        defaultMessage={'Studiengänge'}
-                        description={'Studiengang Menu'}
-                    />
-                ),
+                label: <IconLink to={curriculumRoute.to} icon={'play_lesson'} messageProps={curriculumMenu} />,
                 key: 'curriculum',
             },
             {
-                label: (
-                    <IconLink
-                        icon={'collections_bookmark'}
-                        messageId={'module.menu'}
-                        defaultMessage={'Module'}
-                        description={'Module Menu'}
-                    />
-                ),
+                label: <IconLink icon={'collections_bookmark'} messageProps={moduleMenu} />,
                 key: 'modules',
             },
             {
-                label: (
-                    <IconLink
-                        to={courseRoute.to}
-                        icon={'developer_guide'}
-                        messageId={'course.menu'}
-                        defaultMessage={'Kurse'}
-                        description={'Kurse Menu'}
-                    />
-                ),
+                label: <IconLink to={courseRoute.to} icon={'developer_guide'} messageProps={courseMenu} />,
                 key: 'course',
             },
             {
-                label: (
-                    <IconLink
-                        icon={'supervised_user_circle'}
-                        messageId={'user-management.menu'}
-                        defaultMessage={'Benutzer'}
-                        description={'Benutzer Menu'}
-                    />
-                ),
+                label: <IconLink icon={'supervised_user_circle'} messageProps={userManagementMenu} />,
                 key: 'user-management',
             },
             {
-                label: (
-                    <IconLink
-                        icon={'school'}
-                        messageId={'students.menu'}
-                        defaultMessage={'Studenten'}
-                        description={'Studenten Menu'}
-                    />
-                ),
+                label: <IconLink icon={'school'} messageProps={studentsMenu} />,
                 key: 'students',
                 disabled: false,
             },
             {
-                label: (
-                    <IconLink
-                        icon={'sticky_note_2'}
-                        to={myCourseRoute.to}
-                        messageId={'my-course.menu'}
-                        defaultMessage={'Meine Kurse'}
-                        description={'Meine Kurse Menu'}
-                    />
-                ),
+                label: <IconLink icon={'sticky_note_2'} to={myCourseRoute.to} messageProps={myCourseMenu} />,
                 key: 'my-course',
                 disabled: false,
             },
             {
-                label: (
-                    <IconLink
-                        to={studentModuleRoute.to}
-                        messageId={'my-curriculum.menu'}
-                        defaultMessage={'Mein Studium'}
-                        description={'Mein Studium Menu'}
-                    />
-                ),
+                label: <IconLink to={studentModuleRoute.to} messageProps={myCurriculumMenu} />,
                 key: 'my-curriculum',
                 disabled: false,
             },
             {
-                label: (
-                    <IconLink
-                        to={onboardingRoute.to}
-                        messageId={'onboarding.menu'}
-                        defaultMessage={'Onboarding'}
-                        description={'Onboarding Menu'}
-                    />
-                ),
+                label: <IconLink to={onboardingRoute.to} messageProps={onboardingMenu} />,
                 key: 'onboarding',
                 disabled: false,
             },
@@ -133,14 +85,7 @@ export default function Navigation() {
                 key: 'account',
                 children: [
                     {
-                        label: (
-                            <IconLink
-                                to={settingsRoute.to}
-                                messageId={'settings.menu'}
-                                defaultMessage={'Settings'}
-                                description={'Settings Menu'}
-                            />
-                        ),
+                        label: <IconLink to={settingsRoute.to} messageProps={settingsMenu} />,
                         key: 'settings',
                         disabled: false,
                     },

@@ -18,5 +18,5 @@ export const courseDetailRoute = new Route({
     getParentRoute: () => courseRoute,
     path: '$id',
     parseParams: (params) => ({ id: z.number().int().parse(parseInt(params.id)) }),
-    component: lazyRouteComponent(() => import('@features/course/CourseDetail.tsx')),
+    component: lazyRouteComponent(() => import('@pages/EditCoursePage.tsx')),
 });

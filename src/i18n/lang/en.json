@@ -1,4 +1,60 @@
 {
+    "course.ButtonActivate": {
+        "defaultMessage": "Aktivieren",
+        "description": "Speichern Button"
+    },
+    "course.ButtonAdd": {
+        "defaultMessage": "+ Hinzufügen",
+        "description": "Qualifikation hinzufügen Button"
+    },
+    "course.ButtonCancel": {
+        "defaultMessage": "Abbrechen",
+        "description": "Abbrechen Button"
+    },
+    "course.ButtonSave": {
+        "defaultMessage": "Speichern",
+        "description": "Speichern Button"
+    },
+    "course.Course": {
+        "defaultMessage": "Kurs",
+        "description": "Kurs Name"
+    },
+    "course.LecturerTitle": {
+        "defaultMessage": "Dozent(en)",
+        "description": "Name Dozent"
+    },
+    "course.ModuleTitle": {
+        "defaultMessage": "Modul(e)",
+        "description": "Module Title"
+    },
+    "course.Number": {
+        "defaultMessage": "Number",
+        "description": "Kurs Nummer"
+    },
+    "course.QualificationCertificate": {
+        "defaultMessage": "Qualifikationsnachweis",
+        "description": "Qualification Certificate"
+    },
+    "course.QualificationCertificatesTitle": {
+        "defaultMessage": "Qualifikationsnachweise",
+        "description": "Qualification Certificates Title"
+    },
+    "course.Title": {
+        "defaultMessage": "Titel",
+        "description": "Titel"
+    },
+    "course.Weight": {
+        "defaultMessage": "Gewichtung",
+        "description": "Qualification weight"
+    },
+    "course.menu": {
+        "defaultMessage": "Kurse",
+        "description": "Kurse Menu"
+    },
+    "courseDetail.Title": {
+        "defaultMessage": "Kurs",
+        "description": "Kursdetail Titel"
+    },
     "curriculum": {
         "defaultMessage": "Curriculum",
         "description": "Studiengang Dropdown Titel"
@@ -91,9 +147,13 @@
         "defaultMessage": "Specialised studies",
         "description": "Tab Fachstudium"
     },
-    "logout.menu": {
-        "defaultMessage": "Logout",
-        "description": "Logout Menu"
+    "students.menu": {
+        "defaultMessage": "Studenten",
+        "description": "Studenten Menu"
+    },
+    "user-management.menu": {
+        "defaultMessage": "Benutzer",
+        "description": "Benutzer Menu"
     },
     "settings.title": {
         "defaultMessage": "Settings",

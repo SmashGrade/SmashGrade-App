@@ -35,9 +35,8 @@ msalInstance
                         <MsalProvider instance={msalInstance}>
                             <QueryClientProvider client={queryClient}>
                                 <RouterProvider router={router} />
-                                <DevSupportComponent>
-                                    <ReactQueryDevtools initialIsOpen={false} />
-                                </DevSupportComponent>
+                                <ReactQueryDevtools initialIsOpen={false} />
+                                <DevSupportComponent/>
                             </QueryClientProvider>
                         </MsalProvider>
                     </ConfigProvider>
