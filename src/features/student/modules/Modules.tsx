@@ -25,7 +25,7 @@ interface Module {
     id: number;
     description: string;
     number: string;
-    isActivee: boolean;
+    isActive: boolean;
     grade: number;
     courses: CourseObj[];
 }
@@ -37,7 +37,7 @@ const getModules = async (activeFilter: string): Promise<ItemType[]> => {
     const modules = studentModuleResponse.data.modules;
 
     return modules
-        .filter((module) => module.isActivee)
+        .filter((module) => module.isActive)
         .map((module) => {
             return {
                 key: module.id,
