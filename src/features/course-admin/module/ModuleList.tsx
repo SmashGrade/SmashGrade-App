@@ -1,4 +1,4 @@
-import Grid from '@components/Grid.tsx';
+import Grid from '@components/grid/Grid.tsx';
 import DropdownCellRenderer from '@components/grid/DropdownCellRenderer.tsx';
 import StatusCellRenderer from '@components/grid/StatusCellRenderer.tsx';
 import { copyModuleRoute, moduleDetailRoute, newModuleRoute } from '@pages/routes/moduleRoutes.ts';

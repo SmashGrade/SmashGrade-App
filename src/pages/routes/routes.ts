@@ -1,20 +1,18 @@
-import StudentModulePage from '@pages/ModulesPage.tsx';
 import { courseDetailRoute, courseIndexRoute, newCourseRoute } from '@pages/routes/courseRoutes.ts';
+import { studentCourseRoute, studentIndexRoute, studentModuleRoute } from '@pages/routes/studentRoutes.ts';
 import { copyModuleRoute, moduleDetailRoute, moduleIndexRoute, newModuleRoute } from '@pages/routes/moduleRoutes.ts';
-import { lazyRouteComponent, RootRoute, Route, Router, RouterMeta } from '@tanstack/react-router';
+import { lazyRouteComponent, RootRoute, Route, Router } from '@tanstack/react-router';
 import App from '../../App.tsx';
 import OnboardingPage from '../OnboardingPage.tsx';
 
-const routerMeta = new RouterMeta();
+const rootRoute = new RootRoute({
+    component: App,
+});
 
 export const onboardingRoute = new Route({
     getParentRoute: () => rootRoute,
     path: '/onboarding',
     component: OnboardingPage,
-});
-
-const rootRoute: RootRoute = routerMeta.createRootRoute({
-    component: App,
 });
 
 const indexRoute = new Route({
@@ -35,16 +33,27 @@ export const courseRoute = new Route({
     component: lazyRouteComponent(() => import('@pages/CoursePage.tsx')),
 });
 
+export const settingsRoute = new Route({
+    getParentRoute: () => rootRoute,
+    path: 'settings',
+    component: lazyRouteComponent(() => import('@pages/SettingsPage.tsx')),
+});
+
 export const moduleRoute = new Route({
     getParentRoute: () => rootRoute,
     path: '/module',
     component: lazyRouteComponent(() => import('@pages/ModulePage.tsx')),
 });
-
-export const studentModuleRoute = new Route({
+export const studentRoute = new Route({
     getParentRoute: () => rootRoute,
-    path: 'modules',
-    component: StudentModulePage,
+    path: 'student',
+    component: lazyRouteComponent(() => import('@pages/StudentPage.tsx')),
+});
+
+export const myCourseRoute = new Route({
+    getParentRoute: () => rootRoute,
+    path: 'my-course',
+    component: lazyRouteComponent(() => import('@pages/MyCoursePage.tsx')),
 });
 
 const routeTree = rootRoute.addChildren([
@@ -52,8 +61,10 @@ const routeTree = rootRoute.addChildren([
     onboardingRoute,
     curriculumRoute,
     moduleRoute.addChildren([moduleIndexRoute.addChildren([moduleDetailRoute, newModuleRoute, copyModuleRoute])]),
-    studentModuleRoute,
+    studentRoute.addChildren([studentIndexRoute.addChildren([studentModuleRoute, studentCourseRoute])]),
+    settingsRoute,
     courseRoute.addChildren([courseIndexRoute.addChildren([courseDetailRoute, newCourseRoute])]),
+    myCourseRoute,
 ]);
 export const router = new Router({ routeTree });
 

@@ -1,0 +1,110 @@
+@import '../colors.module.scss';
+
+.cardOverwrite {
+    box-shadow: none;
+    border: none;
+    border-inline-end: none !important;
+}
+
+.baseFlexCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexRowCenter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2%;
+}
+
+.flexRowStart {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5%;
+}
+
+.outlined {
+    border-radius: 5px;
+    background-color: $colorSecondary;
+    padding: 10px;
+    margin: 5px;
+}
+
+.baseInsetsLeftRight {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.baseBackground {
+    background-color: $colorTertiary;
+    border-radius: 10px;
+}
+
+.background {
+    @extend .baseBackground;
+    padding: 10px;
+    margin: 10px;
+}
+
+.divider {
+    border-top: 1px solid;
+}
+
+.myCoursePage {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.gradeContainer {
+    @extend .baseFlexCol;
+    @extend .cardOverwrite;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+}
+
+.gradeComponent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10%;
+}
+
+.componentChildren * {
+    margin: 0;
+    padding: 0;
+}
+
+.courseNavigation {
+    @extend .baseFlexCol;
+    @extend .cardOverwrite;
+    justify-content: space-between;
+    align-items: center;
+    width: 20%;
+}
+
+.proofOfQualification {
+    @extend .baseFlexCol;
+    @extend .cardOverwrite;
+    justify-content: space-between;
+    align-items: center;
+    width: 30%;
+}
+
+.setWidth {
+    width: 90%;
+}
+
+.menu {
+    @extend .baseBackground;
+    @extend .cardOverwrite;
+}

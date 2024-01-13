@@ -1,7 +1,95 @@
 {
+    "settings.menu": {
+        "defaultMessage": "Einstellungen",
+        "description": "Settings Menu"
+    },
+    "course.ButtonCancel": {
+        "defaultMessage": "Abbrechen",
+        "description": "Abbrechen Button"
+    },
+    "course.ButtonSave": {
+        "defaultMessage": "Speichern",
+        "description": "Speichern Button"
+    },
+    "course.QualificationCertificate": {
+        "defaultMessage": "Qualifikationsnachweis",
+        "description": "Qualification Certificate"
+    },
+    "course.QualificationCertificatesTitle": {
+        "defaultMessage": "Qualifikationsnachweise",
+        "description": "Qualification Certificates Title"
+    },
+    "course.Title": {
+        "defaultMessage": "Titel",
+        "description": "Titel"
+    },
+    "course.Weight": {
+        "defaultMessage": "Gewichtung",
+        "description": "Qualification weight"
+    },
+    "course.menu": {
+        "defaultMessage": "Kurse",
+        "description": "Kurse Menu"
+    },
+    "course.qualification": {
+        "defaultMessage": "Qualifikationsnachweise",
+        "description": "Qualifikationsnachweise eines Kurses"
+    },
+    "courseDetail.Title": {
+        "defaultMessage": "Kurs",
+        "description": "Kursdetail Titel"
+    },
+    "courseForm.description": {
+        "defaultMessage": "Kurs",
+        "description": "Kurs Name"
+    },
+    "courseForm.modules": {
+        "defaultMessage": "Modul(e)",
+        "description": "Module Title"
+    },
+    "courseForm.number": {
+        "defaultMessage": "Nummer",
+        "description": "Kurs Nummer"
+    },
+    "courseForm.teachers": {
+        "defaultMessage": "Dozent(en)",
+        "description": "Name Dozent"
+    },
+    "courseForm.updateSuccessMessage": {
+        "defaultMessage": "Kurse erfolgreich gespeichert",
+        "description": "Course Update success message"
+    },
+    "courseForm.createSuccessMessage": {
+        "defaultMessage": "Kurse erfolgreich erstellt",
+        "description": "Course Creation success message"
+    },
     "curriculum": {
         "defaultMessage": "Lehrplan",
         "description": "Lehrplan Dropdown Titel"
+    },
+    "curriculum.menu": {
+        "defaultMessage": "Studiengänge",
+        "description": "Studiengang Menu"
+    },
+    "grade.assessment": {
+        "defaultMessage": "Bewertung",
+        "description": "Bewertung eines Qualifikationsnachweises"
+    },
+    "grade.average": {
+        "defaultMessage": "Durchschnitt",
+        "description": "Durchschnitt einer Prüfung, Kurses, etc"
+    },
+    "grade.weighting": {
+        "defaultMessage": "Gewichtung",
+        "description": "Gewichtung eines Qualifikationsnachweises"
+    },
+    "logout.menu": {
+        "defaultMessage": "Logout",
+        "description": "Logout Menu"
+    },
+    "onboarding.menu": {
+        "defaultMessage": "Onboarding",
+        "description": "Onboarding Menu"
     },
     "language.english": {
         "defaultMessage": "Englisch",
@@ -15,9 +103,73 @@
         "defaultMessage": "Deutsch",
         "description": "Sprachoption Deutsch"
     },
-    "logout.menu": {
-        "defaultMessage": "Logout",
-        "description": "Logout Menu"
+    "module.menu": {
+        "defaultMessage": "Module",
+        "description": "Module Menu"
+    },
+    "my-course.menu": {
+        "defaultMessage": "Meine Kurse",
+        "description": "Meine Kurse Menu"
+    },
+    "my-curriculum.menu": {
+        "defaultMessage": "Mein Studium",
+        "description": "Mein Studium Menu"
+    },
+    "students.menu": {
+        "defaultMessage": "Studenten",
+        "description": "Studenten Menu"
+    },
+    "account.menu": {
+        "defaultMessage": "Account",
+        "description": "Account Menu"
+    },
+    "onboarding.title": {
+        "defaultMessage": "Übersicht",
+        "description": "Übersicht Titel"
+    },
+    "settings.language": {
+        "defaultMessage": "Sprache",
+        "description": "Sprachoption"
+    },
+    "settings.myModules": {
+        "defaultMessage": "Meine Module",
+        "description": "Meine Module"
+    },
+    "settings.title": {
+        "defaultMessage": "Einstellungen",
+        "description": "Einstellungen Titel"
+    },
+    "startYear": {
+        "defaultMessage": "Startjahr",
+        "description": "Startjahr Dropdown Titel"
+    },
+    "student.basicStudies": {
+        "defaultMessage": "Grundstudium",
+        "description": "Tab Grundstudium"
+    },
+    "student.focusStudies": {
+        "defaultMessage": "Schwerpunkt",
+        "description": "Tab Schwerpunkt"
+    },
+    "student.noModulesFound": {
+        "defaultMessage": "Es wurden keine Module gefunden",
+        "description": "no modules found"
+    },
+    "student.specialisedStudies": {
+        "defaultMessage": "Fachstudium",
+        "description": "Tab Fachstudium"
+    },
+    "students.menu": {
+        "defaultMessage": "Studenten",
+        "description": "Studenten Menu"
+    },
+    "studyType": {
+        "defaultMessage": "Studiengang",
+        "description": "Studiengang Dropdown Titel"
+    },
+    "user-management.menu": {
+        "defaultMessage": "Benutzer",
+        "description": "Benutzer Menu"
     },
     "moduleList.activeModule": {
         "defaultMessage": "Aktiv",
@@ -53,33 +205,5 @@
     "moduleList.inactiveModule": {
         "defaultMessage": "Inaktiv",
         "description": "Displays the module status"
-    },
-    "onboarding.title": {
-        "defaultMessage": "Übersicht",
-        "description": "Übersicht Titel"
-    },
-    "startYear": {
-        "defaultMessage": "Startjahr",
-        "description": "Startjahr Dropdown Titel"
-    },
-    "student.basicStudies": {
-        "defaultMessage": "Grundstudium",
-        "description": "Tab Grundstudium"
-    },
-    "student.focusStudies": {
-        "defaultMessage": "Schwerpunkt",
-        "description": "Tab Schwerpunkt"
-    },
-    "student.noModulesFound": {
-        "defaultMessage": "Es wurden keine Module gefunden",
-        "description": "no modules found"
-    },
-    "student.specialisedStudies": {
-        "defaultMessage": "Fachstudium",
-        "description": "Tab Fachstudium"
-    },
-    "studyType": {
-        "defaultMessage": "Studiengang",
-        "description": "Studiengang Dropdown Titel"
     }
 }

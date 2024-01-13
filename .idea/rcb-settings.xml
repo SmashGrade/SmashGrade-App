@@ -5,7 +5,7 @@
       <DevServerState>
         <option name="packageJsonPath" value="$PROJECT_DIR$/package.json" />
         <option name="scriptName" value="dev-db" />
-        <option name="url" value="http://localhost:5173" />
+        <option name="url" value="http://localhost:5174" />
       </DevServerState>
     </option>
   </component>

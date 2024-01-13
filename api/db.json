@@ -1,156 +1,477 @@
 {
-  "onboardingFilter": {
-    "curriculumTypes": [
-      {
-        "id": 1,
-        "description": "Vollzeit",
-        "durationYears": 3
-      },
-      {
-        "id": 2,
-        "description": "Berufsbegleitend",
-        "durationYears": 3
-      }
+    "users": [
+        {
+            "firstName": "Max",
+            "lastName": "Müller",
+            "email": "max.mueller@hftm.ch",
+            "role": "Student:in",
+            "curriculum": {
+                "id": 1,
+                "field": "Systemtechnik",
+                "focus": "Automation/ICT",
+                "year": 2023
+            }
+        },
+        {
+            "firstName": "Kurt",
+            "lastName": "Munter",
+            "email": "kurt.munter@hftm.ch",
+            "role": "Fachbereichsleitung",
+            "field": "Informatik"
+        },
+        {
+            "firstName": "Simeon",
+            "lastName": "Liniger",
+            "email": "simeon.liniger@hftm.ch",
+            "role": "Dozent:in"
+        },
+        {
+            "firstName": "Stefan",
+            "lastName": "Brandenberger",
+            "email": "stefan.brandenberger@hftm.ch",
+            "role": "Kursadministrator:in"
+        }
     ],
+    "startYears": [{ "year": 2022 }, { "year": 2023 }, { "year": 2024 }, { "year": 2025 }, { "year": 2026 }],
     "curriculums": [
-      {
-        "id": 1,
-        "focus": "Softwareentwicklung",
-        "field": "Informatik",
-        "curriculumType": "Berufsbegleitend",
-        "isActiv": true,
-        "startDate": "2023-11-29T17:13:23.819Z",
-        "endDate": "2023-11-29T17:13:23.819Z"
-      },
-      {
-        "id": 2,
-        "focus": "Gebäudeautomation",
-        "field": "Elektrotechnik",
-        "curriculumType": "Berufsbegleitend",
-        "isActiv": true,
-        "startDate": "2023-11-29T17:13:23.819Z",
-        "endDate": "2023-11-29T17:13:23.819Z"
-      },
-      {
-        "id": 2,
-        "focus": "Systemtechnik",
-        "field": "Informatik",
-        "curriculumType": "Vollzeit",
-        "isActiv": true,
-        "startDate": "2023-11-29T17:13:23.819Z",
-        "endDate": "2023-11-29T17:13:23.819Z"
-      }
-    ]
-  },
-  "courses": [
+        { "id": 1, "title": "1. Lehrgang", "year": 2023 },
+        { "id": 2, "title": "2. Lehrgang", "year": 2023 },
+        { "id": 3, "title": "3. Lehrgang", "year": 2024 },
+        { "id": 4, "title": "4. Lehrgang", "year": 2026 }
+    ],
+    "onboardingFilter": {
+        "curriculumTypes": [
+            {
+                "id": 1,
+                "description": "Vollzeit",
+                "durationYears": 3
+            },
+            {
+                "id": 2,
+                "description": "Berufsbegleitend",
+                "durationYears": 3
+            }
+        ],
+        "curriculums": [
+            {
+                "id": 1,
+                "focus": "Softwareentwicklung",
+                "field": "Informatik",
+                "curriculumType": "Berufsbegleitend",
+                "isActiv": true,
+                "startDate": "2023-11-29T17:13:23.819Z",
+                "endDate": "2023-11-29T17:13:23.819Z"
+            },
+            {
+                "id": 2,
+                "focus": "Gebäudeautomation",
+                "field": "Elektrotechnik",
+                "curriculumType": "Berufsbegleitend",
+                "isActiv": true,
+                "startDate": "2023-11-29T17:13:23.819Z",
+                "endDate": "2023-11-29T17:13:23.819Z"
+            },
+            {
+                "id": 2,
+                "focus": "Systemtechnik",
+                "field": "Informatik",
+                "curriculumType": "Vollzeit",
+                "isActiv": true,
+                "startDate": "2023-11-29T17:13:23.819Z",
+                "endDate": "2023-11-29T17:13:23.819Z"
+            }
+        ]
+    },
+  "course": [
     {
       "id": 1,
-      "description": "Introduction to Programming",
-      "number": "1.101",
-      "teachers": [
-        "Alice Smith",
-        "Bob Johnson"
+      "version": 1,
+      "description": "Projektmanagement",
+      "number": "555",
+      "modules": [
+        {
+          "id": 0,
+          "version": 1,
+          "description": "Schnittstellen-Technologien",
+          "number": "string",
+          "isActive": true
+        }
       ],
-      "evaluationType": "E"
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Simeon Liniger"
+        },
+        {
+          "id": 2,
+          "name": "Kurt Munter"
+        }
+      ],
+      "exams": [
+        {
+          "id": 1,
+          "description": "Projektarbeit",
+          "weight": 2,
+          "type": "Schriftliche Arbeit 2"
+        },
+        {
+          "id": 2,
+          "description": "Abschlusspräsentation",
+          "weight": 2,
+          "type": "Präsentation"
+        },
+        {
+          "id": 3,
+          "description": "Zusammenfassung",
+          "weight": 4,
+          "type": "Credits Aufgabe"
+        },
+        {
+          "id": 4,
+          "description": "New Exam!",
+          "type": "afeafeafea",
+          "weight": 2
+        }
+      ],
+      "versions": [
+        1,
+        2,
+        3
+      ]
     },
     {
       "id": 2,
-      "description": "Data Structures and Algorithms",
-      "number": "2.201",
-      "teachers": [
-        "David Brown",
-        "Emma White"
+      "version": 2,
+      "description": "Data Structures",
+      "number": "3.122",
+      "versions": [
+        1,
+        2
       ],
-      "evaluationType": "E"
+      "modules": [
+        {
+          "id": 1,
+          "version": 1,
+          "description": "Data Analysis",
+          "number": "string",
+          "isActive": true
+        }
+      ],
+      "exams": [
+        {
+          "id": 1,
+          "description": "Final Exam",
+          "weight": 3,
+          "type": "Schritfliche Arbeit"
+        }
+      ],
+      "teachers": [
+        {
+          "id": 1,
+          "name": "John Doe"
+        }
+      ]
     },
     {
       "id": 3,
-      "description": "Digital Marketing",
-      "number": "4.401",
-      "teachers": [
-        "Grace Miller",
-        "Henry Davis"
+      "version": 1,
+      "description": "Web Development",
+      "number": "3.123",
+      "versions": [
+        1
       ],
-      "evaluationType": "M"
+      "modules": [
+        {
+          "id": 2,
+          "version": 1,
+          "description": "Frontend Development",
+          "number": "string",
+          "isActive": true
+        }
+      ],
+      "exams": [
+        {
+          "id": 2,
+          "description": "Project Presentation",
+          "weight": 3,
+          "type": "Schritfliche Arbeit"
+        }
+      ],
+      "teachers": [
+        {
+          "id": 2,
+          "name": "Jane Doe"
+        }
+      ]
     },
     {
       "id": 4,
-      "description": "Art History",
-      "number": "5.321",
-      "teachers": [
-        "Olivia Green",
-        "Samuel Clark"
+      "version": 1,
+      "description": "Machine Learning",
+      "number": "3.124",
+      "versions": [
+        1
       ],
-      "evaluationType": "E"
+      "modules": [
+        {
+          "id": 3,
+          "version": 1,
+          "description": "Deep Learning",
+          "number": "string",
+          "isActive": true
+        }
+      ],
+      "exams": [
+        {
+          "id": 3,
+          "description": "Final Project",
+          "weight": 3,
+          "type": "Schritfliche Arbeit"
+        }
+      ],
+      "teachers": [
+        {
+          "id": 3,
+          "name": "Alice Johnson"
+        }
+      ]
     },
     {
       "id": 5,
-      "description": "Psychology 101",
-      "number": "3.001",
-      "teachers": [
-        "Sophia Wilson",
-        "Michael Turner"
+      "version": 1,
+      "description": "Network Security",
+      "number": "3.125",
+      "versions": [
+        1
       ],
-      "evaluationType": "E"
+      "modules": [
+        {
+          "id": 4,
+          "version": 1,
+          "description": "Cryptography",
+          "number": "string",
+          "isActive": true
+        }
+      ],
+      "exams": [
+        {
+          "id": 4,
+          "description": "Final Exam",
+          "weight": 3,
+          "type": "Schritfliche Arbeit"
+        }
+      ],
+      "teachers": [
+        {
+          "id": 4,
+          "name": "Bob Smith"
+        }
+      ]
     },
     {
-      "id": 6,
-      "description": "Business Finance",
-      "number": "4.501",
-      "teachers": [
-        "Liam Anderson",
-        "Ava Hall"
+      "version": 1,
+      "description": "Projektmanagement NEW NEW",
+      "number": "afefeafea",
+      "modules": [
+        {
+          "id": 0,
+          "version": 1,
+          "description": "Schnittstellen-Technologien",
+          "number": "string",
+          "isActive": true
+        }
       ],
-      "evaluationType": "M"
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Simeon Liniger"
+        }
+      ],
+      "exams": [
+        {
+          "id": 1,
+          "description": "Test Exam",
+          "type": "Test",
+          "weight": 1
+        }
+      ],
+      "versions": [
+        1,
+        2,
+        3
+      ],
+      "id": 6
     },
     {
-      "id": 7,
-      "description": "Environmental Science",
-      "number": "2.301",
-      "teachers": [
-        "Noah Lee",
-        "Ella Harris"
+      "version": 1,
+      "description": "New Kurs",
+      "number": "455",
+      "modules": [
+        {
+          "id": 0,
+          "version": 1,
+          "description": "Schnittstellen-Technologien",
+          "number": "string",
+          "isActive": true
+        },
+        {
+          "id": 1,
+          "version": 1,
+          "description": "Datenbanken",
+          "number": "string",
+          "isActive": false
+        }
       ],
-      "evaluationType": "E"
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Simeon Liniger"
+        },
+        {
+          "id": 2,
+          "name": "Kurt Munter"
+        }
+      ],
+      "exams": [
+        {
+          "id": 1,
+          "description": "Test",
+          "type": "Test",
+          "weight": 1
+        },
+        {
+          "id": 1,
+          "description": "Test 2",
+          "type": "xxx",
+          "weight": 5
+        }
+      ],
+      "versions": [
+        1,
+        2,
+        3
+      ],
+      "id": 7
     },
     {
-      "id": 8,
-      "description": "Chemistry Lab",
-      "number": "6.112",
-      "teachers": [
-        "Lucas Taylor",
-        "Mia King"
+      "version": 1,
+      "description": "NEW COURSE",
+      "number": "12",
+      "modules": [
+        {
+          "id": 1,
+          "version": 1,
+          "description": "Datenbanken",
+          "number": "string",
+          "isActive": false
+        }
       ],
-      "evaluationType": "M"
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Simeon Liniger"
+        }
+      ],
+      "exams": [
+        {
+          "id": 1,
+          "description": "Test",
+          "type": "test",
+          "weight": 1
+        }
+      ],
+      "versions": [
+        1,
+        2,
+        3
+      ],
+      "id": 8
     },
     {
-      "id": 9,
-      "description": "World History",
-      "number": "5.201",
-      "teachers": [
-        "William Brown",
-        "Charlotte Young"
+      "version": 1,
+      "description": "test",
+      "number": "test",
+      "modules": [
+        {
+          "id": 0,
+          "version": 1,
+          "description": "Schnittstellen-Technologien",
+          "number": "string",
+          "isActive": true
+        }
       ],
-      "evaluationType": "E"
-    },
-    {
-      "id": 10,
-      "description": "Physical Education",
-      "number": "1.501",
       "teachers": [
-        "James Moore",
-        "Emily Adams"
+        {
+          "id": 1,
+          "name": "Simeon Liniger"
+        },
+        {
+          "id": 2,
+          "name": "Kurt Munter"
+        }
       ],
-      "evaluationType": "P"
+      "exams": [
+        {
+          "id": 1,
+          "description": "test",
+          "type": "etaete",
+          "weight": 1
+        }
+      ],
+      "versions": [
+        1,
+        2,
+        3
+      ],
+      "id": 9
     }
   ],
+  "courseFilter": {
+    "modules": [
+      {
+        "id": 0,
+        "version": 1,
+        "description": "Schnittstellen-Technologien",
+        "number": "string",
+        "isActive": true
+      },
+      {
+        "id": 1,
+        "version": 1,
+        "description": "Datenbanken",
+        "number": "string",
+        "isActive": false
+      },
+      {
+        "id": 2,
+        "version": 1,
+        "description": "Projektmanagement",
+        "number": "string",
+        "isActive": true
+      }
+    ],
+    "teachers": [
+      {
+        "id": 1,
+        "name": "Simeon Liniger"
+      },
+      {
+        "id": 2,
+        "name": "Kurt Munter"
+      },
+      {
+        "id": 3,
+        "name": "Richard Moor"
+      }
+    ]
+  },
   "moduleStudent": [
     {
       "id": 1,
       "modules": [
         {
           "id": 1,
-          "version": 0,
+          "version": 1,
           "description": "Mathematik",
           "number": "3.112",
           "isActive": true,
@@ -166,21 +487,21 @@
           "courses": [
             {
               "id": 1,
-              "version": 0,
+              "version": 1,
               "description": "Mathematik I",
               "number": "3.121",
               "grade": 3.6
             },
             {
               "id": 2,
-              "version": 0,
+              "version": 1,
               "description": "Mathematik II",
               "number": "3.121",
               "grade": 4.8
             },
             {
               "id": 3,
-              "version": 0,
+              "version": 1,
               "description": "Mathematik III",
               "number": "3.121",
               "grade": 5.5
@@ -194,7 +515,7 @@
       "modules": [
         {
           "id": 2,
-          "version": 0,
+          "version": 1,
           "description": "Programmierung",
           "number": "3.112",
           "isActive": true,
@@ -210,14 +531,14 @@
           "courses": [
             {
               "id": 7,
-              "version": 0,
+              "version": 1,
               "description": "OOP I",
               "number": "3.121",
               "grade": 4.6
             },
             {
               "id": 8,
-              "version": 0,
+              "version": 1,
               "description": "OOP II",
               "number": "3.121",
               "grade": 5.5
@@ -226,7 +547,7 @@
         },
         {
           "id": 3,
-          "version": 0,
+          "version": 1,
           "description": "Datentechnik",
           "number": "3.112",
           "isActive": true,
@@ -242,21 +563,21 @@
           "courses": [
             {
               "id": 9,
-              "version": 0,
+              "version": 1,
               "description": "Datenbanken 1",
               "number": "3.121",
               "grade": 0
             },
             {
               "id": 10,
-              "version": 0,
+              "version": 1,
               "description": "Datenbanken 2",
               "number": "3.121",
               "grade": 5.5
             },
             {
               "id": 11,
-              "version": 0,
+              "version": 1,
               "description": "XML-Grundlagen",
               "number": "3.121",
               "grade": 5.5
@@ -270,6 +591,98 @@
       "modules": []
     }
   ],
+  "modules": [
+    {
+      "id": 0,
+      "description": "2023 - Schnittstellen-Technologien ||",
+      "number": "string",
+      "status": "Active",
+      "bewertungstyp_beschreibung": "Wenn alle Kurse erfuellt sind",
+      "bewertungstyp_bezeichnung": "E",
+      "courses": [
+        {
+          "id": 0,
+          "description": "Projektmanagement",
+          "number": "3.121",
+          "teacher": [
+            [
+              "Kurt Munter",
+              "Lancelot"
+            ]
+          ],
+          "evaluationType": "M"
+        }
+    ]}
+  ],
+    "courseTeacher": {
+        "id": 0,
+        "version": 0,
+        "description": "Projektmanagement",
+        "number": "3.121",
+        "exams": [
+            {
+                "id": 0,
+                "description": "Projektarbeit",
+                "weight": 0.3,
+                "type": "Schritfliche Arbeit",
+                "avgGrades": [
+                    {
+                        "id": 0,
+                        "description": "CH-Note",
+                        "grade": 4.3
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "description": "Projektpräsentation",
+                "weight": 0.7,
+                "type": "Mündliche Prüfung",
+                "avgGrades": [
+                    {
+                        "id": 1,
+                        "description": "CH-Note",
+                        "grade": 5.5
+                    }
+                ]
+            }
+        ]
+    },
+    "modules": [
+        {
+            "id": 2,
+            "version": 0,
+            "description": "Management 2",
+            "number": "????",
+            "isActive": true,
+            "valuationCategory": {
+                "description": "string",
+                "code": "M"
+            }
+        },
+        {
+            "id": 3,
+            "version": 0,
+            "description": "Betriebs- und Organisationstechnik I",
+            "number": "VZGS1-2m",
+            "isActive": true,
+            "valuationCategory": {
+                "description": "string",
+                "code": "M"
+            }
+        },
+        {
+            "id": 1,
+            "version": 0,
+            "description": "Mathematik",
+            "number": "VZGS1-4m",
+            "isActive": true,
+            "valuationCategory": {
+                "description": "string",
+                "code": "M"
+            }
+        }
+    ],
   "curriculum": [
     {
       "id": 1,
@@ -418,20 +831,6 @@
           ]
         }
       ]
-    }
-  ],
-  "modules": [
-    {
-      "id": 1
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 4
     }
   ]
 }

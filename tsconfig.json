@@ -5,7 +5,7 @@
         "lib": ["ES2020", "DOM", "DOM.Iterable", "esnext.intl", "es2017.intl", "es2018.intl"],
         "module": "ESNext",
         "skipLibCheck": true,
-
+        "sourceMap": true,
         /* Bundler mode */
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,

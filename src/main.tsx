@@ -11,7 +11,7 @@ import { antdTheme } from './config/antdTheme.ts';
 import { msalConfig } from './config/authConfig.ts';
 import DevSupportComponent from './dev/DevSupportComponent.tsx';
 import './global.scss';
-import { ReactIntlProvider } from './i18n/ReactIntlProvider.tsx';
+import { LocaleProvider } from './i18n/ReactIntlProvider.tsx';
 
 const queryClient = new QueryClient();
 const msalInstance = new PublicClientApplication(msalConfig);
@@ -30,18 +30,17 @@ msalInstance
 
         root.render(
             <React.StrictMode>
-                <ConfigProvider theme={antdTheme}>
-                    <MsalProvider instance={msalInstance}>
-                        <QueryClientProvider client={queryClient}>
-                            <ReactIntlProvider>
+                <LocaleProvider>
+                    <ConfigProvider theme={antdTheme}>
+                        <MsalProvider instance={msalInstance}>
+                            <QueryClientProvider client={queryClient}>
                                 <RouterProvider router={router} />
-                            </ReactIntlProvider>
-                            <DevSupportComponent>
                                 <ReactQueryDevtools initialIsOpen={false} />
-                            </DevSupportComponent>
-                        </QueryClientProvider>
-                    </MsalProvider>
-                </ConfigProvider>
+                                <DevSupportComponent />
+                            </QueryClientProvider>
+                        </MsalProvider>
+                    </ConfigProvider>
+                </LocaleProvider>
             </React.StrictMode>
         );
     })

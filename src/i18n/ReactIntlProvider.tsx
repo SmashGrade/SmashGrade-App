@@ -1,8 +1,7 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react';
-import { IntlProvider as IntlProviderCustom } from 'react-intl';
+import React, { createContext, ReactNode, useEffect, useState, useMemo } from 'react';
+import { IntlProvider } from 'react-intl';
 import type * as sourceOfTruth from './compiled-lang/de.json';
 import { AvailableLocales } from './Locale';
-import LocaleSwitcher from './LocaleSwitcher.tsx';
 
 export type LocaleMessages = typeof sourceOfTruth;
 export type LocaleKey = keyof LocaleMessages;
@@ -11,6 +10,7 @@ async function importMessages(locale: AvailableLocales): Promise<LocaleMessages>
     switch (locale) {
         case AvailableLocales.English: {
             const enModule = await import('./compiled-lang/en.json');
+            // @ts-expect-error - complains because english does not have all translations, low prio
             return enModule.default;
         }
         case AvailableLocales.German: {
@@ -19,6 +19,7 @@ async function importMessages(locale: AvailableLocales): Promise<LocaleMessages>
         }
         case AvailableLocales.French: {
             const frModule = await import('./compiled-lang/fr.json');
+            // @ts-expect-error - complains because french does not have all translations, low prio
             return frModule.default;
         }
         default: {
@@ -28,11 +29,11 @@ async function importMessages(locale: AvailableLocales): Promise<LocaleMessages>
     }
 }
 
-const IntlProvider: React.FC<
-    Omit<React.ComponentProps<typeof IntlProviderCustom>, 'messages'> & {
+const CustomIntlProvider: React.FC<
+    Omit<React.ComponentProps<typeof IntlProvider>, 'messages'> & {
         messages: LocaleMessages;
     }
-> = (props) => <IntlProviderCustom {...props} />;
+> = (props) => <IntlProvider {...props} />;
 
 function getDefaultLanguage() {
     const userLang = localStorage.getItem('locale') as AvailableLocales;
@@ -48,7 +49,18 @@ function getDefaultLanguage() {
     return AvailableLocales.German;
 }
 
-export function ReactIntlProvider({ children }: PropsWithChildren) {
+export interface LocaleContextProps {
+    locale: AvailableLocales;
+    setLocale: React.Dispatch<React.SetStateAction<AvailableLocales>>;
+}
+
+interface LocaleProviderProps {
+    children: ReactNode;
+}
+
+export const LocaleContext = createContext<LocaleContextProps | undefined>(undefined);
+
+export function LocaleProvider({ children }: Readonly<LocaleProviderProps>) {
     const defaultLocale = getDefaultLanguage();
     const [locale, setLocale] = useState(defaultLocale);
     const [messages, setMessages] = useState<LocaleMessages | null>(null);
@@ -57,12 +69,22 @@ export function ReactIntlProvider({ children }: PropsWithChildren) {
         importMessages(locale).then(setMessages).catch(console.error);
     }, [locale]);
 
-    return messages ? (
-        <IntlProvider locale={locale} messages={messages} defaultLocale={defaultLocale}>
-            <LocaleSwitcher setLocale={setLocale} />
-            {children}
-        </IntlProvider>
-    ) : (
-        'Language Loading...'
+    const contextValue: LocaleContextProps = useMemo(() => {
+        return {
+            locale,
+            setLocale,
+        };
+    }, [locale]);
+
+    return (
+        <LocaleContext.Provider value={contextValue}>
+            {messages ? (
+                <CustomIntlProvider locale={locale} messages={messages} defaultLocale={defaultLocale}>
+                    {children}
+                </CustomIntlProvider>
+            ) : (
+                'Language Loading...'
+            )}
+        </LocaleContext.Provider>
     );
 }
