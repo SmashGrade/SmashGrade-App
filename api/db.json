@@ -750,5 +750,52 @@
                 }
             ]
         }
+    ],
+    "courseStudent": [
+        {
+            "id": 1,
+            "course": {
+                "id": 1,
+                "version": 0,
+                "description": "Projektmanagement",
+                "number": "3.121",
+                "exams": [
+                    {
+                        "id": 1,
+                        "description": "Projektarbeit",
+                        "weight": 0.3,
+                        "type": "Schritfliche Arbeit",
+                        "grade": {
+                            "id": 1,
+                            "date": "2023-11-20T14:36:02.335Z",
+                            "gradesPerType": [
+                                {
+                                    "id": 1,
+                                    "description": "CH-Note",
+                                    "grade": 4.3
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "id": 2,
+                        "description": "Test",
+                        "weight": 0.3,
+                        "type": "Schritfliche Arbeit",
+                        "grade": {
+                            "id": 1,
+                            "date": "2023-11-20T14:36:02.335Z",
+                            "gradesPerType": [
+                                {
+                                    "id": 1,
+                                    "description": "CH-Note",
+                                    "grade": 4.3
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
     ]
 }
