@@ -61,16 +61,7 @@ export default function Navigation() {
                 disabled: false,
             },
             {
-                label: <IconLink icon={'sticky_note_2'} messageProps={myCourseMenu} />,
-                label: (
-                    <IconLink
-                        icon={'sticky_note_2'}
-                        to={myCourseRoute.to}
-                        messageId={'my-course.menu'}
-                        defaultMessage={'Meine Kurse'}
-                        description={'Meine Kurse Menu'}
-                    />
-                ),
+                label: <IconLink icon={'sticky_note_2'} to={myCourseRoute.to} messageProps={myCourseMenu} />,
                 key: 'my-course',
                 disabled: false,
             },
