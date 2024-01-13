@@ -1,5 +1,5 @@
-import { getCourse, updateCourse } from '@features/course-admin/courseApi.ts';
-import CourseForm from '@features/course-admin/CourseForm.tsx';
+import { getCourse, updateCourse } from '@features/course-admin/course/courseApi.ts';
+import CourseForm from '@features/course-admin/course/CourseForm.tsx';
 import { CourseResponse } from '@features/course-admin/interfaces/CourseData.ts';
 import { courseDetailRoute } from '@pages/routes/courseRoutes.ts';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';

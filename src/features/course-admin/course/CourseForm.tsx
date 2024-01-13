@@ -1,8 +1,8 @@
 import { SaveOutlined } from '@ant-design/icons';
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
-import { getCourseFilter } from '@features/course-admin/courseApi.ts';
-import { CourseDetailForm, CourseFormData } from '@features/course-admin/CourseDetailForm.tsx';
-import { ExamForm } from '@features/course-admin/ExamForm.tsx';
+import { getCourseFilter } from '@features/course-admin/course/courseApi.ts';
+import { CourseDetailForm, CourseFormData } from '@features/course-admin/course/CourseDetailForm.tsx';
+import { ExamForm } from '@features/course-admin/course/ExamForm.tsx';
 import {
     CourseCreationRequest,
     CourseResponse,

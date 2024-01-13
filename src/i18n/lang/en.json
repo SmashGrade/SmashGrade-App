@@ -170,5 +170,36 @@
     "studyType": {
         "defaultMessage": "Study Type",
         "description": "Studiengang Dropdown Titel"
+    },
+    "moduleList.activeModule": {
+        "defaultMessage": "Active",
+        "description": "Displays the module status"
+    },
+    "moduleList.addModuleButton": {
+        "defaultMessage": "Modul hinzufügen",
+        "description": "Button for creating a new module"
+    },
+    "moduleList.copy": {
+        "defaultMessage": "Kopieren",
+        "description": "Menu item to copy a module"
+    },
+    "moduleList.delete": {
+        "defaultMessage": "Löschen",
+        "description": "Menu item to delete a module"
+    },
+    "moduleList.deleteSuccessMessage": {
+        "defaultMessage": "Modul erfolgreich gelöscht",
+        "description": "Module Delete success message"
+    },
+    "moduleList.deleteErrorMessage": {
+        "defaultMessage": "Modul konnte nicht gelöscht werden",
+        "description": "Module Delete Error Message"
+    },
+    "moduleList.edit": {
+        "defaultMessage": "Editieren"
+    },
+    "moduleList.inactiveModule": {
+        "defaultMessage": "Inactive",
+        "description": "Displays the module status"
     }
 }

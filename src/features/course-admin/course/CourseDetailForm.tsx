@@ -1,10 +1,10 @@
-import styles from '@features/course-admin/CourseCreation.module.scss';
+import styles from '@features/course-admin/course/CourseCreation.module.scss';
 import { ExamCreateData } from '@features/course-admin/interfaces/CourseData.ts';
 import { FormFilters } from '@features/course-admin/interfaces/FormFilters.ts';
 import { Form, FormInstance, Input, Select } from 'antd';
 import { useIntl } from 'react-intl';
-import colors from '../../colors.module.scss';
-import layout from '../../layout.module.scss';
+import colors from '../../../colors.module.scss';
+import layout from '../../../layout.module.scss';
 
 export interface CourseFormData {
     description: string;

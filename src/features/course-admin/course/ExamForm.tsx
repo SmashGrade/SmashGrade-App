@@ -1,13 +1,13 @@
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
-import styles from '@features/course-admin/CourseCreation.module.scss';
-import { CourseFormData } from '@features/course-admin/CourseDetailForm.tsx';
+import styles from '@features/course-admin/course/CourseCreation.module.scss';
+import { CourseFormData } from '@features/course-admin/course/CourseDetailForm.tsx';
 import { ExamResponse } from '@features/course-admin/interfaces/CourseData.ts';
 import { FormFilters } from '@features/course-admin/interfaces/FormFilters.ts';
 import { Button, Col, Divider, Form, FormListOperation, Input, InputNumber, Row } from 'antd';
 import { useCallback, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import colors from '../../colors.module.scss';
-import layout from '../../layout.module.scss';
+import colors from '../../../colors.module.scss';
+import layout from '../../../layout.module.scss';
 
 interface ExamFormProps {
     courseFormFilterData: FormFilters | undefined;

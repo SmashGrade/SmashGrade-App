@@ -2,7 +2,14 @@ import { useMsal } from '@azure/msal-react';
 import { IconLink } from '@components/ui-elements/IconLink.tsx';
 import { UserProfile } from '@features/profile/UserProfile.tsx';
 import useUserRoles from '@hooks/useUserRoles.ts';
-import { courseRoute, curriculumRoute, myCourseRoute, onboardingRoute, settingsRoute } from '@pages/routes/routes.ts';
+import {
+    courseRoute,
+    curriculumRoute,
+    moduleRoute,
+    myCourseRoute,
+    onboardingRoute,
+    settingsRoute,
+} from '@pages/routes/routes.ts';
 import { studentModuleRoute } from '@pages/routes/studentRoutes.ts';
 import { useRouter } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
@@ -38,7 +45,7 @@ export default function Navigation() {
                 key: 'curriculum',
             },
             {
-                label: <IconLink icon={'collections_bookmark'} messageProps={moduleMenu} />,
+                label: <IconLink to={moduleRoute.to} icon={'collections_bookmark'} messageProps={moduleMenu} />,
                 key: 'modules',
             },
             {

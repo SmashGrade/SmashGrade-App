@@ -683,119 +683,154 @@
             }
         }
     ],
-    "curriculum":[
+  "curriculum": [
+    {
+      "id": 1,
+      "focus": "Softwareentwicklung",
+      "field": "Informatik",
+      "curriculumType": "Berufsbegleitend",
+      "isActive": true,
+      "startDate": "2023-12-28T18:49:49.630Z",
+      "endDate": "2023-12-28T18:49:49.630Z",
+      "description": "2023-12-28 Informatik Softwareentwicklung",
+      "fieldmanagers": [
         {
+          "id": 0,
+          "name": "Kurt Munter"
+        }
+      ],
+      "modules": [
+        {
+          "id": 0,
+          "version": 0,
+          "description": "Schnittstellen-Technologien",
+          "number": "string",
+          "isActive": true,
+          "studyStage": {
             "id": 0,
-            "focus": "Softwareentwicklung",
-            "field": "Informatik",
-            "curriculumType": "Berufsbegleitend",
-            "isActiv": true,
-            "startDate": "2023-11-29T20:26:25.859Z",
-            "endDate": "2023-11-29T20:26:25.859Z",
-            "fieldmanagers": [
+            "description": "Fachstudium"
+          },
+          "valuationCategory": {
+            "description": "string",
+            "code": "E"
+          },
+          "courses": [
+            {
+              "id": 0,
+              "version": 0,
+              "description": "Projektmanagement",
+              "number": "3.121",
+              "versions": [
+                0
+              ],
+              "modules": [
                 {
-                    "id": 0,
-                    "name": "Kurt Munter"
-                }
-            ],
-            "modules": [
+                  "id": 1,
+                  "version": 0,
+                  "description": "Schnittstellen-Technologien",
+                  "number": "string",
+                  "isActive": true
+                },
                 {
-                    "id": 0,
-                    "version": 0,
-                    "description": "Schnittstellen-Technologien",
-                    "number": "string",
-                    "isActiv": true,
-                    "studyStage": {
-                        "id": 0,
-                        "description": "Fachstudium"
-                    },
-                    "valuationCategory": {
-                        "description": "string",
-                        "code": "E"
-                    },
-                    "courses": [
-                        {
-                            "id": 0,
-                            "version": 0,
-                            "description": "Projektmanagement",
-                            "number": "3.121",
-                            "versions": [
-                                0
-                            ],
-                            "modules": [
-                                {
-                                    "id": 0,
-                                    "version": 0,
-                                    "description": "Schnittstellen-Technologien",
-                                    "number": "string",
-                                    "isActiv": true
-                                }
-                            ],
-                            "exams": [
-                                {
-                                    "id": 0,
-                                    "description": "Projektarbeit",
-                                    "weight": 3,
-                                    "type": "Schritfliche Arbeit"
-                                }
-                            ],
-                            "teachers": [
-                                {
-                                    "id": 0,
-                                    "name": "Simeon Liniger"
-                                }
-                            ]
-                        }
-                    ]
+                  "id": 2,
+                  "version": 0,
+                  "description": "DB 1",
+                  "number": "string",
+                  "isActive": true
                 }
-            ]
-        }
-    ],
-    "courseStudent": [
-        {
-            "id": 1,
-            "course": {
-                "id": 1,
-                "version": 0,
-                "description": "Projektmanagement",
-                "number": "3.121",
-                "exams": [
-                    {
-                        "id": 1,
-                        "description": "Projektarbeit",
-                        "weight": 0.3,
-                        "type": "Schritfliche Arbeit",
-                        "grade": {
-                            "id": 1,
-                            "date": "2023-11-20T14:36:02.335Z",
-                            "gradesPerType": [
-                                {
-                                    "id": 1,
-                                    "description": "CH-Note",
-                                    "grade": 4.3
-                                }
-                            ]
-                        }
-                    },
-                    {
-                        "id": 2,
-                        "description": "Test",
-                        "weight": 0.3,
-                        "type": "Schritfliche Arbeit",
-                        "grade": {
-                            "id": 1,
-                            "date": "2023-11-20T14:36:02.335Z",
-                            "gradesPerType": [
-                                {
-                                    "id": 1,
-                                    "description": "CH-Note",
-                                    "grade": 4.3
-                                }
-                            ]
-                        }
-                    }
-                ]
+              ],
+              "exams": [
+                {
+                  "id": 0,
+                  "description": "Projektarbeit",
+                  "weight": 3,
+                  "type": "Schriftliche Arbeit"
+                }
+              ],
+              "teachers": [
+                {
+                  "id": 0,
+                  "name": "Simeon Liniger"
+                }
+              ]
             }
+          ]
         }
-    ]
+      ]
+    },
+    {
+      "id": 2,
+      "focus": "Data Science",
+      "field": "Computer Science",
+      "curriculumType": "Vollzeit",
+      "isActive": true,
+      "startDate": "2022-12-28T18:49:49.630Z",
+      "endDate": "2025-12-28T18:49:49.630Z",
+      "description": "2022-12-28 Informatik Wirtschaftsinformatik",
+      "fieldmanagers": [
+        {
+          "id": 1,
+          "name": "Kurt Munter"
+        }
+      ],
+      "modules": [
+        {
+          "id": 1,
+          "version": 0,
+          "description": "Machine Learning Basics",
+          "number": "ML101",
+          "isActive": true,
+          "studyStage": {
+            "id": 1,
+            "description": "Grundstudium"
+          },
+          "valuationCategory": {
+            "description": "Advanced",
+            "code": "A"
+          },
+          "courses": [
+            {
+              "id": 1,
+              "version": 0,
+              "description": "Introduction to Neural Networks",
+              "number": "NN201",
+              "versions": [
+                0
+              ],
+              "modules": [
+                {
+                  "id": 3,
+                  "version": 0,
+                  "description": "Machine Learning Basics",
+                  "number": "ML101",
+                  "isActive": true
+                },
+                {
+                  "id": 4,
+                  "version": 0,
+                  "description": "BWL",
+                  "number": "BWL100",
+                  "isActive": false
+                }
+              ],
+              "exams": [
+                {
+                  "id": 1,
+                  "description": "Neural Networks Exam",
+                  "weight": 4,
+                  "type": "Written Exam"
+                }
+              ],
+              "teachers": [
+                {
+                  "id": 1,
+                  "name": "Bob Smith"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
