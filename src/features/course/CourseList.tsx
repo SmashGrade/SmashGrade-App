@@ -7,6 +7,8 @@ import { courseRoute } from '@pages/routes/routes.ts';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { ColDef } from 'ag-grid-community';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { Button, Spin } from 'antd';
 import axios from 'axios';
 import styles from './Course.module.scss';

@@ -30,8 +30,6 @@ export default function ModuleList() {
 
     // States for the Modal Delete Popup
     const [moduleIdToDelete, setModuleIdToDelete] = useState<number | null>(null);
-    /*const [open, setOpen] = useState<boolean>(false);
-    const [confirmLoading, setConfirmLoading] = useState<boolean>(false);*/
     const [modalState, setModalState] = useState({ open: false, confirmLoading: false });
     const [modalText, setModalText] = useState<React.ReactNode | undefined>();
 
