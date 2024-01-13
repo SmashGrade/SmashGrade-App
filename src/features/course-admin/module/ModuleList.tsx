@@ -159,15 +159,6 @@ export default function ModuleList() {
                             description={'Menu item to delete a module'}
                         />
                     </Button>
-                    <Modal
-                        title={'Title'}
-                        open={open}
-                        onOk={handleOk}
-                        confirmLoading={confirmLoading}
-                        onCancel={handleCancel}
-                    >
-                        <p>{modalText}</p>
-                    </Modal>
                 </div>
             ),
         },
@@ -199,6 +190,9 @@ export default function ModuleList() {
                 columnDefs={moduleColumnDefs}
                 defaultColDef={defaultModuleColDef}
             />
+            <Modal title={'Title'} open={open} onOk={handleOk} confirmLoading={confirmLoading} onCancel={handleCancel}>
+                <p>{modalText}</p>
+            </Modal>
         </div>
     );
 }
