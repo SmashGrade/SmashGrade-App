@@ -9,57 +9,14 @@ import { ColDef } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { AgGridReact } from 'ag-grid-react';
-import { Button, Spin, Input, message } from 'antd';
+import { Button, Spin, Input, message, Modal } from 'antd';
 import type { MenuProps } from 'antd';
 import { EditOutlined, DeleteOutlined, CopyOutlined } from '@ant-design/icons';
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import styles from './ModuleList.module.scss';
 import { FormattedMessage } from 'react-intl';
 import { ModuleObject } from '@features/course-admin/interfaces/ModuleData.ts';
 import { getModules, deleteModuleById } from '@features/course-admin/module/moduleApi.ts';
-
-// Function to generate menu items dynamically based on id
-const menuItems = (id: number, handleDelete: (id: number) => void): MenuProps['items'] => [
-    {
-        key: 'edit',
-        label: (
-            <Link from={moduleRoute.to} to={moduleDetailRoute.to} params={{ id }}>
-                <EditOutlined /> <FormattedMessage id={'moduleList.edit'} defaultMessage={'Editieren'} />
-            </Link>
-        ),
-    },
-    {
-        key: 'copy',
-        label: (
-            <Link from={moduleRoute.to} to={copyModuleRoute.to} params={{ id }}>
-                <CopyOutlined className={styles.iconTextSpaceBetween} />
-                <FormattedMessage
-                    id={'moduleList.copy'}
-                    defaultMessage={'Kopieren'}
-                    description={'Menu item to copy a module'}
-                />
-            </Link>
-        ),
-    },
-    {
-        key: 'delete',
-        label: (
-            <Button
-                className={styles.deleteButton}
-                onClick={() => {
-                    handleDelete(id);
-                }}
-                icon={<DeleteOutlined className={styles.iconTextSpaceBetween} />}
-            >
-                <FormattedMessage
-                    id={'moduleList.delete'}
-                    defaultMessage={'Löschen'}
-                    description={'Menu item to delete a module'}
-                />
-            </Button>
-        ),
-    },
-];
 
 const { Search } = Input;
 
@@ -68,6 +25,34 @@ const defaultModuleColDef: ColDef<ModuleObject> = { sortable: true, filter: 'agT
 export default function ModuleList() {
     const gridRef = useRef<AgGridReact>(null);
     const queryClient = useQueryClient();
+
+    // States for the Modal Delete Popup
+    const [moduleIdToDelete, setModuleIdToDelete] = useState<number | null>(null);
+    const [open, setOpen] = useState<boolean>(false);
+    const [confirmLoading, setConfirmLoading] = useState(false);
+    const [modalText, setModalText] = useState('');
+
+    const showModal = (id: number) => {
+        setOpen(true);
+        setModuleIdToDelete(id);
+        //console.log('show Modal');
+    };
+
+    const handleOk = () => {
+        setModalText('The modal will be closed after two seconds');
+        setConfirmLoading(true);
+        if (moduleIdToDelete !== null) {
+            setTimeout(() => {
+                setOpen(false);
+                setConfirmLoading(false);
+                deleteModuleMutation.mutate(moduleIdToDelete);
+            }, 3000);
+        }
+    };
+
+    const handleCancel = () => {
+        setOpen(false);
+    };
 
     const {
         isLoading: isGetModulePending,
@@ -92,12 +77,10 @@ export default function ModuleList() {
         },
     });
 
-    const handleDelete = (id: number) => {
-        if (window.confirm('Wirklich Löschen?')) {
+    /*const handleDelete = (id: number) => {
             // Call the mutation function with the module id
             deleteModuleMutation.mutate(id);
-        }
-    };
+        };*/
 
     // Filter for the searchbar
     const onFilterTextBoxChanged = useCallback((value: string) => {
@@ -131,7 +114,61 @@ export default function ModuleList() {
             sortable: false,
             filter: '',
             cellRenderer: (params: { data: ModuleObject }) => (
-                <DropdownCellRenderer data={params.data} handleDelete={handleDelete} menuItems={menuItems} />
+                <DropdownCellRenderer data={params.data} menuItems={menuItems} />
+            ),
+        },
+    ];
+
+    // Function to generate menu items dynamically based on id
+    const menuItems = (id: number): MenuProps['items'] => [
+        {
+            key: 'edit',
+            label: (
+                <Link from={moduleRoute.to} to={moduleDetailRoute.to} params={{ id }}>
+                    <EditOutlined /> <FormattedMessage id={'moduleList.edit'} defaultMessage={'Editieren'} />
+                </Link>
+            ),
+        },
+        {
+            key: 'copy',
+            label: (
+                <Link from={moduleRoute.to} to={copyModuleRoute.to} params={{ id }}>
+                    <CopyOutlined className={styles.iconTextSpaceBetween} />
+                    <FormattedMessage
+                        id={'moduleList.copy'}
+                        defaultMessage={'Kopieren'}
+                        description={'Menu item to copy a module'}
+                    />
+                </Link>
+            ),
+        },
+        {
+            key: 'delete',
+            label: (
+                <div>
+                    <Button
+                        className={styles.deleteButton}
+                        onClick={() => {
+                            showModal(id);
+                        }}
+                        icon={<DeleteOutlined className={styles.iconTextSpaceBetween} />}
+                    >
+                        <FormattedMessage
+                            id={'moduleList.delete'}
+                            defaultMessage={'Löschen'}
+                            description={'Menu item to delete a module'}
+                        />
+                    </Button>
+                    <Modal
+                        title={'Title'}
+                        open={open}
+                        onOk={handleOk}
+                        confirmLoading={confirmLoading}
+                        onCancel={handleCancel}
+                    >
+                        <p>{modalText}</p>
+                    </Modal>
+                </div>
             ),
         },
     ];
