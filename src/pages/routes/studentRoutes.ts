@@ -9,14 +9,14 @@ export const studentIndexRoute = new Route({
 });
 
 export const studentCourseRoute = new Route({
-    getParentRoute: () => studentIndexRoute,
+    getParentRoute: () => studentRoute,
     path: 'course/$id',
     parseParams: (params) => ({ id: z.number().int().parse(parseInt(params.id)) }),
     component: lazyRouteComponent(() => import('@pages/StudentCoursePage.tsx')),
 });
 
 export const studentModuleRoute = new Route({
-    getParentRoute: () => studentIndexRoute,
+    getParentRoute: () => studentRoute,
     path: 'modules',
     component: lazyRouteComponent(() => import('@pages/ModulesPage.tsx')),
 });
