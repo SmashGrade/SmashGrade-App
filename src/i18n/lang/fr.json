@@ -39,6 +39,10 @@
         "defaultMessage": "Modul erfolgreich gelöscht",
         "description": "Module Delete success message"
     },
+    "moduleList.deleteErrorMessage": {
+        "defaultMessage": "Modul konnte nicht gelöscht werden",
+        "description": "Module Delete Error Message"
+    },
     "moduleList.edit": {
         "defaultMessage": "Editieren"
     },

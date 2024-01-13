@@ -13,6 +13,7 @@
     "moduleList.delete": "Löschen",
     "moduleList.deleteMessage": "Möchtest du das Module wirklich löschen?",
     "moduleList.deleteSuccessMessage": "Modul erfolgreich gelöscht",
+    "moduleList.deleteErrorMessage": "Module couldn't be deleted",
     "moduleList.activeModule": "Inaktiv",
     "moduleList.inactiveModule": "Inaktiv",
     "moduleList.edit": "Editieren",

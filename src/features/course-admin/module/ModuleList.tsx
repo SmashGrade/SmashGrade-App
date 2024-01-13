@@ -11,10 +11,10 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { AgGridReact } from 'ag-grid-react';
 import { Button, Spin, Input, message, Modal } from 'antd';
 import type { MenuProps } from 'antd';
-import { EditOutlined, DeleteOutlined, CopyOutlined } from '@ant-design/icons';
-import { useCallback, useRef, useState } from 'react';
+import { EditOutlined, DeleteOutlined, CopyOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import React, { useCallback, useRef, useState } from 'react';
+import { useIntl } from 'react-intl';
 import styles from './ModuleList.module.scss';
-import { FormattedMessage } from 'react-intl';
 import { ModuleObject } from '@features/course-admin/interfaces/ModuleData.ts';
 import { getModules, deleteModuleById } from '@features/course-admin/module/moduleApi.ts';
 
@@ -26,32 +26,42 @@ export default function ModuleList() {
     const gridRef = useRef<AgGridReact>(null);
     const queryClient = useQueryClient();
 
+    const intl = useIntl();
+
     // States for the Modal Delete Popup
     const [moduleIdToDelete, setModuleIdToDelete] = useState<number | null>(null);
-    const [open, setOpen] = useState<boolean>(false);
-    const [confirmLoading, setConfirmLoading] = useState(false);
-    const [modalText, setModalText] = useState('');
+    /*const [open, setOpen] = useState<boolean>(false);
+    const [confirmLoading, setConfirmLoading] = useState<boolean>(false);*/
+    const [modalState, setModalState] = useState({ open: false, confirmLoading: false });
+    const [modalText, setModalText] = useState<React.ReactNode | undefined>();
 
-    const showModal = (id: number) => {
-        setOpen(true);
+    const showModal = (id: number, moduleDescription: string) => {
+        const message = (
+            <>
+                {intl.formatMessage({
+                    id: 'moduleList.deleteMessage',
+                    defaultMessage: 'Möchtest du das Modul wirklich löschen?',
+                    description: 'Modal Message to confirm the deletion',
+                })}
+                <br />
+                <strong>{moduleDescription}</strong>
+            </>
+        );
+
+        setModalText(message);
+        setModalState({ ...modalState, open: true });
         setModuleIdToDelete(id);
-        //console.log('show Modal');
     };
 
     const handleOk = () => {
-        setModalText('The modal will be closed after two seconds');
-        setConfirmLoading(true);
+        setModalState({ ...modalState, confirmLoading: true });
         if (moduleIdToDelete !== null) {
-            setTimeout(() => {
-                setOpen(false);
-                setConfirmLoading(false);
-                deleteModuleMutation.mutate(moduleIdToDelete);
-            }, 3000);
+            deleteModuleMutation.mutate(moduleIdToDelete);
         }
     };
 
     const handleCancel = () => {
-        setOpen(false);
+        setModalState({ ...modalState, open: false });
     };
 
     const {
@@ -67,20 +77,26 @@ export default function ModuleList() {
         mutationFn: deleteModuleById,
         onSuccess: () => {
             void queryClient.invalidateQueries({ queryKey: ['modules'] });
+            setModalState({ open: false, confirmLoading: false });
             void message.success(
-                <FormattedMessage
-                    id={'moduleList.deleteSuccessMessage'}
-                    description={'Module Delete success message'}
-                    defaultMessage={'Modul erfolgreich gelöscht'}
-                />
+                intl.formatMessage({
+                    id: 'moduleList.deleteSuccessMessage',
+                    defaultMessage: 'Modul erfolgreich gelöscht',
+                    description: 'Module Delete success message',
+                })
+            );
+        },
+        onError: () => {
+            setModalState({ open: false, confirmLoading: false });
+            void message.error(
+                intl.formatMessage({
+                    id: 'moduleList.deleteErrorMessage',
+                    defaultMessage: 'Modul konnte nicht gelöscht werden',
+                    description: 'Module Delete Error Message',
+                })
             );
         },
     });
-
-    /*const handleDelete = (id: number) => {
-            // Call the mutation function with the module id
-            deleteModuleMutation.mutate(id);
-        };*/
 
     // Filter for the searchbar
     const onFilterTextBoxChanged = useCallback((value: string) => {
@@ -91,9 +107,6 @@ export default function ModuleList() {
 
     if (isGetModuleError) return <div>Error when loading courses</div>;
     if (isGetModulePending) return <Spin />;
-
-    /*    if (isDeleteModulePending) return <div>Error when loading courses</div>;
-    if (isDeleteModuleError) return <Spin />;*/
 
     const moduleColumnDefs: ColDef<ModuleObject>[] = [
         { field: 'moduleDescription', headerName: 'Module', flex: 1 },
@@ -120,12 +133,17 @@ export default function ModuleList() {
     ];
 
     // Function to generate menu items dynamically based on id
-    const menuItems = (id: number): MenuProps['items'] => [
+    const menuItems = (id: number, moduleDescription: string): MenuProps['items'] => [
         {
             key: 'edit',
             label: (
                 <Link from={moduleRoute.to} to={moduleDetailRoute.to} params={{ id }}>
-                    <EditOutlined /> <FormattedMessage id={'moduleList.edit'} defaultMessage={'Editieren'} />
+                    <EditOutlined className={styles.iconTextSpaceBetween} />
+                    {intl.formatMessage({
+                        id: 'moduleList.edit',
+                        defaultMessage: 'Editieren',
+                        description: 'Menu item to copy a module',
+                    })}
                 </Link>
             ),
         },
@@ -134,11 +152,11 @@ export default function ModuleList() {
             label: (
                 <Link from={moduleRoute.to} to={copyModuleRoute.to} params={{ id }}>
                     <CopyOutlined className={styles.iconTextSpaceBetween} />
-                    <FormattedMessage
-                        id={'moduleList.copy'}
-                        defaultMessage={'Kopieren'}
-                        description={'Menu item to copy a module'}
-                    />
+                    {intl.formatMessage({
+                        id: 'moduleList.copy',
+                        defaultMessage: 'Kopieren',
+                        description: 'Menu item to copy a module',
+                    })}
                 </Link>
             ),
         },
@@ -149,15 +167,15 @@ export default function ModuleList() {
                     <Button
                         className={styles.deleteButton}
                         onClick={() => {
-                            showModal(id);
+                            showModal(id, moduleDescription);
                         }}
-                        icon={<DeleteOutlined className={styles.iconTextSpaceBetween} />}
+                        icon={<DeleteOutlined />}
                     >
-                        <FormattedMessage
-                            id={'moduleList.delete'}
-                            defaultMessage={'Löschen'}
-                            description={'Menu item to delete a module'}
-                        />
+                        {intl.formatMessage({
+                            id: 'moduleList.delete',
+                            defaultMessage: 'Löschen',
+                            description: 'Menu item to delete a module',
+                        })}
                     </Button>
                 </div>
             ),
@@ -170,11 +188,11 @@ export default function ModuleList() {
                 <Link from={moduleRoute.to} to={newModuleRoute.to}>
                     <Button type={'primary'}>
                         + &nbsp;
-                        <FormattedMessage
-                            id={'moduleList.addModuleButton'}
-                            defaultMessage={'Modul hinzufügen'}
-                            description={'Button for creating a new module'}
-                        />
+                        {intl.formatMessage({
+                            id: 'moduleList.addModuleButton',
+                            defaultMessage: 'Modul hinzufügen',
+                            description: 'Button for creating a new module',
+                        })}
                     </Button>
                 </Link>
 
@@ -190,7 +208,18 @@ export default function ModuleList() {
                 columnDefs={moduleColumnDefs}
                 defaultColDef={defaultModuleColDef}
             />
-            <Modal title={'Title'} open={open} onOk={handleOk} confirmLoading={confirmLoading} onCancel={handleCancel}>
+            <Modal
+                title={
+                    <span>
+                        <QuestionCircleOutlined style={{ marginRight: 8, color: 'red' }} />
+                        {intl.formatMessage({ id: 'moduleList.delete' })}
+                    </span>
+                }
+                open={modalState.open}
+                onOk={handleOk}
+                confirmLoading={modalState.confirmLoading}
+                onCancel={handleCancel}
+            >
                 <p>{modalText}</p>
             </Modal>
         </div>

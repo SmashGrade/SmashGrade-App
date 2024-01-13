@@ -27,5 +27,6 @@ export async function getModules(): Promise<ModuleObject[]> {
 }
 
 export async function deleteModuleById(id: number): Promise<void> {
+    console.debug('Module to delete: ' + id);
     await axios.delete(`${import.meta.env.VITE_BACKEND_API_URL}/modules/${id}`);
 }
