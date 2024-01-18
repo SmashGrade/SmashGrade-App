@@ -1,22 +1,22 @@
-import Grid from '@components/grid/Grid.tsx';
+import { CopyOutlined, DeleteOutlined, EditOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import DropdownCellRenderer from '@components/grid/DropdownCellRenderer.tsx';
+import Grid from '@components/grid/Grid.tsx';
 import StatusCellRenderer from '@components/grid/StatusCellRenderer.tsx';
-import { copyModuleRoute, moduleDetailRoute, newModuleRoute } from '@pages/routes/moduleRoutes.ts';
-import { moduleRoute } from '@pages/routes/routes.ts';
+import { ModuleObject } from '@features/course-admin/interfaces/ModuleData.ts';
+import { deleteModuleById, getModules } from '@features/course-admin/module/moduleApi.ts';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { ColDef } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { AgGridReact } from 'ag-grid-react';
-import { Button, Spin, Input, message, Modal } from 'antd';
 import type { MenuProps } from 'antd';
-import { EditOutlined, DeleteOutlined, CopyOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { Button, Input, message, Modal, Spin } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
+import { Route as ModuleDetailRoute } from '../../../routes/module/$id.tsx';
+import { Route as CopyModuleRoute } from '../../../routes/module/copy.$id.tsx';
 import styles from './ModuleList.module.scss';
-import { ModuleObject } from '@features/course-admin/interfaces/ModuleData.ts';
-import { getModules, deleteModuleById } from '@features/course-admin/module/moduleApi.ts';
 
 const { Search } = Input;
 
@@ -135,7 +135,7 @@ export default function ModuleList() {
         {
             key: 'edit',
             label: (
-                <Link from={moduleRoute.to} to={moduleDetailRoute.to} params={{ id }}>
+                <Link from={'/module'} to={ModuleDetailRoute.to} params={{ id }}>
                     <EditOutlined className={styles.iconTextSpaceBetween} />
                     {intl.formatMessage({
                         id: 'moduleList.edit',
@@ -148,7 +148,7 @@ export default function ModuleList() {
         {
             key: 'copy',
             label: (
-                <Link from={moduleRoute.to} to={copyModuleRoute.to} params={{ id }}>
+                <Link from={'/module'} to={CopyModuleRoute.to} params={{ id }}>
                     <CopyOutlined className={styles.iconTextSpaceBetween} />
                     {intl.formatMessage({
                         id: 'moduleList.copy',
@@ -183,7 +183,7 @@ export default function ModuleList() {
     return (
         <div className={styles.moduleContainer}>
             <div className={styles.spaceBetweenButtonAndSearch}>
-                <Link from={moduleRoute.to} to={newModuleRoute.to}>
+                <Link from={'/module'} to={'/module/new'}>
                     <Button type={'primary'}>
                         + &nbsp;
                         {intl.formatMessage({

@@ -2,15 +2,6 @@ import { useMsal } from '@azure/msal-react';
 import { IconLink } from '@components/ui-elements/IconLink.tsx';
 import { UserProfile } from '@features/profile/UserProfile.tsx';
 import useUserRoles from '@hooks/useUserRoles.ts';
-import {
-    courseRoute,
-    curriculumRoute,
-    moduleRoute,
-    myCourseRoute,
-    onboardingRoute,
-    settingsRoute,
-} from '@pages/routes/routes.ts';
-import { studentModuleRoute } from '@pages/routes/studentRoutes.ts';
 import { useRouter } from '@tanstack/react-router';
 import { Menu, MenuProps } from 'antd';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
@@ -41,38 +32,48 @@ export default function Navigation() {
     const items: MenuProps['items'] = useMemo(() => {
         return [
             {
-                label: <IconLink to={curriculumRoute.to} icon={'play_lesson'} messageProps={curriculumMenu} />,
+                label: (
+                    <IconLink linkProps={{ to: '/curriculum' }} icon={'play_lesson'} messageProps={curriculumMenu} />
+                ),
                 key: 'curriculum',
             },
             {
-                label: <IconLink to={moduleRoute.to} icon={'collections_bookmark'} messageProps={moduleMenu} />,
+                label: (
+                    <IconLink linkProps={{ to: '/module' }} icon={'collections_bookmark'} messageProps={moduleMenu} />
+                ),
                 key: 'modules',
             },
             {
-                label: <IconLink to={courseRoute.to} icon={'developer_guide'} messageProps={courseMenu} />,
+                label: <IconLink linkProps={{ to: '/course' }} icon={'developer_guide'} messageProps={courseMenu} />,
                 key: 'course',
             },
             {
-                label: <IconLink icon={'supervised_user_circle'} messageProps={userManagementMenu} />,
+                label: (
+                    <IconLink
+                        linkProps={{ to: '/' }}
+                        icon={'supervised_user_circle'}
+                        messageProps={userManagementMenu}
+                    />
+                ),
                 key: 'user-management',
             },
             {
-                label: <IconLink icon={'school'} messageProps={studentsMenu} />,
+                label: <IconLink linkProps={{ to: '/' }} icon={'school'} messageProps={studentsMenu} />,
                 key: 'students',
                 disabled: false,
             },
             {
-                label: <IconLink icon={'sticky_note_2'} to={myCourseRoute.to} messageProps={myCourseMenu} />,
+                label: <IconLink linkProps={{ to: '/my-course' }} icon={'sticky_note_2'} messageProps={myCourseMenu} />,
                 key: 'my-course',
                 disabled: false,
             },
             {
-                label: <IconLink to={studentModuleRoute.to} messageProps={myCurriculumMenu} />,
+                label: <IconLink linkProps={{ to: '/student/modules' }} messageProps={myCurriculumMenu} />,
                 key: 'my-curriculum',
                 disabled: false,
             },
             {
-                label: <IconLink to={onboardingRoute.to} messageProps={onboardingMenu} />,
+                label: <IconLink linkProps={{ to: '/onboarding' }} messageProps={onboardingMenu} />,
                 key: 'onboarding',
                 disabled: false,
             },
@@ -86,7 +87,7 @@ export default function Navigation() {
                 key: 'account',
                 children: [
                     {
-                        label: <IconLink to={settingsRoute.to} messageProps={settingsMenu} />,
+                        label: <IconLink linkProps={{ to: '/settings' }} messageProps={settingsMenu} />,
                         key: 'settings',
                         disabled: false,
                     },

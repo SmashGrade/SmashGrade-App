@@ -1,5 +1,4 @@
 import Rating from '@features/student/modules/Rating.tsx';
-import { studentCourseRoute } from '@pages/routes/studentRoutes.ts';
 import { Link } from '@tanstack/react-router';
 import styles from './Course.module.scss';
 
@@ -16,7 +15,7 @@ interface CourseProps {
 export function Course({ course }: Readonly<CourseProps>) {
     return (
         <div className={styles.courseContainer}>
-            <Link to={studentCourseRoute.to} params={{ id: course.id }}>
+            <Link to={'/student/course/$id'} params={{ id: course.id }}>
                 <p className={styles.courseTitle}>{course.description}</p>
             </Link>
 

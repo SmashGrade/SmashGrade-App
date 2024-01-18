@@ -1,7 +1,6 @@
 import { createCourse } from '@features/course-admin/course/courseApi.ts';
 import CourseForm from '@features/course-admin/course/CourseForm.tsx';
 import { CourseCreationRequest } from '@features/course-admin/interfaces/CourseData.ts';
-import { courseIndexRoute } from '@pages/routes/courseRoutes.ts';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
 import { message } from 'antd';
@@ -26,7 +25,7 @@ function NewCourse() {
         mutationFn: createCourse,
         onSuccess: () => {
             void queryClient.invalidateQueries({ queryKey: ['courses'] });
-            void navigate({ to: courseIndexRoute.to });
+            void navigate({ to: '/course' });
             void message.success(
                 intl.formatMessage({
                     id: 'courseForm.updateSuccessMessage',

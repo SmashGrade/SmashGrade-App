@@ -1,6 +1,4 @@
 import { CourseResponse } from '@features/course/CourseList.tsx';
-import { courseDetailRoute } from '@pages/routes/courseRoutes.ts';
-import { courseRoute } from '@pages/routes/routes.ts';
 import { Link } from '@tanstack/react-router';
 import { ICellRendererParams } from 'ag-grid-community';
 import { Button } from 'antd';
@@ -8,8 +6,8 @@ import { Button } from 'antd';
 export function LinkButtonCellRenderer(params: Readonly<ICellRendererParams<CourseResponse, number>>) {
     return (
         <Link
-            from={courseRoute.to}
-            to={courseDetailRoute.to}
+            from={'/course'}
+            to={'/course/$id'}
             params={{
                 id: params?.value ?? 0,
             }}

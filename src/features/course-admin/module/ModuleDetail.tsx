@@ -1,8 +1,7 @@
-import { moduleDetailRoute } from '@pages/routes/moduleRoutes.ts';
-import { useParams } from '@tanstack/react-router';
+import { Route } from '../../../routes/module/$id.tsx';
 
 function ModuleDetail() {
-    const { id } = useParams({ from: moduleDetailRoute.id });
+    const { id } = Route.useParams();
     return <div>Rendering detail for module {id}</div>;
 }
 

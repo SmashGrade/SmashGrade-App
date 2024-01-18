@@ -2,8 +2,6 @@ import { getValueGetter } from '@components/grid/columnFormatter.ts';
 import Grid from '@components/grid/Grid.tsx';
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
 import { LinkButtonCellRenderer } from '@features/course/LinkButtonCellRenderer.tsx';
-import { newCourseRoute } from '@pages/routes/courseRoutes.ts';
-import { courseRoute } from '@pages/routes/routes.ts';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { ColDef } from 'ag-grid-community';
@@ -86,7 +84,7 @@ export default function CourseList() {
     return (
         <div className={styles.courseContainer}>
             <Button type={'primary'} className={styles.addButton}>
-                <Link from={courseRoute.to} to={newCourseRoute.to} className={styles.addLink}>
+                <Link from={'/course'} to={'/course/new'} className={styles.addLink}>
                     <MaterialIcon icon={'add'} size={'small'} />
                     New Course
                 </Link>
