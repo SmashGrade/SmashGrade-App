@@ -1,15 +1,14 @@
 import { BookFilled } from '@ant-design/icons';
-import { Menu, Select } from 'antd';
-import type { MenuProps } from 'antd';
-import { MenuItemType } from 'antd/es/menu/hooks/useItems';
-import { useIntl } from 'react-intl';
-import React, { useCallback, useState } from 'react';
-import { MenuInfo } from 'node_modules/rc-menu/lib/interface';
-
-import styles from './MyCoursePage.module.scss';
 import Grade from '@features/teacher/courses/Grade.tsx';
 import GradeProperty from '@features/teacher/courses/GradeProperty.tsx';
 import Qualification from '@features/teacher/courses/Qualification.tsx';
+import { Menu, MenuProps, Select } from 'antd';
+import { MenuItemType } from 'antd/es/menu/hooks/useItems';
+import { MenuInfo } from 'node_modules/rc-menu/lib/interface';
+import React, { useCallback, useState } from 'react';
+import { useIntl } from 'react-intl';
+
+import styles from './MyCoursePage.module.scss';
 
 interface Exam {
     id: number;

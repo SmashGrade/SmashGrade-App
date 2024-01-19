@@ -1,6 +1,5 @@
 import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from '@azure/msal-react';
 import { Login } from '@features/navigation/Login.tsx';
-import Navigation from '@features/navigation/Navigation.tsx';
 import { Outlet } from '@tanstack/react-router';
 import React, { useEffect } from 'react';
 
@@ -13,6 +12,8 @@ const TanStackRouterDevtoolsAsync =
                   default: res.TanStackRouterDevtools,
               }))
           );
+
+const NavAsync = React.lazy(() => import('@features/navigation/Navigation.tsx'));
 
 function App() {
     const { accounts, instance } = useMsal();
@@ -31,7 +32,9 @@ function App() {
         <>
             <AuthenticatedTemplate>
                 <>
-                    <Navigation />
+                    <React.Suspense fallback={null}>
+                        <NavAsync />
+                    </React.Suspense>
                     <Outlet />
                     <React.Suspense fallback={null}>
                         <TanStackRouterDevtoolsAsync position={'bottom-left'} />

@@ -1,8 +1,8 @@
+import { InteractionRequiredAuthError, IPublicClientApplication } from '@azure/msal-browser';
 import { useMsal } from '@azure/msal-react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { msGraphEndpoints, loginRequest } from '../config/authConfig.ts';
-import { InteractionRequiredAuthError, IPublicClientApplication } from '@azure/msal-browser';
+import { loginRequest, msGraphEndpoints } from '../config/authConfig.ts';
 
 interface MeResponse {
     id: string;

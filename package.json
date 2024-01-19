@@ -33,8 +33,7 @@
         ],
         "**/!(api)/*.{ts,tsx,css}": [
             "npm run lint"
-        ],
-        "!src/routeTree.gen.ts": "npm run lint"
+        ]
     },
     "dependencies": {
         "@azure/msal-browser": "^3.6.0",

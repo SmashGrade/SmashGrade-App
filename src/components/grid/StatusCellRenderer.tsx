@@ -3,6 +3,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import styles from './StatusCellRenderer.module.scss';
+
 const StatusCellRenderer: React.FC<{ value: boolean }> = ({ value }) => {
     return (
         <div className={value ? styles.isActive : styles.isInactive}>

@@ -25,7 +25,8 @@
             "@components/*": ["src/components/*"],
             "@features/*": ["src/features/*"],
             "@pages/*": ["src/pages/*"],
-            "@hooks/*": ["src/hooks/*"]
+            "@hooks/*": ["src/hooks/*"],
+            "@routes/*": ["src/routes/*"]
         },
 
         /* i18n */

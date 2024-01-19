@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { Curriculum, ModuleObject } from '@features/course-admin/interfaces/ModuleData.ts';
+import axios from 'axios';
 
 export async function getModules(): Promise<ModuleObject[]> {
     const { data: curriculumData } = await axios.get<Curriculum[]>(

@@ -1,12 +1,12 @@
 import { getCourse, updateCourse } from '@features/course-admin/course/courseApi.ts';
 import CourseForm from '@features/course-admin/course/CourseForm.tsx';
 import { CourseResponse } from '@features/course-admin/interfaces/CourseData.ts';
+import { Route } from '@routes/course/$id.tsx';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { message, Spin } from 'antd';
 import { useIntl } from 'react-intl';
-import { Route } from '../../../routes/course/$id.tsx';
 
-export function CourseEdit() {
+export default function CourseEdit() {
     const { id } = Route.useParams();
     const courseId = id ?? 1;
 

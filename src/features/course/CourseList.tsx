@@ -9,6 +9,8 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { Button, Spin } from 'antd';
 import axios from 'axios';
+import { Route as CourseIndexRoute } from '../../routes/course/index.tsx';
+import { Route as NewCourseRoute } from '../../routes/course/new.tsx';
 import styles from './Course.module.scss';
 
 interface Module {
@@ -84,7 +86,7 @@ export default function CourseList() {
     return (
         <div className={styles.courseContainer}>
             <Button type={'primary'} className={styles.addButton}>
-                <Link from={'/course'} to={'/course/new'} className={styles.addLink}>
+                <Link from={CourseIndexRoute.to} to={NewCourseRoute.to} className={styles.addLink}>
                     <MaterialIcon icon={'add'} size={'small'} />
                     New Course
                 </Link>

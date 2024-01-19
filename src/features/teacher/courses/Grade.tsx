@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
-
 import Rating from '@features/student/modules/Rating.tsx';
 import GradeCard from '@features/teacher/courses/GradeCard.tsx';
 import styles from '@pages/MyCoursePage.module.scss';
 import { Divider } from 'antd';
+import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 interface Grade {

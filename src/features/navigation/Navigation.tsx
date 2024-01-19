@@ -1,9 +1,19 @@
 import { useMsal } from '@azure/msal-react';
 import { IconLink } from '@components/ui-elements/IconLink.tsx';
 import { UserProfile } from '@features/profile/UserProfile.tsx';
-import useUserRoles from '@hooks/useUserRoles.ts';
+import useUserRoles, { UserRoles } from '@hooks/useUserRoles.ts';
+import { Route as CourseIndexRoute } from '@routes/course/index.tsx';
+
+import { Route as CurriculumRoute } from '@routes/curriculum.tsx';
+import { Route as IndexRoute } from '@routes/index.tsx';
+import { Route as ModuleIndexRoute } from '@routes/module/index.tsx';
+import { Route as MyCourseRoute } from '@routes/my-course.tsx';
+import { Route as OnboardingRoute } from '@routes/onboarding.tsx';
+import { Route as SettingsRoute } from '@routes/settings.tsx';
+import { Route as StudentModulesRoute } from '@routes/student/modules.tsx';
 import { useRouter } from '@tanstack/react-router';
-import { Menu, MenuProps } from 'antd';
+import { Button, Menu, MenuProps } from 'antd';
+import type { ItemType } from 'antd/es/menu/hooks/useItems';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 import { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -21,64 +31,92 @@ import {
 } from '../../i18n/dynamic-messages/menuMessages.ts';
 import styles from './Navigation.module.scss';
 
+const teacherNavItems: ItemType[] = [
+    {
+        label: <IconLink linkProps={{ to: MyCourseRoute.to }} icon={'sticky_note_2'} messageProps={myCourseMenu} />,
+        key: 'my-course',
+        disabled: false,
+    },
+    {
+        label: <IconLink linkProps={{ to: IndexRoute.to }} icon={'school'} messageProps={studentsMenu} />,
+        key: 'students',
+        disabled: false,
+    },
+];
+
+const studentNavItems: MenuProps['items'] = [
+    {
+        label: <IconLink linkProps={{ to: StudentModulesRoute.to }} messageProps={myCurriculumMenu} />,
+        key: 'my-curriculum',
+        disabled: false,
+    },
+    {
+        label: <IconLink linkProps={{ to: OnboardingRoute.to }} icon={'rocket_launch'} messageProps={onboardingMenu} />,
+        key: 'onboarding',
+        disabled: false,
+    },
+];
+
+const courseAdminNavItems: ItemType[] = [
+    {
+        label: <IconLink linkProps={{ to: CurriculumRoute.to }} icon={'play_lesson'} messageProps={curriculumMenu} />,
+        key: 'curriculum',
+    },
+    {
+        label: (
+            <IconLink linkProps={{ to: ModuleIndexRoute.to }} icon={'collections_bookmark'} messageProps={moduleMenu} />
+        ),
+        key: 'modules',
+    },
+    {
+        label: <IconLink linkProps={{ to: CourseIndexRoute.to }} icon={'developer_guide'} messageProps={courseMenu} />,
+        key: 'course',
+    },
+    {
+        label: (
+            <IconLink
+                linkProps={{ to: IndexRoute.to }}
+                icon={'supervised_user_circle'}
+                messageProps={userManagementMenu}
+            />
+        ),
+        key: 'user-management',
+    },
+];
+
+const defaultNavItems: ItemType[] = [
+    {
+        label: <IconLink linkProps={{ to: SettingsRoute.to }} icon={'settings'} messageProps={settingsMenu} />,
+        key: 'settings',
+    },
+];
+
+const getNavItemsBasedOnRole = (role?: UserRoles) => {
+    switch (role) {
+        case UserRoles.Teacher:
+            return teacherNavItems;
+        case UserRoles.Student:
+            return studentNavItems;
+        case UserRoles.CourseAdmin:
+            return courseAdminNavItems;
+        default:
+            return [];
+    }
+};
+
 export default function Navigation() {
     const router = useRouter();
     const currentPath = router.state.location.pathname;
     const [current, setCurrent] = useState(currentPath.substring(1) || 'onboarding');
-    const onNavItemClick = useCallback<MenuClickEventHandler>((e) => setCurrent(e.key), []);
     const userRoles = useUserRoles();
     const { instance } = useMsal();
 
+    const onNavItemClick = useCallback<MenuClickEventHandler>((e) => setCurrent(e.key), []);
+
     const items: MenuProps['items'] = useMemo(() => {
-        return [
-            {
-                label: (
-                    <IconLink linkProps={{ to: '/curriculum' }} icon={'play_lesson'} messageProps={curriculumMenu} />
-                ),
-                key: 'curriculum',
-            },
-            {
-                label: (
-                    <IconLink linkProps={{ to: '/module' }} icon={'collections_bookmark'} messageProps={moduleMenu} />
-                ),
-                key: 'modules',
-            },
-            {
-                label: <IconLink linkProps={{ to: '/course' }} icon={'developer_guide'} messageProps={courseMenu} />,
-                key: 'course',
-            },
-            {
-                label: (
-                    <IconLink
-                        linkProps={{ to: '/' }}
-                        icon={'supervised_user_circle'}
-                        messageProps={userManagementMenu}
-                    />
-                ),
-                key: 'user-management',
-            },
-            {
-                label: <IconLink linkProps={{ to: '/' }} icon={'school'} messageProps={studentsMenu} />,
-                key: 'students',
-                disabled: false,
-            },
-            {
-                label: <IconLink linkProps={{ to: '/my-course' }} icon={'sticky_note_2'} messageProps={myCourseMenu} />,
-                key: 'my-course',
-                disabled: false,
-            },
-            {
-                label: <IconLink linkProps={{ to: '/student/modules' }} messageProps={myCurriculumMenu} />,
-                key: 'my-curriculum',
-                disabled: false,
-            },
-            {
-                label: <IconLink linkProps={{ to: '/onboarding' }} messageProps={onboardingMenu} />,
-                key: 'onboarding',
-                disabled: false,
-            },
-        ];
-    }, []);
+        const roleBasedItems = getNavItemsBasedOnRole(userRoles?.[0]);
+        return [...roleBasedItems, ...defaultNavItems];
+    }, [userRoles]);
 
     const accountItems: MenuProps['items'] = useMemo(() => {
         return [
@@ -87,13 +125,10 @@ export default function Navigation() {
                 key: 'account',
                 children: [
                     {
-                        label: <IconLink linkProps={{ to: '/settings' }} messageProps={settingsMenu} />,
-                        key: 'settings',
-                        disabled: false,
-                    },
-                    {
                         label: (
-                            <div
+                            <Button
+                                style={{ width: '100%' }}
+                                type={'primary'}
                                 onClick={() => {
                                     void instance.logout();
                                 }}
@@ -103,7 +138,7 @@ export default function Navigation() {
                                     defaultMessage={'Logout'}
                                     description={'Logout Menu'}
                                 />
-                            </div>
+                            </Button>
                         ),
                         key: 'logout',
                     },
@@ -121,20 +156,18 @@ export default function Navigation() {
                     <p className={styles.title}>{userRoles?.[0]}</p>
                 </div>
             </div>
-
             <Menu
                 onClick={onNavItemClick}
                 selectedKeys={[current]}
                 mode={'horizontal'}
                 items={items}
-                className={styles.menuContainer}
+                className={styles.mainMenuContainer}
             />
             <Menu
                 onClick={onNavItemClick}
-                selectedKeys={['logout']}
                 mode={'horizontal'}
                 items={accountItems}
-                className={styles.accountMenu}
+                className={styles.accountMenuContainer}
             />
         </div>
     );

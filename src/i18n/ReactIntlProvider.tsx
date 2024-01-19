@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useEffect, useState, useMemo } from 'react';
+import React, { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
 import { IntlProvider } from 'react-intl';
 import type * as sourceOfTruth from './compiled-lang/de.json';
 import { AvailableLocales } from './Locale';
