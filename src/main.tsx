@@ -30,6 +30,7 @@ const router = new Router({
     routeTree,
     context: {
         auth: msalInstance,
+        authInProgress: true,
     },
     defaultErrorComponent: DefaultErrorComponent,
 });

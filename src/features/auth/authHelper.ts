@@ -6,6 +6,7 @@ import { PermissionDeniedError } from '../../exceptions/PermissionDeniedError.ts
 export const getActiveAccount = (authClient: PublicClientApplication) => {
     const activeAccount = authClient.getActiveAccount();
     if (!activeAccount) {
+        console.log('accs', authClient.getAllAccounts());
         throw new NoSignedInAccount(
             'No active account! Verify a user has been signed in and setActiveAccount has been called.'
         );
@@ -23,17 +24,33 @@ export const hasRole = (account: AccountInfo, role: UserRoles) => {
 };
 
 export const currentUserHasRole = (authClient: PublicClientApplication, role: UserRoles) => {
+    console.log(`check for role ${role} with auth `);
     const activeAccount = getActiveAccount(authClient);
     return hasRole(activeAccount, role);
 };
 
-export const hasRoleToAccessRouteOrThrow = (authClient: PublicClientApplication, role: UserRoles) => {
+export const hasRoleToAccessRouteOrThrow = (
+    authClient: PublicClientApplication,
+    role: UserRoles,
+    authInProgress: boolean
+) => {
+    if (authInProgress) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                console.log('auth in progress');
+                resolve(null);
+            }, 2000);
+        });
+    }
     if (!currentUserHasRole(authClient, role)) {
         throw new PermissionDeniedError('You do not have permission to view this page.');
     }
 };
 
 export const createRoleCheckerLoader = (role: UserRoles) => {
-    return ({ context: { auth } }: { context: { auth: PublicClientApplication } }) =>
-        hasRoleToAccessRouteOrThrow(auth, role);
+    return ({
+        context: { auth, authInProgress },
+    }: {
+        context: { auth: PublicClientApplication; authInProgress: boolean };
+    }) => hasRoleToAccessRouteOrThrow(auth, role, authInProgress);
 };

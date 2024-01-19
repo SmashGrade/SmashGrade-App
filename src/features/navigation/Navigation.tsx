@@ -35,12 +35,10 @@ const teacherNavItems: ItemType[] = [
     {
         label: <IconLink linkProps={{ to: MyCourseRoute.to }} icon={'sticky_note_2'} messageProps={myCourseMenu} />,
         key: 'my-course',
-        disabled: false,
     },
     {
         label: <IconLink linkProps={{ to: IndexRoute.to }} icon={'school'} messageProps={studentsMenu} />,
         key: 'students',
-        disabled: false,
     },
 ];
 

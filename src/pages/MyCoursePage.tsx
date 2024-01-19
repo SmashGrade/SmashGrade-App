@@ -261,6 +261,8 @@ export default function MyCoursePage() {
     const [menuItems, setMenuItems] = useState<MenuItem[]>(getMenuItems(0));
     const [current, setCurrent] = useState<MenuItemType>(menuItems[0] as MenuItemType);
 
+    console.log('render MyCoursePage');
+
     const handleOnChange = useCallback(
         (e: number) => {
             setMenuItems(getMenuItems(e));
