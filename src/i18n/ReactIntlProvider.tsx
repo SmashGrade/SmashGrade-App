@@ -8,19 +8,9 @@ export type LocaleKey = keyof LocaleMessages;
 
 async function importMessages(locale: AvailableLocales): Promise<LocaleMessages> {
     switch (locale) {
-        case AvailableLocales.English: {
-            const enModule = await import('./compiled-lang/en.json');
-            // @ts-expect-error - complains because english does not have all translations, low prio
-            return enModule.default;
-        }
         case AvailableLocales.German: {
             const deModule = await import('./compiled-lang/de.json');
             return deModule.default;
-        }
-        case AvailableLocales.French: {
-            const frModule = await import('./compiled-lang/fr.json');
-            // @ts-expect-error - complains because french does not have all translations, low prio
-            return frModule.default;
         }
         default: {
             const defaultModule = await import('./compiled-lang/de.json');
