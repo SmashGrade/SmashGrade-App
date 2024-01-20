@@ -31,7 +31,7 @@
         "*.{js,jsx,ts,tsx,json,css,scss,md}": [
             "npm run format"
         ],
-        "**/!(api)/*.{ts,tsx,css}": [
+        "**/!(api)!(*routeTree.gen).ts/*.{ts,tsx,css}": [
             "npm run lint"
         ]
     },
