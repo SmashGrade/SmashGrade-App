@@ -6,7 +6,6 @@ import { PermissionDeniedError } from '../../exceptions/PermissionDeniedError.ts
 export const getActiveAccount = (authClient: PublicClientApplication) => {
     const activeAccount = authClient.getActiveAccount();
     if (!activeAccount) {
-        console.log('accs', authClient.getAllAccounts());
         throw new NoSignedInAccount(
             'No active account! Verify a user has been signed in and setActiveAccount has been called.'
         );
@@ -24,7 +23,6 @@ export const hasRole = (account: AccountInfo, role: UserRoles) => {
 };
 
 export const currentUserHasRole = (authClient: PublicClientApplication, role: UserRoles) => {
-    console.log(`check for role ${role} with auth `);
     const activeAccount = getActiveAccount(authClient);
     return hasRole(activeAccount, role);
 };
@@ -37,7 +35,6 @@ export const hasRoleToAccessRouteOrThrow = (
     if (authInProgress) {
         return new Promise((resolve) => {
             setTimeout(() => {
-                console.log('auth in progress');
                 resolve(null);
             }, 2000);
         });

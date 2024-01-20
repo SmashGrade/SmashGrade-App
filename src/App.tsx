@@ -1,6 +1,7 @@
 import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from '@azure/msal-react';
 import { Login } from '@features/navigation/Login.tsx';
 import { Outlet } from '@tanstack/react-router';
+import axios from 'axios';
 import React, { useEffect } from 'react';
 
 const TanStackRouterDevtoolsAsync =
@@ -14,7 +15,7 @@ const TanStackRouterDevtoolsAsync =
           );
 
 const NavAsync = React.lazy(() => import('@features/navigation/Navigation.tsx'));
-
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_API_URL;
 function App() {
     const { accounts, instance } = useMsal();
 

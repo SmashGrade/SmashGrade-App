@@ -75,7 +75,7 @@ export default function CourseList() {
     const { isPending, isError, data } = useQuery({
         queryKey: ['courses'],
         queryFn: async () => {
-            const { data } = await axios.get<CourseResponse[]>(`${import.meta.env.VITE_BACKEND_API_URL}/course`);
+            const { data } = await axios.get<CourseResponse[]>('/course');
             return data;
         },
     });

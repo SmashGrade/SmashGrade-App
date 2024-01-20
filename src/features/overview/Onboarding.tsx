@@ -47,9 +47,7 @@ function getYears(): Year[] {
 }
 
 async function getOnboardingFilter(): Promise<OnboardingFilterResponse> {
-    const response = await axios.get<OnboardingFilterResponse>(
-        `${import.meta.env.VITE_BACKEND_API_URL}/onboardingFilter`
-    );
+    const response = await axios.get<OnboardingFilterResponse>('/onboardingFilter');
 
     if (response.status !== 200) {
         throw new Error('Error while getting onboarding filter');

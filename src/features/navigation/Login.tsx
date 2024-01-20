@@ -1,5 +1,6 @@
 import { InteractionRequiredAuthError, InteractionStatus, InteractionType } from '@azure/msal-browser';
 import { useMsal, useMsalAuthentication } from '@azure/msal-react';
+import { Route } from '@routes/__root.tsx';
 import { useRouter } from '@tanstack/react-router';
 import { Alert } from 'antd';
 import { useEffect } from 'react';
@@ -9,7 +10,7 @@ import styles from './Login.module.scss';
 export function Login() {
     const { instance, accounts, inProgress } = useMsal();
     const activeAccount = accounts[0];
-    const { login, error, result } = useMsalAuthentication(InteractionType.Silent, {
+    const { login, error } = useMsalAuthentication(InteractionType.Silent, {
         ...loginRequest,
         loginHint: activeAccount?.idTokenClaims?.login_hint,
     });
@@ -17,14 +18,10 @@ export function Login() {
     const router = useRouter();
 
     useEffect(() => {
-        console.log('login state', inProgress);
-        router.state.matches.forEach((match) => {
-            if (match?.context) {
-                match.context.authInProgress = inProgress !== InteractionStatus.None;
-                console.log('setting inProgress to', inProgress !== InteractionStatus.None);
-            }
-            console.log('match', match);
-        });
+        const rootRoute = router.state.matches.find((match) => match?.routeId === Route.id);
+        if (rootRoute) {
+            rootRoute.context.authInProgress = inProgress !== InteractionStatus.None;
+        }
     }, [inProgress, router.state.matches]);
 
     useEffect(() => {

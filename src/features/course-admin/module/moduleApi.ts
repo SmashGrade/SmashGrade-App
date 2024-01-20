@@ -2,9 +2,7 @@ import { Curriculum, ModuleObject } from '@features/course-admin/interfaces/Modu
 import axios from 'axios';
 
 export async function getModules(): Promise<ModuleObject[]> {
-    const { data: curriculumData } = await axios.get<Curriculum[]>(
-        `${import.meta.env.VITE_BACKEND_API_URL}/curriculum`
-    );
+    const { data: curriculumData } = await axios.get<Curriculum[]>('/curriculum');
 
     // Flatten the array of curriculum with modules and create an array of module objects
     const moduleObjects: ModuleObject[] = curriculumData.flatMap((curriculum) =>
@@ -28,5 +26,5 @@ export async function getModules(): Promise<ModuleObject[]> {
 
 export async function deleteModuleById(id: number): Promise<void> {
     console.debug('Module to delete: ' + id);
-    await axios.delete(`${import.meta.env.VITE_BACKEND_API_URL}/modules/${id}`);
+    await axios.delete('/modules/${id}');
 }

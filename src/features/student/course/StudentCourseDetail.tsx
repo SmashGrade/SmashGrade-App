@@ -21,7 +21,7 @@ interface Course {
 }
 
 async function getCourse(id: number) {
-    const { data } = await axios.get<CourseResponse>(`${import.meta.env.VITE_BACKEND_API_URL}/courseStudent/${id}`);
+    const { data } = await axios.get<CourseResponse>(`/courseStudent/${id}`);
     return data.course;
 }
 
