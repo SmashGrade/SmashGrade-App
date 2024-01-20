@@ -110,6 +110,9 @@ export default function Navigation() {
     const { instance } = useMsal();
 
     const onNavItemClick = useCallback<MenuClickEventHandler>((e) => setCurrent(e.key), []);
+    const onLogout = useCallback(() => {
+        void instance.logout();
+    }, [instance]);
 
     const items: MenuProps['items'] = useMemo(() => {
         const roleBasedItems = getNavItemsBasedOnRole(userRoles?.[0]);
@@ -124,13 +127,7 @@ export default function Navigation() {
                 children: [
                     {
                         label: (
-                            <Button
-                                style={{ width: '100%' }}
-                                type={'primary'}
-                                onClick={() => {
-                                    void instance.logout();
-                                }}
-                            >
+                            <Button style={{ width: '100%' }} type={'primary'} onClick={onLogout}>
                                 <FormattedMessage
                                     id={'logout.menu'}
                                     defaultMessage={'Logout'}

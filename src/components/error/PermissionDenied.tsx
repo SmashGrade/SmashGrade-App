@@ -9,7 +9,7 @@ export function PermissionDenied() {
             title={'Permission Denied'}
             subTitle={'Sorry, you are not authorized to access this page.'}
             extra={
-                <Button type={'primary'} onClick={() => history.back()}>
+                <Button type={'primary'} onClick={history.back}>
                     Go Back to previous Page
                 </Button>
             }

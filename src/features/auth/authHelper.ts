@@ -33,7 +33,7 @@ export const hasRoleToAccessRouteOrThrow = (
     authInProgress: boolean
 ) => {
     if (authInProgress) {
-        return new Promise((resolve) => {
+        void new Promise((resolve) => {
             setTimeout(() => {
                 resolve(null);
             }, 2000);
