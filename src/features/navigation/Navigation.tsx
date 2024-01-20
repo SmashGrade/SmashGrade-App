@@ -140,7 +140,7 @@ export default function Navigation() {
                 ],
             },
         ];
-    }, [instance]);
+    }, [onLogout]);
 
     return (
         <div className={styles.navigationContainer}>
