@@ -22,163 +22,163 @@ import { Route as StudentModulesImport } from './routes/student/modules';
 // Create/Update Routes
 
 const SettingsRoute = SettingsImport.update({
-    path: '/settings',
-    getParentRoute: () => rootRoute,
-} as any);
+  path: '/settings',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const OnboardingRoute = OnboardingImport.update({
-    path: '/onboarding',
-    getParentRoute: () => rootRoute,
-} as any);
+  path: '/onboarding',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const MyCourseRoute = MyCourseImport.update({
-    path: '/my-course',
-    getParentRoute: () => rootRoute,
-} as any);
+  path: '/my-course',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const CurriculumRoute = CurriculumImport.update({
-    path: '/curriculum',
-    getParentRoute: () => rootRoute,
-} as any);
+  path: '/curriculum',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
-    path: '/',
-    getParentRoute: () => rootRoute,
-} as any);
+  path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const StudentIndexRoute = StudentIndexImport.update({
-    path: '/student/',
-    getParentRoute: () => rootRoute,
-} as any);
+  path: '/student/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const ModuleIndexRoute = ModuleIndexImport.update({
-    path: '/module/',
-    getParentRoute: () => rootRoute,
-} as any);
+  path: '/module/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const CourseIndexRoute = CourseIndexImport.update({
-    path: '/course/',
-    getParentRoute: () => rootRoute,
-} as any);
+  path: '/course/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const StudentModulesRoute = StudentModulesImport.update({
-    path: '/student/modules',
-    getParentRoute: () => rootRoute,
-} as any);
+  path: '/student/modules',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const ModuleNewRoute = ModuleNewImport.update({
-    path: '/module/new',
-    getParentRoute: () => rootRoute,
-} as any);
+  path: '/module/new',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const ModuleIdRoute = ModuleIdImport.update({
-    path: '/module/$id',
-    getParentRoute: () => rootRoute,
-} as any);
+  path: '/module/$id',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const CourseNewRoute = CourseNewImport.update({
-    path: '/course/new',
-    getParentRoute: () => rootRoute,
-} as any);
+  path: '/course/new',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const CourseIdRoute = CourseIdImport.update({
-    path: '/course/$id',
-    getParentRoute: () => rootRoute,
-} as any);
+  path: '/course/$id',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const StudentCourseIdRoute = StudentCourseIdImport.update({
-    path: '/student/course/$id',
-    getParentRoute: () => rootRoute,
-} as any);
+  path: '/student/course/$id',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const ModuleCopyIdRoute = ModuleCopyIdImport.update({
-    path: '/module/copy/$id',
-    getParentRoute: () => rootRoute,
-} as any);
+  path: '/module/copy/$id',
+  getParentRoute: () => rootRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
-    interface FileRoutesByPath {
-        '/': {
-            preLoaderRoute: typeof IndexImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/curriculum': {
-            preLoaderRoute: typeof CurriculumImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/my-course': {
-            preLoaderRoute: typeof MyCourseImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/onboarding': {
-            preLoaderRoute: typeof OnboardingImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/settings': {
-            preLoaderRoute: typeof SettingsImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/course/$id': {
-            preLoaderRoute: typeof CourseIdImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/course/new': {
-            preLoaderRoute: typeof CourseNewImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/module/$id': {
-            preLoaderRoute: typeof ModuleIdImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/module/new': {
-            preLoaderRoute: typeof ModuleNewImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/student/modules': {
-            preLoaderRoute: typeof StudentModulesImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/course/': {
-            preLoaderRoute: typeof CourseIndexImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/module/': {
-            preLoaderRoute: typeof ModuleIndexImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/student/': {
-            preLoaderRoute: typeof StudentIndexImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/module/copy/$id': {
-            preLoaderRoute: typeof ModuleCopyIdImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/student/course/$id': {
-            preLoaderRoute: typeof StudentCourseIdImport;
-            parentRoute: typeof rootRoute;
-        };
+  interface FileRoutesByPath {
+    '/': {
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
     }
+    '/curriculum': {
+      preLoaderRoute: typeof CurriculumImport
+      parentRoute: typeof rootRoute
+    }
+    '/my-course': {
+      preLoaderRoute: typeof MyCourseImport
+      parentRoute: typeof rootRoute
+    }
+    '/onboarding': {
+      preLoaderRoute: typeof OnboardingImport
+      parentRoute: typeof rootRoute
+    }
+    '/settings': {
+      preLoaderRoute: typeof SettingsImport
+      parentRoute: typeof rootRoute
+    }
+    '/course/$id': {
+      preLoaderRoute: typeof CourseIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/course/new': {
+      preLoaderRoute: typeof CourseNewImport
+      parentRoute: typeof rootRoute
+    }
+    '/module/$id': {
+      preLoaderRoute: typeof ModuleIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/module/new': {
+      preLoaderRoute: typeof ModuleNewImport
+      parentRoute: typeof rootRoute
+    }
+    '/student/modules': {
+      preLoaderRoute: typeof StudentModulesImport
+      parentRoute: typeof rootRoute
+    }
+    '/course/': {
+      preLoaderRoute: typeof CourseIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/module/': {
+      preLoaderRoute: typeof ModuleIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/student/': {
+      preLoaderRoute: typeof StudentIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/module/copy/$id': {
+      preLoaderRoute: typeof ModuleCopyIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/student/course/$id': {
+      preLoaderRoute: typeof StudentCourseIdImport
+      parentRoute: typeof rootRoute
+    }
+  }
 }
 
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
-    IndexRoute,
-    CurriculumRoute,
-    MyCourseRoute,
-    OnboardingRoute,
-    SettingsRoute,
-    CourseIdRoute,
-    CourseNewRoute,
-    ModuleIdRoute,
-    ModuleNewRoute,
-    StudentModulesRoute,
-    CourseIndexRoute,
-    ModuleIndexRoute,
-    StudentIndexRoute,
-    ModuleCopyIdRoute,
-    StudentCourseIdRoute,
-]);
+  IndexRoute,
+  CurriculumRoute,
+  MyCourseRoute,
+  OnboardingRoute,
+  SettingsRoute,
+  CourseIdRoute,
+  CourseNewRoute,
+  ModuleIdRoute,
+  ModuleNewRoute,
+  StudentModulesRoute,
+  CourseIndexRoute,
+  ModuleIndexRoute,
+  StudentIndexRoute,
+  ModuleCopyIdRoute,
+  StudentCourseIdRoute,
+])

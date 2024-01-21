@@ -44,7 +44,7 @@ const teacherNavItems: ItemType[] = [
 
 const studentNavItems: MenuProps['items'] = [
     {
-        label: <IconLink linkProps={{ to: StudentModulesRoute.to }} messageProps={myCurriculumMenu} />,
+        label: <IconLink linkProps={{ to: StudentModulesRoute.to }} icon={'school'} messageProps={myCurriculumMenu} />,
         key: 'my-curriculum',
         disabled: false,
     },
