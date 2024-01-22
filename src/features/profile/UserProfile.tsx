@@ -1,11 +1,11 @@
 import { InteractionRequiredAuthError, IPublicClientApplication } from '@azure/msal-browser';
 import { useMsal } from '@azure/msal-react';
 import styles from '@components/ui-elements/IconLink.module.scss';
+import { useUserProfile } from '@hooks/useUserProfile.ts';
 import { useQuery } from '@tanstack/react-query';
 import { Avatar, Spin } from 'antd';
 import axios, { AxiosError } from 'axios';
 import { loginRequest, msGraphEndpoints } from '../../config/authConfig.ts';
-import { useUserProfile } from '@hooks/useUserProfile.ts';
 
 const getAccessToken = async (instance: IPublicClientApplication) => {
     try {

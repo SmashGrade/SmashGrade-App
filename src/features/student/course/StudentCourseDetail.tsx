@@ -1,7 +1,6 @@
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
 import { Exam } from '@features/student/course/Exam.tsx';
 import Rating from '@features/student/modules/Rating.tsx';
-import { studentModuleRoute } from '@pages/routes/studentRoutes.ts';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { Divider, Spin } from 'antd';
@@ -22,7 +21,7 @@ interface Course {
 }
 
 async function getCourse(id: number) {
-    const { data } = await axios.get<CourseResponse>(`${import.meta.env.VITE_BACKEND_API_URL}/courseStudent/${id}`);
+    const { data } = await axios.get<CourseResponse>(`/courseStudent/${id}`);
     return data.course;
 }
 
@@ -47,7 +46,7 @@ export default function StudentCourseDetail({ id }: Readonly<StudentCourseDetail
     return (
         <>
             <div className={styles.courseTitleContainer}>
-                <Link to={studentModuleRoute.to} className={styles.backButton} params={''} search={''}>
+                <Link to={'/student/modules'} className={styles.backButton}>
                     <MaterialIcon icon={'arrow_back_ios_new'} size={'small'} />
                 </Link>
                 <h2>{course.description}</h2>

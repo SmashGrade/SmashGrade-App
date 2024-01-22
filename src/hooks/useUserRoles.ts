@@ -3,7 +3,8 @@ import { useMsal } from '@azure/msal-react';
 export enum UserRoles {
     Student = 'Student',
     Teacher = 'Dozent',
-    CourseAdmin = 'KursAdmin',
+    CourseAdmin = 'Kursadministrator',
+    DepartmentManager = 'Fachbereichsleiter',
 }
 
 export default function useUserRoles() {

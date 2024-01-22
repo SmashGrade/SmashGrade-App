@@ -1,42 +1,47 @@
 .navigationContainer {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    padding: 0 4px;
 
-    .logo {
-        height: 70px;
-        width: auto;
-    }
-
-    .menuContainer {
+    .logoContainer {
+        padding-left: 1px;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 0;
-        flex: auto;
-    }
-}
+        gap: 4px;
 
-.accountMenu {
-    margin-left: auto;
-    padding-right: 10px;
-}
-
-.logoContainer {
-    display: flex;
-    min-width: 0;
-    flex: auto;
-    gap: 4px;
-
-    .titleContainer {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        min-width: 0;
-        flex: auto;
-
-        .title {
-            margin: 0;
+        .logo {
+            height: 70px;
+            width: auto;
         }
+
+        .titleContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0;
+            flex: auto;
+
+            .title {
+                margin: 0;
+            }
+        }
+    }
+
+    .mainMenuContainer {
+        min-width: 0;
+        flex: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+    }
+
+    .accountMenuContainer {
+        min-width: 0;
+        flex: auto;
+        display: flex;
+        max-width: 160px;
+        justify-content: flex-end;
+        align-items: center;
     }
 }

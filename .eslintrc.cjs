@@ -16,7 +16,7 @@ module.exports = {
         'plugin:react/jsx-runtime',
         'prettier',
     ],
-    ignorePatterns: ['dist', '.eslintrc.cjs', 'node_modules', 'api','vite.config.ts'],
+    ignorePatterns: ['dist', '.eslintrc.cjs', 'node_modules', 'api','vite.config.ts', 'src/routeTree.gen.ts'],
     parser: '@typescript-eslint/parser',
     plugins: ['react-refresh'],
     settings: {

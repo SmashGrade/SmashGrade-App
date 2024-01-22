@@ -11,7 +11,7 @@ import { SelectProps } from 'antd';
 import axios from 'axios';
 
 export async function getCourse(courseId: number): Promise<SelectProps['value']> {
-    const { data } = await axios.get<CourseResponse>(`${import.meta.env.VITE_BACKEND_API_URL}/course/${courseId}`);
+    const { data } = await axios.get<CourseResponse>(`/course/${courseId}`);
     return {
         id: data.id,
         description: data.description,
@@ -25,7 +25,7 @@ export async function getCourse(courseId: number): Promise<SelectProps['value']>
 }
 
 export async function getCourseFilter(): Promise<FormFilters> {
-    const { data } = await axios.get<CourseFilter>(`${import.meta.env.VITE_BACKEND_API_URL}/courseFilter`);
+    const { data } = await axios.get<CourseFilter>('/courseFilter');
 
     return {
         ...data,
@@ -41,8 +41,8 @@ export async function getCourseFilter(): Promise<FormFilters> {
 }
 
 export async function updateCourse(course: CourseUpdateRequest): Promise<void> {
-    await axios.put(`${import.meta.env.VITE_BACKEND_API_URL}/course/${course.id}`, course);
+    await axios.put('/course/${course.id}', course);
 }
 export async function createCourse(course: CourseCreationRequest): Promise<void> {
-    await axios.post(`${import.meta.env.VITE_BACKEND_API_URL}/course`, course);
+    await axios.post('/course', course);
 }

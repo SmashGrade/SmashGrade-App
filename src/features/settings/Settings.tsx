@@ -1,14 +1,14 @@
 import Onboarding from '@features/overview/Onboarding.tsx';
-import { Card, Select, Space, List, Spin } from 'antd';
-import Title from 'antd/lib/typography/Title';
 import { useLocale } from '@hooks/useLocale.ts';
-import LocaleSwitcher from '../../i18n/LocaleSwitcher.tsx';
-import { FormattedMessage } from 'react-intl';
-import useUserRoles from '@hooks/useUserRoles.ts';
-
-import styles from './Settings.module.scss';
 
 import { useUserProfile } from '@hooks/useUserProfile.ts';
+import useUserRoles from '@hooks/useUserRoles.ts';
+import { Card, List, Select, Space, Spin } from 'antd';
+import Title from 'antd/lib/typography/Title';
+import { FormattedMessage } from 'react-intl';
+import LocaleSwitcher from '../../i18n/LocaleSwitcher.tsx';
+
+import styles from './Settings.module.scss';
 
 export default function Settings() {
     const { locale, setLocale } = useLocale();

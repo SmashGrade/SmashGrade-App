@@ -11,7 +11,6 @@ function LocaleSwitcher({ setLocale, locale }: Readonly<LocaleContextProps>) {
             <Select
                 value={locale}
                 style={{ width: 300 }}
-                bordered={false}
                 options={[
                     {
                         value: AvailableLocales.German,
@@ -19,22 +18,6 @@ function LocaleSwitcher({ setLocale, locale }: Readonly<LocaleContextProps>) {
                             id: 'language.german',
                             defaultMessage: 'Deutsch',
                             description: 'Sprachoption Deutsch',
-                        }),
-                    },
-                    {
-                        value: AvailableLocales.English,
-                        label: intl.formatMessage({
-                            id: 'language.english',
-                            defaultMessage: 'Englisch',
-                            description: 'Sprachoption Englisch',
-                        }),
-                    },
-                    {
-                        value: AvailableLocales.French,
-                        label: intl.formatMessage({
-                            id: 'language.french',
-                            defaultMessage: 'Französisch',
-                            description: 'Sprachoption Französisch',
                         }),
                     },
                 ]}

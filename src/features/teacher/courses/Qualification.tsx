@@ -1,9 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { Spin } from 'antd';
-
 import QualificationCard from '@features/teacher/courses/QualificationCard.tsx';
 import styles from '@pages/MyCoursePage.module.scss';
+import { useQuery } from '@tanstack/react-query';
+import { Spin } from 'antd';
+import axios from 'axios';
 
 interface Qualification {
     name: string;
@@ -40,9 +39,7 @@ interface TeacherCourseResponse {
 }
 
 const getExams = async (activeFilter: string): Promise<Qualification[]> => {
-    const teacherCourseResponse = await axios.get<TeacherCourseResponse>(
-        `${import.meta.env.VITE_BACKEND_API_URL}/courseTeacher/${activeFilter}`
-    );
+    const teacherCourseResponse = await axios.get<TeacherCourseResponse>(`/courseTeacher/${activeFilter}`);
     return teacherCourseResponse.data.exams.map((exam) => ({
         name: exam.description,
         weight: exam.weight.toString(),

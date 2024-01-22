@@ -31,9 +31,7 @@ interface Module {
 }
 
 const getModules = async (activeFilter: string): Promise<ItemType[]> => {
-    const studentModuleResponse = await axios.get<StudentModuleResponse>(
-        `${import.meta.env.VITE_BACKEND_API_URL}/moduleStudent/${activeFilter}`
-    );
+    const studentModuleResponse = await axios.get<StudentModuleResponse>(`/moduleStudent/${activeFilter}`);
     const modules = studentModuleResponse.data.modules;
 
     return modules
