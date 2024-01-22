@@ -82,6 +82,13 @@ const courseAdminNavItems: ItemType[] = [
     },
 ];
 
+const departmentManagerNavItems: ItemType[] = [
+    {
+        label: <IconLink linkProps={{ to: IndexRoute.to }} icon={'school'} messageProps={studentsMenu} />,
+        key: 'students',
+    },
+];
+
 const defaultNavItems: ItemType[] = [
     {
         label: <IconLink linkProps={{ to: SettingsRoute.to }} icon={'settings'} messageProps={settingsMenu} />,
@@ -97,6 +104,8 @@ const getNavItemsBasedOnRole = (role?: UserRoles) => {
             return studentNavItems;
         case UserRoles.CourseAdmin:
             return courseAdminNavItems;
+        case UserRoles.DepartmentManager:
+            return departmentManagerNavItems;
         default:
             return [];
     }

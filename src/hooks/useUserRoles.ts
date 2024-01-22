@@ -4,6 +4,7 @@ export enum UserRoles {
     Student = 'Student',
     Teacher = 'Dozent',
     CourseAdmin = 'Kursadministrator',
+    DepartmentManager = 'Fachbereichsleiter',
 }
 
 export default function useUserRoles() {
