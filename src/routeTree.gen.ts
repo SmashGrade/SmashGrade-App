@@ -6,7 +6,6 @@ import { Route as rootRoute } from './routes/__root';
 import { Route as SettingsImport } from './routes/settings';
 import { Route as OnboardingImport } from './routes/onboarding';
 import { Route as MyCourseImport } from './routes/my-course';
-
 import { Route as IndexImport } from './routes/index';
 import { Route as StudentIndexImport } from './routes/student/index';
 import { Route as ModuleIndexImport } from './routes/module/index';
@@ -56,7 +55,7 @@ const ModuleIndexRoute = ModuleIndexImport.update({
 } as any);
 
 const CurriculumIndexRoute = CurriculumIndexImport.update({
-    path: '/curriculum',
+    path: '/curriculum/',
     getParentRoute: () => rootRoute,
 } as any);
 
@@ -81,12 +80,12 @@ const ModuleIdRoute = ModuleIdImport.update({
 } as any);
 
 const CurriculumNewRoute = CurriculumNewImport.update({
-    path: 'curriculum/new',
+    path: '/curriculum/new',
     getParentRoute: () => rootRoute,
 } as any);
 
 const CurriculumIdRoute = CurriculumIdImport.update({
-    path: 'curriculum/$id',
+    path: '/curriculum/$id',
     getParentRoute: () => rootRoute,
 } as any);
 
@@ -111,7 +110,7 @@ const ModuleCopyIdRoute = ModuleCopyIdImport.update({
 } as any);
 
 const CurriculumCopyIdRoute = CurriculumCopyIdImport.update({
-    path: 'curriculum/copy/$id',
+    path: '/curriculum/copy/$id',
     getParentRoute: () => rootRoute,
 } as any);
 
@@ -198,21 +197,21 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
     IndexRoute,
-    CurriculumIdRoute,
-    CurriculumNewRoute,
-    CurriculumIndexRoute,
-    CurriculumCopyIdRoute,
     MyCourseRoute,
     OnboardingRoute,
     SettingsRoute,
     CourseIdRoute,
     CourseNewRoute,
+    CurriculumIdRoute,
+    CurriculumNewRoute,
     ModuleIdRoute,
     ModuleNewRoute,
     StudentModulesRoute,
     CourseIndexRoute,
+    CurriculumIndexRoute,
     ModuleIndexRoute,
     StudentIndexRoute,
+    CurriculumCopyIdRoute,
     ModuleCopyIdRoute,
     StudentCourseIdRoute,
 ]);

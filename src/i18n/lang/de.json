@@ -1,8 +1,4 @@
 {
-    "settings.menu": {
-        "defaultMessage": "Einstellungen",
-        "description": "Settings Menu"
-    },
     "course.ButtonCancel": {
         "defaultMessage": "Abbrechen",
         "description": "Abbrechen Button"
@@ -59,17 +55,41 @@
         "defaultMessage": "Kurse erfolgreich gespeichert",
         "description": "Course Update success message"
     },
-    "courseForm.createSuccessMessage": {
-        "defaultMessage": "Kurse erfolgreich erstellt",
-        "description": "Course Creation success message"
-    },
     "curriculum": {
         "defaultMessage": "Lehrplan",
         "description": "Lehrplan Dropdown Titel"
     },
+    "curriculum.edit": {
+        "defaultMessage": "Editieren",
+        "description": "Menu item to copy a curriculum"
+    },
     "curriculum.menu": {
         "defaultMessage": "Studiengänge",
         "description": "Studiengang Menu"
+    },
+    "curriculumList.addCurriculumButton": {
+        "defaultMessage": "Studiengang hinzufügen",
+        "description": "Button for creating a new curriculum"
+    },
+    "curriculumList.copy": {
+        "defaultMessage": "Kopieren",
+        "description": "Menu item to copy a curriculum"
+    },
+    "curriculumList.delete": {
+        "defaultMessage": "Löschen",
+        "description": "Curriculum Modal delete"
+    },
+    "curriculumList.deleteErrorMessage": {
+        "defaultMessage": "Studiengang konnte nicht gelöscht werden",
+        "description": "Modal Delete Error Message"
+    },
+    "curriculumList.deleteMessage": {
+        "defaultMessage": "Möchtest du den Studiengang wirklich löschen?",
+        "description": "Modal Message to confirm the deletion"
+    },
+    "curriculumList.deleteSuccessMessage": {
+        "defaultMessage": "Studiengang erfolgreich gelöscht",
+        "description": "Curriculum Delete success message"
     },
     "grade.assessment": {
         "defaultMessage": "Bewertung",
@@ -83,29 +103,53 @@
         "defaultMessage": "Gewichtung",
         "description": "Gewichtung eines Qualifikationsnachweises"
     },
-    "logout.menu": {
-        "defaultMessage": "Logout",
-        "description": "Logout Menu"
-    },
-    "onboarding.menu": {
-        "defaultMessage": "Onboarding",
-        "description": "Onboarding Menu"
-    },
-    "language.english": {
-        "defaultMessage": "Englisch",
-        "description": "Sprachoption Englisch"
-    },
-    "language.french": {
-        "defaultMessage": "Französisch",
-        "description": "Sprachoption Französisch"
-    },
     "language.german": {
         "defaultMessage": "Deutsch",
         "description": "Sprachoption Deutsch"
     },
+    "logout.menu": {
+        "defaultMessage": "Logout",
+        "description": "Logout Menu"
+    },
     "module.menu": {
         "defaultMessage": "Module",
         "description": "Module Menu"
+    },
+    "moduleList.activeModule": {
+        "defaultMessage": "Aktiv",
+        "description": "Displays the module status"
+    },
+    "moduleList.addModuleButton": {
+        "defaultMessage": "Modul hinzufügen",
+        "description": "Button for creating a new module"
+    },
+    "moduleList.copy": {
+        "defaultMessage": "Kopieren",
+        "description": "Menu item to copy a module"
+    },
+    "moduleList.delete": {
+        "defaultMessage": "Löschen",
+        "description": "Curriculum Modal delete"
+    },
+    "moduleList.deleteErrorMessage": {
+        "defaultMessage": "Modul konnte nicht gelöscht werden",
+        "description": "Module Delete Error Message"
+    },
+    "moduleList.deleteMessage": {
+        "defaultMessage": "Möchtest du das Modul wirklich löschen?",
+        "description": "Modal Message to confirm the deletion"
+    },
+    "moduleList.deleteSuccessMessage": {
+        "defaultMessage": "Modul erfolgreich gelöscht",
+        "description": "Module Delete success message"
+    },
+    "moduleList.edit": {
+        "defaultMessage": "Editieren",
+        "description": "Menu item to copy a module"
+    },
+    "moduleList.inactiveModule": {
+        "defaultMessage": "Inaktiv",
+        "description": "Displays the module status"
     },
     "my-course.menu": {
         "defaultMessage": "Meine Kurse",
@@ -115,13 +159,9 @@
         "defaultMessage": "Mein Studium",
         "description": "Mein Studium Menu"
     },
-    "students.menu": {
-        "defaultMessage": "Studenten",
-        "description": "Studenten Menu"
-    },
-    "account.menu": {
-        "defaultMessage": "Account",
-        "description": "Account Menu"
+    "onboarding.menu": {
+        "defaultMessage": "Onboarding",
+        "description": "Onboarding Menu"
     },
     "onboarding.title": {
         "defaultMessage": "Übersicht",
@@ -130,6 +170,10 @@
     "settings.language": {
         "defaultMessage": "Sprache",
         "description": "Sprachoption"
+    },
+    "settings.menu": {
+        "defaultMessage": "Settings",
+        "description": "Settings Menu"
     },
     "settings.myModules": {
         "defaultMessage": "Meine Module",
@@ -170,40 +214,5 @@
     "user-management.menu": {
         "defaultMessage": "Benutzer",
         "description": "Benutzer Menu"
-    },
-    "moduleList.activeModule": {
-        "defaultMessage": "Aktiv",
-        "description": "Displays the module status"
-    },
-    "moduleList.addModuleButton": {
-        "defaultMessage": "Modul hinzufügen",
-        "description": "Button for creating a new module"
-    },
-    "moduleList.copy": {
-        "defaultMessage": "Kopieren",
-        "description": "Menu item to copy a module"
-    },
-    "moduleList.delete": {
-        "defaultMessage": "Löschen",
-        "description": "Menu item to delete a module"
-    },
-    "moduleList.deleteSuccessMessage": {
-        "defaultMessage": "Modul erfolgreich gelöscht",
-        "description": "Module Delete success message"
-    },
-    "moduleList.deleteErrorMessage": {
-        "defaultMessage": "Modul konnte nicht gelöscht werden",
-        "description": "Module Delete Error Message"
-    },
-    "moduleList.deleteMessage": {
-        "defaultMessage": "Möchtest du das Module wirklich löschen?",
-        "description": "Modal Message to confirm the deletion"
-    },
-    "moduleList.edit": {
-        "defaultMessage": "Editieren"
-    },
-    "moduleList.inactiveModule": {
-        "defaultMessage": "Inaktiv",
-        "description": "Displays the module status"
     }
 }
