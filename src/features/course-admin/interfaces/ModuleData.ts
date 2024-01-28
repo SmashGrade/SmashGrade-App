@@ -56,7 +56,7 @@ export interface ModuleObject {
     curriculumId: number;
     curriculumDescription: string;
     moduleId: number;
-    moduleDescription: string;
+    description: string;
     moduleIsActive: boolean;
     studyStage: string;
 }

@@ -107,7 +107,7 @@ export default function ModuleList() {
     if (isGetModulePending) return <Spin />;
 
     const moduleColumnDefs: ColDef<ModuleObject>[] = [
-        { field: 'moduleDescription', headerName: 'Module', flex: 1 },
+        { field: 'description', headerName: 'Module', flex: 1 },
         { field: 'curriculumDescription', headerName: 'Studiengang', flex: 1 },
         { field: 'studyStage', headerName: 'Lehrgang' },
         {
@@ -210,7 +210,11 @@ export default function ModuleList() {
                 title={
                     <span>
                         <QuestionCircleOutlined style={{ marginRight: 8, color: 'red' }} />
-                        {intl.formatMessage({ id: 'moduleList.delete' })}
+                        {intl.formatMessage({
+                            id: 'moduleList.delete',
+                            defaultMessage: 'Löschen',
+                            description: 'Curriculum Modal delete',
+                        })}
                     </span>
                 }
                 open={modalState.open}

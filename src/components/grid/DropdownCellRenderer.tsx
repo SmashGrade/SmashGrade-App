@@ -4,16 +4,16 @@ import { Button, Dropdown, MenuProps } from 'antd';
 // Define a generic type for the data
 interface DropdownCellRendererProps<T> {
     data: T;
-    menuItems: (id: number, moduleDescription: string) => MenuProps['items'];
+    menuItems: (id: number, description: string) => MenuProps['items'];
 }
 
 // Make ActionsCellRenderer generic
-const DropdownCellRenderer = <T extends { routingId: number; moduleDescription: string }>({
+const DropdownCellRenderer = <T extends { routingId: number; description: string }>({
     data,
     menuItems,
 }: DropdownCellRendererProps<T>) => {
     return (
-        <Dropdown menu={{ items: menuItems(data.routingId, data.moduleDescription) }}>
+        <Dropdown menu={{ items: menuItems(data.routingId, data.description) }}>
             <Button type={'link'} icon={<MoreOutlined />} />
         </Dropdown>
     );
