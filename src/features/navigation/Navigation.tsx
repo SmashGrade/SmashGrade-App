@@ -4,7 +4,7 @@ import { UserProfile } from '@features/profile/UserProfile.tsx';
 import useUserRoles, { UserRoles } from '@hooks/useUserRoles.ts';
 import { Route as CourseIndexRoute } from '@routes/course/index.tsx';
 
-import { Route as CurriculumRoute } from '@routes/curriculum.tsx';
+import { Route as CurriculumRoute } from '@routes/curriculum/index.tsx';
 import { Route as IndexRoute } from '@routes/index.tsx';
 import { Route as ModuleIndexRoute } from '@routes/module/index.tsx';
 import { Route as MyCourseRoute } from '@routes/my-course.tsx';
