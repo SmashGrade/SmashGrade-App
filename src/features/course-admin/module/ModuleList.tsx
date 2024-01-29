@@ -1,6 +1,7 @@
-import { CopyOutlined, DeleteOutlined, EditOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { CopyOutlined, EditOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import DropdownCellRenderer from '@components/grid/DropdownCellRenderer.tsx';
 import Grid from '@components/grid/Grid.tsx';
+import DeleteModal from '@components/grid/ModalDeletePrompt.tsx';
 import StatusCellRenderer from '@components/grid/StatusCellRenderer.tsx';
 import { ModuleObject } from '@features/course-admin/interfaces/ModuleData.ts';
 import { deleteModuleById, getModules } from '@features/course-admin/module/moduleApi.ts';
@@ -160,23 +161,7 @@ export default function ModuleList() {
         },
         {
             key: 'delete',
-            label: (
-                <div>
-                    <Button
-                        className={styles.deleteButton}
-                        onClick={() => {
-                            showModal(id, moduleDescription);
-                        }}
-                        icon={<DeleteOutlined />}
-                    >
-                        {intl.formatMessage({
-                            id: 'moduleList.delete',
-                            defaultMessage: 'Löschen',
-                            description: 'Menu item to delete a module',
-                        })}
-                    </Button>
-                </div>
-            ),
+            label: <DeleteModal id={id} description={moduleDescription} showModal={showModal} />,
         },
     ];
 

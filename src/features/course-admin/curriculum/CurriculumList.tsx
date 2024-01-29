@@ -1,4 +1,4 @@
-import { CopyOutlined, DeleteOutlined, EditOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { CopyOutlined, EditOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import DropdownCellRenderer from '@components/grid/DropdownCellRenderer.tsx';
 import Grid from '@components/grid/Grid.tsx';
 import StatusCellRenderer from '@components/grid/StatusCellRenderer.tsx';
@@ -14,14 +14,46 @@ import { AgGridReact } from 'ag-grid-react';
 import type { MenuProps } from 'antd';
 import { Button, Input, message, Modal, Spin } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
-import { useIntl } from 'react-intl';
+import { IntlShape, useIntl } from 'react-intl';
 import { Route as CurriculumDetailRoute } from '../../../routes/curriculum/$id.tsx';
 import { Route as CopyCurriculumRoute } from '../../../routes/curriculum/copy.$id.tsx';
 import styles from './CurriculumList.module.scss';
+import DeleteModal from '@components/grid/ModalDeletePrompt.tsx';
 
 const { Search } = Input;
 
 const defaultCurriculumColDef: ColDef<CurriculumObject> = { sortable: true, filter: 'agTextColumnFilter' };
+
+class ModalDeletePrompt extends React.Component<{
+    intl: IntlShape;
+    modalState: { confirmLoading: boolean; open: boolean };
+    onOk: () => void;
+    onCancel: () => void;
+    modalText: React.ReactNode | undefined;
+}> {
+    render() {
+        return (
+            <Modal
+                title={
+                    <span>
+                        <QuestionCircleOutlined style={{ marginRight: 8, color: 'red' }} />
+                        {this.props.intl.formatMessage({
+                            id: 'curriculumList.delete',
+                            defaultMessage: 'Löschen',
+                            description: 'Curriculum Modal delete',
+                        })}
+                    </span>
+                }
+                open={this.props.modalState.open}
+                onOk={this.props.onOk}
+                confirmLoading={this.props.modalState.confirmLoading}
+                onCancel={this.props.onCancel}
+            >
+                <p>{this.props.modalText}</p>
+            </Modal>
+        );
+    }
+}
 
 export default function CurriculumList() {
     const gridRef = useRef<AgGridReact>(null);
@@ -179,23 +211,7 @@ export default function CurriculumList() {
         },
         {
             key: 'delete',
-            label: (
-                <div>
-                    <Button
-                        className={styles.deleteButton}
-                        onClick={() => {
-                            showModal(id, curriculumDescription);
-                        }}
-                        icon={<DeleteOutlined />}
-                    >
-                        {intl.formatMessage({
-                            id: 'curriculumList.delete',
-                            defaultMessage: 'Löschen',
-                            description: 'Menu item to delete a curriculum',
-                        })}
-                    </Button>
-                </div>
-            ),
+            label: <DeleteModal id={id} description={curriculumDescription} showModal={showModal} />,
         },
     ];
 
@@ -225,24 +241,13 @@ export default function CurriculumList() {
                 columnDefs={curriculumColumnDefs}
                 defaultColDef={defaultCurriculumColDef}
             />
-            <Modal
-                title={
-                    <span>
-                        <QuestionCircleOutlined style={{ marginRight: 8, color: 'red' }} />
-                        {intl.formatMessage({
-                            id: 'curriculumList.delete',
-                            defaultMessage: 'Löschen',
-                            description: 'Curriculum Modal delete',
-                        })}
-                    </span>
-                }
-                open={modalState.open}
+            <ModalDeletePrompt
+                intl={intl}
+                modalState={modalState}
                 onOk={handleOk}
-                confirmLoading={modalState.confirmLoading}
                 onCancel={handleCancel}
-            >
-                <p>{modalText}</p>
-            </Modal>
+                modalText={modalText}
+            />
         </div>
     );
 }
