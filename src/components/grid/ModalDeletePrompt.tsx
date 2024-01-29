@@ -3,7 +3,7 @@
 import React from 'react';
 import { Button } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
-import styles from './DeleteModal.module.css';
+import styles from './ModalDeletePompt.module.scss';
 import { useIntl } from 'react-intl'; // Add missing import statement for useIntl
 
 interface DeleteModalProps {
