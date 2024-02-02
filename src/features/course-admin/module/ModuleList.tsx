@@ -126,7 +126,7 @@ export default function ModuleList() {
             sortable: false,
             filter: '',
             cellRenderer: (params: { data: ModuleObject }) => (
-                <DropdownCellRenderer data={params.data} menuItems={menuItems} />
+                <DropdownCellRenderer<ModuleObject> data={params.data} menuItems={menuItems} />
             ),
         },
     ];

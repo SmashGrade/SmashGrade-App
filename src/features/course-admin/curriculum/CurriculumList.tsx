@@ -165,7 +165,7 @@ export default function CurriculumList() {
             field: 'isActive',
             headerName: 'Status',
             cellStyle: { textAlign: 'center' },
-            cellRenderer: (params: { value: boolean }) => <StatusCellRenderer value={params.value} />,
+            cellRenderer: StatusCellRenderer,
         },
         {
             colId: 'actions',
@@ -176,7 +176,7 @@ export default function CurriculumList() {
             sortable: false,
             filter: '',
             cellRenderer: (params: { data: CurriculumObject }) => (
-                <DropdownCellRenderer data={params.data} menuItems={menuItems} />
+                <DropdownCellRenderer<CurriculumObject> data={params.data} menuItems={menuItems} />
             ),
         },
     ];
@@ -215,6 +215,10 @@ export default function CurriculumList() {
         },
     ];
 
+    const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        onFilterTextBoxChanged(e.target.value);
+    };
+
     return (
         <div className={styles.curriculumContainer}>
             <div className={styles.spaceBetweenButtonAndSearch}>
@@ -229,11 +233,7 @@ export default function CurriculumList() {
                     </Button>
                 </Link>
 
-                <Search
-                    placeholder={'Filter...'}
-                    onChange={(e) => onFilterTextBoxChanged(e.target.value)}
-                    className={styles.searchbar}
-                />
+                <Search placeholder={'Filter...'} onChange={handleFilterChange} className={styles.searchbar} />
             </div>
             <Grid<CurriculumObject>
                 gridRef={gridRef}
