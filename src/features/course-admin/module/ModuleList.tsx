@@ -115,7 +115,7 @@ export default function ModuleList() {
             field: 'moduleIsActive',
             headerName: 'Status',
             cellStyle: { textAlign: 'center' },
-            cellRenderer: (params: { value: boolean }) => <StatusCellRenderer value={params.value} />,
+            cellRenderer: StatusCellRenderer,
         },
         {
             colId: 'actions',
