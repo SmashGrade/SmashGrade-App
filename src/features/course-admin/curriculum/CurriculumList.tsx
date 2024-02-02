@@ -1,6 +1,7 @@
 import { CopyOutlined, EditOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import DropdownCellRenderer from '@components/grid/DropdownCellRenderer.tsx';
 import Grid from '@components/grid/Grid.tsx';
+import DeleteModal from '@components/grid/ModalDeletePrompt.tsx';
 import StatusCellRenderer from '@components/grid/StatusCellRenderer.tsx';
 import { formatDate } from '@components/ui-elements/FormatDate.ts';
 import { deleteCurriculumById, getCurriculums } from '@features/course-admin/curriculum/curriculumApi.ts';
@@ -18,7 +19,6 @@ import { IntlShape, useIntl } from 'react-intl';
 import { Route as CurriculumDetailRoute } from '../../../routes/curriculum/$id.tsx';
 import { Route as CopyCurriculumRoute } from '../../../routes/curriculum/copy.$id.tsx';
 import styles from './CurriculumList.module.scss';
-import DeleteModal from '@components/grid/ModalDeletePrompt.tsx';
 
 const { Search } = Input;
 
@@ -106,6 +106,16 @@ export default function CurriculumList() {
 
     const deleteCurriculumMutation = useMutation({
         mutationFn: deleteCurriculumById,
+        onError: () => {
+            setModalState({ open: false, confirmLoading: false });
+            void message.error(
+                intl.formatMessage({
+                    id: 'curriculumList.deleteErrorMessage',
+                    defaultMessage: 'Studiengang konnte nicht gelöscht werden',
+                    description: 'Modal Delete Error Message',
+                })
+            );
+        },
         onSuccess: () => {
             void queryClient.invalidateQueries({ queryKey: ['curriculums'] });
             setModalState({ open: false, confirmLoading: false });
@@ -114,16 +124,6 @@ export default function CurriculumList() {
                     id: 'curriculumList.deleteSuccessMessage',
                     defaultMessage: 'Studiengang erfolgreich gelöscht',
                     description: 'Curriculum Delete success message',
-                })
-            );
-        },
-        onError: () => {
-            setModalState({ open: false, confirmLoading: false });
-            void message.error(
-                intl.formatMessage({
-                    id: 'curriculumList.deleteErrorMessage',
-                    defaultMessage: 'Studiengang konnte nicht gelöscht werden',
-                    description: 'Modal Delete Error Message',
                 })
             );
         },
