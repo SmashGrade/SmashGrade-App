@@ -66,6 +66,10 @@ export default function CurriculumList() {
     const [modalState, setModalState] = useState({ open: false, confirmLoading: false });
     const [modalText, setModalText] = useState<React.ReactNode | undefined>();
 
+    const renderDeleteModal = (id: number, curriculumDescription: string) => (
+        <DeleteModal id={id} description={curriculumDescription} showModal={showModal} />
+    );
+
     const showModal = (id: number, curriculumDescription: string) => {
         const message = (
             <>
@@ -211,7 +215,7 @@ export default function CurriculumList() {
         },
         {
             key: 'delete',
-            label: <DeleteModal id={id} description={curriculumDescription} showModal={showModal} />,
+            label: renderDeleteModal(id, curriculumDescription),
         },
     ];
 
