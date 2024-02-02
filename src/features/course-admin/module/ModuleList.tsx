@@ -34,6 +34,10 @@ export default function ModuleList() {
     const [modalState, setModalState] = useState({ open: false, confirmLoading: false });
     const [modalText, setModalText] = useState<React.ReactNode | undefined>();
 
+    const renderDeleteModal = (id: number, moduleDescription: string) => (
+        <DeleteModal id={id} description={moduleDescription} showModal={showModal} />
+    );
+
     const showModal = (id: number, moduleDescription: string) => {
         const message = (
             <>
@@ -161,7 +165,7 @@ export default function ModuleList() {
         },
         {
             key: 'delete',
-            label: <DeleteModal id={id} description={moduleDescription} showModal={showModal} />,
+            label: renderDeleteModal(id, moduleDescription),
         },
     ];
 
