@@ -70,6 +70,10 @@ export default function CurriculumList() {
         <DeleteModal id={id} description={curriculumDescription} showModal={showModal} />
     );
 
+    const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        onFilterTextBoxChanged(e.target.value);
+    };
+
     const showModal = (id: number, curriculumDescription: string) => {
         const message = (
             <>
@@ -218,10 +222,6 @@ export default function CurriculumList() {
             label: renderDeleteModal(id, curriculumDescription),
         },
     ];
-
-    const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        onFilterTextBoxChanged(e.target.value);
-    };
 
     return (
         <div className={styles.curriculumContainer}>
