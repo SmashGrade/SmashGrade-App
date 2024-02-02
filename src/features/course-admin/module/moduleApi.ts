@@ -13,7 +13,7 @@ export async function getModules(): Promise<ModuleObject[]> {
                     curriculumId: curriculum.id,
                     curriculumDescription: curriculum.description,
                     moduleId: courseModule.id,
-                    moduleDescription: courseModule.description,
+                    description: courseModule.description,
                     moduleIsActive: courseModule.isActive,
                     studyStage: module.studyStage.description,
                 }))

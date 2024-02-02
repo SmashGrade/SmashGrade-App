@@ -1,6 +1,7 @@
-import { CopyOutlined, DeleteOutlined, EditOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { CopyOutlined, EditOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import DropdownCellRenderer from '@components/grid/DropdownCellRenderer.tsx';
 import Grid from '@components/grid/Grid.tsx';
+import DeleteModal from '@components/grid/ModalDeletePrompt.tsx';
 import StatusCellRenderer from '@components/grid/StatusCellRenderer.tsx';
 import { ModuleObject } from '@features/course-admin/interfaces/ModuleData.ts';
 import { deleteModuleById, getModules } from '@features/course-admin/module/moduleApi.ts';
@@ -32,6 +33,10 @@ export default function ModuleList() {
     const [moduleIdToDelete, setModuleIdToDelete] = useState<number | null>(null);
     const [modalState, setModalState] = useState({ open: false, confirmLoading: false });
     const [modalText, setModalText] = useState<React.ReactNode | undefined>();
+
+    const renderDeleteModal = (id: number, moduleDescription: string) => (
+        <DeleteModal id={id} description={moduleDescription} showModal={showModal} />
+    );
 
     const showModal = (id: number, moduleDescription: string) => {
         const message = (
@@ -107,14 +112,14 @@ export default function ModuleList() {
     if (isGetModulePending) return <Spin />;
 
     const moduleColumnDefs: ColDef<ModuleObject>[] = [
-        { field: 'moduleDescription', headerName: 'Module', flex: 1 },
+        { field: 'description', headerName: 'Module', flex: 1 },
         { field: 'curriculumDescription', headerName: 'Studiengang', flex: 1 },
         { field: 'studyStage', headerName: 'Lehrgang' },
         {
             field: 'moduleIsActive',
             headerName: 'Status',
             cellStyle: { textAlign: 'center' },
-            cellRenderer: (params: { value: boolean }) => <StatusCellRenderer value={params.value} />,
+            cellRenderer: StatusCellRenderer,
         },
         {
             colId: 'actions',
@@ -125,7 +130,7 @@ export default function ModuleList() {
             sortable: false,
             filter: '',
             cellRenderer: (params: { data: ModuleObject }) => (
-                <DropdownCellRenderer data={params.data} menuItems={menuItems} />
+                <DropdownCellRenderer<ModuleObject> data={params.data} menuItems={menuItems} />
             ),
         },
     ];
@@ -160,23 +165,7 @@ export default function ModuleList() {
         },
         {
             key: 'delete',
-            label: (
-                <div>
-                    <Button
-                        className={styles.deleteButton}
-                        onClick={() => {
-                            showModal(id, moduleDescription);
-                        }}
-                        icon={<DeleteOutlined />}
-                    >
-                        {intl.formatMessage({
-                            id: 'moduleList.delete',
-                            defaultMessage: 'Löschen',
-                            description: 'Menu item to delete a module',
-                        })}
-                    </Button>
-                </div>
-            ),
+            label: renderDeleteModal(id, moduleDescription),
         },
     ];
 
@@ -210,7 +199,11 @@ export default function ModuleList() {
                 title={
                     <span>
                         <QuestionCircleOutlined style={{ marginRight: 8, color: 'red' }} />
-                        {intl.formatMessage({ id: 'moduleList.delete' })}
+                        {intl.formatMessage({
+                            id: 'moduleList.delete',
+                            defaultMessage: 'Löschen',
+                            description: 'Curriculum Modal delete',
+                        })}
                     </span>
                 }
                 open={modalState.open}
