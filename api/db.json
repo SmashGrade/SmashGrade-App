@@ -591,29 +591,6 @@
       "modules": []
     }
   ],
-  "modules": [
-    {
-      "id": 0,
-      "description": "2023 - Schnittstellen-Technologien ||",
-      "number": "string",
-      "status": "Active",
-      "bewertungstyp_beschreibung": "Wenn alle Kurse erfuellt sind",
-      "bewertungstyp_bezeichnung": "E",
-      "courses": [
-        {
-          "id": 0,
-          "description": "Projektmanagement",
-          "number": "3.121",
-          "teacher": [
-            [
-              "Kurt Munter",
-              "Lancelot"
-            ]
-          ],
-          "evaluationType": "M"
-        }
-    ]}
-  ],
     "courseTeacher": {
         "id": 0,
         "version": 0,
