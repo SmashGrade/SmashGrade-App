@@ -15,7 +15,7 @@ export interface ModuleResponse {
   courses: Course[];
 }
 
-interface ModuleResponseNew {
+export interface ModuleResponseNew {
   id: number;
   version: number;
   description: string;
@@ -84,4 +84,4 @@ export interface ModuleObject {
   studyStage: string;
 }
 
-export type ModuleCreateRequest = Omit<ModuleResponse, 'id'>;
+export type ModuleCreateRequest = Omit<ModuleResponseNew, 'id'>;

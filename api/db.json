@@ -1,87 +1,119 @@
 {
-    "users": [
-        {
-            "firstName": "Max",
-            "lastName": "Müller",
-            "email": "max.mueller@hftm.ch",
-            "role": "Student:in",
-            "curriculum": {
-                "id": 1,
-                "field": "Systemtechnik",
-                "focus": "Automation/ICT",
-                "year": 2023
-            }
-        },
-        {
-            "firstName": "Kurt",
-            "lastName": "Munter",
-            "email": "kurt.munter@hftm.ch",
-            "role": "Fachbereichsleitung",
-            "field": "Informatik"
-        },
-        {
-            "firstName": "Simeon",
-            "lastName": "Liniger",
-            "email": "simeon.liniger@hftm.ch",
-            "role": "Dozent:in"
-        },
-        {
-            "firstName": "Stefan",
-            "lastName": "Brandenberger",
-            "email": "stefan.brandenberger@hftm.ch",
-            "role": "Kursadministrator:in"
-        }
-    ],
-    "startYears": [{ "year": 2022 }, { "year": 2023 }, { "year": 2024 }, { "year": 2025 }, { "year": 2026 }],
-    "curriculums": [
-        { "id": 1, "title": "1. Lehrgang", "year": 2023 },
-        { "id": 2, "title": "2. Lehrgang", "year": 2023 },
-        { "id": 3, "title": "3. Lehrgang", "year": 2024 },
-        { "id": 4, "title": "4. Lehrgang", "year": 2026 }
-    ],
-    "onboardingFilter": {
-        "curriculumTypes": [
-            {
-                "id": 1,
-                "description": "Vollzeit",
-                "durationYears": 3
-            },
-            {
-                "id": 2,
-                "description": "Berufsbegleitend",
-                "durationYears": 3
-            }
-        ],
-        "curriculums": [
-            {
-                "id": 1,
-                "focus": "Softwareentwicklung",
-                "field": "Informatik",
-                "curriculumType": "Berufsbegleitend",
-                "isActiv": true,
-                "startDate": "2023-11-29T17:13:23.819Z",
-                "endDate": "2023-11-29T17:13:23.819Z"
-            },
-            {
-                "id": 2,
-                "focus": "Gebäudeautomation",
-                "field": "Elektrotechnik",
-                "curriculumType": "Berufsbegleitend",
-                "isActiv": true,
-                "startDate": "2023-11-29T17:13:23.819Z",
-                "endDate": "2023-11-29T17:13:23.819Z"
-            },
-            {
-                "id": 2,
-                "focus": "Systemtechnik",
-                "field": "Informatik",
-                "curriculumType": "Vollzeit",
-                "isActiv": true,
-                "startDate": "2023-11-29T17:13:23.819Z",
-                "endDate": "2023-11-29T17:13:23.819Z"
-            }
-        ]
+  "users": [
+    {
+      "firstName": "Max",
+      "lastName": "Müller",
+      "email": "max.mueller@hftm.ch",
+      "role": "Student:in",
+      "curriculum": {
+        "id": 1,
+        "field": "Systemtechnik",
+        "focus": "Automation/ICT",
+        "year": 2023
+      }
     },
+    {
+      "firstName": "Kurt",
+      "lastName": "Munter",
+      "email": "kurt.munter@hftm.ch",
+      "role": "Fachbereichsleitung",
+      "field": "Informatik"
+    },
+    {
+      "firstName": "Simeon",
+      "lastName": "Liniger",
+      "email": "simeon.liniger@hftm.ch",
+      "role": "Dozent:in"
+    },
+    {
+      "firstName": "Stefan",
+      "lastName": "Brandenberger",
+      "email": "stefan.brandenberger@hftm.ch",
+      "role": "Kursadministrator:in"
+    }
+  ],
+  "startYears": [
+    {
+      "year": 2022
+    },
+    {
+      "year": 2023
+    },
+    {
+      "year": 2024
+    },
+    {
+      "year": 2025
+    },
+    {
+      "year": 2026
+    }
+  ],
+  "curriculums": [
+    {
+      "id": 1,
+      "title": "1. Lehrgang",
+      "year": 2023
+    },
+    {
+      "id": 2,
+      "title": "2. Lehrgang",
+      "year": 2023
+    },
+    {
+      "id": 3,
+      "title": "3. Lehrgang",
+      "year": 2024
+    },
+    {
+      "id": 4,
+      "title": "4. Lehrgang",
+      "year": 2026
+    }
+  ],
+  "onboardingFilter": {
+    "curriculumTypes": [
+      {
+        "id": 1,
+        "description": "Vollzeit",
+        "durationYears": 3
+      },
+      {
+        "id": 2,
+        "description": "Berufsbegleitend",
+        "durationYears": 3
+      }
+    ],
+    "curriculums": [
+      {
+        "id": 1,
+        "focus": "Softwareentwicklung",
+        "field": "Informatik",
+        "curriculumType": "Berufsbegleitend",
+        "isActiv": true,
+        "startDate": "2023-11-29T17:13:23.819Z",
+        "endDate": "2023-11-29T17:13:23.819Z"
+      },
+      {
+        "id": 2,
+        "focus": "Gebäudeautomation",
+        "field": "Elektrotechnik",
+        "curriculumType": "Berufsbegleitend",
+        "isActiv": true,
+        "startDate": "2023-11-29T17:13:23.819Z",
+        "endDate": "2023-11-29T17:13:23.819Z"
+      },
+      {
+        "id": 2,
+        "focus": "Systemtechnik",
+        "field": "Informatik",
+        "curriculumType": "Vollzeit",
+        "isActiv": true,
+        "startDate": "2023-11-29T17:13:23.819Z",
+        "endDate": "2023-11-29T17:13:23.819Z"
+      }
+    ]
+  },
   "course": [
     {
       "id": 1,
@@ -591,75 +623,191 @@
       "modules": []
     }
   ],
-    "courseTeacher": {
+  "courseTeacher": {
+    "id": 0,
+    "version": 0,
+    "description": "Projektmanagement",
+    "number": "3.121",
+    "exams": [
+      {
         "id": 0,
-        "version": 0,
-        "description": "Projektmanagement",
-        "number": "3.121",
-        "exams": [
-            {
-                "id": 0,
-                "description": "Projektarbeit",
-                "weight": 0.3,
-                "type": "Schritfliche Arbeit",
-                "avgGrades": [
-                    {
-                        "id": 0,
-                        "description": "CH-Note",
-                        "grade": 4.3
-                    }
-                ]
-            },
-            {
-                "id": 1,
-                "description": "Projektpräsentation",
-                "weight": 0.7,
-                "type": "Mündliche Prüfung",
-                "avgGrades": [
-                    {
-                        "id": 1,
-                        "description": "CH-Note",
-                        "grade": 5.5
-                    }
-                ]
-            }
+        "description": "Projektarbeit",
+        "weight": 0.3,
+        "type": "Schritfliche Arbeit",
+        "avgGrades": [
+          {
+            "id": 0,
+            "description": "CH-Note",
+            "grade": 4.3
+          }
         ]
-    },
-    "modules": [
-        {
-            "id": 2,
-            "version": 0,
-            "description": "Management 2",
-            "number": "????",
-            "isActive": true,
-            "valuationCategory": {
-                "description": "string",
-                "code": "M"
-            }
-        },
-        {
-            "id": 3,
-            "version": 0,
-            "description": "Betriebs- und Organisationstechnik I",
-            "number": "VZGS1-2m",
-            "isActive": true,
-            "valuationCategory": {
-                "description": "string",
-                "code": "M"
-            }
-        },
-        {
+      },
+      {
+        "id": 1,
+        "description": "Projektpräsentation",
+        "weight": 0.7,
+        "type": "Mündliche Prüfung",
+        "avgGrades": [
+          {
             "id": 1,
-            "version": 0,
-            "description": "Mathematik",
-            "number": "VZGS1-4m",
-            "isActive": true,
-            "valuationCategory": {
-                "description": "string",
-                "code": "M"
-            }
+            "description": "CH-Note",
+            "grade": 5.5
+          }
+        ]
+      }
+    ]
+  },
+  "modules": [
+    {
+      "id": 1,
+      "version": 1,
+      "description": "Schnittstellen-Technologien",
+      "number": "IT-200",
+      "isActive": true,
+      "studyStage": {
+        "id": 10,
+        "description": "Fachstudium"
+      },
+      "valuationCategory": {
+        "description": "Grundlagenmodul",
+        "code": "E"
+      },
+      "courses": [
+        {
+          "id": 101,
+          "version": 1,
+          "description": "Projektmanagement",
+          "number": "3.121",
+          "versions": [
+            1,
+            2
+          ]
         }
-    ],
+      ]
+    },
+    {
+      "id": 2,
+      "version": 1,
+      "description": "Datenstrukturen und Algorithmen",
+      "number": "CS-101",
+      "isActive": true,
+      "studyStage": {
+        "id": 20,
+        "description": "Grundstudium"
+      },
+      "valuationCategory": {
+        "description": "Kernmodul",
+        "code": "B"
+      },
+      "courses": [
+        {
+          "id": 102,
+          "version": 2,
+          "description": "Algorithmen",
+          "number": "4.101",
+          "versions": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "version": 2,
+      "description": "Software Engineering",
+      "number": "SE-300",
+      "isActive": false,
+      "studyStage": {
+        "id": 30,
+        "description": "Hauptstudium"
+      },
+      "valuationCategory": {
+        "description": "Spezialisierungsmodul",
+        "code": "S"
+      },
+      "courses": [
+        {
+          "id": 103,
+          "version": 3,
+          "description": "Software Design Patterns",
+          "number": "5.555",
+          "versions": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "version": 3,
+      "description": "Künstliche Intelligenz",
+      "number": "AI-400",
+      "isActive": true,
+      "studyStage": {
+        "id": 40,
+        "description": "Spezialstudium"
+      },
+      "valuationCategory": {
+        "description": "Vertiefungsmodul",
+        "code": "V"
+      },
+      "courses": [
+        {
+          "id": 104,
+          "version": 4,
+          "description": "Neuronale Netze",
+          "number": "6.666",
+          "versions": [
+            2,
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "number": "CS-500",
+      "description": "Computer Sciene Basics",
+      "evaluationType": "E",
+      "curriculum": [
+        "lehrplan1",
+        "lehrplan2"
+      ],
+      "studyPhase": 1,
+      "isActive": true,
+      "version": 1,
+      "valuationCategory": {
+        "code": "E",
+        "description": "E"
+      },
+      "studyStage": {
+        "id": 0,
+        "description": "None"
+      },
+      "courses": [],
+      "id": 5
+    },
+    {
+      "number": "444",
+      "description": "test",
+      "evaluationType": "D",
+      "curriculum": [
+        "lehrplan1"
+      ],
+      "studyStage": {
+        "id": 3,
+        "description": "Schwerpunkt 3"
+      },
+      "version": 1,
+      "valuationCategory": {
+        "code": "D",
+        "description": "D - Modul bestanden, wenn der Durchschnitt der Kruse genügend ist (mehr als 60%)"
+      },
+      "courses": [],
+      "id": 6
+    }
+  ],
   "curriculum": [
     {
       "id": 1,

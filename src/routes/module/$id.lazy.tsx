@@ -1,6 +1,6 @@
-import ModuleDetail from '@features/course-admin/module/ModuleDetail.tsx';
+import { EditModule } from '@features/course-admin/module/EditModule.tsx';
 import { createLazyFileRoute } from '@tanstack/react-router';
 
 export const Route = createLazyFileRoute('/module/$id')({
-  component: ModuleDetail,
+  component: EditModule,
 });

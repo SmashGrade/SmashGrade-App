@@ -54,6 +54,10 @@ const courseColumnDefs: ColDef<CourseResponse>[] = [
     headerName: '',
     filter: null,
     cellRenderer: LinkButtonCellRenderer,
+    cellRendererParams: {
+      from: CourseIndexRoute.to,
+      to: '/course/$id',
+    },
   },
   {
     field: 'id',
