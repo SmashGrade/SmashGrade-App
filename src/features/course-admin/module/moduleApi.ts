@@ -20,7 +20,9 @@ export async function createModule(module: ModuleCreateRequest): Promise<void> {
 }
 
 export async function getModule(id: number): Promise<ModuleResponseNew> {
-  const { data: module } = await axios.get<ModuleResponseNew>(`/modules/${id}`);
+  const { data: module } = await axios.get<ModuleResponseNew>(
+    `/moduless/${id}`
+  );
   return module;
 }
 
