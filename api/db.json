@@ -208,17 +208,20 @@
       "id": 3,
       "version": 1,
       "description": "Web Development",
-      "number": "3.123",
-      "versions": [
-        1
-      ],
+      "number": "5555555",
       "modules": [
         {
           "id": 2,
           "version": 1,
-          "description": "Frontend Development",
+          "description": "Projektmanagement",
           "number": "string",
           "isActive": true
+        }
+      ],
+      "teachers": [
+        {
+          "id": 2,
+          "name": "Kurt Munter"
         }
       ],
       "exams": [
@@ -229,11 +232,10 @@
           "type": "Schritfliche Arbeit"
         }
       ],
-      "teachers": [
-        {
-          "id": 2,
-          "name": "Jane Doe"
-        }
+      "versions": [
+        1,
+        2,
+        3
       ]
     },
     {
@@ -456,6 +458,50 @@
         3
       ],
       "id": 9
+    },
+    {
+      "version": 1,
+      "description": "test",
+      "number": "test",
+      "modules": [
+        {
+          "id": 0,
+          "version": 1,
+          "description": "Schnittstellen-Technologien",
+          "number": "string",
+          "isActive": true
+        }
+      ],
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Simeon Liniger"
+        },
+        {
+          "id": 2,
+          "name": "Kurt Munter"
+        }
+      ],
+      "exams": [
+        {
+          "id": 1,
+          "description": "test",
+          "type": "test",
+          "weight": 1
+        },
+        {
+          "id": 1,
+          "description": "test",
+          "type": "teset",
+          "weight": 2
+        }
+      ],
+      "versions": [
+        1,
+        2,
+        3
+      ],
+      "id": 10
     }
   ],
   "courseFilter": {
@@ -806,6 +852,27 @@
       },
       "courses": [],
       "id": 6
+    },
+    {
+      "number": "C555555",
+      "description": "Test",
+      "evaluationType": "F",
+      "curriculum": [
+        "lehrplan1",
+        "lehrplan2"
+      ],
+      "studyStage": {
+        "id": 1,
+        "description": "Grundstudium"
+      },
+      "isActive": true,
+      "version": 1,
+      "valuationCategory": {
+        "code": "F",
+        "description": "F"
+      },
+      "courses": [],
+      "id": 7
     }
   ],
   "curriculum": [

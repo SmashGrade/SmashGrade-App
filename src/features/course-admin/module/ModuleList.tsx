@@ -7,6 +7,7 @@ import DropdownCellRenderer from '@components/grid/DropdownCellRenderer.tsx';
 import Grid from '@components/grid/Grid.tsx';
 import DeleteModal from '@components/grid/ModalDeletePrompt.tsx';
 import StatusCellRenderer from '@components/grid/StatusCellRenderer.tsx';
+import { Spinner } from '@components/ui-elements/Spinner.tsx';
 import {
   ModuleObject,
   ModuleResponseNew,
@@ -24,7 +25,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { AgGridReact } from 'ag-grid-react';
 import type { MenuProps } from 'antd';
-import { Button, Input, message, Modal, Spin } from 'antd';
+import { Button, Input, message, Modal } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Route as ModuleDetailRoute } from '../../../routes/module/$id.tsx';
@@ -131,7 +132,7 @@ export default function ModuleList() {
   }, []);
 
   if (isGetModuleError) return <div>Error when loading courses</div>;
-  if (isGetModulePending) return <Spin />;
+  if (isGetModulePending) return <Spinner />;
 
   const moduleColumnDefs: ColDef<ModuleResponseNew>[] = [
     {

@@ -1,13 +1,14 @@
 import { getValueGetter } from '@components/grid/columnFormatter.ts';
 import Grid from '@components/grid/Grid.tsx';
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
+import { Spinner } from '@components/ui-elements/Spinner.tsx';
 import { LinkButtonCellRenderer } from '@features/course/LinkButtonCellRenderer.tsx';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { ColDef } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
-import { Button, Spin } from 'antd';
+import { Button } from 'antd';
 import axios from 'axios';
 import { Route as CourseIndexRoute } from '../../routes/course/index.tsx';
 import styles from './Course.module.scss';
@@ -97,7 +98,7 @@ export default function CourseList() {
   });
 
   if (isError) return <div>Error when loading courses</div>;
-  if (isPending) return <Spin />;
+  if (isPending) return <Spinner />;
 
   return (
     <div className={styles.courseContainer}>

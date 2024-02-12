@@ -1,7 +1,8 @@
+import { Spinner } from '@components/ui-elements/Spinner.tsx';
 import { ModuleResponseNew } from '@features/course-admin/interfaces/ModuleData.ts';
 import { Route } from '@routes/module/$id.tsx';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { message, Spin } from 'antd';
+import { message } from 'antd';
 import { getModule, updateModule } from './moduleApi';
 import { ModuleForm } from './ModuleForm';
 
@@ -33,12 +34,7 @@ export function EditModule() {
 
   // Display loading and error states
   if (isModuleError) return <div>Error when loading courses</div>;
-  if (isModuleLoading) return <Spin />;
+  if (isModuleLoading) return <Spinner />;
 
-  return (
-    <>
-      courseData &&
-      <ModuleForm moduleData={moduleData} mutation={updateModuleMutation} />
-    </>
-  );
+  return <ModuleForm moduleData={moduleData} mutation={updateModuleMutation} />;
 }

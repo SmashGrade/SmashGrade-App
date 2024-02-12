@@ -1,7 +1,8 @@
+import { Spinner } from '@components/ui-elements/Spinner';
 import { ModuleResponseNew } from '@features/course-admin/interfaces/ModuleData.ts';
 import { CourseResponse } from '@features/course/CourseList.tsx';
 import { useQuery } from '@tanstack/react-query';
-import { Button, List, Spin } from 'antd';
+import { Button, List } from 'antd';
 import axios from 'axios';
 
 interface ModuleCoursesFormProps {
@@ -24,7 +25,7 @@ export function ModuleCoursesForm({
   });
 
   if (isError) return <div>Error when loading courses</div>;
-  if (isPending) return <Spin />;
+  if (isPending) return <Spinner />;
 
   return (
     <>
