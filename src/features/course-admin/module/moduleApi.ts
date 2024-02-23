@@ -25,5 +25,5 @@ export async function getModule(id: number): Promise<ModuleResponseNew> {
 }
 
 export async function updateModule(module: ModuleResponseNew): Promise<void> {
-  await axios.put('/module/${module.id}', module);
+  await axios.put(`/modules/${module.id}`, module);
 }

@@ -143,7 +143,10 @@ export function ModuleForm({
       </div>
       <div className={styles.course}>
         <h2>Kurse</h2>
-        <ModuleCoursesForm moduleCourses={moduleData.courses ?? []} />
+        <ModuleCoursesForm
+          moduleCourses={moduleData.courses ?? []}
+          module={moduleData}
+        />
       </div>
     </div>
   );

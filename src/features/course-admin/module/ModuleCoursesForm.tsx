@@ -1,32 +1,18 @@
-import { Spinner } from '@components/ui-elements/Spinner';
 import { ModuleResponseNew } from '@features/course-admin/interfaces/ModuleData.ts';
-import { CourseResponse } from '@features/course/CourseList.tsx';
-import { useQuery } from '@tanstack/react-query';
+import { AddCourseModal } from '@features/course-admin/module/AddCourseModal.tsx';
 import { Button, List } from 'antd';
-import axios from 'axios';
+import { useState } from 'react';
 
 interface ModuleCoursesFormProps {
   moduleCourses: ModuleResponseNew['courses'];
+  module: ModuleResponseNew;
 }
 
 export function ModuleCoursesForm({
   moduleCourses,
+  module,
 }: Readonly<ModuleCoursesFormProps>) {
-  const {
-    isPending,
-    isError,
-    data: availableCourses,
-  } = useQuery({
-    queryKey: ['courses'],
-    queryFn: async () => {
-      const { data } = await axios.get<CourseResponse[]>('/course');
-      return data;
-    },
-  });
-
-  if (isError) return <div>Error when loading courses</div>;
-  if (isPending) return <Spinner />;
-
+  const [modalShown, setModalShown] = useState(false);
   return (
     <>
       <List
@@ -41,7 +27,12 @@ export function ModuleCoursesForm({
           </List.Item>
         )}
       />
-      <Button>Hinzufügen</Button>
+      <Button onClick={() => setModalShown(true)}>Hinzufügen</Button>
+      <AddCourseModal
+        modalShown={modalShown}
+        setModalShown={setModalShown}
+        module={module}
+      />
     </>
   );
 }

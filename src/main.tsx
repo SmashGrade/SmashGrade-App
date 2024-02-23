@@ -48,6 +48,7 @@ const router = createRouter({
     queryClient,
   },
   defaultPreload: 'intent',
+  defaultPreloadStaleTime: 5,
   defaultErrorComponent: DefaultErrorComponent,
   defaultPendingComponent: Spinner,
 });

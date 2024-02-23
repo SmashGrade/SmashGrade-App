@@ -7,6 +7,7 @@ import {
   TeacherResponse,
 } from '@features/course-admin/interfaces/CourseData.ts';
 import { FormFilters } from '@features/course-admin/interfaces/FormFilters.ts';
+import { CourseResponse as CourseListResponse } from '@features/course/CourseList';
 import { SelectProps } from 'antd';
 import axios from 'axios';
 
@@ -40,6 +41,11 @@ export async function getCourseFilter(): Promise<FormFilters> {
       value: teacher.id,
     })),
   };
+}
+
+export async function getCourses() {
+  const { data } = await axios.get<CourseListResponse[]>('/course');
+  return data;
 }
 
 export async function updateCourse(course: CourseUpdateRequest): Promise<void> {
