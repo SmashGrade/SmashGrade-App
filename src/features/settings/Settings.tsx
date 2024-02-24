@@ -57,7 +57,6 @@ export default function Settings() {
                             defaultMessage={'Meine Module'}
                             description={'Meine Module'}
                         />
-                        <Select />
                         <List />
                     </>
                 )}
