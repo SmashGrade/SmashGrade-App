@@ -23,16 +23,11 @@ const getIdToken = async (instance: IPublicClientApplication) => {
 
 export function addTokenInterceptor() {
     return async function (config: InternalAxiosRequestConfig) {
-        // Do something before request is sent
-
         const idToken = await getIdToken(msalInstance);
         const bearer = `Bearer ${idToken}`;
         if (config.headers && !config.url?.includes(msGraphBaseUrl)) {
             config.headers.Authorization = bearer;
         }
-
-        console.log(config.url, config.baseURL);
-
         return config;
     };
 }
