@@ -5,20 +5,20 @@ import { updateModule } from './moduleApi';
 import { ModuleForm } from './ModuleForm';
 
 export function EditModule() {
-  const module = Route.useLoaderData();
+    const module = Route.useLoaderData();
 
-  const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
 
-  const updateModuleMutation = useMutation({
-    mutationFn: updateModule,
-    onSuccess: () => {
-      void queryClient.invalidateQueries({
-        queryKey: ['modules', module.id],
-      });
-      void queryClient.invalidateQueries({ queryKey: ['modules'] });
-      void message.success('Modul erfolgreich aktualisiert');
-    },
-  });
+    const updateModuleMutation = useMutation({
+        mutationFn: updateModule,
+        onSuccess: () => {
+            void queryClient.invalidateQueries({
+                queryKey: ['modules', module.id],
+            });
+            void queryClient.invalidateQueries({ queryKey: ['modules'] });
+            void message.success('Modul erfolgreich aktualisiert');
+        },
+    });
 
-  return <ModuleForm moduleData={module} mutation={updateModuleMutation} />;
+    return <ModuleForm moduleData={module} mutation={updateModuleMutation} />;
 }

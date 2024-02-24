@@ -1,53 +1,46 @@
 {
-  "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable",
-      "esnext.intl",
-      "es2017.intl",
-      "es2018.intl"
-    ],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "sourceMap": true,
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
+    "compilerOptions": {
+        "target": "ES2020",
+        "useDefineForClassFields": true,
+        "lib": ["ES2020", "DOM", "DOM.Iterable", "esnext.intl", "es2017.intl", "es2018.intl"],
+        "module": "ESNext",
+        "skipLibCheck": true,
+        "sourceMap": true,
+        /* Bundler mode */
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
 
-    /* Linting */
-    "strict": true,
-    "strictNullChecks": true,
-    "noFallthroughCasesInSwitch": true,
+        /* Linting */
+        "strict": true,
+        "strictNullChecks": true,
+        "noFallthroughCasesInSwitch": true,
 
-    /* Aliases */
-    "baseUrl": "./",
-    "paths": {
-      "@components/*": ["src/components/*"],
-      "@features/*": ["src/features/*"],
-      "@pages/*": ["src/pages/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@routes/*": ["src/routes/*"]
+        /* Aliases */
+        "baseUrl": "./",
+        "paths": {
+            "@components/*": ["src/components/*"],
+            "@features/*": ["src/features/*"],
+            "@pages/*": ["src/pages/*"],
+            "@hooks/*": ["src/hooks/*"],
+            "@routes/*": ["src/routes/*"]
+        },
+
+        /* i18n */
+        "plugins": [
+            {
+                "transform": "@formatjs/ts-transformer",
+                "import": "transform",
+                "type": "config",
+                "overrideIdFn": "[sha512:contenthash:base64:6]",
+                "ast": true
+            }
+        ]
     },
-
-    /* i18n */
-    "plugins": [
-      {
-        "transform": "@formatjs/ts-transformer",
-        "import": "transform",
-        "type": "config",
-        "overrideIdFn": "[sha512:contenthash:base64:6]",
-        "ast": true
-      }
-    ]
-  },
-  "include": ["src"],
-  "exclude": ["src/routeTree.gen.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+    "include": ["src"],
+    "exclude": ["src/routeTree.gen.ts"],
+    "references": [{ "path": "./tsconfig.node.json" }]
 }

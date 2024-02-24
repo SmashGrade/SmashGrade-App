@@ -3,14 +3,14 @@ import { createFileRoute } from '@tanstack/react-router';
 import { z } from 'zod';
 
 export const Route = createFileRoute('/student/course/$id')({
-  component: StudentCourseDetailPage,
-  parseParams: (params) => ({
-    id: z.number().int().parse(parseInt(params.id)),
-  }),
+    component: StudentCourseDetailPage,
+    parseParams: (params) => ({
+        id: z.number().int().parse(parseInt(params.id)),
+    }),
 });
 
 function StudentCourseDetailPage() {
-  const { id } = Route.useParams();
+    const { id } = Route.useParams();
 
-  return <StudentCourseDetail id={id} />;
+    return <StudentCourseDetail id={id} />;
 }

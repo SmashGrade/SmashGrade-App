@@ -6,23 +6,23 @@ import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  server: {
-    port: 5173,
-    open: true,
-  },
-  plugins: [react(), TanStackRouterVite(), visualizer()],
-  resolve: {
-    alias: {
-      '@components': path.resolve(__dirname, './src/components'),
-      '@features': path.resolve(__dirname, './src/features'),
-      '@pages': path.resolve(__dirname, './src/pages'),
-      '@hooks': path.resolve(__dirname, './src/hooks'),
-      '@routes': path.resolve(__dirname, './src/routes'),
+    server: {
+        port: 5173,
+        open: true,
     },
-  },
-  build: {
-    rollupOptions: {
-      external: ['./api/**', './src/dev/**'],
+    plugins: [react(), TanStackRouterVite(), visualizer()],
+    resolve: {
+        alias: {
+            '@components': path.resolve(__dirname, './src/components'),
+            '@features': path.resolve(__dirname, './src/features'),
+            '@pages': path.resolve(__dirname, './src/pages'),
+            '@hooks': path.resolve(__dirname, './src/hooks'),
+            '@routes': path.resolve(__dirname, './src/routes'),
+        },
     },
-  },
+    build: {
+        rollupOptions: {
+            external: ['./api/**', './src/dev/**'],
+        },
+    },
 });

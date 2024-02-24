@@ -4,35 +4,25 @@ import { Button, List } from 'antd';
 import { useState } from 'react';
 
 interface ModuleCoursesFormProps {
-  moduleCourses: ModuleResponseNew['courses'];
-  module: ModuleResponseNew;
+    moduleCourses: ModuleResponseNew['courses'];
+    module: ModuleResponseNew;
 }
 
-export function ModuleCoursesForm({
-  moduleCourses,
-  module,
-}: Readonly<ModuleCoursesFormProps>) {
-  const [modalShown, setModalShown] = useState(false);
-  return (
-    <>
-      <List
-        itemLayout={'horizontal'}
-        dataSource={moduleCourses}
-        renderItem={(item, index) => (
-          <List.Item key={index}>
-            <List.Item.Meta
-              title={item.number}
-              description={item.description}
+export function ModuleCoursesForm({ moduleCourses, module }: Readonly<ModuleCoursesFormProps>) {
+    const [modalShown, setModalShown] = useState(false);
+    return (
+        <>
+            <List
+                itemLayout={'horizontal'}
+                dataSource={moduleCourses}
+                renderItem={(item, index) => (
+                    <List.Item key={index}>
+                        <List.Item.Meta title={item.number} description={item.description} />
+                    </List.Item>
+                )}
             />
-          </List.Item>
-        )}
-      />
-      <Button onClick={() => setModalShown(true)}>Hinzufügen</Button>
-      <AddCourseModal
-        modalShown={modalShown}
-        setModalShown={setModalShown}
-        module={module}
-      />
-    </>
-  );
+            <Button onClick={() => setModalShown(true)}>Hinzufügen</Button>
+            <AddCourseModal modalShown={modalShown} setModalShown={setModalShown} module={module} />
+        </>
+    );
 }
