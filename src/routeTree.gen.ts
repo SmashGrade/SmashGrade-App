@@ -18,12 +18,11 @@ import { Route as OnboardingImport } from './routes/onboarding';
 import { Route as MyCourseImport } from './routes/my-course';
 import { Route as IndexImport } from './routes/index';
 import { Route as StudentIndexImport } from './routes/student/index';
-import { Route as CurriculumIndexImport } from './routes/curriculum/index';
 import { Route as CourseIndexImport } from './routes/course/index';
 import { Route as ModuleIndexRouteImport } from './routes/module/index.route';
+import { Route as CurriculumIndexRouteImport } from './routes/curriculum/index.route';
 import { Route as StudentModulesImport } from './routes/student/modules';
 import { Route as ModuleIdImport } from './routes/module/$id';
-import { Route as CurriculumNewImport } from './routes/curriculum/new';
 import { Route as CurriculumIdImport } from './routes/curriculum/$id';
 import { Route as CourseIdImport } from './routes/course/$id';
 import { Route as StudentCourseIdImport } from './routes/student/course.$id';
@@ -33,6 +32,7 @@ import { Route as CurriculumCopyIdImport } from './routes/curriculum/copy.$id';
 // Create Virtual Routes
 
 const ModuleNewLazyImport = createFileRoute('/module/new')();
+const CurriculumNewLazyImport = createFileRoute('/curriculum/new')();
 const CourseNewLazyImport = createFileRoute('/course/new')();
 
 // Create/Update Routes
@@ -62,11 +62,6 @@ const StudentIndexRoute = StudentIndexImport.update({
     getParentRoute: () => rootRoute,
 } as any);
 
-const CurriculumIndexRoute = CurriculumIndexImport.update({
-    path: '/curriculum/',
-    getParentRoute: () => rootRoute,
-} as any);
-
 const CourseIndexRoute = CourseIndexImport.update({
     path: '/course/',
     getParentRoute: () => rootRoute,
@@ -77,10 +72,20 @@ const ModuleIndexRouteRoute = ModuleIndexRouteImport.update({
     getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/module/index.route.lazy').then((d) => d.Route));
 
+const CurriculumIndexRouteRoute = CurriculumIndexRouteImport.update({
+    path: '/curriculum/',
+    getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/curriculum/index.route.lazy').then((d) => d.Route));
+
 const ModuleNewLazyRoute = ModuleNewLazyImport.update({
     path: '/module/new',
     getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/module/new.lazy').then((d) => d.Route));
+
+const CurriculumNewLazyRoute = CurriculumNewLazyImport.update({
+    path: '/curriculum/new',
+    getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/curriculum/new.lazy').then((d) => d.Route));
 
 const CourseNewLazyRoute = CourseNewLazyImport.update({
     path: '/course/new',
@@ -96,11 +101,6 @@ const ModuleIdRoute = ModuleIdImport.update({
     path: '/module/$id',
     getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/module/$id.lazy').then((d) => d.Route));
-
-const CurriculumNewRoute = CurriculumNewImport.update({
-    path: '/curriculum/new',
-    getParentRoute: () => rootRoute,
-} as any);
 
 const CurriculumIdRoute = CurriculumIdImport.update({
     path: '/curriculum/$id',
@@ -125,7 +125,7 @@ const ModuleCopyIdRoute = ModuleCopyIdImport.update({
 const CurriculumCopyIdRoute = CurriculumCopyIdImport.update({
     path: '/curriculum/copy/$id',
     getParentRoute: () => rootRoute,
-} as any);
+} as any).lazy(() => import('./routes/curriculum/copy.$id.route.lazy').then((d) => d.Route));
 
 // Populate the FileRoutesByPath interface
 
@@ -155,10 +155,6 @@ declare module '@tanstack/react-router' {
             preLoaderRoute: typeof CurriculumIdImport;
             parentRoute: typeof rootRoute;
         };
-        '/curriculum/new': {
-            preLoaderRoute: typeof CurriculumNewImport;
-            parentRoute: typeof rootRoute;
-        };
         '/module/$id': {
             preLoaderRoute: typeof ModuleIdImport;
             parentRoute: typeof rootRoute;
@@ -171,8 +167,16 @@ declare module '@tanstack/react-router' {
             preLoaderRoute: typeof CourseNewLazyImport;
             parentRoute: typeof rootRoute;
         };
+        '/curriculum/new': {
+            preLoaderRoute: typeof CurriculumNewLazyImport;
+            parentRoute: typeof rootRoute;
+        };
         '/module/new': {
             preLoaderRoute: typeof ModuleNewLazyImport;
+            parentRoute: typeof rootRoute;
+        };
+        '/curriculum/': {
+            preLoaderRoute: typeof CurriculumIndexRouteImport;
             parentRoute: typeof rootRoute;
         };
         '/module/': {
@@ -181,10 +185,6 @@ declare module '@tanstack/react-router' {
         };
         '/course/': {
             preLoaderRoute: typeof CourseIndexImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/curriculum/': {
-            preLoaderRoute: typeof CurriculumIndexImport;
             parentRoute: typeof rootRoute;
         };
         '/student/': {
@@ -215,14 +215,14 @@ export const routeTree = rootRoute.addChildren([
     SettingsRoute,
     CourseIdRoute,
     CurriculumIdRoute,
-    CurriculumNewRoute,
     ModuleIdRoute,
     StudentModulesRoute,
     CourseNewLazyRoute,
+    CurriculumNewLazyRoute,
     ModuleNewLazyRoute,
+    CurriculumIndexRouteRoute,
     ModuleIndexRouteRoute,
     CourseIndexRoute,
-    CurriculumIndexRoute,
     StudentIndexRoute,
     CurriculumCopyIdRoute,
     ModuleCopyIdRoute,

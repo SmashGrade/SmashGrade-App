@@ -1,0 +1,22 @@
+.curriculumFormContainer {
+    margin-top: 8px;
+    display: flex;
+    gap: 16px;
+
+    .form {
+        width: 40%;
+        .buttonContainer {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+        }
+    }
+
+    .course {
+        width: 60%;
+    }
+    .maxWidth {
+        width: 100%;
+    }
+}

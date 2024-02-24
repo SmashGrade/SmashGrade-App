@@ -4,7 +4,6 @@ import { UserProfile } from '@features/profile/UserProfile.tsx';
 import useUserRoles, { UserRoles } from '@hooks/useUserRoles.ts';
 import { Route as CourseIndexRoute } from '@routes/course/index.tsx';
 
-import { Route as CurriculumRoute } from '@routes/curriculum/index.tsx';
 import { Route as IndexRoute } from '@routes/index.tsx';
 import { Route as MyCourseRoute } from '@routes/my-course.tsx';
 import { Route as OnboardingRoute } from '@routes/onboarding.tsx';
@@ -56,7 +55,7 @@ const studentNavItems: MenuProps['items'] = [
 
 const courseAdminNavItems: ItemType[] = [
     {
-        label: <IconLink linkProps={{ to: CurriculumRoute.to }} icon={'play_lesson'} messageProps={curriculumMenu} />,
+        label: <IconLink linkProps={{ to: '/curriculum' }} icon={'play_lesson'} messageProps={curriculumMenu} />,
         key: 'curriculum',
     },
     {
