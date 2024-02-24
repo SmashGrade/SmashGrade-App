@@ -2,8 +2,8 @@ import { Spinner } from '@components/ui-elements/Spinner.tsx';
 import Onboarding from '@features/overview/Onboarding.tsx';
 import { useLocale } from '@hooks/useLocale.ts';
 import { useUserProfile } from '@hooks/useUserProfile.ts';
-import useUserRoles from '@hooks/useUserRoles.ts';
-import { Card, List, Select, Space } from 'antd';
+import useUserRoles, { UserRoles } from '@hooks/useUserRoles.ts';
+import { Card, List, Space } from 'antd';
 import Title from 'antd/lib/typography/Title';
 import { FormattedMessage } from 'react-intl';
 import LocaleSwitcher from '../../i18n/LocaleSwitcher.tsx';
@@ -18,6 +18,8 @@ export default function Settings() {
     if (isLoading) return <Spinner />;
     // Todo Settings: implement error handling
     if (error) return <p>Fehler beim Laden des Benutzerprofils</p>;
+
+    const isStudent = userRoles?.includes(UserRoles.Student);
 
     return (
         <div className={styles.settingsContainer}>
@@ -47,14 +49,17 @@ export default function Settings() {
 
                     <LocaleSwitcher setLocale={setLocale} locale={locale} />
                 </div>
-                <Onboarding isReadonly={true} />
-                <FormattedMessage
-                    id={'settings.myModules'}
-                    defaultMessage={'Meine Module'}
-                    description={'Meine Module'}
-                />
-                <Select />
-                <List />
+                {isStudent && (
+                    <>
+                        <Onboarding isReadonly={true} />
+                        <FormattedMessage
+                            id={'settings.myModules'}
+                            defaultMessage={'Meine Module'}
+                            description={'Meine Module'}
+                        />
+                        <List />
+                    </>
+                )}
             </Space>
         </div>
     );
