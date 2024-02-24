@@ -3,7 +3,7 @@ import Onboarding from '@features/overview/Onboarding.tsx';
 import { useLocale } from '@hooks/useLocale.ts';
 import { useUserProfile } from '@hooks/useUserProfile.ts';
 import useUserRoles, { UserRoles } from '@hooks/useUserRoles.ts';
-import { Card, List, Select, Space } from 'antd';
+import { Card, List, Space } from 'antd';
 import Title from 'antd/lib/typography/Title';
 import { FormattedMessage } from 'react-intl';
 import LocaleSwitcher from '../../i18n/LocaleSwitcher.tsx';
