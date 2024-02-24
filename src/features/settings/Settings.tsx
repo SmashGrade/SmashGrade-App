@@ -1,9 +1,9 @@
+import { Spinner } from '@components/ui-elements/Spinner.tsx';
 import Onboarding from '@features/overview/Onboarding.tsx';
 import { useLocale } from '@hooks/useLocale.ts';
-
 import { useUserProfile } from '@hooks/useUserProfile.ts';
 import useUserRoles from '@hooks/useUserRoles.ts';
-import { Card, List, Select, Space, Spin } from 'antd';
+import { Card, List, Select, Space } from 'antd';
 import Title from 'antd/lib/typography/Title';
 import { FormattedMessage } from 'react-intl';
 import LocaleSwitcher from '../../i18n/LocaleSwitcher.tsx';
@@ -15,7 +15,7 @@ export default function Settings() {
     const userRoles = useUserRoles();
     const { userProfile, isLoading, error } = useUserProfile();
 
-    if (isLoading) return <Spin />;
+    if (isLoading) return <Spinner />;
     // Todo Settings: implement error handling
     if (error) return <p>Fehler beim Laden des Benutzerprofils</p>;
 

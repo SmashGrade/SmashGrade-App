@@ -1,8 +1,10 @@
 import NewCurriculum from '@features/course-admin/curriculum/NewCurriculum.tsx';
-import { FileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 import { z } from 'zod';
 
-export const Route = new FileRoute('/curriculum/copy/$id').createRoute({
+export const Route = createFileRoute('/curriculum/copy/$id')({
     component: NewCurriculum,
-    parseParams: (params) => ({ id: z.number().int().parse(parseInt(params.id)) }),
+    parseParams: (params) => ({
+        id: z.number().int().parse(parseInt(params.id)),
+    }),
 });

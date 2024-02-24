@@ -3,8 +3,11 @@ import DropdownCellRenderer from '@components/grid/DropdownCellRenderer.tsx';
 import Grid from '@components/grid/Grid.tsx';
 import DeleteModal from '@components/grid/ModalDeletePrompt.tsx';
 import StatusCellRenderer from '@components/grid/StatusCellRenderer.tsx';
-import { ModuleObject } from '@features/course-admin/interfaces/ModuleData.ts';
+import { Spinner } from '@components/ui-elements/Spinner.tsx';
+import { ModuleObject, ModuleResponseNew } from '@features/course-admin/interfaces/ModuleData.ts';
 import { deleteModuleById, getModules } from '@features/course-admin/module/moduleApi.ts';
+import { LinkButtonCellRenderer } from '@features/course/LinkButtonCellRenderer.tsx';
+import { Route as ModuleIndexRoute } from '@routes/module/index.route.tsx';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { ColDef } from 'ag-grid-community';
@@ -12,7 +15,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { AgGridReact } from 'ag-grid-react';
 import type { MenuProps } from 'antd';
-import { Button, Input, message, Modal, Spin } from 'antd';
+import { Button, Input, message, Modal } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Route as ModuleDetailRoute } from '../../../routes/module/$id.tsx';
@@ -21,7 +24,10 @@ import styles from './ModuleList.module.scss';
 
 const { Search } = Input;
 
-const defaultModuleColDef: ColDef<ModuleObject> = { sortable: true, filter: 'agTextColumnFilter' };
+const defaultModuleColDef: ColDef<ModuleResponseNew> = {
+    sortable: true,
+    filter: 'agTextColumnFilter',
+};
 
 export default function ModuleList() {
     const gridRef = useRef<AgGridReact>(null);
@@ -31,7 +37,10 @@ export default function ModuleList() {
 
     // States for the Modal Delete Popup
     const [moduleIdToDelete, setModuleIdToDelete] = useState<number | null>(null);
-    const [modalState, setModalState] = useState({ open: false, confirmLoading: false });
+    const [modalState, setModalState] = useState({
+        open: false,
+        confirmLoading: false,
+    });
     const [modalText, setModalText] = useState<React.ReactNode | undefined>();
 
     const renderDeleteModal = (id: number, moduleDescription: string) => (
@@ -109,14 +118,27 @@ export default function ModuleList() {
     }, []);
 
     if (isGetModuleError) return <div>Error when loading courses</div>;
-    if (isGetModulePending) return <Spin />;
+    if (isGetModulePending) return <Spinner />;
 
-    const moduleColumnDefs: ColDef<ModuleObject>[] = [
-        { field: 'description', headerName: 'Module', flex: 1 },
-        { field: 'curriculumDescription', headerName: 'Studiengang', flex: 1 },
-        { field: 'studyStage', headerName: 'Lehrgang' },
+    const moduleColumnDefs: ColDef<ModuleResponseNew>[] = [
         {
-            field: 'moduleIsActive',
+            field: 'id',
+            headerName: '',
+            cellRenderer: LinkButtonCellRenderer,
+            cellRendererParams: {
+                from: ModuleIndexRoute.to,
+                to: ModuleDetailRoute.to,
+            },
+        },
+        { field: 'number', headerName: 'Nummer', flex: 1 },
+        { field: 'description', headerName: 'Module', flex: 1 },
+        { field: 'studyStage.description', headerName: 'Studiumsphase', flex: 1 },
+        {
+            field: 'valuationCategory.description',
+            headerName: 'Bewertungskategorie',
+        },
+        {
+            field: 'isActive',
             headerName: 'Status',
             cellStyle: { textAlign: 'center' },
             cellRenderer: StatusCellRenderer,
@@ -189,7 +211,7 @@ export default function ModuleList() {
                     className={styles.searchbar}
                 />
             </div>
-            <Grid<ModuleObject>
+            <Grid<ModuleResponseNew>
                 gridRef={gridRef}
                 rowData={moduleData}
                 columnDefs={moduleColumnDefs}

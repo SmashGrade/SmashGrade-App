@@ -1,5 +1,6 @@
 import { SaveOutlined } from '@ant-design/icons';
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
+import { Spinner } from '@components/ui-elements/Spinner.tsx';
 import { getCourseFilter } from '@features/course-admin/course/courseApi.ts';
 import { CourseDetailForm, CourseFormData } from '@features/course-admin/course/CourseDetailForm.tsx';
 import { ExamForm } from '@features/course-admin/course/ExamForm.tsx';
@@ -10,7 +11,7 @@ import {
 } from '@features/course-admin/interfaces/CourseData.ts';
 
 import { UseMutationResult, useQuery } from '@tanstack/react-query';
-import { Button, Form, Select, Space, Spin } from 'antd';
+import { Button, Form, Select, Space } from 'antd';
 import { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import styles from './CourseCreation.module.scss';
@@ -104,7 +105,7 @@ export default function CourseForm(props: Readonly<CourseFormProps>) {
     }, [courseForm]);
 
     if (courseFormFilterError) return <div>Error when loading filters</div>;
-    if (isCourseFormFilterLoading) return <Spin />;
+    if (isCourseFormFilterLoading) return <Spinner />;
 
     const initialData: Partial<CourseFormData> = {
         description: props.courseData.description,
@@ -161,7 +162,7 @@ export default function CourseForm(props: Readonly<CourseFormProps>) {
                                 />
                             </div>
                         ) : (
-                            <Spin />
+                            <Spinner />
                         )}
                         <div className={styles.flexTwoThirds}>
                             <ExamForm

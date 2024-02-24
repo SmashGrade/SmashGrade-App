@@ -4,6 +4,7 @@ import Grid from '@components/grid/Grid.tsx';
 import DeleteModal from '@components/grid/ModalDeletePrompt.tsx';
 import StatusCellRenderer from '@components/grid/StatusCellRenderer.tsx';
 import { formatDate } from '@components/ui-elements/FormatDate.ts';
+import { Spinner } from '@components/ui-elements/Spinner.tsx';
 import { deleteCurriculumById, getCurriculums } from '@features/course-admin/curriculum/curriculumApi.ts';
 import { CurriculumObject } from '@features/course-admin/interfaces/CurriculumData.ts';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -13,7 +14,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { AgGridReact } from 'ag-grid-react';
 import type { MenuProps } from 'antd';
-import { Button, Input, message, Modal, Spin } from 'antd';
+import { Button, Input, message, Modal } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 import { Route as CurriculumDetailRoute } from '../../../routes/curriculum/$id.tsx';
@@ -22,7 +23,10 @@ import styles from './CurriculumList.module.scss';
 
 const { Search } = Input;
 
-const defaultCurriculumColDef: ColDef<CurriculumObject> = { sortable: true, filter: 'agTextColumnFilter' };
+const defaultCurriculumColDef: ColDef<CurriculumObject> = {
+    sortable: true,
+    filter: 'agTextColumnFilter',
+};
 
 class ModalDeletePrompt extends React.Component<{
     intl: IntlShape;
@@ -63,7 +67,10 @@ export default function CurriculumList() {
 
     // States for the Modal Delete Popup
     const [curriculumIdToDelete, setCurriculumIdToDelete] = useState<number | null>(null);
-    const [modalState, setModalState] = useState({ open: false, confirmLoading: false });
+    const [modalState, setModalState] = useState({
+        open: false,
+        confirmLoading: false,
+    });
     const [modalText, setModalText] = useState<React.ReactNode | undefined>();
 
     const renderDeleteModal = (id: number, curriculumDescription: string) => (
@@ -145,7 +152,7 @@ export default function CurriculumList() {
     }, []);
 
     if (isGetCurriculumError) return <div>Error when loading curriculums</div>;
-    if (isGetCurriculumPending) return <Spin />;
+    if (isGetCurriculumPending) return <Spinner />;
 
     const curriculumColumnDefs: ColDef<CurriculumObject>[] = [
         { field: 'focus', headerName: 'Studiengang', flex: 1 },

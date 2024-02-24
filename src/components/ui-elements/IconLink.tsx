@@ -26,6 +26,7 @@ export function IconLink<
     TMaskTo extends string = '',
 >({ linkProps, icon, messageProps }: Readonly<IconLinkProps<TRouteTree, TFrom, TTo, TMaskFrom, TMaskTo>>) {
     return (
+        // @ts-expect-error Not sure how to correctly type custom links
         <Link {...linkProps}>
             <div className={styles.menuItemIconAbove}>
                 {icon ? <MaterialIcon icon={icon} size={'large'} /> : null}

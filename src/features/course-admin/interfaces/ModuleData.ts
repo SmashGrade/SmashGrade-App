@@ -15,6 +15,29 @@ export interface ModuleResponse {
     courses: Course[];
 }
 
+export interface ModuleResponseNew {
+    id: number;
+    version: number;
+    description: string;
+    number: string;
+    isActive: boolean;
+    studyStage: {
+        id: number;
+        description: string;
+    };
+    valuationCategory: {
+        description: string;
+        code: string;
+    };
+    courses: {
+        id: number;
+        version: number;
+        description: string;
+        number: string;
+        versions: number[];
+    }[];
+}
+
 export interface Curriculum {
     id: number;
     focus: string;
@@ -60,3 +83,5 @@ export interface ModuleObject {
     moduleIsActive: boolean;
     studyStage: string;
 }
+
+export type ModuleCreateRequest = Omit<ModuleResponseNew, 'id'>;

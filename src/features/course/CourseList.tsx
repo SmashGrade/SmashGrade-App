@@ -1,16 +1,16 @@
 import { getValueGetter } from '@components/grid/columnFormatter.ts';
 import Grid from '@components/grid/Grid.tsx';
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
+import { Spinner } from '@components/ui-elements/Spinner.tsx';
+import { getCourses } from '@features/course-admin/course/courseApi.ts';
 import { LinkButtonCellRenderer } from '@features/course/LinkButtonCellRenderer.tsx';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { ColDef } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
-import { Button, Spin } from 'antd';
-import axios from 'axios';
+import { Button } from 'antd';
 import { Route as CourseIndexRoute } from '../../routes/course/index.tsx';
-import { Route as NewCourseRoute } from '../../routes/course/new.tsx';
 import styles from './Course.module.scss';
 
 interface Module {
@@ -44,11 +44,28 @@ export interface CourseResponse {
     teachers: Teacher[];
 }
 
-const defaultCourseColDef: ColDef<CourseResponse> = { sortable: true, filter: 'agTextColumnFilter' };
+const defaultCourseColDef: ColDef<CourseResponse> = {
+    sortable: true,
+    filter: 'agTextColumnFilter',
+};
 
 const courseColumnDefs: ColDef<CourseResponse>[] = [
-    { field: 'id', headerName: '', filter: null, cellRenderer: LinkButtonCellRenderer },
-    { field: 'id', headerName: 'ID', filter: 'agNumberColumnFilter', sort: 'asc' },
+    {
+        field: 'id',
+        headerName: '',
+        filter: null,
+        cellRenderer: LinkButtonCellRenderer,
+        cellRendererParams: {
+            from: CourseIndexRoute.to,
+            to: '/course/$id',
+        },
+    },
+    {
+        field: 'id',
+        headerName: 'ID',
+        filter: 'agNumberColumnFilter',
+        sort: 'asc',
+    },
     { field: 'number', headerName: 'Course Number' },
     { field: 'description', headerName: 'Course Name', flex: 1 },
     {
@@ -74,19 +91,16 @@ const courseColumnDefs: ColDef<CourseResponse>[] = [
 export default function CourseList() {
     const { isPending, isError, data } = useQuery({
         queryKey: ['courses'],
-        queryFn: async () => {
-            const { data } = await axios.get<CourseResponse[]>('/course');
-            return data;
-        },
+        queryFn: getCourses,
     });
 
     if (isError) return <div>Error when loading courses</div>;
-    if (isPending) return <Spin />;
+    if (isPending) return <Spinner />;
 
     return (
         <div className={styles.courseContainer}>
             <Button type={'primary'} className={styles.addButton}>
-                <Link from={CourseIndexRoute.to} to={NewCourseRoute.to} className={styles.addLink}>
+                <Link from={CourseIndexRoute.to} to={'/course/new'} className={styles.addLink}>
                     <MaterialIcon icon={'add'} size={'small'} />
                     New Course
                 </Link>

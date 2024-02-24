@@ -1,0 +1,19 @@
+.moduleFormContainer {
+    margin-top: 8px;
+    display: flex;
+    gap: 16px;
+
+    .form {
+        width: 60%;
+        .buttonContainer {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+        }
+    }
+
+    .course {
+        width: 40%;
+    }
+}

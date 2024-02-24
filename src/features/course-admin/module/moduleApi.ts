@@ -1,30 +1,26 @@
-import { Curriculum, ModuleObject } from '@features/course-admin/interfaces/ModuleData.ts';
+import { ModuleCreateRequest, ModuleResponseNew } from '@features/course-admin/interfaces/ModuleData.ts';
 import axios from 'axios';
 
-export async function getModules(): Promise<ModuleObject[]> {
-    const { data: curriculumData } = await axios.get<Curriculum[]>('/curriculum');
-
-    // Flatten the array of curriculum with modules and create an array of module objects
-    const moduleObjects: ModuleObject[] = curriculumData.flatMap((curriculum) =>
-        curriculum.modules.flatMap((module) =>
-            module.courses.flatMap((course) =>
-                course.modules.map((courseModule) => ({
-                    routingId: courseModule.id,
-                    curriculumId: curriculum.id,
-                    curriculumDescription: curriculum.description,
-                    moduleId: courseModule.id,
-                    description: courseModule.description,
-                    moduleIsActive: courseModule.isActive,
-                    studyStage: module.studyStage.description,
-                }))
-            )
-        )
-    );
-    console.debug(moduleObjects);
-    return moduleObjects;
+export async function getModules(): Promise<ModuleResponseNew[]> {
+    const { data: modules } = await axios.get<ModuleResponseNew[]>('/modules');
+    return modules;
 }
 
 export async function deleteModuleById(id: number): Promise<void> {
     console.debug('Module to delete: ' + id);
     await axios.delete('/modules/${id}');
+}
+
+export async function createModule(module: ModuleCreateRequest): Promise<void> {
+    console.debug('Module to create:', module);
+    await axios.post('/modules', module);
+}
+
+export async function getModule(id: number): Promise<ModuleResponseNew> {
+    const { data: module } = await axios.get<ModuleResponseNew>(`/modules/${id}`);
+    return module;
+}
+
+export async function updateModule(module: ModuleResponseNew): Promise<void> {
+    await axios.put(`/modules/${module.id}`, module);
 }

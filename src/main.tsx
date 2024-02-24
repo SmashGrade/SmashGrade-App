@@ -1,9 +1,11 @@
 import { EventType, PublicClientApplication } from '@azure/msal-browser';
 import { MsalProvider } from '@azure/msal-react';
+import { onApiError } from '@components/error/apiError.ts';
 import { DefaultErrorComponent } from '@components/error/DefaultErrorComponent.tsx';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Spinner } from '@components/ui-elements/Spinner.tsx';
+import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Router, RouterProvider } from '@tanstack/react-router';
+import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { ConfigProvider } from 'antd';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -16,7 +18,11 @@ import { LocaleProvider } from './i18n/ReactIntlProvider.tsx';
 // Import the generated route tree
 import { routeTree } from './routeTree.gen';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+    queryCache: new QueryCache({
+        onError: onApiError,
+    }),
+});
 export const msalInstance = new PublicClientApplication(msalConfig);
 
 msalInstance.addEventCallback((event) => {
@@ -26,13 +32,17 @@ msalInstance.addEventCallback((event) => {
 });
 
 // Create a new router instance
-const router = new Router({
+const router = createRouter({
     routeTree,
     context: {
         auth: msalInstance,
         authInProgress: true,
+        queryClient,
     },
+    defaultPreload: 'intent',
+    defaultPreloadStaleTime: 5,
     defaultErrorComponent: DefaultErrorComponent,
+    defaultPendingComponent: Spinner,
 });
 
 // Register the router instance for type safety

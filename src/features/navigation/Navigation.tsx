@@ -6,7 +6,6 @@ import { Route as CourseIndexRoute } from '@routes/course/index.tsx';
 
 import { Route as CurriculumRoute } from '@routes/curriculum/index.tsx';
 import { Route as IndexRoute } from '@routes/index.tsx';
-import { Route as ModuleIndexRoute } from '@routes/module/index.tsx';
 import { Route as MyCourseRoute } from '@routes/my-course.tsx';
 import { Route as OnboardingRoute } from '@routes/onboarding.tsx';
 import { Route as SettingsRoute } from '@routes/settings.tsx';
@@ -61,9 +60,7 @@ const courseAdminNavItems: ItemType[] = [
         key: 'curriculum',
     },
     {
-        label: (
-            <IconLink linkProps={{ to: ModuleIndexRoute.to }} icon={'collections_bookmark'} messageProps={moduleMenu} />
-        ),
+        label: <IconLink linkProps={{ to: '/module' }} icon={'collections_bookmark'} messageProps={moduleMenu} />,
         key: 'modules',
     },
     {

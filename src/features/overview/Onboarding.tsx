@@ -1,7 +1,8 @@
 import { RocketOutlined } from '@ant-design/icons';
 import SelectWithTitle from '@components/ui-elements/SelectWithTitle.tsx';
+import { Spinner } from '@components/ui-elements/Spinner';
 import { useQuery } from '@tanstack/react-query';
-import { Button, Spin } from 'antd';
+import { Button } from 'antd';
 import axios from 'axios';
 import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -88,7 +89,7 @@ export default function Onboarding({ isReadonly }: Readonly<OnboardingProps>) {
     const intl = useIntl();
 
     if (onboardingLoading) {
-        return <Spin />;
+        return <Spinner />;
     }
 
     if (onboardingError) {
@@ -113,7 +114,10 @@ export default function Onboarding({ isReadonly }: Readonly<OnboardingProps>) {
                   return false;
               })
               .filter((curriculum) => curriculum.curriculumType === selectedCurriculumType)
-              .map((curriculum) => ({ value: curriculum.id, label: curriculum.focus }))
+              .map((curriculum) => ({
+                  value: curriculum.id,
+                  label: curriculum.focus,
+              }))
         : [];
 
     return (
@@ -129,7 +133,11 @@ export default function Onboarding({ isReadonly }: Readonly<OnboardingProps>) {
             )}
             <SelectWithTitle
                 key={'startYear'}
-                selectProps={{ options: getYears(), onChange: setCurrentYear, disabled: isReadonly }}
+                selectProps={{
+                    options: getYears(),
+                    onChange: setCurrentYear,
+                    disabled: isReadonly,
+                }}
                 title={intl.formatMessage({
                     id: 'startYear',
                     defaultMessage: 'Startjahr',
@@ -139,7 +147,11 @@ export default function Onboarding({ isReadonly }: Readonly<OnboardingProps>) {
 
             <SelectWithTitle
                 key={'studyType'}
-                selectProps={{ options: curriculumTypes, onChange: setSelectedCurriculumType, disabled: isReadonly }}
+                selectProps={{
+                    options: curriculumTypes,
+                    onChange: setSelectedCurriculumType,
+                    disabled: isReadonly,
+                }}
                 title={intl.formatMessage({
                     id: 'studyType',
                     defaultMessage: 'Studiengang',

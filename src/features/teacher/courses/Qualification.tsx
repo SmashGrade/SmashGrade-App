@@ -1,7 +1,7 @@
+import { Spinner } from '@components/ui-elements/Spinner';
 import QualificationCard from '@features/teacher/courses/QualificationCard.tsx';
 import styles from '@pages/MyCoursePage.module.scss';
 import { useQuery } from '@tanstack/react-query';
-import { Spin } from 'antd';
 import axios from 'axios';
 
 interface Qualification {
@@ -59,7 +59,7 @@ export default function Qualification(props: QualificationProps) {
     });
 
     if (loading) {
-        return <Spin />;
+        return <Spinner />;
     }
 
     if (error) {

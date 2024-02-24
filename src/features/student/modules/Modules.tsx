@@ -1,7 +1,8 @@
+import { Spinner } from '@components/ui-elements/Spinner';
 import { Course, CourseObj } from '@features/student/modules/Course.tsx';
 import Rating from '@features/student/modules/Rating.tsx';
 import { useQuery } from '@tanstack/react-query';
-import { Collapse, Spin } from 'antd';
+import { Collapse } from 'antd';
 import axios from 'axios';
 import { ItemType } from 'rc-collapse/es/interface';
 import { CSSProperties } from 'react';
@@ -58,7 +59,7 @@ export default function Modules({ activeFilter }: Readonly<ModulesProps>) {
     });
 
     if (modulesLoading) {
-        return <Spin />;
+        return <Spinner />;
     }
 
     if (modulesError) {

@@ -1,9 +1,10 @@
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
+import { Spinner } from '@components/ui-elements/Spinner';
 import { Exam } from '@features/student/course/Exam.tsx';
 import Rating from '@features/student/modules/Rating.tsx';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
-import { Divider, Spin } from 'antd';
+import { Divider } from 'antd';
 import axios from 'axios';
 import styles from './StudentCourseDetail.module.scss';
 
@@ -36,7 +37,7 @@ export default function StudentCourseDetail({ id }: Readonly<StudentCourseDetail
     });
 
     if (examsLoading) {
-        return <Spin />;
+        return <Spinner />;
     }
 
     if (examsError ?? !course) {

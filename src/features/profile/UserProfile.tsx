@@ -1,9 +1,10 @@
 import { InteractionRequiredAuthError, IPublicClientApplication } from '@azure/msal-browser';
 import { useMsal } from '@azure/msal-react';
 import styles from '@components/ui-elements/IconLink.module.scss';
+import { Spinner } from '@components/ui-elements/Spinner.tsx';
 import { useUserProfile } from '@hooks/useUserProfile.ts';
 import { useQuery } from '@tanstack/react-query';
-import { Avatar, Spin } from 'antd';
+import { Avatar } from 'antd';
 import axios, { AxiosError } from 'axios';
 import { loginRequest, msGraphEndpoints } from '../../config/authConfig.ts';
 
@@ -57,7 +58,7 @@ export function UserProfile() {
         queryFn: () => getUserPicture(instance),
     });
 
-    if (isLoading) return <Spin />;
+    if (isLoading) return <Spinner />;
     if (error) return <div>Fehler beim Laden des Benutzerprofils: {error.message}</div>;
     if (pictureError) return <div>Fehler beim Laden des Profilbildes: {pictureError.message}</div>;
 
