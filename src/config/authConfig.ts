@@ -60,7 +60,7 @@ export const loginRequest: RedirectRequest = {
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
  */
 
-const msGraphBaseUrl = 'https://graph.microsoft.com/v1.0';
+export const msGraphBaseUrl = 'https://graph.microsoft.com/v1.0';
 export const msGraphEndpoints = {
     userProfile: `${msGraphBaseUrl}/me`,
     userProfilePicture: `${msGraphBaseUrl}/me/photo/$value`,
