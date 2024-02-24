@@ -11,23 +11,24 @@
 import { createFileRoute } from '@tanstack/react-router';
 
 // Import Routes
+
 import { Route as rootRoute } from './routes/__root';
-import { Route as CourseIdImport } from './routes/course/$id';
-import { Route as CourseIndexImport } from './routes/course/index';
-import { Route as CurriculumIdImport } from './routes/curriculum/$id';
-import { Route as CurriculumCopyIdImport } from './routes/curriculum/copy.$id';
-import { Route as CurriculumIndexImport } from './routes/curriculum/index';
-import { Route as CurriculumNewImport } from './routes/curriculum/new';
-import { Route as IndexImport } from './routes/index';
-import { Route as ModuleIdImport } from './routes/module/$id';
-import { Route as ModuleCopyIdImport } from './routes/module/copy.$id';
-import { Route as ModuleIndexRouteImport } from './routes/module/index.route';
-import { Route as MyCourseImport } from './routes/my-course';
-import { Route as OnboardingImport } from './routes/onboarding';
 import { Route as SettingsImport } from './routes/settings';
-import { Route as StudentCourseIdImport } from './routes/student/course.$id';
+import { Route as OnboardingImport } from './routes/onboarding';
+import { Route as MyCourseImport } from './routes/my-course';
+import { Route as IndexImport } from './routes/index';
 import { Route as StudentIndexImport } from './routes/student/index';
+import { Route as CurriculumIndexImport } from './routes/curriculum/index';
+import { Route as CourseIndexImport } from './routes/course/index';
+import { Route as ModuleIndexRouteImport } from './routes/module/index.route';
 import { Route as StudentModulesImport } from './routes/student/modules';
+import { Route as ModuleIdImport } from './routes/module/$id';
+import { Route as CurriculumNewImport } from './routes/curriculum/new';
+import { Route as CurriculumIdImport } from './routes/curriculum/$id';
+import { Route as CourseIdImport } from './routes/course/$id';
+import { Route as StudentCourseIdImport } from './routes/student/course.$id';
+import { Route as ModuleCopyIdImport } from './routes/module/copy.$id';
+import { Route as CurriculumCopyIdImport } from './routes/curriculum/copy.$id';
 
 // Create Virtual Routes
 
