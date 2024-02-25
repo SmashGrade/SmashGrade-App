@@ -3,6 +3,7 @@ import DropdownCellRenderer from '@components/grid/DropdownCellRenderer.tsx';
 import Grid from '@components/grid/Grid.tsx';
 import DeleteModal from '@components/grid/ModalDeletePrompt.tsx';
 import StatusCellRenderer from '@components/grid/StatusCellRenderer.tsx';
+import { Route as CurriculumIndexRoute } from '@routes/curriculum/index.route.tsx';
 import { formatDate } from '@components/ui-elements/FormatDate.ts';
 import { Spinner } from '@components/ui-elements/Spinner.tsx';
 import { deleteCurriculumById, getCurriculums } from '@features/course-admin/curriculum/curriculumApi.ts';
@@ -20,6 +21,7 @@ import { IntlShape, useIntl } from 'react-intl';
 import { Route as CurriculumDetailRoute } from '../../../routes/curriculum/$id.tsx';
 import { Route as CopyCurriculumRoute } from '../../../routes/curriculum/copy.$id.tsx';
 import styles from './CurriculumList.module.scss';
+import { LinkButtonCellRenderer } from '@features/course/LinkButtonCellRenderer.tsx';
 
 const { Search } = Input;
 
@@ -155,6 +157,16 @@ export default function CurriculumList() {
     if (isGetCurriculumPending) return <Spinner />;
 
     const curriculumColumnDefs: ColDef<CurriculumObject>[] = [
+        {
+            field: 'id',
+            headerName: '',
+            flex: 1,
+            cellRenderer: LinkButtonCellRenderer,
+            cellRendererParams: {
+                from: CurriculumIndexRoute.to,
+                to: CurriculumDetailRoute.to,
+            },
+        },
         { field: 'focus', headerName: 'Studiengang', flex: 1 },
         {
             field: 'fieldmanagers',
@@ -168,18 +180,21 @@ export default function CurriculumList() {
         {
             field: 'startDate',
             headerName: 'Von',
+            flex: 1,
             valueFormatter: (params) => (typeof params.value === 'string' ? formatDate(params.value) : ''),
         },
         {
             field: 'endDate',
             headerName: 'Bis',
+            flex: 1,
             valueFormatter: (params) => (typeof params.value === 'string' ? formatDate(params.value) : ''),
         },
         { field: 'curriculumType', headerName: 'Typ', flex: 1 },
         {
             field: 'isActive',
             headerName: 'Status',
-            cellStyle: { textAlign: 'center' },
+            flex: 1,
+            cellStyle: { textAlign: 'left' },
             cellRenderer: StatusCellRenderer,
         },
         {
