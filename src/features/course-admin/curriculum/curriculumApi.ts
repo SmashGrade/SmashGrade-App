@@ -36,3 +36,7 @@ export async function getCurriculum(id: number): Promise<CurriculumResponseNew> 
     const { data: curriculum } = await axios.get<CurriculumResponseNew>(`/curriculum/${id}`);
     return curriculum;
 }
+
+export async function updateCurriculum(curriculum: CurriculumResponseNew): Promise<void> {
+    await axios.put(`/curriculum/${curriculum.id}`, curriculum);
+}

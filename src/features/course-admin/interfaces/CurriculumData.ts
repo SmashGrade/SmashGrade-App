@@ -16,23 +16,6 @@ export interface CurriculumObject extends Curriculum {
     routingId: number;
 }
 
-/*export interface CurriculumResponse {
-    id: number;
-    version: number;
-    description: string;
-    number: string;
-    isActive: boolean;
-    studyStage: {
-        id: number;
-        description: string;
-    };
-    valuationCategory: {
-        description: string;
-        code: string;
-    };
-    courses: Course[];
-}*/
-
 export interface CurriculumResponseNew {
     id: number;
     focusOption: {
