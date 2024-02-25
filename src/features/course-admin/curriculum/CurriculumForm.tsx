@@ -7,10 +7,12 @@ import styles from './CurriculumForm.module.scss';
 export const DATE_FORMAT = 'DD.MM.YYYY';
 
 export interface CurriculumForm {
-    number: string;
-    description: string;
-    focusOption: string;
-    module: string[];
+    focusOption: number;
+    fieldOption: number;
+    typeOption: number;
+    teacherOption: number;
+    startDate: string;
+    endDate: string;
     isActive: boolean;
 }
 
@@ -29,26 +31,26 @@ export interface CurriculumFormNewProps {
 type CurriculumFormProps = CurriculumFormEditProps | CurriculumFormNewProps;
 
 const focusOptions = [
-    { label: 'Focus 1', value: 'focus1' },
-    { label: 'Focus 2', value: 'focus2' },
+    { label: 'Focus 1', value: 1 },
+    { label: 'Focus 2', value: 2 },
     // add more options as needed
 ];
 
 const fieldOptions = [
-    { label: 'Field 1', value: 'field1' },
-    { label: 'Field 2', value: 'field2' },
+    { label: 'Field 1', value: 1 },
+    { label: 'Field 2', value: 2 },
     // add more options as needed
 ];
 
 const typeOptions = [
-    { label: 'Type 1', value: 'type1' },
-    { label: 'Type 2', value: 'type2' },
+    { label: 'Type 1', value: 1 },
+    { label: 'Type 2', value: 2 },
     // add more options as needed
 ];
 
 const teacherOptions = [
-    { label: 'Daniel Rutz', value: 'DanielRutz' },
-    { label: 'Kurt Munter', value: 'KurtMunter' },
+    { label: 'Daniel Rutz', value: 1 },
+    { label: 'Kurt Munter', value: 2 },
     // add more options as needed
 ];
 
@@ -57,9 +59,10 @@ export function CurriculumForm({ curriculumData, mutation, newCurriculum }: Read
 
     const initialFormValues: CurriculumForm = {
         ...curriculumData,
-        /*focusOptions: curriculumData.valuationCategory.code,*/
         focusOption: curriculumData.focusOption.id,
-        module: [],
+        fieldOption: curriculumData.fieldOption.id,
+        typeOption: curriculumData.typeOption.id,
+        teacherOption: curriculumData.teacherOption.id,
     };
 
     const onCurriculumFormFinish = useCallback(
@@ -74,20 +77,42 @@ export function CurriculumForm({ curriculumData, mutation, newCurriculum }: Read
 
                 const focusOption = focusOptions.find((focus) => focus.value === formValues.focusOption) ?? {
                     label: 'None',
-                    value: '',
+                    value: 0,
                 };
+
+                const fieldOption = fieldOptions.find((field) => field.value === formValues.fieldOption) ?? {
+                    label: 'None',
+                    value: 0,
+                };
+
+                const typeOption = typeOptions.find((type) => type.value === formValues.typeOption) ?? {
+                    label: 'None',
+                    value: 0,
+                };
+
+                const teacherOption = teacherOptions.find((teacher) => teacher.value === formValues.teacherOption) ?? {
+                    label: 'None',
+                    value: 0,
+                };
+
                 const payload: CurriculumCreateRequest = {
                     ...formValues,
-                    version: 1,
-                    /*valuationCategory: {
-                        code: evaluationCategory.value,
-                        description: evaluationCategory.label,
-                    },*/
                     focusOption: {
                         id: focusOption.value,
                         description: focusOption.label,
                     },
-                    modules: [],
+                    fieldOption: {
+                        id: fieldOption.value,
+                        description: fieldOption.label,
+                    },
+                    typeOption: {
+                        id: typeOption.value,
+                        description: typeOption.label,
+                    },
+                    teacherOption: {
+                        id: teacherOption.value,
+                        description: teacherOption.label,
+                    },
                 };
                 mutation.mutate(payload);
             }
@@ -130,7 +155,7 @@ export function CurriculumForm({ curriculumData, mutation, newCurriculum }: Read
                         </Col>
                     </Row>
                     <Form.Item label={'Status'} name={'status'}>
-                        <Switch checkedChildren={'Active'} unCheckedChildren={'Inactive'} />
+                        <Switch checkedChildren={'isActive'} unCheckedChildren={'InActive'} />
                     </Form.Item>
                     <div className={styles.buttonContainer}>
                         <Button htmlType={'reset'}>Cancel</Button>

@@ -4,7 +4,6 @@ import {
     CurriculumResponse,
     CurriculumResponseNew,
 } from '@features/course-admin/interfaces/CurriculumData.ts';
-import { ModuleCreateRequest, ModuleResponseNew } from '@features/course-admin/interfaces/ModuleData.ts';
 import axios from 'axios';
 
 export async function getCurriculums(): Promise<CurriculumObject[]> {
@@ -25,12 +24,12 @@ export async function getCurriculums(): Promise<CurriculumObject[]> {
 
 export async function deleteCurriculumById(id: number): Promise<void> {
     console.debug('Curriculum to delete: ' + id);
-    await axios.delete('/curriculums/${id}');
+    await axios.delete('/curriculum/${id}');
 }
 
 export async function createCurriculum(curriculum: CurriculumCreateRequest): Promise<void> {
     console.debug('Curriculum to create:', curriculum);
-    await axios.post('/curriculums', curriculum);
+    await axios.post('/curriculum', curriculum);
 }
 
 export async function getCurriculum(id: number): Promise<CurriculumResponseNew> {

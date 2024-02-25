@@ -35,25 +35,32 @@ export interface CurriculumObject extends Curriculum {
 
 export interface CurriculumResponseNew {
     id: number;
-    version: number;
-    description: string;
-    number: string;
-    isActive: boolean;
     focusOption: {
-        id: string;
+        id: number;
         description: string;
     };
-    /*valuationCategory: {
+    fieldOption: {
+        id: number;
         description: string;
-        code: string;
-    };*/
-    modules: {
+    };
+    typeOption: {
+        id: number;
+        description: string;
+    };
+    teacherOption: {
+        id: number;
+        description: string;
+    };
+    startDate: string;
+    endDate: string;
+    isActive: boolean;
+    /* modules: {
         id: number;
         version: number;
         description: string;
         number: string;
         versions: number[];
-    }[];
+    }[]; */
 }
 
 export type CurriculumCreateRequest = Omit<CurriculumResponseNew, 'id'>;
