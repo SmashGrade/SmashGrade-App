@@ -7,13 +7,25 @@ import styles from './CurriculumForm.module.scss';
 export const DATE_FORMAT = 'DD.MM.YYYY';
 
 export interface CurriculumForm {
-    focusOption: number;
-    fieldOption: number;
-    typeOption: number;
-    teacherOption: number;
+    focus: {
+        id: number;
+        description: string;
+    };
+    field: {
+        id: number;
+        description: string;
+    };
+    curriculumType: {
+        id: number;
+        description: string;
+    };
+    isActive: boolean;
     startDate: string;
     endDate: string;
-    isActive: boolean;
+    fieldmanagers: {
+        id: number;
+        name: string;
+    }[];
 }
 
 export interface CurriculumFormEditProps {
@@ -30,25 +42,25 @@ export interface CurriculumFormNewProps {
 
 type CurriculumFormProps = CurriculumFormEditProps | CurriculumFormNewProps;
 
-const focusOptions = [
+const focus = [
     { label: 'Focus 1', value: 1 },
     { label: 'Focus 2', value: 2 },
     // add more options as needed
 ];
 
-const fieldOptions = [
+const field = [
     { label: 'Field 1', value: 1 },
     { label: 'Field 2', value: 2 },
     // add more options as needed
 ];
 
-const typeOptions = [
+const curriculumType = [
     { label: 'Type 1', value: 1 },
     { label: 'Type 2', value: 2 },
     // add more options as needed
 ];
 
-const teacherOptions = [
+const fieldmanagers = [
     { label: 'Daniel Rutz', value: 1 },
     { label: 'Kurt Munter', value: 2 },
     // add more options as needed
@@ -59,60 +71,36 @@ export function CurriculumForm({ curriculumData, mutation, newCurriculum }: Read
 
     const initialFormValues: CurriculumForm = {
         ...curriculumData,
-        focusOption: curriculumData.focusOption.id,
-        fieldOption: curriculumData.fieldOption.id,
-        typeOption: curriculumData.typeOption.id,
-        teacherOption: curriculumData.teacherOption.id,
+        focus: curriculumData.focus,
+        field: curriculumData.field,
+        curriculumType: curriculumData.curriculumType,
+        fieldmanagers: curriculumData.fieldmanagers.map((t: { id: number; name: string }) => ({
+            id: t.id,
+            name: t.name,
+        })),
     };
 
     const onCurriculumFormFinish = useCallback(
         (formValues: CurriculumForm) => {
             if (newCurriculum) {
-                /*const evaluationCategory: = evaluationCategories.find(
-                    (category) => category.value === formValues.focusOptions
-                ) ?? {
-                    label: '',
-                    value: '',
-                };*/
-
-                const focusOption = focusOptions.find((focus) => focus.value === formValues.focusOption) ?? {
-                    label: 'None',
-                    value: 0,
-                };
-
-                const fieldOption = fieldOptions.find((field) => field.value === formValues.fieldOption) ?? {
-                    label: 'None',
-                    value: 0,
-                };
-
-                const typeOption = typeOptions.find((type) => type.value === formValues.typeOption) ?? {
-                    label: 'None',
-                    value: 0,
-                };
-
-                const teacherOption = teacherOptions.find((teacher) => teacher.value === formValues.teacherOption) ?? {
-                    label: 'None',
-                    value: 0,
-                };
-
                 const payload: CurriculumCreateRequest = {
                     ...formValues,
-                    focusOption: {
-                        id: focusOption.value,
-                        description: focusOption.label,
+                    focus: {
+                        id: focus[0].value,
+                        description: focus[0].label,
                     },
-                    fieldOption: {
-                        id: fieldOption.value,
-                        description: fieldOption.label,
+                    field: {
+                        id: field[0].value,
+                        description: field[0].label,
                     },
-                    typeOption: {
-                        id: typeOption.value,
-                        description: typeOption.label,
+                    curriculumType: {
+                        id: curriculumType[0].value,
+                        description: curriculumType[0].label,
                     },
-                    teacherOption: {
-                        id: teacherOption.value,
-                        description: teacherOption.label,
-                    },
+                    fieldmanagers: fieldmanagers.map((f) => ({
+                        id: f.value,
+                        name: f.label,
+                    })),
                 };
                 mutation.mutate(payload);
             }
@@ -131,16 +119,16 @@ export function CurriculumForm({ curriculumData, mutation, newCurriculum }: Read
                     onFinish={onCurriculumFormFinish}
                 >
                     <Form.Item label={'Focus'} name={'focus'}>
-                        <Select options={focusOptions} />
+                        <Select options={focus} />
                     </Form.Item>
                     <Form.Item label={'Field'} name={'field'}>
-                        <Select options={fieldOptions} />
+                        <Select options={field} />
                     </Form.Item>
                     <Form.Item label={'Type'} name={'type'}>
-                        <Select options={typeOptions} />
+                        <Select options={curriculumType} />
                     </Form.Item>
-                    <Form.Item label={'Teacher'} name={'teacher'}>
-                        <Select mode={'multiple'} options={teacherOptions} />
+                    <Form.Item label={'Teacher'} name={'fieldmanagers'}>
+                        <Select mode={'multiple'} options={fieldmanagers} />
                     </Form.Item>
                     <Row gutter={16}>
                         <Col span={12}>

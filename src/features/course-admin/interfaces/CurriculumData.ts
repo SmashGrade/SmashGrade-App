@@ -18,25 +18,25 @@ export interface CurriculumObject extends Curriculum {
 
 export interface CurriculumResponseNew {
     id: number;
-    focusOption: {
+    focus: {
         id: number;
         description: string;
     };
-    fieldOption: {
+    field: {
         id: number;
         description: string;
     };
-    typeOption: {
+    curriculumType: {
         id: number;
         description: string;
     };
-    teacherOption: {
-        id: number;
-        description: string;
-    };
+    isActive: boolean;
     startDate: string;
     endDate: string;
-    isActive: boolean;
+    fieldmanagers: {
+        id: number;
+        name: string;
+    }[];
     /* modules: {
         id: number;
         version: number;

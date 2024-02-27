@@ -9,22 +9,19 @@ import { Route as CurriculumIdRoute } from '@routes/curriculum/index.route.tsx';
 function NewCurriculum() {
     const newCurriculum: CurriculumResponseNew = {
         id: 55,
-        focusOption: {
+        focus: {
             id: 0,
             description: '',
         },
-        fieldOption: {
+        field: {
             id: 0,
             description: '',
         },
-        typeOption: {
+        curriculumType: {
             id: 0,
             description: '',
         },
-        teacherOption: {
-            id: 0,
-            description: '',
-        },
+        fieldmanagers: [],
         startDate: '',
         endDate: '',
         isActive: false,
