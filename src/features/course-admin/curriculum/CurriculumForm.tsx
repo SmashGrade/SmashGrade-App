@@ -142,7 +142,7 @@ export function CurriculumForm({ curriculumData, mutation, newCurriculum }: Read
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Form.Item label={'Status'} name={'status'}>
+                    <Form.Item label={'Status'} name={'isActive'}>
                         <Switch checkedChildren={'isActive'} unCheckedChildren={'InActive'} />
                     </Form.Item>
                     <div className={styles.buttonContainer}>
