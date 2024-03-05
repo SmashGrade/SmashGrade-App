@@ -12,7 +12,6 @@ export async function deleteModuleById(id: number): Promise<void> {
 }
 
 export async function createModule(module: ModuleCreateRequest): Promise<void> {
-    console.debug('Module to create:', module);
     await axios.post('/modules', module);
 }
 

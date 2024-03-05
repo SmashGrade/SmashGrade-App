@@ -1,12 +1,15 @@
-import { ModuleResponseNew } from '@features/course-admin/interfaces/ModuleData.ts';
-import { createModule } from '@features/course-admin/module/moduleApi.ts';
-import { ModuleForm } from '@features/course-admin/module/ModuleForm.tsx';
-import { Route as ModuleIndexRoute } from '@routes/module/index.route.tsx';
+import { ModuleResponseNew } from '@features/course-admin/interfaces/ModuleData';
+import { createModule } from '@features/course-admin/module/moduleApi';
+import { ModuleForm } from '@features/course-admin/module/ModuleForm';
+import { Route as ModuleIndexRoute } from '@routes/module/index.route';
+import { Route as ModuleNewRoute } from '@routes/module/new';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
 import { message } from 'antd';
 
 function NewModule() {
+    const courses = ModuleNewRoute.useLoaderData();
+
     const newModule: ModuleResponseNew = {
         id: 55,
         number: '',
@@ -36,7 +39,7 @@ function NewModule() {
         },
     });
 
-    return <ModuleForm newModule={true} mutation={createModuleMutation} moduleData={newModule} />;
+    return <ModuleForm newModule={true} mutation={createModuleMutation} moduleData={newModule} allCourses={courses} />;
 }
 
 export default NewModule;

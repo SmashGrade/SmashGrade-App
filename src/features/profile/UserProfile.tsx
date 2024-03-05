@@ -10,9 +10,10 @@ import { loginRequest, msGraphEndpoints } from '../../config/authConfig.ts';
 
 const getAccessToken = async (instance: IPublicClientApplication) => {
     try {
-        const { accessToken } = await instance.acquireTokenSilent({
+        const response = await instance.acquireTokenSilent({
             ...loginRequest,
         });
+        const accessToken = response.accessToken;
         return accessToken;
     } catch (error) {
         if (error instanceof InteractionRequiredAuthError) {

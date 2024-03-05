@@ -14,6 +14,7 @@ module.exports = {
         'plugin:react/recommended',
         'plugin:react-hooks/recommended',
         'plugin:react/jsx-runtime',
+        'plugin:@tanstack/eslint-plugin-query/recommended',
         'prettier',
     ],
     ignorePatterns: ['dist', '.eslintrc.cjs', 'node_modules', 'api','vite.config.ts', 'src/routeTree.gen.ts'],

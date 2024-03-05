@@ -5,10 +5,9 @@ import { useState } from 'react';
 
 interface ModuleCoursesFormProps {
     moduleCourses: ModuleResponseNew['courses'];
-    module: ModuleResponseNew;
 }
 
-export function ModuleCoursesForm({ moduleCourses, module }: Readonly<ModuleCoursesFormProps>) {
+export function ModuleCoursesForm({ moduleCourses }: Readonly<ModuleCoursesFormProps>) {
     const [modalShown, setModalShown] = useState(false);
     return (
         <>
@@ -21,8 +20,8 @@ export function ModuleCoursesForm({ moduleCourses, module }: Readonly<ModuleCour
                     </List.Item>
                 )}
             />
-            <Button onClick={() => setModalShown(true)}>Hinzufügen</Button>
-            <AddCourseModal modalShown={modalShown} setModalShown={setModalShown} module={module} />
+            <Button onClick={() => setModalShown(true)}>Bearbeiten</Button>
+            <AddCourseModal modalShown={modalShown} setModalShown={setModalShown} />
         </>
     );
 }
