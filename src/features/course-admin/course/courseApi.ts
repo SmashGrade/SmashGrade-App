@@ -1,54 +1,28 @@
-import {
-    CourseCreationRequest,
-    CourseFilter,
-    CourseResponse,
-    CourseUpdateRequest,
-    ModuleResponse,
-    TeacherResponse,
-} from '@features/course-admin/interfaces/CourseData.ts';
-import { FormFilters } from '@features/course-admin/interfaces/FormFilters.ts';
-import { CourseResponse as CourseListResponse } from '@features/course/CourseList';
-import { SelectProps } from 'antd';
+import { CourseMetaInfo } from '@components/api/interfaces/Course.ts';
+import { CourseResponse, CoursesResponse } from '@features/course-admin/interfaces/CourseApi.ts';
+import { CourseCreationRequest, CourseUpdateRequest } from '@features/course-admin/interfaces/CourseData.ts';
 import axios from 'axios';
+import { BACKEND_API_URL } from '../../../config/apiConfig.ts';
 
-export async function getCourse(courseId: number): Promise<SelectProps['value']> {
-    const { data } = await axios.get<CourseResponse>(`/course/${courseId}`);
-    return {
-        id: data.id,
-        description: data.description,
-        version: data.version,
-        number: data.number,
-        versions: data.versions,
-        modules: data.modules,
-        exams: data.exams,
-        teachers: data.teachers,
-    };
+export async function getCourse(courseId: number, version: number) {
+    const { data } = await axios.get<CourseResponse>(`/courses/${courseId}/${version}`, { baseURL: BACKEND_API_URL });
+    return data.data;
 }
 
-export async function getCourseFilter(): Promise<FormFilters> {
-    const { data } = await axios.get<CourseFilter>('/courseFilter');
-
-    return {
-        ...data,
-        moduleOptions: data.modules.map((module: ModuleResponse) => ({
-            label: module.description,
-            value: module.id,
-        })),
-        teacherOptions: data.teachers.map((teacher: TeacherResponse) => ({
-            label: teacher.name,
-            value: teacher.id,
-        })),
-    };
+export async function getCourseMetadata() {
+    const { data } = await axios.get<CourseMetaInfo>('coursesMeta');
+    return data;
 }
 
 export async function getCourses() {
-    const { data } = await axios.get<CourseListResponse[]>('/course');
-    return data;
+    const { data } = await axios.get<CoursesResponse>('/courses', { baseURL: BACKEND_API_URL });
+    return data.data;
 }
 
 export async function updateCourse(course: CourseUpdateRequest): Promise<void> {
     await axios.put(`/course/${course.id}`, course);
 }
+
 export async function createCourse(course: CourseCreationRequest): Promise<void> {
     await axios.post('/course', course);
 }

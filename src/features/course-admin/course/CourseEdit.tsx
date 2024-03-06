@@ -1,33 +1,25 @@
-import { Spinner } from '@components/ui-elements/Spinner.tsx';
 import { getCourse, updateCourse } from '@features/course-admin/course/courseApi.ts';
 import CourseForm from '@features/course-admin/course/CourseForm.tsx';
-import { CourseResponse } from '@features/course-admin/interfaces/CourseData.ts';
 import { Route } from '@routes/course/$id.tsx';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { message } from 'antd';
 import { useIntl } from 'react-intl';
 
 export default function CourseEdit() {
-    const { id } = Route.useParams();
-    const courseId = id ?? 1;
+    const params = Route.useParams();
+    const course = useSuspenseQuery({
+        queryKey: ['courses', params.id, 1],
+        queryFn: () => getCourse(params.id, 1),
+    }).data;
 
     const queryClient = useQueryClient();
     const intl = useIntl();
-
-    const {
-        isPending: isCourseLoading,
-        error: isCourseError,
-        data: courseData,
-    } = useQuery<CourseResponse>({
-        queryKey: ['courses', courseId],
-        queryFn: () => getCourse(courseId),
-    });
 
     const updateCourseMutation = useMutation({
         mutationFn: updateCourse,
         onSuccess: () => {
             void queryClient.invalidateQueries({
-                queryKey: ['courses', courseData?.id],
+                queryKey: ['courses', course?.id],
             });
             void queryClient.invalidateQueries({ queryKey: ['courses'] });
             void message.success(
@@ -40,9 +32,5 @@ export default function CourseEdit() {
         },
     });
 
-    // Display loading and error states
-    if (isCourseError) return <div>Error when loading courses</div>;
-    if (isCourseLoading) return <Spinner />;
-
-    return <>{courseData && <CourseForm courseData={courseData} mutation={updateCourseMutation} />}</>;
+    return <>{course && <CourseForm courseData={course} mutation={updateCourseMutation} />}</>;
 }

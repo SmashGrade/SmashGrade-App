@@ -1,0 +1,71 @@
+host: 0.0.0.0
+port: 9000
+auth:
+  enabled: false
+  oAuthKeyDiscoveryURL: https://login.microsoftonline.com/common/discovery/keys
+autoMigrate: true
+connect: true
+dbConnectionStr: 'sqlite://:memory:'
+allowedDomains:
+  - hftm.ch
+  - smashgrade.ch
+examTypes:
+  - Mündliche oder schriftliche Prüfung
+  - Präsentationen
+  - Lernbericht
+  - schriftliche Arbeit
+  - Lernjournal
+examEvaluationTypes:
+  - code: F
+    description: Modul bestanden, wenn jeder Kurs eine genügende Bewertung aufweist.
+      (Art. 29)
+  - code: M
+    description: Modul bestanden, wenn der Durchschnitt aller Kurse genügend und nicht
+      mehr als ein Kurs im Modul ungenügend ist. (Art. 30)
+  - code: D
+    description: Modul bestanden, wenn der Durchschnitt der Kurse genügend ist (mehr
+      als 60%). (Art. 31)
+  - code: E
+    description: Modul bestanden, wenn alle Kurse erfüllt sind. (Art. 32)
+gradeTypes:
+  - Kein Eintrag
+  - Note (1-6)
+  - Prozentwert (0-100)
+states:
+  - Aktiv
+  - Inaktiv
+curriculumTypes:
+  - description: Vollzeit
+    durationyears: 2
+  - description: Teilzeit
+    durationyears: 3
+roles:
+  - id: 1
+    name: Kursadministrator
+    claimName: Kursadministrator
+  - id: 2
+    name: Fachbereichsleiter
+    claimName: Fachbereichsleiter
+  - id: 3
+    name: Dozent
+    claimName: Dozent
+  - id: 4
+    name: Student
+    claimName: Student
+mockData: false
+cors:
+  allowedOrigins:
+    - https://localhost:9000
+    - https://api.smashgrade.ch
+    - http://localhost:5173
+  allowedHeaders:
+    - Origin
+    - Content-Type
+    - Accept
+    - Authorization
+maxBodySize: 2M
+rateLimit:
+  burst: 20
+  rate: 10
+  expiry: 60
+logLevel: INFO

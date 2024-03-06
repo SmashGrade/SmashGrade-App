@@ -1,16 +1,13 @@
 import { SaveOutlined } from '@ant-design/icons';
+import { CourseObject } from '@components/api/interfaces/Course.ts';
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
 import { Spinner } from '@components/ui-elements/Spinner.tsx';
-import { getCourseFilter } from '@features/course-admin/course/courseApi.ts';
+import { getCourseMetadata } from '@features/course-admin/course/courseApi.ts';
 import { CourseDetailForm, CourseFormData } from '@features/course-admin/course/CourseDetailForm.tsx';
 import { ExamForm } from '@features/course-admin/course/ExamForm.tsx';
-import {
-    CourseCreationRequest,
-    CourseResponse,
-    CourseUpdateRequest,
-} from '@features/course-admin/interfaces/CourseData.ts';
+import { CourseCreationRequest, CourseUpdateRequest } from '@features/course-admin/interfaces/CourseData.ts';
 
-import { UseMutationResult, useQuery } from '@tanstack/react-query';
+import { UseMutationResult, useSuspenseQuery } from '@tanstack/react-query';
 import { Button, Form, Select, Space } from 'antd';
 import { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -21,13 +18,12 @@ const validateMessages = {
 };
 
 interface CourseFormEditProps {
-    courseData: CourseResponse;
+    courseData: CourseObject;
     newCourse?: false;
     mutation: UseMutationResult<void, Error, CourseUpdateRequest, unknown>;
 }
 
 interface CourseFormNewProps {
-    courseData: CourseCreationRequest;
     newCourse: true;
     mutation: UseMutationResult<void, Error, CourseCreationRequest, unknown>;
 }
@@ -37,25 +33,31 @@ type CourseFormProps = CourseFormEditProps | CourseFormNewProps;
 export default function CourseForm(props: Readonly<CourseFormProps>) {
     const [courseForm] = Form.useForm();
 
-    const {
-        isLoading: isCourseFormFilterLoading,
-        error: courseFormFilterError,
-        data: courseFormFilterData,
-    } = useQuery({
-        queryKey: ['formFilters'],
-        queryFn: getCourseFilter,
-    });
+    const courseMetaData = useSuspenseQuery({
+        queryKey: ['meta', 'course'],
+        queryFn: getCourseMetadata,
+    }).data;
+
+    const initialData: Partial<CourseFormData> | undefined = !props.newCourse
+        ? {
+              description: props.courseData.description,
+              number: props.courseData.number,
+              teachers: props.courseData.teachedBy.map((teacher) => teacher.id),
+              modules: props.courseData.modules.map((module) => module.id),
+              exams: props.courseData.exams,
+          }
+        : undefined;
 
     const onCourseFormFinish = useCallback(
         (formValues: CourseFormData) => {
-            if (!courseFormFilterData) {
+            if (!courseMetaData) {
                 console.error('courseFilter is not defined');
                 return;
             }
 
             // Get an array of teacher objects from the teacher ids from the form (will be removed later when real backend is there since it will only need the ID's)
             const teachers = formValues.teachers.map((teacherId) => {
-                const teacher = courseFormFilterData.teachers.find((teacher) => teacher.id === teacherId);
+                const teacher = courseMetaData.teachers.find((teacher) => teacher.id === teacherId);
                 if (!teacher) {
                     throw new Error(`Teacher with id ${teacherId} not found`);
                 }
@@ -64,7 +66,7 @@ export default function CourseForm(props: Readonly<CourseFormProps>) {
 
             // Get an array of module objects from the module ids from the form (will be removed later when real backend is there since it will only need the ID's)
             const modules = formValues.modules.map((moduleId) => {
-                const module = courseFormFilterData.modules.find((module) => module.id === moduleId);
+                const module = courseMetaData.modules.find((module) => module.id === moduleId);
                 if (!module) {
                     throw new Error(`Module with id ${moduleId} not found`);
                 }
@@ -97,7 +99,7 @@ export default function CourseForm(props: Readonly<CourseFormProps>) {
                 props.mutation.mutate(payload);
             }
         },
-        [courseFormFilterData, props.courseData, props.mutation, props.newCourse]
+        [courseMetaData, props.mutation, props.newCourse]
     );
 
     const onSave = useCallback(() => {
@@ -106,14 +108,6 @@ export default function CourseForm(props: Readonly<CourseFormProps>) {
 
     if (courseFormFilterError) return <div>Error when loading filters</div>;
     if (isCourseFormFilterLoading) return <Spinner />;
-
-    const initialData: Partial<CourseFormData> = {
-        description: props.courseData.description,
-        number: props.courseData.number,
-        teachers: props.courseData.teachers.map((teacher) => teacher.id),
-        modules: props.courseData.modules.map((module) => module.id),
-        exams: props.courseData.exams,
-    };
 
     return (
         <div className={styles.overallFlex}>
@@ -132,48 +126,41 @@ export default function CourseForm(props: Readonly<CourseFormProps>) {
                 <Space wrap>
                     <Select
                         className={styles.version}
-                        defaultValue={props.courseData?.version?.toString()}
-                        options={props.courseData?.versions.map((version) => ({
-                            value: version.toString(),
-                            label: `v${version}`,
-                        }))}
+                        defaultValue={props.newCourse ? 1 : props.courseData?.version?.toString()}
+                        options={[
+                            { value: 1, label: '1' },
+                            { value: 2, label: '2' },
+                        ]}
                     />
                 </Space>
             </div>
 
-            {props.courseData && (
-                <Form<CourseFormData>
-                    name={'courseForm'}
-                    layout={'vertical'}
-                    form={courseForm}
-                    validateMessages={validateMessages}
-                    initialValues={initialData}
-                    onFinish={onCourseFormFinish}
-                    style={{ width: '100%' }}
-                >
-                    <div className={styles.flexOverall}>
-                        {courseFormFilterData ? (
-                            <div className={styles.flexOneThird}>
-                                <CourseDetailForm
-                                    form={courseForm}
-                                    initialValues={initialData}
-                                    onFinish={onCourseFormFinish}
-                                    courseFormFilterData={courseFormFilterData}
-                                />
-                            </div>
-                        ) : (
-                            <Spinner />
-                        )}
-                        <div className={styles.flexTwoThirds}>
-                            <ExamForm
-                                courseFormFilterData={courseFormFilterData}
-                                initialValues={initialData}
-                                courseExams={props.courseData.exams}
+            <Form<CourseFormData>
+                name={'courseForm'}
+                layout={'vertical'}
+                form={courseForm}
+                validateMessages={validateMessages}
+                initialValues={initialData}
+                onFinish={onCourseFormFinish}
+                style={{ width: '100%' }}
+            >
+                <div className={styles.flexOverall}>
+                    {courseMetaData ? (
+                        <div className={styles.flexOneThird}>
+                            <CourseDetailForm
+                                form={courseForm}
+                                onFinish={onCourseFormFinish}
+                                courseMetaData={courseMetaData}
                             />
                         </div>
+                    ) : (
+                        <Spinner />
+                    )}
+                    <div className={styles.flexTwoThirds}>
+                        <ExamForm courseMetaData={courseMetaData} courseExams={initialData?.exams ?? []} />
                     </div>
-                </Form>
-            )}
+                </div>
+            </Form>
 
             <div className={styles.divButtons}>
                 <Button type={'primary'} className={styles.buttons}>

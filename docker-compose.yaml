@@ -17,22 +17,21 @@ services:
       - "3000:3000"
     networks:
       - smash-grade-network
-    profiles:
-      - json-server
 
   smash-grade-backend:
       image: ghcr.io/smashgrade/backend:dev
       container_name: smash-grade-backend
       ports:
-        - "9000:9000"
+        - "9191:9000"
       environment:
         - ENV=dev
         - API_MOCK_DATA=true
         - API_LOG_LEVEL=debug
       networks:
         - smash-grade-network
-      profiles:
-        - backend
+      volumes:
+        - ./api/config.yaml:/app/config.yaml
+
 networks:
   smash-grade-network:
     driver: bridge
