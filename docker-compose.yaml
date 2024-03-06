@@ -1,4 +1,3 @@
-# TODO: Fokus auf zusammenspiel zwischen json-server und react-app legen, anschliessend auf backend
 version: "3.8"
 services:
   smash-grade-frontend:
@@ -10,6 +9,7 @@ services:
       - smash-grade-network
     depends_on:
         - json-server
+
   json-server:
     image: ghcr.io/smashgrade/json-server:dev-latest
     container_name: json-server
@@ -17,7 +17,23 @@ services:
       - "3000:3000"
     networks:
       - smash-grade-network
+    profiles:
+      - json-server
 
+  smash-grade-backend:
+      image: ghcr.io/smashgrade/backend:dev
+      container_name: smash-grade-backend
+      ports:
+        - "9000:9000"
+      environment:
+        - ENV=dev
+        - API_MOCK_DATA=true
+        - API_LOG_LEVEL=debug
+      networks:
+        - smash-grade-network
+      profiles:
+        - backend
 networks:
   smash-grade-network:
     driver: bridge
+
