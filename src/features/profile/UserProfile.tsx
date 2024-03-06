@@ -55,6 +55,7 @@ export function UserProfile() {
     const { userProfile, isLoading, error } = useUserProfile();
 
     const { error: pictureError, data: profilePicture } = useQuery({
+        // eslint-disable-next-line @tanstack/query/exhaustive-deps
         queryKey: ['userPicture'],
         queryFn: () => getUserPicture(instance),
     });

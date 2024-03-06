@@ -49,6 +49,7 @@ export function useUserProfile() {
         isLoading,
         error,
     } = useQuery({
+        // eslint-disable-next-line @tanstack/query/exhaustive-deps
         queryKey: ['userProfile'],
         queryFn: () => fetchUserProfile(instance),
     });
