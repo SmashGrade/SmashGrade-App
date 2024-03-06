@@ -1,7 +1,7 @@
 import { ModuleResponseNew } from '@features/course-admin/interfaces/ModuleData.ts';
 import { AddCourseModal } from '@features/course-admin/module/AddCourseModal.tsx';
 import { Button, List } from 'antd';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 interface ModuleCoursesFormProps {
     moduleCourses: ModuleResponseNew['courses'];
@@ -9,6 +9,9 @@ interface ModuleCoursesFormProps {
 
 export function ModuleCoursesForm({ moduleCourses }: Readonly<ModuleCoursesFormProps>) {
     const [modalShown, setModalShown] = useState(false);
+
+    const onCoursesEdit = useCallback(() => setModalShown(true), []);
+
     return (
         <>
             <List
@@ -20,7 +23,7 @@ export function ModuleCoursesForm({ moduleCourses }: Readonly<ModuleCoursesFormP
                     </List.Item>
                 )}
             />
-            <Button onClick={() => setModalShown(true)}>Bearbeiten</Button>
+            <Button onClick={onCoursesEdit}>Bearbeiten</Button>
             <AddCourseModal modalShown={modalShown} setModalShown={setModalShown} />
         </>
     );
