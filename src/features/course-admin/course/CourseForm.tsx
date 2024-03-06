@@ -1,14 +1,11 @@
 import { SaveOutlined } from '@ant-design/icons';
+import { CourseObject } from '@components/api/interfaces/Course.ts';
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
 import { Spinner } from '@components/ui-elements/Spinner.tsx';
 import { getCourseFilter } from '@features/course-admin/course/courseApi.ts';
 import { CourseDetailForm, CourseFormData } from '@features/course-admin/course/CourseDetailForm.tsx';
 import { ExamForm } from '@features/course-admin/course/ExamForm.tsx';
-import {
-    CourseCreationRequest,
-    CourseResponse,
-    CourseUpdateRequest,
-} from '@features/course-admin/interfaces/CourseData.ts';
+import { CourseCreationRequest, CourseUpdateRequest } from '@features/course-admin/interfaces/CourseData.ts';
 
 import { UseMutationResult, useQuery } from '@tanstack/react-query';
 import { Button, Form, Select, Space } from 'antd';
@@ -21,7 +18,7 @@ const validateMessages = {
 };
 
 interface CourseFormEditProps {
-    courseData: CourseResponse;
+    courseData: CourseObject;
     newCourse?: false;
     mutation: UseMutationResult<void, Error, CourseUpdateRequest, unknown>;
 }
@@ -110,7 +107,7 @@ export default function CourseForm(props: Readonly<CourseFormProps>) {
     const initialData: Partial<CourseFormData> = {
         description: props.courseData.description,
         number: props.courseData.number,
-        teachers: props.courseData.teachers.map((teacher) => teacher.id),
+        teachers: props.courseData.teachedBy.map((teacher) => teacher.id),
         modules: props.courseData.modules.map((module) => module.id),
         exams: props.courseData.exams,
     };

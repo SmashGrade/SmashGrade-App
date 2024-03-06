@@ -1,6 +1,6 @@
+import { CourseObject } from '@features/course-admin/interfaces/Course.ts';
 import { ModuleCreateRequest, ModuleResponseNew } from '@features/course-admin/interfaces/ModuleData.ts';
 import { ModuleCoursesForm } from '@features/course-admin/module/ModuleCoursesForm.tsx';
-import { CourseResponse } from '@features/course/CourseList.tsx';
 import { UseMutationResult } from '@tanstack/react-query';
 import { Button, Form, Input, Select, Switch } from 'antd';
 import { useCallback } from 'react';
@@ -18,14 +18,14 @@ export interface ModuleForm {
 
 interface ModuleFormEditProps {
     moduleData: ModuleResponseNew;
-    allCourses: CourseResponse[];
+    allCourses: CourseObject[];
     newModule?: false;
     mutation: UseMutationResult<void, Error, ModuleResponseNew, unknown>;
 }
 
 interface ModuleFormNewProps {
     moduleData: ModuleResponseNew;
-    allCourses: CourseResponse[];
+    allCourses: CourseObject[];
     newModule: true;
     mutation: UseMutationResult<void, Error, ModuleCreateRequest, unknown>;
 }

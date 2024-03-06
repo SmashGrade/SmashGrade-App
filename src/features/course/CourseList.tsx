@@ -1,10 +1,10 @@
 import { getValueGetter } from '@components/grid/columnFormatter.ts';
 import Grid from '@components/grid/Grid.tsx';
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
-import { Spinner } from '@components/ui-elements/Spinner.tsx';
 import { getCourses } from '@features/course-admin/course/courseApi.ts';
+import { CourseObject } from '@features/course-admin/interfaces/Course.ts';
 import { LinkButtonCellRenderer } from '@features/course/LinkButtonCellRenderer.tsx';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { ColDef } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
@@ -44,12 +44,12 @@ export interface CourseResponse {
     teachers: Teacher[];
 }
 
-const defaultCourseColDef: ColDef<CourseResponse> = {
+const defaultCourseColDef: ColDef<CourseObject> = {
     sortable: true,
     filter: 'agTextColumnFilter',
 };
 
-const courseColumnDefs: ColDef<CourseResponse>[] = [
+const courseColumnDefs: ColDef<CourseObject>[] = [
     {
         field: 'id',
         headerName: '',
@@ -59,43 +59,42 @@ const courseColumnDefs: ColDef<CourseResponse>[] = [
             from: CourseIndexRoute.to,
             to: '/course/$id',
         },
+        width: 100,
     },
     {
         field: 'id',
         headerName: 'ID',
         filter: 'agNumberColumnFilter',
         sort: 'asc',
+        width: 100,
     },
-    { field: 'number', headerName: 'Course Number' },
-    { field: 'description', headerName: 'Course Name', flex: 1 },
+    { field: 'number', headerName: 'Number', width: 100 },
+    { field: 'description', headerName: 'Name', flex: 2 },
     {
-        field: 'teachers',
+        field: 'teachedBy',
         headerName: 'Teachers',
         flex: 1,
-        valueGetter: getValueGetter('teachers', 'name'),
+        valueGetter: getValueGetter('teachedBy', 'name'),
     },
     {
         field: 'modules',
         headerName: 'Modules',
-        flex: 1,
+        flex: 2,
         valueGetter: getValueGetter('modules', 'description'),
     },
     {
         field: 'exams',
         headerName: 'Exams',
-        flex: 1,
+        flex: 2,
         valueGetter: getValueGetter('exams', 'description'),
     },
 ];
 
 export default function CourseList() {
-    const { isPending, isError, data } = useQuery({
+    const courses = useSuspenseQuery({
         queryKey: ['courses'],
         queryFn: getCourses,
-    });
-
-    if (isError) return <div>Error when loading courses</div>;
-    if (isPending) return <Spinner />;
+    }).data;
 
     return (
         <div className={styles.courseContainer}>
@@ -106,7 +105,7 @@ export default function CourseList() {
                 </Link>
             </Button>
 
-            <Grid<CourseResponse> columnDefs={courseColumnDefs} rowData={data} defaultColDef={defaultCourseColDef} />
+            <Grid<CourseObject> columnDefs={courseColumnDefs} rowData={courses} defaultColDef={defaultCourseColDef} />
         </div>
     );
 }

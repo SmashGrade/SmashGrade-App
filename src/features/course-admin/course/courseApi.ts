@@ -1,28 +1,17 @@
+import { CourseResponse, CoursesResponse } from '@features/course-admin/interfaces/CourseApi.ts';
 import {
     CourseCreationRequest,
     CourseFilter,
-    CourseResponse,
     CourseUpdateRequest,
     ModuleResponse,
     TeacherResponse,
 } from '@features/course-admin/interfaces/CourseData.ts';
 import { FormFilters } from '@features/course-admin/interfaces/FormFilters.ts';
-import { CourseResponse as CourseListResponse } from '@features/course/CourseList';
-import { SelectProps } from 'antd';
 import axios from 'axios';
 
-export async function getCourse(courseId: number): Promise<SelectProps['value']> {
-    const { data } = await axios.get<CourseResponse>(`/course/${courseId}`);
-    return {
-        id: data.id,
-        description: data.description,
-        version: data.version,
-        number: data.number,
-        versions: data.versions,
-        modules: data.modules,
-        exams: data.exams,
-        teachers: data.teachers,
-    };
+export async function getCourse(courseId: number, version: number) {
+    const { data } = await axios.get<CourseResponse>(`/courses/${courseId}/${version}`);
+    return data.data;
 }
 
 export async function getCourseFilter(): Promise<FormFilters> {
@@ -42,13 +31,14 @@ export async function getCourseFilter(): Promise<FormFilters> {
 }
 
 export async function getCourses() {
-    const { data } = await axios.get<CourseListResponse[]>('/course');
-    return data;
+    const { data } = await axios.get<CoursesResponse>('/courses');
+    return data.data;
 }
 
 export async function updateCourse(course: CourseUpdateRequest): Promise<void> {
     await axios.put(`/course/${course.id}`, course);
 }
+
 export async function createCourse(course: CourseCreationRequest): Promise<void> {
     await axios.post('/course', course);
 }

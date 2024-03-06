@@ -11,28 +11,27 @@
 import { createFileRoute } from '@tanstack/react-router';
 
 // Import Routes
-
 import { Route as rootRoute } from './routes/__root';
-import { Route as SettingsImport } from './routes/settings';
-import { Route as OnboardingImport } from './routes/onboarding';
-import { Route as MyCourseImport } from './routes/my-course';
-import { Route as IndexImport } from './routes/index';
-import { Route as StudentIndexImport } from './routes/student/index';
-import { Route as CurriculumIndexImport } from './routes/curriculum/index';
-import { Route as CourseIndexImport } from './routes/course/index';
-import { Route as ModuleIndexRouteImport } from './routes/module/index.route';
-import { Route as StudentModulesImport } from './routes/student/modules';
-import { Route as ModuleIdImport } from './routes/module/$id';
-import { Route as CurriculumNewImport } from './routes/curriculum/new';
-import { Route as CurriculumIdImport } from './routes/curriculum/$id';
 import { Route as CourseIdImport } from './routes/course/$id';
-import { Route as StudentCourseIdImport } from './routes/student/course.$id';
-import { Route as ModuleCopyIdImport } from './routes/module/copy.$id';
+import { Route as CourseIndexImport } from './routes/course/index';
+import { Route as CurriculumIdImport } from './routes/curriculum/$id';
 import { Route as CurriculumCopyIdImport } from './routes/curriculum/copy.$id';
+import { Route as CurriculumIndexImport } from './routes/curriculum/index';
+import { Route as CurriculumNewImport } from './routes/curriculum/new';
+import { Route as IndexImport } from './routes/index';
+import { Route as ModuleIdImport } from './routes/module/$id';
+import { Route as ModuleCopyIdImport } from './routes/module/copy.$id';
+import { Route as ModuleIndexRouteImport } from './routes/module/index.route';
+import { Route as ModuleNewImport } from './routes/module/new';
+import { Route as MyCourseImport } from './routes/my-course';
+import { Route as OnboardingImport } from './routes/onboarding';
+import { Route as SettingsImport } from './routes/settings';
+import { Route as StudentCourseIdImport } from './routes/student/course.$id';
+import { Route as StudentIndexImport } from './routes/student/index';
+import { Route as StudentModulesImport } from './routes/student/modules';
 
 // Create Virtual Routes
 
-const ModuleNewLazyImport = createFileRoute('/module/new')();
 const CourseNewLazyImport = createFileRoute('/course/new')();
 
 // Create/Update Routes
@@ -70,17 +69,12 @@ const CurriculumIndexRoute = CurriculumIndexImport.update({
 const CourseIndexRoute = CourseIndexImport.update({
     path: '/course/',
     getParentRoute: () => rootRoute,
-} as any);
+} as any).lazy(() => import('./routes/course/index.lazy').then((d) => d.Route));
 
 const ModuleIndexRouteRoute = ModuleIndexRouteImport.update({
     path: '/module/',
     getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/module/index.route.lazy').then((d) => d.Route));
-
-const ModuleNewLazyRoute = ModuleNewLazyImport.update({
-    path: '/module/new',
-    getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/module/new.lazy').then((d) => d.Route));
 
 const CourseNewLazyRoute = CourseNewLazyImport.update({
     path: '/course/new',
@@ -91,6 +85,11 @@ const StudentModulesRoute = StudentModulesImport.update({
     path: '/student/modules',
     getParentRoute: () => rootRoute,
 } as any);
+
+const ModuleNewRoute = ModuleNewImport.update({
+    path: '/module/new',
+    getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/module/new.lazy').then((d) => d.Route));
 
 const ModuleIdRoute = ModuleIdImport.update({
     path: '/module/$id',
@@ -110,7 +109,7 @@ const CurriculumIdRoute = CurriculumIdImport.update({
 const CourseIdRoute = CourseIdImport.update({
     path: '/course/$id',
     getParentRoute: () => rootRoute,
-} as any);
+} as any).lazy(() => import('./routes/course/$id.lazy').then((d) => d.Route));
 
 const StudentCourseIdRoute = StudentCourseIdImport.update({
     path: '/student/course/$id',
@@ -163,16 +162,16 @@ declare module '@tanstack/react-router' {
             preLoaderRoute: typeof ModuleIdImport;
             parentRoute: typeof rootRoute;
         };
+        '/module/new': {
+            preLoaderRoute: typeof ModuleNewImport;
+            parentRoute: typeof rootRoute;
+        };
         '/student/modules': {
             preLoaderRoute: typeof StudentModulesImport;
             parentRoute: typeof rootRoute;
         };
         '/course/new': {
             preLoaderRoute: typeof CourseNewLazyImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/module/new': {
-            preLoaderRoute: typeof ModuleNewLazyImport;
             parentRoute: typeof rootRoute;
         };
         '/module/': {
@@ -217,9 +216,9 @@ export const routeTree = rootRoute.addChildren([
     CurriculumIdRoute,
     CurriculumNewRoute,
     ModuleIdRoute,
+    ModuleNewRoute,
     StudentModulesRoute,
     CourseNewLazyRoute,
-    ModuleNewLazyRoute,
     ModuleIndexRouteRoute,
     CourseIndexRoute,
     CurriculumIndexRoute,
