@@ -11,23 +11,25 @@
 import { createFileRoute } from '@tanstack/react-router';
 
 // Import Routes
+
 import { Route as rootRoute } from './routes/__root';
-import { Route as CourseIdImport } from './routes/course/$id';
-import { Route as CourseIndexImport } from './routes/course/index';
-import { Route as CurriculumIdImport } from './routes/curriculum/$id';
-import { Route as CurriculumCopyIdImport } from './routes/curriculum/copy.$id';
-import { Route as CurriculumIndexImport } from './routes/curriculum/index';
-import { Route as CurriculumNewImport } from './routes/curriculum/new';
-import { Route as IndexImport } from './routes/index';
-import { Route as ModuleIdImport } from './routes/module/$id';
-import { Route as ModuleCopyIdImport } from './routes/module/copy.$id';
-import { Route as ModuleIndexRouteImport } from './routes/module/index.route';
-import { Route as MyCourseImport } from './routes/my-course';
-import { Route as OnboardingImport } from './routes/onboarding';
 import { Route as SettingsImport } from './routes/settings';
-import { Route as StudentCourseIdImport } from './routes/student/course.$id';
+import { Route as OnboardingImport } from './routes/onboarding';
+import { Route as MyCourseImport } from './routes/my-course';
+import { Route as IndexImport } from './routes/index';
 import { Route as StudentIndexImport } from './routes/student/index';
+import { Route as CurriculumIndexImport } from './routes/curriculum/index';
+import { Route as CourseIndexImport } from './routes/course/index';
+import { Route as ModuleIndexRouteImport } from './routes/module/index.route';
 import { Route as StudentModulesImport } from './routes/student/modules';
+import { Route as ModuleIdImport } from './routes/module/$id';
+import { Route as DepartmentManagerStudentImport } from './routes/department-manager/student';
+import { Route as CurriculumNewImport } from './routes/curriculum/new';
+import { Route as CurriculumIdImport } from './routes/curriculum/$id';
+import { Route as CourseIdImport } from './routes/course/$id';
+import { Route as StudentCourseIdImport } from './routes/student/course.$id';
+import { Route as ModuleCopyIdImport } from './routes/module/copy.$id';
+import { Route as CurriculumCopyIdImport } from './routes/curriculum/copy.$id';
 
 // Create Virtual Routes
 
@@ -96,6 +98,11 @@ const ModuleIdRoute = ModuleIdImport.update({
     getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/module/$id.lazy').then((d) => d.Route));
 
+const DepartmentManagerStudentRoute = DepartmentManagerStudentImport.update({
+    path: '/department-manager/student',
+    getParentRoute: () => rootRoute,
+} as any);
+
 const CurriculumNewRoute = CurriculumNewImport.update({
     path: '/curriculum/new',
     getParentRoute: () => rootRoute,
@@ -158,6 +165,10 @@ declare module '@tanstack/react-router' {
             preLoaderRoute: typeof CurriculumNewImport;
             parentRoute: typeof rootRoute;
         };
+        '/department-manager/student': {
+            preLoaderRoute: typeof DepartmentManagerStudentImport;
+            parentRoute: typeof rootRoute;
+        };
         '/module/$id': {
             preLoaderRoute: typeof ModuleIdImport;
             parentRoute: typeof rootRoute;
@@ -215,6 +226,7 @@ export const routeTree = rootRoute.addChildren([
     CourseIdRoute,
     CurriculumIdRoute,
     CurriculumNewRoute,
+    DepartmentManagerStudentRoute,
     ModuleIdRoute,
     StudentModulesRoute,
     CourseNewLazyRoute,

@@ -1,0 +1,14 @@
+.myStudentGrid {
+    height: 100%;
+}
+
+.ag-header-cell-label {
+    height: 100%;
+    padding: 0 !important;
+    .ag-header-cell-text {
+        width: 30px;
+        transform: rotate(90deg);
+        margin-top: 50px;
+        display: inline-block;
+    }
+}
