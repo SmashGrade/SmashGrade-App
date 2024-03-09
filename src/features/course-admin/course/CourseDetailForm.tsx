@@ -16,7 +16,6 @@ export interface CourseFormData {
 
 interface CourseDetailFormProps {
     form: FormInstance<CourseFormData>;
-    initialValues: Partial<CourseFormData>;
     onFinish: (formValues: CourseFormData) => void;
     courseFormFilterData: FormFilters;
 }

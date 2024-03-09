@@ -16,7 +16,7 @@ const TanStackRouterDevtoolsAsync =
           );
 
 const NavAsync = React.lazy(() => import('@features/navigation/Navigation.tsx'));
-axios.defaults.baseURL = import.meta.env.VITE_BACKEND_API_URL;
+axios.defaults.baseURL = import.meta.env.VITE_JSON_SERVER_API_URL;
 
 // Add a request interceptor
 axios.interceptors.request.use(addTokenInterceptor());

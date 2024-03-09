@@ -1,5 +1,5 @@
 import { InteractionRequiredAuthError, IPublicClientApplication } from '@azure/msal-browser';
-import axios, { InternalAxiosRequestConfig } from 'axios';
+import { InternalAxiosRequestConfig } from 'axios';
 import { msalInstance } from '../main.tsx';
 import { loginRequest, msGraphBaseUrl } from './authConfig.ts';
 
@@ -31,6 +31,3 @@ export function addTokenInterceptor() {
         return config;
     };
 }
-
-// Add a request interceptor
-axios.interceptors.request.use(addTokenInterceptor());

@@ -1,3 +1,5 @@
+import { ExamType } from '@components/api/interfaces/Exam.ts';
+
 export interface CourseResponse {
     id: number;
     description: string;
@@ -54,8 +56,8 @@ export type CourseCreationRequest = Omit<CourseUpdateRequest, 'id'>;
 export interface ExamCreateData {
     id: number;
     description: string;
-    weight: number;
-    type: string;
+    weighting: number;
+    examtype: ExamType;
 }
 export interface CourseFilterResponse {
     modules: ModuleResponse[];

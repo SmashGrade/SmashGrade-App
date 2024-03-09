@@ -34,7 +34,6 @@ export interface ModuleResponseNew {
         version: number;
         description: string;
         number: string;
-        versions: number[];
     }[];
 }
 

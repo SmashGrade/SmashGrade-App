@@ -1,6 +1,6 @@
+import { MaterialIconButton } from '@components/ui-elements/MaterialIconButton.tsx';
 import { Link } from '@tanstack/react-router';
 import { ICellRendererParams } from 'ag-grid-community';
-import { Button } from 'antd';
 
 interface LinkButtonCellRendererProps<T> extends Readonly<ICellRendererParams<T, number>> {
     from: string;
@@ -16,7 +16,7 @@ export function LinkButtonCellRenderer<T>({ from, to, value }: Readonly<LinkButt
                 id: value ?? 0,
             }}
         >
-            <Button>Open</Button>
+            <MaterialIconButton icon={'search'} size={'middle'} title={'Open'} />
         </Link>
     );
 }

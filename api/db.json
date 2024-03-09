@@ -1,4 +1,242 @@
 {
+  "coursesMeta": {
+    "teachers": [
+      {
+        "id": 1,
+        "created": "2022-08-01T10:00:00Z",
+        "updated": "2024-03-07T12:00:00Z",
+        "deleted": null,
+        "classStartYear": "2022",
+        "name": "Alex Johnson",
+        "email": "alex.johnson@example.com",
+        "fields": null,
+        "roles": [
+          {
+            "claim": "teacher",
+            "created": "2022-08-01T10:00:00Z",
+            "deleted": null,
+            "description": "Responsible for teaching Mathematics.",
+            "id": 101,
+            "updated": "2024-03-07T12:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "created": "2021-09-15T09:30:00Z",
+        "updated": "2024-03-07T12:10:00Z",
+        "deleted": null,
+        "classStartYear": "2021",
+        "name": "Betty Smith",
+        "email": "betty.smith@example.com",
+        "fields": null,
+        "roles": [
+          {
+            "claim": "teacher",
+            "created": "2021-09-15T09:30:00Z",
+            "deleted": null,
+            "description": "Teacher Role",
+            "id": 102,
+            "updated": "2024-03-07T12:10:00Z"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "created": "2023-01-20T11:20:00Z",
+        "updated": "2024-03-07T12:20:00Z",
+        "deleted": null,
+        "classStartYear": "2023",
+        "name": "Charles Davis",
+        "email": "charles.davis@example.com",
+        "fields": null,
+        "roles": [
+          {
+            "claim": "teacher",
+            "created": "2023-01-20T11:20:00Z",
+            "deleted": null,
+            "description": "Teacher Role",
+            "id": 103,
+            "updated": "2024-03-07T12:20:00Z"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "created": "2020-04-12T08:45:00Z",
+        "updated": "2024-03-07T12:30:00Z",
+        "deleted": null,
+        "classStartYear": "2020",
+        "name": "Diana Evans",
+        "email": "diana.evans@example.com",
+        "fields": null,
+        "roles": [
+          {
+            "claim": "teacher",
+            "created": "2020-04-12T08:45:00Z",
+            "deleted": null,
+            "description": "Teacher Role",
+            "id": 104,
+            "updated": "2024-03-07T12:30:00Z"
+          }
+        ]
+      }
+    ],
+    "examtypes": [
+      {
+        "id": 1,
+        "created": "2024-03-07T10:00:00Z",
+        "updated": "2024-03-07T10:00:00Z",
+        "deleted": null,
+        "description": "Schriftliche Prüfung"
+      },
+      {
+        "id": 2,
+        "created": "2024-03-07T10:05:00Z",
+        "updated": "2024-03-07T10:05:00Z",
+        "deleted": null,
+        "description": "Mündliche Prüfung"
+      },
+      {
+        "id": 3,
+        "created": "2024-03-07T10:10:00Z",
+        "updated": "2024-03-07T10:10:00Z",
+        "deleted": null,
+        "description": "Lernberichte"
+      },
+      {
+        "id": 4,
+        "created": "2024-03-07T10:15:00Z",
+        "updated": "2024-03-07T10:15:00Z",
+        "deleted": null,
+        "description": "Schriftliche Arbeiten"
+      },
+      {
+        "id": 5,
+        "created": "2024-03-07T10:20:00Z",
+        "updated": "2024-03-07T10:20:00Z",
+        "deleted": null,
+        "description": "Lernjournal"
+      },
+      {
+        "id": 6,
+        "created": "2024-03-07T10:25:00Z",
+        "updated": "2024-03-07T10:30:00Z",
+        "deleted": {
+          "time": "2024-03-07T11:00:00Z",
+          "valid": false
+        },
+        "description": "Moodle Coding"
+      }
+    ],
+    "modules": [
+      {
+        "id": 101,
+        "version": 1,
+        "created": "2024-03-07T12:00:00Z",
+        "updated": "2024-03-07T14:00:00Z",
+        "deleted": null,
+        "description": "Introduction to Computer Science",
+        "number": "CS-101",
+        "state": {
+          "id": 1,
+          "created": "2024-03-07T12:00:00Z",
+          "updated": "2024-03-07T14:00:00Z",
+          "deleted": null,
+          "description": "Active",
+          "moduleID": 101
+        },
+        "studyStage": {
+          "id": 1,
+          "created": "2024-03-07T12:00:00Z",
+          "updated": "2024-03-07T14:00:00Z",
+          "deleted": null,
+          "description": "Grundstudium",
+          "moduleID": 101
+        },
+        "evaluationType": {
+          "id": 1,
+          "created": "2024-03-06T10:07:52.779856755Z",
+          "updated": "2024-03-06T10:07:52.779856755Z",
+          "deleted": null,
+          "description": "F",
+          "code": "F"
+        },
+        "curriculums": null,
+        "courses": null
+      },
+      {
+        "id": 102,
+        "version": 1,
+        "created": "2024-03-07T12:30:00Z",
+        "updated": "2024-03-07T14:30:00Z",
+        "deleted": null,
+        "description": "Advanced Programming Techniques",
+        "number": "CS-202",
+        "state": {
+          "id": 2,
+          "created": "2024-03-07T12:30:00Z",
+          "updated": "2024-03-07T14:30:00Z",
+          "deleted": null,
+          "description": "Active",
+          "moduleID": 102
+        },
+        "studyStage": {
+          "id": 2,
+          "created": "2024-03-07T12:30:00Z",
+          "updated": "2024-03-07T14:30:00Z",
+          "deleted": null,
+          "description": "Fachstudium",
+          "moduleID": 102
+        },
+        "evaluationType": {
+          "id": 4,
+          "created": "2024-03-06T10:07:53.086121877Z",
+          "updated": "2024-03-06T10:07:53.086121877Z",
+          "deleted": null,
+          "description": "Modul bestanden, wenn der Durchschnitt aller Kurse genügend und nicht mehr als ein Kurs im Modul ungenügend ist. (Art. 30)",
+          "code": "M"
+        },
+        "curriculums": null,
+        "courses": null
+      },
+      {
+        "id": 103,
+        "version": 1,
+        "created": "2024-03-07T13:00:00Z",
+        "updated": "2024-03-07T15:00:00Z",
+        "deleted": null,
+        "description": "Data Structures and Algorithms",
+        "number": "CS-303",
+        "state": {
+          "id": 3,
+          "created": "2024-03-07T13:00:00Z",
+          "updated": "2024-03-07T15:00:00Z",
+          "deleted": null,
+          "description": "Active",
+          "moduleID": 103
+        },
+        "studyStage": {
+          "id": 3,
+          "created": "2024-03-07T13:00:00Z",
+          "updated": "2024-03-07T15:00:00Z",
+          "deleted": null,
+          "description": "Schwerpunkt",
+          "moduleID": 103
+        },
+        "evaluationType": {
+          "id": 6,
+          "created": "2024-03-06T10:07:53.093685092Z",
+          "updated": "2024-03-06T10:07:53.093685092Z",
+          "deleted": null,
+          "description": "Modul bestanden, wenn alle Kurse erfüllt sind. (Art. 32)",
+          "code": "E"
+        },
+        "curriculums": null,
+        "courses": null
+      }
+    ]
+  },
   "users": [
     {
       "firstName": "Max",

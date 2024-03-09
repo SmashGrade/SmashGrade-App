@@ -1,7 +1,6 @@
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
 import styles from '@features/course-admin/course/CourseCreation.module.scss';
-import { CourseFormData } from '@features/course-admin/course/CourseDetailForm.tsx';
-import { ExamResponse } from '@features/course-admin/interfaces/CourseData.ts';
+import { ExamCreateData } from '@features/course-admin/interfaces/CourseData.ts';
 import { FormFilters } from '@features/course-admin/interfaces/FormFilters.ts';
 import { Button, Col, Divider, Form, FormListOperation, Input, InputNumber, Row } from 'antd';
 import { useCallback, useState } from 'react';
@@ -11,15 +10,14 @@ import layout from '../../../layout.module.scss';
 
 interface ExamFormProps {
     courseFormFilterData: FormFilters | undefined;
-    initialValues: Partial<CourseFormData>;
-    courseExams: ExamResponse[];
+    courseExams: ExamCreateData[];
 }
 
 export function ExamForm(props: Readonly<ExamFormProps>) {
-    const initialTotalWeight = props.courseExams.reduce((acc, curr) => acc + curr.weight, 0);
+    const initialTotalWeight = props.courseExams.reduce((acc, curr) => acc + curr.weighting, 0);
     const [weights, setWeights] = useState({
         totalWeight: initialTotalWeight,
-        weights: props.courseExams.map((exam) => exam.weight),
+        weights: props.courseExams.map((exam) => exam.weighting),
     });
 
     // Updates the total weight of all exams live on input change

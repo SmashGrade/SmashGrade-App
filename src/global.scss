@@ -17,6 +17,12 @@ html {
 
 .material-symbols-rounded {
     /* Recommended icon sizes */
+
+    &.tiny {
+        font-size: 16px;
+        font-variation-settings: 'OPSZ' 16;
+    }
+
     &.small {
         font-size: 20px;
         font-variation-settings: 'OPSZ' 20;
