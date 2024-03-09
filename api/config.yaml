@@ -58,6 +58,7 @@ cors:
     - https://localhost:9000
     - https://api.smashgrade.ch
     - http://localhost:5173
+    - https://localhost:9191
   allowedHeaders:
     - Origin
     - Content-Type
