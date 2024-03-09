@@ -105,7 +105,7 @@ const ModuleIdRoute = ModuleIdImport.update({
 const CurriculumIdRoute = CurriculumIdImport.update({
     path: '/curriculum/$id',
     getParentRoute: () => rootRoute,
-} as any);
+} as any).lazy(() => import('./routes/curriculum/$id.lazy').then((d) => d.Route));
 
 const CourseIdRoute = CourseIdImport.update({
     path: '/course/$id',

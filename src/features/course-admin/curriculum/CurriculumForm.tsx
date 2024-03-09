@@ -1,6 +1,7 @@
 import { CurriculumCreateRequest, CurriculumResponseNew } from '@features/course-admin/interfaces/CurriculumData.ts';
 import { UseMutationResult } from '@tanstack/react-query';
 import { Button, Form, Select, Switch, DatePicker, Row, Col } from 'antd';
+import dayjs, { Dayjs } from 'dayjs';
 import { useCallback } from 'react';
 import styles from './CurriculumForm.module.scss';
 
@@ -20,8 +21,8 @@ export interface CurriculumForm {
         description: string;
     };
     isActive: boolean;
-    startDate: string;
-    endDate: string;
+    startDate: Dayjs;
+    endDate: Dayjs;
     fieldmanagers: {
         id: number;
         name: string;
@@ -69,9 +70,12 @@ const fieldmanagers = [
 export function CurriculumForm({ curriculumData, mutation, newCurriculum }: Readonly<CurriculumFormProps>) {
     const [curriculumForm] = Form.useForm();
 
+    console.log(curriculumData);
     const initialFormValues: CurriculumForm = {
         ...curriculumData,
         focus: curriculumData.focus,
+        startDate: dayjs(curriculumData.startDate),
+        endDate: dayjs(curriculumData.endDate),
         field: curriculumData.field,
         curriculumType: curriculumData.curriculumType,
         fieldmanagers: curriculumData.fieldmanagers.map((t: { id: number; name: string }) => ({
@@ -79,6 +83,8 @@ export function CurriculumForm({ curriculumData, mutation, newCurriculum }: Read
             name: t.name,
         })),
     };
+
+    console.log(initialFormValues.endDate);
 
     const onCurriculumFormFinish = useCallback(
         (formValues: CurriculumForm) => {
@@ -97,6 +103,8 @@ export function CurriculumForm({ curriculumData, mutation, newCurriculum }: Read
                         id: curriculumType[0].value,
                         description: curriculumType[0].label,
                     },
+                    startDate: formValues.startDate.toISOString(),
+                    endDate: formValues.endDate.toISOString(),
                     fieldmanagers: fieldmanagers.map((f) => ({
                         id: f.value,
                         name: f.label,

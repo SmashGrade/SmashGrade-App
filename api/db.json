@@ -1023,6 +1023,35 @@
           ]
         }
       ]
+    },
+    {
+      "focus": {
+        "id": 1,
+        "description": "Focus 1"
+      },
+      "field": {
+        "id": 1,
+        "description": "Field 1"
+      },
+      "type": 2,
+      "fieldmanagers": [
+        {
+          "id": 1,
+          "name": "Daniel Rutz"
+        },
+        {
+          "id": 2,
+          "name": "Kurt Munter"
+        }
+      ],
+      "startDate": "2024-03-26T07:27:00.779Z",
+      "endDate": "2024-03-20T07:27:01.932Z",
+      "isActive": true,
+      "curriculumType": {
+        "id": 1,
+        "description": "Type 1"
+      },
+      "id": 3
     }
   ]
 }
