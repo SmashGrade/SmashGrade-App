@@ -5,6 +5,8 @@ export interface Curriculum {
     courses: Course[];
 }
 
+export type CurriculumResponse = Curriculum;
+
 export interface Course {
     id: number;
     description: string;
