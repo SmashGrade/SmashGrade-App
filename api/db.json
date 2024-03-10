@@ -1262,5 +1262,213 @@
         }
       ]
     }
+  ],
+  "teacherCurriculum": [
+    {
+      "id": 1,
+      "description": "Computer Science Curriculum",
+      "startDate": 2023,
+      "courses": [
+        {
+          "id": 101,
+          "description": "Introduction to Programming",
+          "exams": [
+            {
+              "id": 201,
+              "description": "Midterm Exam",
+              "weight": 0.4,
+              "type": "Written",
+              "examEvaluations": [
+                {
+                  "id": 301,
+                  "grade": 85,
+                  "student": {
+                    "id": 1001,
+                    "name": "Alice Smith"
+                  }
+                },
+                {
+                  "id": 302,
+                  "grade": 78,
+                  "student": {
+                    "id": 1002,
+                    "name": "Bob Johnson"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 202,
+              "description": "Final Exam",
+              "weight": 0.6,
+              "type": "Written",
+              "examEvaluations": [
+                {
+                  "id": 303,
+                  "grade": 92,
+                  "student": {
+                    "id": 1001,
+                    "name": "Alice Smith"
+                  }
+                },
+                {
+                  "id": 304,
+                  "grade": 85,
+                  "student": {
+                    "id": 1002,
+                    "name": "Bob Johnson"
+                  }
+                }
+              ]
+            }
+          ],
+          "students": [
+            {
+              "id": 1001,
+              "name": "Alice Smith"
+            },
+            {
+              "id": 1002,
+              "name": "Bob Johnson"
+            }
+          ]
+        },
+        {
+          "id": 102,
+          "description": "Data Structures and Algorithms",
+          "exams": [
+            {
+              "id": 203,
+              "description": "Midterm Exam",
+              "weight": 0.4,
+              "type": "Written",
+              "examEvaluations": [
+                {
+                  "id": 305,
+                  "grade": 80,
+                  "student": {
+                    "id": 1001,
+                    "name": "Alice Smith"
+                  }
+                },
+                {
+                  "id": 306,
+                  "grade": 75,
+                  "student": {
+                    "id": 1002,
+                    "name": "Bob Johnson"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 204,
+              "description": "Final Exam",
+              "weight": 0.6,
+              "type": "Written",
+              "examEvaluations": [
+                {
+                  "id": 307,
+                  "grade": 88,
+                  "student": {
+                    "id": 1001,
+                    "name": "Alice Smith"
+                  }
+                },
+                {
+                  "id": 308,
+                  "grade": 82,
+                  "student": {
+                    "id": 1002,
+                    "name": "Bob Johnson"
+                  }
+                }
+              ]
+            }
+          ],
+          "students": [
+            {
+              "id": 1001,
+              "name": "Alice Smith"
+            },
+            {
+              "id": 1002,
+              "name": "Bob Johnson"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "description": "Curriculum Description",
+      "startDate": 2024,
+      "courses": [
+        {
+          "id": 1,
+          "description": "Course Description 1",
+          "exams": [
+            {
+              "id": 1,
+              "description": "Exam 1",
+              "weight": 0.3,
+              "type": "Midterm",
+              "examEvaluations": [
+                {
+                  "id": 1,
+                  "grade": 85,
+                  "student": {
+                    "id": 1,
+                    "name": "John Doe"
+                  }
+                },
+                {
+                  "id": 2,
+                  "grade": 75,
+                  "student": {
+                    "id": 2,
+                    "name": "Jane Smith"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "description": "Exam 2",
+              "weight": 0.7,
+              "type": "Final",
+              "examEvaluations": [
+                {
+                  "id": 3,
+                  "grade": 90,
+                  "student": {
+                    "id": 1,
+                    "name": "John Doe"
+                  }
+                },
+                {
+                  "id": 4,
+                  "grade": 80,
+                  "student": {
+                    "id": 2,
+                    "name": "Jane Smith"
+                  }
+                }
+              ]
+            }
+          ],
+          "students": [
+            {
+              "id": 1,
+              "name": "John Doe"
+            },
+            {
+              "id": 2,
+              "name": "Jane Smith"
+            }
+          ]
+        }
+      ]
+    }
   ]
 }
