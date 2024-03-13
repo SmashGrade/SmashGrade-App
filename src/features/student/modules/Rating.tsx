@@ -25,10 +25,17 @@ const getRatingClass = (rating: number) => {
 interface RatingProps {
     rating: number;
 }
+
+function getDecimalRating(rating: number, decimalPlaces = 1) {
+    return rating.toFixed(decimalPlaces);
+}
+
 export default function Rating({ rating }: Readonly<RatingProps>) {
     return (
         <div className={`${styles.ratingContainer}`}>
-            <div className={`${styles.rating} ${getRatingClass(rating)}`}>{rating > 0 ? rating : '-'}</div>
+            <div className={`${styles.rating} ${getRatingClass(rating)}`}>
+                {rating > 0 ? getDecimalRating(rating) : '-'}
+            </div>
         </div>
     );
 }
