@@ -4,8 +4,10 @@ import styles from './Course.module.scss';
 
 export interface CourseObj {
     id: number;
+    version: number;
     description: string;
-    grade: number;
+    number: string;
+    grade?: number;
 }
 
 interface CourseProps {
@@ -18,8 +20,7 @@ export function Course({ course }: Readonly<CourseProps>) {
             <Link to={'/student/course/$id'} params={{ id: course.id }}>
                 <p className={styles.courseTitle}>{course.description}</p>
             </Link>
-
-            <Rating rating={course.grade} />
+            <Rating rating={5.5} />
         </div>
     );
 }

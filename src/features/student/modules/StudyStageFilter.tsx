@@ -13,7 +13,7 @@ export default function StudyStageFilter({ tabsProps, defaultActiveKey }: Readon
             defaultActiveKey={defaultActiveKey}
             items={[
                 {
-                    key: '1',
+                    key: '20',
                     label: intl.formatMessage({
                         id: 'student.basicStudies',
                         defaultMessage: 'Grundstudium',
@@ -21,7 +21,7 @@ export default function StudyStageFilter({ tabsProps, defaultActiveKey }: Readon
                     }),
                 },
                 {
-                    key: '2',
+                    key: '10',
                     label: intl.formatMessage({
                         id: 'student.specialisedStudies',
                         defaultMessage: 'Fachstudium',

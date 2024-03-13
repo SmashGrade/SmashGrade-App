@@ -1,12 +1,12 @@
-import { Spinner } from '@components/ui-elements/Spinner';
+import { ModuleResponseNew } from '@features/course-admin/interfaces/ModuleData.ts';
 import { Course, CourseObj } from '@features/student/modules/Course.tsx';
 import Rating from '@features/student/modules/Rating.tsx';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { Collapse } from 'antd';
-import axios from 'axios';
 import { ItemType } from 'rc-collapse/es/interface';
 import { CSSProperties } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { getModules } from '@features/course-admin/module/moduleApi.ts';
 
 const panelStyle: CSSProperties = {
     fontWeight: 'bold',
@@ -15,11 +15,6 @@ const panelStyle: CSSProperties = {
 
 interface ModulesProps {
     activeFilter: string;
-}
-
-interface StudentModuleResponse {
-    id: number;
-    modules: Module[];
 }
 
 interface Module {
@@ -31,40 +26,29 @@ interface Module {
     courses: CourseObj[];
 }
 
-const getModules = async (activeFilter: string): Promise<ItemType[]> => {
-    const studentModuleResponse = await axios.get<StudentModuleResponse>(`/moduleStudent/${activeFilter}`);
-    const modules = studentModuleResponse.data.modules;
+const getModulesForFilter = async (activeFilter: string): Promise<ItemType[]> => {
+    const modules: ModuleResponseNew[] = await getModules();
 
     return modules
-        .filter((module) => module.isActive)
+        .filter((module) => module.isActive && module.studyStage.id.toString() === activeFilter)
         .map((module) => {
             return {
                 key: module.id,
                 label: module.description,
                 children: module.courses.map((course) => <Course key={course.id} course={course} />),
-                extra: <Rating rating={module.grade} />,
+                // TODO: Add rating to module
+                extra: <Rating rating={5.5} />,
                 style: panelStyle,
             };
         });
 };
 
 export default function Modules({ activeFilter }: Readonly<ModulesProps>) {
-    const {
-        isLoading: modulesLoading,
-        error: modulesError,
-        data: modules,
-    } = useQuery({
+    const modules = useSuspenseQuery({
         queryKey: ['studentModules', activeFilter],
-        queryFn: () => getModules(activeFilter),
-    });
+        queryFn: () => getModulesForFilter(activeFilter),
+    }).data;
 
-    if (modulesLoading) {
-        return <Spinner />;
-    }
-
-    if (modulesError) {
-        return <h2>Error</h2>;
-    }
     return modules?.length ? (
         <Collapse items={modules} />
     ) : (
