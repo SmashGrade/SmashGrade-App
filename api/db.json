@@ -907,40 +907,106 @@
       "modules": []
     }
   ],
-  "courseTeacher": {
-    "id": 0,
-    "version": 0,
-    "description": "Projektmanagement",
-    "number": "3.121",
-    "exams": [
-      {
-        "id": 0,
-        "description": "Projektarbeit",
-        "weight": 0.3,
-        "type": "Schritfliche Arbeit",
-        "avgGrades": [
-          {
-            "id": 0,
-            "description": "CH-Note",
-            "grade": 4.3
-          }
-        ]
-      },
-      {
-        "id": 1,
-        "description": "Projektpräsentation",
-        "weight": 0.7,
-        "type": "Mündliche Prüfung",
-        "avgGrades": [
-          {
+  "courseTeacher": [
+    {
+      "id": 0,
+      "version": 0,
+      "description": "Projektmanagement",
+      "number": "3.121",
+      "exams": [
+        {
+          "id": 0,
+          "description": "Projektarbeit",
+          "weight": 0.3,
+          "type": "Schritfliche Arbeit",
+          "avgGrade": 5.5
+        },
+        {
+          "id": 1,
+          "description": "Projektpräsentation",
+          "weight": 0.7,
+          "type": "Mündliche Prüfung",
+          "avgGrade": 3.0
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "version": 0,
+      "description": "Projektmanagement",
+      "number": "3.121",
+      "exams": [
+        {
+          "id": 2,
+          "description": "Projektarbeit",
+          "weight": 0.3,
+          "type": "Schritfliche Arbeit",
+          "avgGrade": 5.5
+        },
+        {
+          "id": 3,
+          "description": "Projektpräsentation",
+          "weight": 0.7,
+          "type": "Mündliche Prüfung",
+          "avgGrade": 3.0
+        }
+      ]
+    }
+  ],
+  "examTeacher": [
+    {
+      "id": 0,
+      "description": "Final Exam",
+      "weight": 0.5,
+      "type": "Final",
+      "examEvaluations": [
+        {
+          "id": 1,
+          "grade": 4.5,
+          "student": {
             "id": 1,
-            "description": "CH-Note",
-            "grade": 5.5
+            "name": "John Doe",
+            "field": "Computer Science"
           }
-        ]
-      }
-    ]
-  },
+        },
+        {
+          "id": 2,
+          "grade": 3.7,
+          "student": {
+            "id": 2,
+            "name": "Jane Smith",
+            "field": "Electrical Engineering"
+          }
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "description": "Final Exam",
+      "weight": 0.5,
+      "type": "Final",
+      "examEvaluations": [
+        {
+          "id": 3,
+          "grade": 5.2,
+          "student": {
+            "id": 1,
+            "name": "John Doe",
+            "field": "Computer Science"
+          }
+        },
+        {
+          "id": 4,
+          "grade": 4.3,
+          "student": {
+            "id": 2,
+            "name": "Jane Smith",
+            "field": "Electrical Engineering"
+          }
+        }
+      ]
+    }
+  ],
   "modules": [
     {
       "id": 1,
@@ -1270,7 +1336,7 @@
       "startDate": 2023,
       "courses": [
         {
-          "id": 101,
+          "id": 0,
           "description": "Introduction to Programming",
           "exams": [
             {
@@ -1334,7 +1400,7 @@
           ]
         },
         {
-          "id": 102,
+          "id": 1,
           "description": "Data Structures and Algorithms",
           "exams": [
             {

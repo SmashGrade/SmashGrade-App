@@ -14,6 +14,22 @@ export interface Course {
     students: Student[];
 }
 
+export interface TeacherCourse {
+    id: number;
+    description: string;
+    exams: TeacherExam[];
+}
+
+export type TeacherCourseResponse = TeacherCourse;
+
+export interface TeacherExam {
+    id: number;
+    description: string;
+    weight: number;
+    type: string;
+    avgGrade: number;
+}
+
 export interface Exam {
     id: number;
     description: string;
@@ -21,6 +37,8 @@ export interface Exam {
     type: string;
     examEvaluations: ExamEvaluation[];
 }
+
+export type ExamResponse = Exam;
 
 export interface ExamEvaluation {
     id: number;
@@ -31,4 +49,5 @@ export interface ExamEvaluation {
 export interface Student {
     id: number;
     name: string;
+    field: string;
 }
