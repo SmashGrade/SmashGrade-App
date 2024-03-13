@@ -1,6 +1,5 @@
+import { CourseMetaInfo, ExamCreateData } from '@components/api/interfaces/Course.ts';
 import styles from '@features/course-admin/course/CourseCreation.module.scss';
-import { ExamCreateData } from '@features/course-admin/interfaces/CourseData.ts';
-import { FormFilters } from '@features/course-admin/interfaces/FormFilters.ts';
 import { Form, FormInstance, Input, Select } from 'antd';
 import { useIntl } from 'react-intl';
 import colors from '../../../colors.module.scss';
@@ -17,7 +16,7 @@ export interface CourseFormData {
 interface CourseDetailFormProps {
     form: FormInstance<CourseFormData>;
     onFinish: (formValues: CourseFormData) => void;
-    courseFormFilterData: FormFilters;
+    courseMetaData: CourseMetaInfo;
 }
 
 export function CourseDetailForm(props: Readonly<CourseDetailFormProps>) {
@@ -71,7 +70,14 @@ export function CourseDetailForm(props: Readonly<CourseDetailFormProps>) {
                     mode={'multiple'}
                     allowClear
                     className={styles.spacerWidth}
-                    options={props.courseFormFilterData?.teacherOptions}
+                    options={
+                        props.courseMetaData.teachers
+                            ? props.courseMetaData.teachers.map((teacher) => ({
+                                  value: teacher.id,
+                                  label: teacher.name,
+                              }))
+                            : []
+                    }
                 />
             </Form.Item>
 
@@ -94,7 +100,14 @@ export function CourseDetailForm(props: Readonly<CourseDetailFormProps>) {
                         mode={'multiple'}
                         allowClear
                         className={styles.spacerWidth}
-                        options={props.courseFormFilterData?.moduleOptions}
+                        options={
+                            props.courseMetaData.modules
+                                ? props.courseMetaData.modules.map((module) => ({
+                                      value: module.id,
+                                      label: module.description,
+                                  }))
+                                : []
+                        }
                     />
                 </Form.Item>
             </div>

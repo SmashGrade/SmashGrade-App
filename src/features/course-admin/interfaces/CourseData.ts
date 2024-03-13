@@ -39,7 +39,7 @@ export interface CourseFilter {
 export interface VersionResponse {
     version: number;
 }
-
+/*
 export interface CourseUpdateRequest {
     id: number;
     version: number;
@@ -53,12 +53,15 @@ export interface CourseUpdateRequest {
 
 export type CourseCreationRequest = Omit<CourseUpdateRequest, 'id'>;
 
+
 export interface ExamCreateData {
     id: number;
     description: string;
     weighting: number;
     examtype: ExamType;
 }
+
+ */
 export interface CourseFilterResponse {
     modules: ModuleResponse[];
     teachers: TeacherResponse[];

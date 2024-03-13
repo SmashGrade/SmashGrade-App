@@ -29,8 +29,6 @@ services:
         - API_LOG_LEVEL=debug
       networks:
         - smash-grade-network
-      volumes:
-        - ./api/config.yaml:/app/config.yaml
 
 networks:
   smash-grade-network:

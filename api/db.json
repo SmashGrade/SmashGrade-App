@@ -356,53 +356,68 @@
     {
       "id": 1,
       "version": 1,
-      "description": "Projektmanagement",
-      "number": "555",
+      "description": "Datenbank Scripting",
+      "number": "IN311",
       "modules": [
         {
-          "id": 0,
+          "id": 102,
           "version": 1,
-          "description": "Schnittstellen-Technologien",
-          "number": "string",
-          "isActive": true
+          "created": "2024-03-07T12:30:00Z",
+          "updated": "2024-03-07T14:30:00Z",
+          "deleted": null,
+          "description": "Advanced Programming Techniques",
+          "number": "CS-202",
+          "state": {
+            "id": 2,
+            "created": "2024-03-07T12:30:00Z",
+            "updated": "2024-03-07T14:30:00Z",
+            "deleted": null,
+            "description": "Active",
+            "moduleID": 102
+          },
+          "studyStage": {
+            "id": 2,
+            "created": "2024-03-07T12:30:00Z",
+            "updated": "2024-03-07T14:30:00Z",
+            "deleted": null,
+            "description": "Fachstudium",
+            "moduleID": 102
+          },
+          "evaluationType": {
+            "id": 4,
+            "created": "2024-03-06T10:07:53.086121877Z",
+            "updated": "2024-03-06T10:07:53.086121877Z",
+            "deleted": null,
+            "description": "Modul bestanden, wenn der Durchschnitt aller Kurse genügend und nicht mehr als ein Kurs im Modul ungenügend ist. (Art. 30)",
+            "code": "M"
+          },
+          "curriculums": null,
+          "courses": null
         }
       ],
       "teachers": [
         {
-          "id": 1,
-          "name": "Simeon Liniger"
-        },
-        {
           "id": 2,
-          "name": "Kurt Munter"
+          "created": "2021-09-15T09:30:00Z",
+          "updated": "2024-03-07T12:10:00Z",
+          "deleted": null,
+          "classStartYear": "2021",
+          "name": "Betty Smith",
+          "email": "betty.smith@example.com",
+          "fields": null,
+          "roles": [
+            {
+              "claim": "teacher",
+              "created": "2021-09-15T09:30:00Z",
+              "deleted": null,
+              "description": "Teacher Role",
+              "id": 102,
+              "updated": "2024-03-07T12:10:00Z"
+            }
+          ]
         }
       ],
-      "exams": [
-        {
-          "id": 1,
-          "description": "Projektarbeit",
-          "weight": 2,
-          "type": "Schriftliche Arbeit 2"
-        },
-        {
-          "id": 2,
-          "description": "Abschlusspräsentation",
-          "weight": 2,
-          "type": "Präsentation"
-        },
-        {
-          "id": 3,
-          "description": "Zusammenfassung",
-          "weight": 4,
-          "type": "Credits Aufgabe"
-        },
-        {
-          "id": 4,
-          "description": "New Exam!",
-          "type": "afeafeafea",
-          "weight": 2
-        }
-      ],
+      "exams": [],
       "versions": [
         1,
         2,
@@ -411,35 +426,73 @@
     },
     {
       "id": 2,
-      "version": 2,
-      "description": "Data Structures",
-      "number": "3.122",
-      "versions": [
-        1,
-        2
-      ],
+      "version": 1,
+      "description": "Modellieren von Softwaresystemen",
+      "number": "IN000",
       "modules": [
         {
-          "id": 1,
+          "id": 102,
           "version": 1,
-          "description": "Data Analysis",
-          "number": "string",
-          "isActive": true
-        }
-      ],
-      "exams": [
-        {
-          "id": 1,
-          "description": "Final Exam",
-          "weight": 3,
-          "type": "Schritfliche Arbeit"
+          "created": "2024-03-07T12:30:00Z",
+          "updated": "2024-03-07T14:30:00Z",
+          "deleted": null,
+          "description": "Advanced Programming Techniques",
+          "number": "CS-202",
+          "state": {
+            "id": 2,
+            "created": "2024-03-07T12:30:00Z",
+            "updated": "2024-03-07T14:30:00Z",
+            "deleted": null,
+            "description": "Active",
+            "moduleID": 102
+          },
+          "studyStage": {
+            "id": 2,
+            "created": "2024-03-07T12:30:00Z",
+            "updated": "2024-03-07T14:30:00Z",
+            "deleted": null,
+            "description": "Fachstudium",
+            "moduleID": 102
+          },
+          "evaluationType": {
+            "id": 4,
+            "created": "2024-03-06T10:07:53.086121877Z",
+            "updated": "2024-03-06T10:07:53.086121877Z",
+            "deleted": null,
+            "description": "Modul bestanden, wenn der Durchschnitt aller Kurse genügend und nicht mehr als ein Kurs im Modul ungenügend ist. (Art. 30)",
+            "code": "M"
+          },
+          "curriculums": null,
+          "courses": null
         }
       ],
       "teachers": [
         {
           "id": 1,
-          "name": "John Doe"
+          "created": "2022-08-01T10:00:00Z",
+          "updated": "2024-03-07T12:00:00Z",
+          "deleted": null,
+          "classStartYear": "2022",
+          "name": "Alex Johnson",
+          "email": "alex.johnson@example.com",
+          "fields": null,
+          "roles": [
+            {
+              "claim": "teacher",
+              "created": "2022-08-01T10:00:00Z",
+              "deleted": null,
+              "description": "Responsible for teaching Mathematics.",
+              "id": 101,
+              "updated": "2024-03-07T12:00:00Z"
+            }
+          ]
         }
+      ],
+      "exams": [],
+      "versions": [
+        1,
+        2,
+        3
       ]
     },
     {
@@ -740,6 +793,146 @@
         3
       ],
       "id": 10
+    },
+    {
+      "version": 1,
+      "description": "sfasdf",
+      "number": "asdfsdf",
+      "modules": [
+        {
+          "id": 102,
+          "version": 1,
+          "created": "2024-03-07T12:30:00Z",
+          "updated": "2024-03-07T14:30:00Z",
+          "deleted": null,
+          "description": "Advanced Programming Techniques",
+          "number": "CS-202",
+          "state": {
+            "id": 2,
+            "created": "2024-03-07T12:30:00Z",
+            "updated": "2024-03-07T14:30:00Z",
+            "deleted": null,
+            "description": "Active",
+            "moduleID": 102
+          },
+          "studyStage": {
+            "id": 2,
+            "created": "2024-03-07T12:30:00Z",
+            "updated": "2024-03-07T14:30:00Z",
+            "deleted": null,
+            "description": "Fachstudium",
+            "moduleID": 102
+          },
+          "evaluationType": {
+            "id": 4,
+            "created": "2024-03-06T10:07:53.086121877Z",
+            "updated": "2024-03-06T10:07:53.086121877Z",
+            "deleted": null,
+            "description": "Modul bestanden, wenn der Durchschnitt aller Kurse genügend und nicht mehr als ein Kurs im Modul ungenügend ist. (Art. 30)",
+            "code": "M"
+          },
+          "curriculums": null,
+          "courses": null
+        }
+      ],
+      "teachers": [
+        {
+          "id": 2,
+          "created": "2021-09-15T09:30:00Z",
+          "updated": "2024-03-07T12:10:00Z",
+          "deleted": null,
+          "classStartYear": "2021",
+          "name": "Betty Smith",
+          "email": "betty.smith@example.com",
+          "fields": null,
+          "roles": [
+            {
+              "claim": "teacher",
+              "created": "2021-09-15T09:30:00Z",
+              "deleted": null,
+              "description": "Teacher Role",
+              "id": 102,
+              "updated": "2024-03-07T12:10:00Z"
+            }
+          ]
+        }
+      ],
+      "versions": [
+        1,
+        2,
+        3
+      ],
+      "id": 11
+    },
+    {
+      "version": 1,
+      "description": "sgdfg",
+      "number": "sdfgsdfg",
+      "modules": [
+        {
+          "id": 103,
+          "version": 1,
+          "created": "2024-03-07T13:00:00Z",
+          "updated": "2024-03-07T15:00:00Z",
+          "deleted": null,
+          "description": "Data Structures and Algorithms",
+          "number": "CS-303",
+          "state": {
+            "id": 3,
+            "created": "2024-03-07T13:00:00Z",
+            "updated": "2024-03-07T15:00:00Z",
+            "deleted": null,
+            "description": "Active",
+            "moduleID": 103
+          },
+          "studyStage": {
+            "id": 3,
+            "created": "2024-03-07T13:00:00Z",
+            "updated": "2024-03-07T15:00:00Z",
+            "deleted": null,
+            "description": "Schwerpunkt",
+            "moduleID": 103
+          },
+          "evaluationType": {
+            "id": 6,
+            "created": "2024-03-06T10:07:53.093685092Z",
+            "updated": "2024-03-06T10:07:53.093685092Z",
+            "deleted": null,
+            "description": "Modul bestanden, wenn alle Kurse erfüllt sind. (Art. 32)",
+            "code": "E"
+          },
+          "curriculums": null,
+          "courses": null
+        }
+      ],
+      "teachers": [
+        {
+          "id": 2,
+          "created": "2021-09-15T09:30:00Z",
+          "updated": "2024-03-07T12:10:00Z",
+          "deleted": null,
+          "classStartYear": "2021",
+          "name": "Betty Smith",
+          "email": "betty.smith@example.com",
+          "fields": null,
+          "roles": [
+            {
+              "claim": "teacher",
+              "created": "2021-09-15T09:30:00Z",
+              "deleted": null,
+              "description": "Teacher Role",
+              "id": 102,
+              "updated": "2024-03-07T12:10:00Z"
+            }
+          ]
+        }
+      ],
+      "versions": [
+        1,
+        2,
+        3
+      ],
+      "id": 12
     }
   ],
   "courseFilter": {
@@ -943,31 +1136,22 @@
   },
   "modules": [
     {
-      "id": 1,
-      "version": 1,
-      "description": "Schnittstellen-Technologien",
       "number": "IT-200",
-      "isActive": true,
+      "description": "Schnittstellen-Technologienqqq",
+      "evaluationType": "E",
+      "curriculum": [],
       "studyStage": {
-        "id": 10,
-        "description": "Fachstudium"
+        "id": 0,
+        "description": "None"
       },
+      "isActive": true,
+      "id": 1,
+      "version": 2,
+      "courses": [],
       "valuationCategory": {
-        "description": "Grundlagenmodul",
-        "code": "E"
-      },
-      "courses": [
-        {
-          "id": 101,
-          "version": 1,
-          "description": "Projektmanagement",
-          "number": "3.121",
-          "versions": [
-            1,
-            2
-          ]
-        }
-      ]
+        "code": "E",
+        "description": "E"
+      }
     },
     {
       "id": 2,

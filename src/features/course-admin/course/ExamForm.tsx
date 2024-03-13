@@ -1,15 +1,15 @@
+import { CourseMetaInfo, ExamCreateData } from '@components/api/interfaces/Course.ts';
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
 import styles from '@features/course-admin/course/CourseCreation.module.scss';
-import { ExamCreateData } from '@features/course-admin/interfaces/CourseData.ts';
-import { FormFilters } from '@features/course-admin/interfaces/FormFilters.ts';
-import { Button, Col, Divider, Form, FormListOperation, Input, InputNumber, Row } from 'antd';
+import { Button, Col, Divider, Form, FormListOperation, Input, InputNumber, Row, Select } from 'antd';
 import { useCallback, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import colors from '../../../colors.module.scss';
 import layout from '../../../layout.module.scss';
 
 interface ExamFormProps {
-    courseFormFilterData: FormFilters | undefined;
+    //courseFormFilterData: FormFilters | undefined;
+    courseMetaData: CourseMetaInfo;
     courseExams: ExamCreateData[];
 }
 
@@ -125,7 +125,15 @@ export function ExamForm(props: Readonly<ExamFormProps>) {
                                         </Col>
                                         <Col span={8}>
                                             <Form.Item {...field} key={field.key + 'type'} name={[field.name, 'type']}>
-                                                <Input type={'text'} />
+                                                <Select
+                                                    options={props.courseMetaData.examtypes.map((examType) => {
+                                                        return {
+                                                            value: examType.id,
+                                                            label: examType.description,
+                                                        };
+                                                    })}
+                                                />
+                                                {}
                                             </Form.Item>
                                         </Col>
                                         <Col span={2}>

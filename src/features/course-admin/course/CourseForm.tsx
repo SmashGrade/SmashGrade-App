@@ -1,11 +1,10 @@
 import { SaveOutlined } from '@ant-design/icons';
-import { CourseObject } from '@components/api/interfaces/Course.ts';
+import { CourseObject, CourseUpdateRequest, CourseCreationRequest } from '@components/api/interfaces/Course.ts';
 import { MaterialIcon } from '@components/ui-elements/MaterialIcon.tsx';
 import { Spinner } from '@components/ui-elements/Spinner.tsx';
 import { getCourseMetadata } from '@features/course-admin/course/courseApi.ts';
 import { CourseDetailForm, CourseFormData } from '@features/course-admin/course/CourseDetailForm.tsx';
 import { ExamForm } from '@features/course-admin/course/ExamForm.tsx';
-import { CourseCreationRequest, CourseUpdateRequest } from '@features/course-admin/interfaces/CourseData.ts';
 
 import { UseMutationResult, useSuspenseQuery } from '@tanstack/react-query';
 import { Button, Form, Select, Space } from 'antd';
@@ -80,7 +79,7 @@ export default function CourseForm(props: Readonly<CourseFormProps>) {
                     description: formValues.description,
                     number: formValues.number,
                     modules: modules,
-                    teachers: teachers,
+                    teachedBy: teachers,
                     exams: formValues.exams,
                     versions: [1, 2, 3],
                 };
@@ -92,7 +91,7 @@ export default function CourseForm(props: Readonly<CourseFormProps>) {
                     description: formValues.description,
                     number: formValues.number,
                     modules: modules,
-                    teachers: teachers,
+                    teachedBy: teachers,
                     exams: formValues.exams,
                     versions: [1, 2, 3],
                 };
@@ -105,9 +104,6 @@ export default function CourseForm(props: Readonly<CourseFormProps>) {
     const onSave = useCallback(() => {
         courseForm.submit();
     }, [courseForm]);
-
-    if (courseFormFilterError) return <div>Error when loading filters</div>;
-    if (isCourseFormFilterLoading) return <Spinner />;
 
     return (
         <div className={styles.overallFlex}>

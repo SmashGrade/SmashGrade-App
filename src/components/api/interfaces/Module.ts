@@ -1,6 +1,6 @@
 import { Curriculum } from '@components/api/interfaces/Curriculum.ts';
+import { CourseObject } from '@components/api/interfaces/Course.ts';
 import { DeletedAt, MetaBase, State } from '@components/api/interfaces/MetaInfo.ts';
-import { Course } from '@features/course-admin/interfaces/ModuleData.ts';
 
 export interface Module extends MetaBase {
     description: string;
@@ -9,7 +9,7 @@ export interface Module extends MetaBase {
     studyStage: StudyStage;
     evaluationType: EvaluationType;
     curriculums: Curriculum[] | null;
-    courses: Course[] | null;
+    courses: CourseObject[] | null;
 }
 interface EvaluationType {
     id: number;

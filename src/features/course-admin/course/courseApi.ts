@@ -1,6 +1,10 @@
-import { CourseMetaInfo } from '@components/api/interfaces/Course.ts';
-import { CourseResponse, CoursesResponse } from '@features/course-admin/interfaces/CourseApi.ts';
-import { CourseCreationRequest, CourseUpdateRequest } from '@features/course-admin/interfaces/CourseData.ts';
+import {
+    CourseMetaInfoResponse,
+    CourseResponse,
+    CoursesResponse,
+} from '@features/course-admin/interfaces/CourseApi.ts';
+//import { CourseCreationRequest, CourseUpdateRequest } from '@features/course-admin/interfaces/CourseData.ts';
+import { CourseUpdateRequest, CourseCreationRequest } from '@components/api/interfaces/Course.ts';
 import axios from 'axios';
 import { BACKEND_API_URL } from '../../../config/apiConfig.ts';
 
@@ -10,8 +14,8 @@ export async function getCourse(courseId: number, version: number) {
 }
 
 export async function getCourseMetadata() {
-    const { data } = await axios.get<CourseMetaInfo>('coursesMeta');
-    return data;
+    const { data } = await axios.get<CourseMetaInfoResponse>('/courses/meta', { baseURL: BACKEND_API_URL });
+    return data.data; // Zugriff auf das innere 'data' für die Metadaten
 }
 
 export async function getCourses() {

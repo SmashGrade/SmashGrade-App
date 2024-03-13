@@ -25,3 +25,23 @@ export interface CourseMetaInfo {
     modules: Module[];
     teachers: User[];
 }
+
+export interface CourseUpdateRequest {
+    id: number;
+    version: number;
+    versions: number[];
+    description: string;
+    number: string;
+    modules: Module[];
+    teachedBy: User[];
+    exams: ExamCreateData[];
+}
+
+export type CourseCreationRequest = Omit<CourseUpdateRequest, 'id'>;
+
+export interface ExamCreateData {
+    id: number;
+    description: string;
+    weighting: number;
+    examtype: ExamType;
+}
