@@ -1,5 +1,5 @@
-import TeacherCurriculum from '@features/teacher/curriculum/TeacherCurriculum.tsx';
+import TeacherCourseList from '@features/teacher/TeacherCourseList.tsx';
 
 export default function MyCoursePage() {
-    return <TeacherCurriculum />;
+    return <TeacherCourseList />;
 }

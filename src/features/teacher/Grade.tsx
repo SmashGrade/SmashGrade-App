@@ -2,13 +2,13 @@ import { UserOutlined } from '@ant-design/icons';
 import Rating from '@features/student/modules/Rating.tsx';
 import styles from '@pages/MyCoursePage.module.scss';
 
-interface GradeCardProps {
+interface GradeProps {
     studentName: string;
     field: string;
     rating: number;
 }
 
-export default function GradeCard(props: Readonly<GradeCardProps>) {
+export default function Grade(props: Readonly<GradeProps>) {
     return (
         <div className={`${styles.outlined} ${styles.gradeComponent}`}>
             <div className={styles.gradeComponent}>

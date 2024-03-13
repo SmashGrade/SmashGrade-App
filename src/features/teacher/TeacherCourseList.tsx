@@ -1,8 +1,8 @@
 import { BookFilled } from '@ant-design/icons';
-import Qualification from '@features/teacher/courses/Qualification.tsx';
+import ExamList from '@features/teacher/ExamList.tsx';
 import styles from '@pages/MyCoursePage.module.scss';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { getCurriculums } from '@features/teacher/curriculum/curriculumApi.ts';
+import { getCurriculums } from '@features/teacher/interfaces/curriculumApi.ts';
 import { Menu, MenuProps, Select } from 'antd';
 import { MenuItemType } from 'antd/es/menu/hooks/useItems';
 import { MenuInfo } from 'node_modules/rc-menu/lib/interface';
@@ -27,7 +27,7 @@ const getItem = (
     } as MenuItem;
 };
 
-export default function TeacherCurriculum() {
+export default function TeacherCourseList() {
     const intl = useIntl();
 
     const curriculums = useSuspenseQuery({
@@ -48,21 +48,26 @@ export default function TeacherCurriculum() {
 
     const [menuItems, setMenuItems] = useState<MenuItem[]>(getMenuItems(0));
     const [current, setCurrent] = useState<MenuItemType>(menuItems[0] as MenuItemType);
+    const [currentCurriculum, setCurrentCurriculum] = useState<number>(0);
+    const [currentCourseId, setCurrentCourseId] = useState<number>(curriculums[currentCurriculum].courses[0].id);
 
     const handleOnChange = useCallback(
         (e: number) => {
             setMenuItems(getMenuItems(e));
+            setCurrentCurriculum(e);
             // Automatically select the first menu item when the selected year changes
             setCurrent(menuItems[0] as MenuItemType);
+            setCurrentCourseId(curriculums[e].courses[0].id);
         },
-        [menuItems]
+        [curriculums, menuItems]
     );
 
     const menuOnClick = useCallback(
         (e: MenuInfo) => {
             setCurrent(menuItems[parseInt(e.key)] as MenuItemType);
+            setCurrentCourseId(curriculums[currentCurriculum].courses[parseInt(e.key)].id);
         },
-        [menuItems]
+        [currentCurriculum, curriculums, menuItems]
     );
 
     return (
@@ -82,15 +87,7 @@ export default function TeacherCurriculum() {
                     style={{ width: '90%' }}
                 />
             </div>
-            <Qualification
-                field={current?.label as string}
-                subheading={intl.formatMessage({
-                    id: 'course.qualification',
-                    description: 'Qualifikationsnachweise eines Kurses',
-                    defaultMessage: 'Qualifikationsnachweise',
-                })}
-            />
-            *
+            <ExamList field={current?.label as string} courseId={currentCourseId} />
         </div>
     );
 }
