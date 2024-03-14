@@ -8,7 +8,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { Button, Menu } from 'antd';
 import { EditFilled } from '@ant-design/icons';
 import { MenuInfo } from 'node_modules/rc-menu/lib/interface';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 interface ExamListProps {
@@ -24,13 +24,19 @@ export default function ExamList(props: Readonly<ExamListProps>) {
     }).data;
 
     const [editStudents, setEditStudents] = useState(false);
-    /*const [menuItems, setMenuItems] = useState(getMenuItems());
-    const [current, setCurrent] = useState<MenuItemType>(menuItems[0] as MenuItemType);*/
-    const [current, setCurrent] = useState<TeacherExam>(exams[0]);
+    const [currentExam, setCurrentExam] = useState<TeacherExam>(exams[0]);
+    const [currentMenuIndex, setCurrentMenuIndex] = useState<number>(0);
+
+    // Used to update the selected exam and current menu index if the courseId changes
+    useEffect(() => {
+        setCurrentExam(exams[0]);
+        setCurrentMenuIndex(0);
+    }, [props.courseId, exams]);
 
     const menuOnClick = useCallback(
         (e: MenuInfo) => {
-            setCurrent(exams[parseInt(e.key)]);
+            setCurrentExam(exams[parseInt(e.key)]);
+            setCurrentMenuIndex(parseInt(e.key));
         },
         [exams]
     );
@@ -68,7 +74,7 @@ export default function ExamList(props: Readonly<ExamListProps>) {
                 </p>
                 <Menu
                     onClick={menuOnClick}
-                    selectedKeys={[current.id.toString()]}
+                    selectedKeys={[currentMenuIndex.toString()]}
                     className={styles.menu}
                     style={{ width: '90%' }}
                 >
@@ -89,9 +95,9 @@ export default function ExamList(props: Readonly<ExamListProps>) {
                 </Menu>
             </div>
             {editStudents ? (
-                <StudentForm examId={current.id} />
+                <StudentForm examId={currentExam.id} />
             ) : (
-                <GradeList examId={current.id} avgGrade={current.avgGrade} />
+                <GradeList examId={currentExam.id} avgGrade={currentExam.avgGrade} />
             )}
         </div>
     );

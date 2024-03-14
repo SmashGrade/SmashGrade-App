@@ -14,7 +14,7 @@ export default function Exam(props: ExamProps) {
         <div className={`${styles.examOutline} ${styles.flexRowCenter} ${styles.componentChildren}`}>
             <div className={styles.baseFlexCol}>
                 <p>{props.name}</p>
-                <div className={styles.flexRowStart}>
+                <div className={styles.flexRowCenter}>
                     <AuditOutlined />
                     <p>{(props.weight * 100).toString() + '%'}</p>
                 </div>
