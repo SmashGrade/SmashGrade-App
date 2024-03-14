@@ -40,11 +40,14 @@ export default function TeacherCourseList() {
         value: index,
     }));
 
-    const getMenuItems = (key: number) => {
-        return curriculums[key].courses.map((course, index) =>
-            getItem(course.description, index.toString(), <BookFilled />)
-        );
-    };
+    const getMenuItems = useCallback(
+        (key: number) => {
+            return curriculums[key].courses.map((course, index) =>
+                getItem(course.description, index.toString(), <BookFilled />)
+            );
+        },
+        [curriculums]
+    );
 
     const [menuItems, setMenuItems] = useState<MenuItem[]>(getMenuItems(0));
     const [current, setCurrent] = useState<MenuItemType>(menuItems[0] as MenuItemType);
@@ -59,7 +62,7 @@ export default function TeacherCourseList() {
             setCurrent(menuItems[0] as MenuItemType);
             setCurrentCourseId(curriculums[e].courses[0].id);
         },
-        [curriculums, menuItems]
+        [curriculums, getMenuItems, menuItems]
     );
 
     const menuOnClick = useCallback(

@@ -8,7 +8,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import styles from '@pages/MyCoursePage.module.scss';
 
 interface StudentFormProps {
-    readonly examId: number;
+    examId: number;
 }
 
 // TODO: Add popup for adding students, needs to have a search field for adding students -> Modal component from antd
@@ -24,19 +24,23 @@ export default function StudentForm(props: Readonly<StudentFormProps>) {
 
     const [students, setStudents] = useState<Student[]>(exam.examEvaluations.map((evaluation) => evaluation.student));
 
-    const handleCancel = () => {
+    function handleCancel() {
         setOpenList(false);
-    };
+    }
 
-    const handleOk = () => {
+    function handleOk() {
         setOpenList(false);
         // TODO: Add student
         console.info('Add student');
-    };
+    }
 
     const removeStudent = (studentId: number) => {
         setStudents(students.filter((student) => student.id !== studentId));
     };
+
+    function openModal() {
+        setOpenList(true);
+    }
 
     return (
         <div className={`${styles.gradeContainer}`}>
@@ -49,13 +53,7 @@ export default function StudentForm(props: Readonly<StudentFormProps>) {
                             description={'Überschrift Teilnehmerliste'}
                         />
                     </h3>
-                    <Button
-                        type={'primary'}
-                        icon={<PlusCircleFilled />}
-                        onClick={() => {
-                            setOpenList(true);
-                        }}
-                    />
+                    <Button type={'primary'} icon={<PlusCircleFilled />} onClick={openModal} />
                 </div>
 
                 {students.map((student) => {
@@ -68,7 +66,6 @@ export default function StudentForm(props: Readonly<StudentFormProps>) {
                                     type={'primary'}
                                     icon={<CloseCircleFilled />}
                                     onClick={() => {
-                                        console.log('Delete student with ID: ' + student.id);
                                         removeStudent(student.id);
                                     }}
                                 />

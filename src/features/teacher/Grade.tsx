@@ -38,6 +38,10 @@ interface GradeProps {
 export default function Grade(props: Readonly<GradeProps>) {
     const [ratingClass, setRatingClass] = useState(getRatingClass(props.rating));
 
+    function handleOnChange(value: number | null) {
+        setRatingClass(getRatingClass(value!));
+    }
+
     return (
         <div className={`${styles.outlined} ${styles.gradeComponent}`}>
             <div className={styles.gradeComponent}>
@@ -53,9 +57,7 @@ export default function Grade(props: Readonly<GradeProps>) {
                 max={6}
                 step={0.01}
                 className={ratingClass}
-                onChange={(value) => {
-                    setRatingClass(getRatingClass(value!));
-                }}
+                onChange={handleOnChange}
             />
         </div>
     );

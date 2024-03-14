@@ -25,34 +25,28 @@ export default function ExamList(props: Readonly<ExamListProps>) {
 
     const [editStudents, setEditStudents] = useState(false);
     const [currentExam, setCurrentExam] = useState<TeacherExam>(exams[0]);
-    const [currentMenuIndex, setCurrentMenuIndex] = useState<number>(0);
 
     // Used to update the selected exam and current menu index if the courseId changes
     useEffect(() => {
         setCurrentExam(exams[0]);
-        setCurrentMenuIndex(0);
     }, [props.courseId, exams]);
 
     const menuOnClick = useCallback(
         (e: MenuInfo) => {
-            setCurrentExam(exams[parseInt(e.key)]);
-            setCurrentMenuIndex(parseInt(e.key));
+            setCurrentExam(exams.filter((exam) => exam.id === parseInt(e.key))[0]);
         },
         [exams]
     );
+
+    function editOnClick() {
+        setEditStudents(!editStudents);
+    }
 
     return (
         <div className={styles.flexRowStart} style={{ flex: 'content' }}>
             <div className={`${styles.proofOfQualification} ${styles.background}`}>
                 <h3>{props.field}</h3>
-                <Button
-                    type={'default'}
-                    icon={<EditFilled />}
-                    size={'large'}
-                    onClick={function () {
-                        setEditStudents(!editStudents);
-                    }}
-                >
+                <Button type={'default'} icon={<EditFilled />} size={'large'} onClick={editOnClick}>
                     {editStudents
                         ? intl.formatMessage({
                               id: 'teacher.editGrades',
@@ -74,21 +68,14 @@ export default function ExamList(props: Readonly<ExamListProps>) {
                 </p>
                 <Menu
                     onClick={menuOnClick}
-                    selectedKeys={[currentMenuIndex.toString()]}
+                    selectedKeys={[currentExam.id.toString()]}
                     className={styles.menu}
                     style={{ width: '90%' }}
                 >
-                    {exams.map((exam, index) => (
+                    {exams.map((exam) => (
                         <Menu.Item
-                            key={index.toString()}
-                            icon={
-                                <Exam
-                                    id={exam.id}
-                                    name={exam.description}
-                                    rating={exam.avgGrade}
-                                    weight={exam.weight}
-                                />
-                            }
+                            key={exam.id.toString()}
+                            icon={<Exam name={exam.description} rating={exam.avgGrade} weight={exam.weight} />}
                             style={{ height: '100px' }}
                         />
                     ))}
