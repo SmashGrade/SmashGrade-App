@@ -22,13 +22,13 @@
 .flexRowStart {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: start;
     justify-content: flex-start;
     gap: 5%;
 }
 
 .outlined {
-    border-radius: 5px;
+    border-radius: 15px;
     background-color: $colorSecondary;
     padding: 10px;
     margin: 5px;
@@ -113,4 +113,21 @@
 .menu {
     @extend .baseBackground;
     @extend .cardOverwrite;
+}
+
+// TODO: Make these available globally
+.ratingGood {
+    background-color: $colorRatingGood;
+}
+
+.ratingBad {
+    background-color: $colorRatingBad;
+}
+
+.ratingMedian {
+    background-color: $colorRatingMedian;
+}
+
+.ratingNone {
+    background-color: $colorSecondary;
 }

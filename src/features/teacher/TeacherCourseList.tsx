@@ -2,7 +2,7 @@ import { BookFilled } from '@ant-design/icons';
 import ExamList from '@features/teacher/ExamList.tsx';
 import styles from '@pages/MyCoursePage.module.scss';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { getCurriculums } from '@features/teacher/interfaces/curriculumApi.ts';
+import { getCurriculums } from '@features/teacher/api/curriculumApi.ts';
 import { Menu, MenuProps, Select } from 'antd';
 import { MenuItemType } from 'antd/es/menu/hooks/useItems';
 import { MenuInfo } from 'node_modules/rc-menu/lib/interface';

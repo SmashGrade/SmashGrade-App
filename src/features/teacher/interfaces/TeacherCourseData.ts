@@ -39,6 +39,7 @@ export interface Exam {
 }
 
 export type ExamResponse = Exam;
+export type ExamUpdateRequest = Exam;
 
 export interface ExamEvaluation {
     id: number;

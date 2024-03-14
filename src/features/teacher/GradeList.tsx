@@ -1,7 +1,7 @@
 import Rating from '@features/student/modules/Rating.tsx';
 import Grade from '@features/teacher/Grade.tsx';
 import ExamProperty from '@features/teacher/ExamProperty.tsx';
-import { getExam } from '@features/teacher/interfaces/examApi.ts';
+import { getExam } from '@features/teacher/api/examApi.ts';
 import styles from '@pages/MyCoursePage.module.scss';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { Divider } from 'antd';
@@ -68,6 +68,9 @@ export default function GradeList(props: Readonly<GradeListProps>) {
                     {exam.examEvaluations.map((evaluation) => {
                         return (
                             <Grade
+                                examId={props.examId}
+                                evaluationId={evaluation.id}
+                                studentId={evaluation.student.id}
                                 studentName={evaluation.student.name}
                                 field={evaluation.student.field}
                                 rating={evaluation.grade}
