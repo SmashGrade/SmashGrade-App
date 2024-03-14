@@ -356,65 +356,156 @@
     {
       "id": 1,
       "version": 1,
-      "description": "Datenbank Scripting",
+      "description": "Datenbank Scriptingg",
       "number": "IN311",
       "modules": [
         {
-          "id": 102,
+          "id": 1,
           "version": 1,
-          "created": "2024-03-07T12:30:00Z",
-          "updated": "2024-03-07T14:30:00Z",
+          "created": "2024-03-14T09:50:50.052468473Z",
+          "updated": "2024-03-14T09:50:50.052468473Z",
           "deleted": null,
-          "description": "Advanced Programming Techniques",
-          "number": "CS-202",
           "state": {
-            "id": 2,
-            "created": "2024-03-07T12:30:00Z",
-            "updated": "2024-03-07T14:30:00Z",
+            "id": 1,
+            "created": "2024-03-14T09:50:50.027814673Z",
+            "updated": "2024-03-14T09:50:50.027814673Z",
             "deleted": null,
-            "description": "Active",
-            "moduleID": 102
+            "description": "Aktiv",
+            "moduleID": 0
           },
           "studyStage": {
-            "id": 2,
-            "created": "2024-03-07T12:30:00Z",
-            "updated": "2024-03-07T14:30:00Z",
+            "id": 1,
+            "created": "2024-03-14T09:50:50.047899577Z",
+            "updated": "2024-03-14T09:50:50.047899577Z",
             "deleted": null,
-            "description": "Fachstudium",
-            "moduleID": 102
+            "description": "Grundstudium",
+            "moduleID": 0
           },
           "evaluationType": {
-            "id": 4,
-            "created": "2024-03-06T10:07:53.086121877Z",
-            "updated": "2024-03-06T10:07:53.086121877Z",
+            "id": 1,
+            "created": "2024-03-14T09:50:50.042772033Z",
+            "updated": "2024-03-14T09:50:50.042772033Z",
             "deleted": null,
-            "description": "Modul bestanden, wenn der Durchschnitt aller Kurse genügend und nicht mehr als ein Kurs im Modul ungenügend ist. (Art. 30)",
-            "code": "M"
+            "description": "F",
+            "code": "F"
           },
-          "curriculums": null,
-          "courses": null
-        }
-      ],
-      "teachers": [
-        {
-          "id": 2,
-          "created": "2021-09-15T09:30:00Z",
-          "updated": "2024-03-07T12:10:00Z",
-          "deleted": null,
-          "classStartYear": "2021",
-          "name": "Betty Smith",
-          "email": "betty.smith@example.com",
-          "fields": null,
-          "roles": [
+          "description": "Schnittstellen-Technologien",
+          "number": "IN123",
+          "curriculums": [
             {
-              "claim": "teacher",
-              "created": "2021-09-15T09:30:00Z",
+              "id": 1,
+              "startvalidity": "2021-04-01T00:00:00Z",
+              "created": "2024-03-14T09:50:50.037401612Z",
+              "updated": "2024-03-14T09:50:50.037401612Z",
               "deleted": null,
-              "description": "Teacher Role",
-              "id": 102,
-              "updated": "2024-03-07T12:10:00Z"
+              "focus": {
+                "id": 0,
+                "created": "0001-01-01T00:00:00Z",
+                "updated": "0001-01-01T00:00:00Z",
+                "deleted": null,
+                "field": {
+                  "id": 0,
+                  "created": "0001-01-01T00:00:00Z",
+                  "updated": "0001-01-01T00:00:00Z",
+                  "deleted": null,
+                  "description": "",
+                  "users": null
+                },
+                "description": ""
+              },
+              "curriculumType": {
+                "id": 0,
+                "created": "0001-01-01T00:00:00Z",
+                "updated": "0001-01-01T00:00:00Z",
+                "deleted": null,
+                "description": "",
+                "durationYears": 0
+              },
+              "state": {
+                "id": 0,
+                "created": "0001-01-01T00:00:00Z",
+                "updated": "0001-01-01T00:00:00Z",
+                "deleted": null,
+                "description": "",
+                "moduleID": 0
+              },
+              "endValidity": "2024-04-01T12:00:00Z",
+              "description": "Softwareentwicklung",
+              "modules": null
+            },
+            {
+              "id": 2,
+              "startvalidity": "2021-04-01T00:00:00Z",
+              "created": "2024-03-14T09:50:50.040773873Z",
+              "updated": "2024-03-14T09:50:50.040773873Z",
+              "deleted": null,
+              "focus": {
+                "id": 0,
+                "created": "0001-01-01T00:00:00Z",
+                "updated": "0001-01-01T00:00:00Z",
+                "deleted": null,
+                "field": {
+                  "id": 0,
+                  "created": "0001-01-01T00:00:00Z",
+                  "updated": "0001-01-01T00:00:00Z",
+                  "deleted": null,
+                  "description": "",
+                  "users": null
+                },
+                "description": ""
+              },
+              "curriculumType": {
+                "id": 0,
+                "created": "0001-01-01T00:00:00Z",
+                "updated": "0001-01-01T00:00:00Z",
+                "deleted": null,
+                "description": "",
+                "durationYears": 0
+              },
+              "state": {
+                "id": 0,
+                "created": "0001-01-01T00:00:00Z",
+                "updated": "0001-01-01T00:00:00Z",
+                "deleted": null,
+                "description": "",
+                "moduleID": 0
+              },
+              "endValidity": "2024-04-01T12:00:00Z",
+              "description": "Softwareentwicklung",
+              "modules": null
+            }
+          ],
+          "courses": [
+            {
+              "id": 1,
+              "version": 1,
+              "created": "2024-03-14T09:50:50.058180118Z",
+              "updated": "2024-03-14T09:50:50.058180118Z",
+              "deleted": null,
+              "description": "Datenbank Scripting",
+              "number": "IN311",
+              "modules": null,
+              "teachedBy": null,
+              "selectedCourses": null,
+              "exams": null
             }
           ]
+        }
+      ],
+      "teachedBy": [
+        {
+          "id": 5,
+          "created": "2024-03-14T09:50:50.012733222Z",
+          "updated": "2024-03-14T09:50:50.012733222Z",
+          "deleted": null,
+          "classStartYear": "0001-01-01T00:00:00Z",
+          "name": "Simeon Liniger",
+          "email": "simeon.liniger@hftm.ch",
+          "fields": null,
+          "roles": null,
+          "teachesCourses": null,
+          "selectedCourses": null,
+          "curriculumId": 0
         }
       ],
       "exams": [],
@@ -933,6 +1024,175 @@
         3
       ],
       "id": 12
+    },
+    {
+      "version": 1,
+      "description": "bbbb",
+      "number": "bbbb",
+      "modules": [
+        {
+          "id": 1,
+          "version": 1,
+          "created": "2024-03-14T15:14:05.816935269Z",
+          "updated": "2024-03-14T15:14:05.816935269Z",
+          "deleted": null,
+          "state": {
+            "id": 1,
+            "created": "2024-03-14T15:14:05.79376015Z",
+            "updated": "2024-03-14T15:14:05.79376015Z",
+            "deleted": null,
+            "description": "Aktiv",
+            "moduleID": 0
+          },
+          "studyStage": {
+            "id": 1,
+            "created": "2024-03-14T15:14:05.812599365Z",
+            "updated": "2024-03-14T15:14:05.812599365Z",
+            "deleted": null,
+            "description": "Grundstudium",
+            "moduleID": 0
+          },
+          "evaluationType": {
+            "id": 1,
+            "created": "2024-03-14T15:14:05.807908297Z",
+            "updated": "2024-03-14T15:14:05.807908297Z",
+            "deleted": null,
+            "description": "F",
+            "code": "F"
+          },
+          "description": "Schnittstellen-Technologien",
+          "number": "IN123",
+          "curriculums": [
+            {
+              "id": 1,
+              "startvalidity": "2021-04-01T00:00:00Z",
+              "created": "2024-03-14T15:14:05.803856075Z",
+              "updated": "2024-03-14T15:14:05.803856075Z",
+              "deleted": null,
+              "focus": {
+                "id": 0,
+                "created": "0001-01-01T00:00:00Z",
+                "updated": "0001-01-01T00:00:00Z",
+                "deleted": null,
+                "field": {
+                  "id": 0,
+                  "created": "0001-01-01T00:00:00Z",
+                  "updated": "0001-01-01T00:00:00Z",
+                  "deleted": null,
+                  "description": "",
+                  "users": null
+                },
+                "description": ""
+              },
+              "curriculumType": {
+                "id": 0,
+                "created": "0001-01-01T00:00:00Z",
+                "updated": "0001-01-01T00:00:00Z",
+                "deleted": null,
+                "description": "",
+                "durationYears": 0
+              },
+              "state": {
+                "id": 0,
+                "created": "0001-01-01T00:00:00Z",
+                "updated": "0001-01-01T00:00:00Z",
+                "deleted": null,
+                "description": "",
+                "moduleID": 0
+              },
+              "endValidity": "2024-04-01T12:00:00Z",
+              "description": "Softwareentwicklung",
+              "modules": null
+            },
+            {
+              "id": 2,
+              "startvalidity": "2021-04-01T00:00:00Z",
+              "created": "2024-03-14T15:14:05.806064624Z",
+              "updated": "2024-03-14T15:14:05.806064624Z",
+              "deleted": null,
+              "focus": {
+                "id": 0,
+                "created": "0001-01-01T00:00:00Z",
+                "updated": "0001-01-01T00:00:00Z",
+                "deleted": null,
+                "field": {
+                  "id": 0,
+                  "created": "0001-01-01T00:00:00Z",
+                  "updated": "0001-01-01T00:00:00Z",
+                  "deleted": null,
+                  "description": "",
+                  "users": null
+                },
+                "description": ""
+              },
+              "curriculumType": {
+                "id": 0,
+                "created": "0001-01-01T00:00:00Z",
+                "updated": "0001-01-01T00:00:00Z",
+                "deleted": null,
+                "description": "",
+                "durationYears": 0
+              },
+              "state": {
+                "id": 0,
+                "created": "0001-01-01T00:00:00Z",
+                "updated": "0001-01-01T00:00:00Z",
+                "deleted": null,
+                "description": "",
+                "moduleID": 0
+              },
+              "endValidity": "2024-04-01T12:00:00Z",
+              "description": "Softwareentwicklung",
+              "modules": null
+            }
+          ],
+          "courses": [
+            {
+              "id": 1,
+              "version": 1,
+              "created": "2024-03-14T15:14:05.822607262Z",
+              "updated": "2024-03-14T15:14:05.822607262Z",
+              "deleted": null,
+              "description": "Datenbank Scripting",
+              "number": "IN311",
+              "modules": null,
+              "teachedBy": null,
+              "selectedCourses": null,
+              "exams": null
+            }
+          ]
+        }
+      ],
+      "teachedBy": [
+        {
+          "id": 1,
+          "created": "2024-03-14T15:14:05.768021972Z",
+          "updated": "2024-03-14T15:14:05.768021972Z",
+          "deleted": null,
+          "classStartYear": "0001-01-01T00:00:00Z",
+          "name": "Kurt Munter",
+          "email": "kurt.munter@hftm.ch",
+          "fields": null,
+          "roles": null,
+          "teachesCourses": null,
+          "selectedCourses": null,
+          "curriculumId": 0
+        }
+      ],
+      "exams": [
+        {
+          "id": 1,
+          "description": "asdfsdf",
+          "type": 1,
+          "weight": 1
+        }
+      ],
+      "versions": [
+        1,
+        2,
+        3
+      ],
+      "id": 13
     }
   ],
   "courseFilter": {
@@ -1136,7 +1396,7 @@
   },
   "modules": [
     {
-      "number": "IT-200",
+      "number": "IT-2000",
       "description": "Schnittstellen-Technologienqqq",
       "evaluationType": "E",
       "curriculum": [],
@@ -1146,7 +1406,7 @@
       },
       "isActive": true,
       "id": 1,
-      "version": 2,
+      "version": 3,
       "courses": [],
       "valuationCategory": {
         "code": "E",
@@ -1295,6 +1555,26 @@
       },
       "courses": [],
       "id": 7
+    },
+    {
+      "number": "fsdfsa",
+      "description": "sdfasdf",
+      "evaluationType": "D",
+      "curriculum": [
+        "lehrplan1"
+      ],
+      "studyStage": {
+        "id": 1,
+        "description": "Grundstudium"
+      },
+      "isActive": true,
+      "version": 1,
+      "valuationCategory": {
+        "code": "D",
+        "description": "D - Modul bestanden, wenn der Durchschnitt der Kruse genügend ist (mehr als 60%)"
+      },
+      "courses": [],
+      "id": 8
     }
   ],
   "curriculum": [
