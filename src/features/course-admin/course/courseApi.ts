@@ -23,7 +23,7 @@ export async function getCourses() {
 }
 
 export async function updateCourse(course: CourseUpdateRequest): Promise<void> {
-    await axios.put(`/courses/${course.id}`, course);
+    await axios.put(`/courses/${course.id}`, course, { baseURL: BACKEND_API_URL });
 }
 
 export async function createCourse(course: CourseCreationRequest): Promise<void> {
