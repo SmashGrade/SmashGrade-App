@@ -1,4 +1,6 @@
 {
+    "button.cancel": "Abbrechen",
+    "button.save": "Speichern",
     "course.ButtonCancel": "Abbrechen",
     "course.ButtonSave": "Speichern",
     "course.QualificationCertificate": "Qualifikationsnachweis",
@@ -52,5 +54,9 @@
     "student.specialisedStudies": "Fachstudium",
     "students.menu": "Studenten",
     "studyType": "Studiengang",
+    "teacher.addStudent": "Student(en) hinzufügen",
+    "teacher.courseParticipants": "Teilnehmer",
+    "teacher.editGrades": "Kursnoten bearbeiten",
+    "teacher.editStudents": "Teilnehmer bearbeiten",
     "user-management.menu": "Benutzer"
 }

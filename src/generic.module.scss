@@ -1,0 +1,17 @@
+@import './colors.module.scss';
+
+.ratingGood {
+    background-color: $colorRatingGood;
+}
+
+.ratingBad {
+    background-color: $colorRatingBad;
+}
+
+.ratingMedian {
+    background-color: $colorRatingMedian;
+}
+
+.ratingNone {
+    background-color: $colorSecondary;
+}

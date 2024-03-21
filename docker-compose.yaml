@@ -4,7 +4,7 @@ services:
     image: ghcr.io/smashgrade/react-app:dev-latest
     container_name: smash-grade-frontend
     ports:
-      - "80:80"
+      - "5173:80"
     networks:
       - smash-grade-network
     depends_on:
@@ -14,7 +14,7 @@ services:
     image: ghcr.io/smashgrade/json-server:dev-latest
     container_name: json-server
     ports:
-      - "3000:3000"
+      - "3000:9000"
     networks:
       - smash-grade-network
 

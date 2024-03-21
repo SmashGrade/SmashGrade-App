@@ -907,40 +907,6 @@
       "modules": []
     }
   ],
-  "courseTeacher": {
-    "id": 0,
-    "version": 0,
-    "description": "Projektmanagement",
-    "number": "3.121",
-    "exams": [
-      {
-        "id": 0,
-        "description": "Projektarbeit",
-        "weight": 0.3,
-        "type": "Schritfliche Arbeit",
-        "avgGrades": [
-          {
-            "id": 0,
-            "description": "CH-Note",
-            "grade": 4.3
-          }
-        ]
-      },
-      {
-        "id": 1,
-        "description": "Projektpräsentation",
-        "weight": 0.7,
-        "type": "Mündliche Prüfung",
-        "avgGrades": [
-          {
-            "id": 1,
-            "description": "CH-Note",
-            "grade": 5.5
-          }
-        ]
-      }
-    ]
-  },
   "modules": [
     {
       "id": 1,
@@ -1257,6 +1223,649 @@
                   "name": "Bob Smith"
                 }
               ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "courseTeacher": [
+    {
+      "id": 0,
+      "description": "Modellieren von Softwaresystemen",
+      "exams": [
+        {
+          "id": 1,
+          "description": "Test #1",
+          "weight": 0.4,
+          "type": "Schriftlich",
+          "avgGrade": 5.0
+        },
+        {
+          "id": 2,
+          "description": "Test #2",
+          "weight": 0.6,
+          "type": "Schriftlich",
+          "avgGrade": 5.25
+        }
+      ],
+      "students": [
+        {
+          "id": 1,
+          "name": "John Doe"
+        },
+        {
+          "id": 2,
+          "name": "Jane Smith"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "description": "Requirements Engineering",
+      "exams": [
+        {
+          "id": 3,
+          "description": "Test #1",
+          "weight": 0.3,
+          "type": "Schriftlich",
+          "avgGrade": 5.0
+        },
+        {
+          "id": 4,
+          "description": "Test #2",
+          "weight": 0.3,
+          "type": "Schriftlich",
+          "avgGrade": 3.75
+        },
+        {
+          "id": 5,
+          "description": "Projektarbeit",
+          "weight": 0.4,
+          "type": "Schriftlich",
+          "avgGrade": 4.0
+        }
+      ],
+      "students": [
+        {
+          "id": 1,
+          "name": "John Doe"
+        },
+        {
+          "id": 2,
+          "name": "Jane Smith"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "description": "Verteilte Systeme 2",
+      "exams": [
+        {
+          "id": 6,
+          "description": "Test #1",
+          "weight": 0.3,
+          "type": "Schriftlich",
+          "avgGrade": 5.0
+        },
+        {
+          "id": 7,
+          "description": "Projektarbeit",
+          "weight": 0.7,
+          "type": "Präsentation",
+          "avgGrade": 4.65
+        }
+      ],
+      "students": [
+        {
+          "id": 1,
+          "name": "John Doe"
+        },
+        {
+          "id": 2,
+          "name": "Jane Smith"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "description": "Datenbank Scripting",
+      "exams": [
+        {
+          "id": 8,
+          "description": "Test #1",
+          "weight": 0.5,
+          "type": "Schriftlich",
+          "avgGrade": 4.1
+        },
+        {
+          "id": 9,
+          "description": "Test #2",
+          "weight": 0.5,
+          "type": "Schriftlich",
+          "avgGrade": 5.05
+        }
+      ],
+      "students": [
+        {
+          "id": 1,
+          "name": "John Doe"
+        },
+        {
+          "id": 2,
+          "name": "Jane Smith"
+        }
+      ]
+    }
+  ],
+  "examTeacher": [
+    {
+      "id": 1,
+      "description": "Test #1",
+      "weight": 0.4,
+      "type": "Schriftlich",
+      "examEvaluations": [
+        {
+          "id": 1,
+          "grade": 4.7,
+          "student": {
+            "id": 1,
+            "name": "John Doe"
+          }
+        },
+        {
+          "id": 2,
+          "grade": 5.3,
+          "student": {
+            "id": 2,
+            "name": "Jane Smith"
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "description": "Test #2",
+      "weight": 0.6,
+      "type": "Schriftlich",
+      "examEvaluations": [
+        {
+          "id": 3,
+          "grade": 4.1,
+          "student": {
+            "id": 1,
+            "name": "John Doe"
+          }
+        },
+        {
+          "id": 4,
+          "grade": 5.4,
+          "student": {
+            "id": 2,
+            "name": "Jane Smith"
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "description": "Test #1",
+      "weight": 0.3,
+      "type": "Schriftlich",
+      "examEvaluations": [
+        {
+          "id": 5,
+          "grade": 5.5,
+          "student": {
+            "id": 1,
+            "name": "John Doe"
+          }
+        },
+        {
+          "id": 6,
+          "grade": 4.5,
+          "student": {
+            "id": 2,
+            "name": "Jane Smith"
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "description": "Test #2",
+      "weight": 0.3,
+      "type": "Schriftlich",
+      "examEvaluations": [
+        {
+          "id": 7,
+          "grade": 4.1,
+          "student": {
+            "id": 1,
+            "name": "John Doe"
+          }
+        },
+        {
+          "id": 8,
+          "grade": 3.4,
+          "student": {
+            "id": 2,
+            "name": "Jane Smith"
+          }
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "description": "Projektarbeit",
+      "weight": 0.4,
+      "type": "Schriftlich",
+      "examEvaluations": [
+        {
+          "id": 9,
+          "grade": 4.3,
+          "student": {
+            "id": 1,
+            "name": "John Doe"
+          }
+        },
+        {
+          "id": 10,
+          "grade": 3.7,
+          "student": {
+            "id": 2,
+            "name": "Jane Smith"
+          }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "description": "Test #1",
+      "weight": 0.3,
+      "type": "Schriftlich",
+      "examEvaluations": [
+        {
+          "id": 11,
+          "grade": 5.5,
+          "student": {
+            "id": 1,
+            "name": "John Doe"
+          }
+        },
+        {
+          "id": 12,
+          "grade": 4.5,
+          "student": {
+            "id": 2,
+            "name": "Jane Smith"
+          }
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "description": "Projektarbeit",
+      "weight": 0.7,
+      "type": "Präsentation",
+      "examEvaluations": [
+        {
+          "id": 13,
+          "grade": 5.2,
+          "student": {
+            "id": 1,
+            "name": "John Doe"
+          }
+        },
+        {
+          "id": 14,
+          "grade": 4.1,
+          "student": {
+            "id": 2,
+            "name": "Jane Smith"
+          }
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "description": "Test #1",
+      "weight": 0.5,
+      "type": "Schriftlich",
+      "examEvaluations": [
+        {
+          "id": 15,
+          "grade": 4.3,
+          "student": {
+            "id": 1,
+            "name": "John Doe"
+          }
+        },
+        {
+          "id": 16,
+          "grade": 3.9,
+          "student": {
+            "id": 2,
+            "name": "Jane Smith"
+          }
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "description": "Test #2",
+      "weight": 0.5,
+      "type": "Schriftlich",
+      "examEvaluations": [
+        {
+          "id": 17,
+          "grade": 5.3,
+          "student": {
+            "id": 1,
+            "name": "John Doe"
+          }
+        },
+        {
+          "id": 18,
+          "grade": 4.8,
+          "student": {
+            "id": 2,
+            "name": "Jane Smith"
+          }
+        }
+      ]
+    }
+  ],
+  "teacherCurriculum": [
+    {
+      "id": 0,
+      "description": "Requirements Engineering",
+      "startDate": 2023,
+      "courses": [
+        {
+          "id": 0,
+          "description": "Modellieren von Softwaresystemen",
+          "exams": [
+            {
+              "id": 1,
+              "description": "Test #1",
+              "weight": 0.4,
+              "type": "Schriftlich",
+              "examEvaluations": [
+                {
+                  "id": 1,
+                  "grade": 4.7,
+                  "student": {
+                    "id": 1,
+                    "name": "John Doe"
+                  }
+                },
+                {
+                  "id": 2,
+                  "grade": 5.3,
+                  "student": {
+                    "id": 2,
+                    "name": "Jane Smith"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "description": "Test #2",
+              "weight": 0.6,
+              "type": "Schriftlich",
+              "examEvaluations": [
+                {
+                  "id": 3,
+                  "grade": 4.1,
+                  "student": {
+                    "id": 1,
+                    "name": "John Doe"
+                  }
+                },
+                {
+                  "id": 4,
+                  "grade": 5.4,
+                  "student": {
+                    "id": 2,
+                    "name": "Jane Smith"
+                  }
+                }
+              ]
+            }
+          ],
+          "students": [
+            {
+              "id": 1,
+              "name": "John Doe"
+            },
+            {
+              "id": 2,
+              "name": "Jane Smith"
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "description": "Requirements Engineering",
+          "exams": [
+            {
+              "id": 3,
+              "description": "Test #1",
+              "weight": 0.3,
+              "type": "Schriftlich",
+              "examEvaluations": [
+                {
+                  "id": 5,
+                  "grade": 5.5,
+                  "student": {
+                    "id": 1,
+                    "name": "John Doe"
+                  }
+                },
+                {
+                  "id": 6,
+                  "grade": 4.5,
+                  "student": {
+                    "id": 2,
+                    "name": "Jane Smith"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 4,
+              "description": "Test #2",
+              "weight": 0.3,
+              "type": "Schriftlich",
+              "examEvaluations": [
+                {
+                  "id": 7,
+                  "grade": 4.1,
+                  "student": {
+                    "id": 1,
+                    "name": "John Doe"
+                  }
+                },
+                {
+                  "id": 8,
+                  "grade": 3.4,
+                  "student": {
+                    "id": 2,
+                    "name": "Jane Smith"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "description": "Projektarbeit",
+              "weight": 0.4,
+              "type": "Schriftlich",
+              "examEvaluations": [
+                {
+                  "id": 9,
+                  "grade": 4.3,
+                  "student": {
+                    "id": 1,
+                    "name": "John Doe"
+                  }
+                },
+                {
+                  "id": 10,
+                  "grade": 3.7,
+                  "student": {
+                    "id": 2,
+                    "name": "Jane Smith"
+                  }
+                }
+              ]
+            }
+          ],
+          "students": [
+            {
+              "id": 1,
+              "name": "John Doe"
+            },
+            {
+              "id": 2,
+              "name": "Jane Smith"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "description": "Schnittstellen-Technologien",
+      "startDate": 2024,
+      "courses": [
+        {
+          "id": 2,
+          "description": "Verteilte Systeme 2",
+          "exams": [
+            {
+              "id": 6,
+              "description": "Test #1",
+              "weight": 0.3,
+              "type": "Schriftlich",
+              "examEvaluations": [
+                {
+                  "id": 11,
+                  "grade": 5.5,
+                  "student": {
+                    "id": 1,
+                    "name": "John Doe"
+                  }
+                },
+                {
+                  "id": 12,
+                  "grade": 4.5,
+                  "student": {
+                    "id": 2,
+                    "name": "Jane Smith"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 7,
+              "description": "Projektarbeit",
+              "weight": 0.7,
+              "type": "Präsentation",
+              "examEvaluations": [
+                {
+                  "id": 13,
+                  "grade": 5.2,
+                  "student": {
+                    "id": 1,
+                    "name": "John Doe"
+                  }
+                },
+                {
+                  "id": 14,
+                  "grade": 4.1,
+                  "student": {
+                    "id": 2,
+                    "name": "Jane Smith"
+                  }
+                }
+              ]
+            }
+          ],
+          "students": [
+            {
+              "id": 1,
+              "name": "John Doe"
+            },
+            {
+              "id": 2,
+              "name": "Jane Smith"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "description": "Datenbank Scripting",
+          "exams": [
+            {
+              "id": 8,
+              "description": "Test #1",
+              "weight": 0.5,
+              "type": "Schriftlich",
+              "examEvaluations": [
+                {
+                  "id": 15,
+                  "grade": 4.3,
+                  "student": {
+                    "id": 1,
+                    "name": "John Doe"
+                  }
+                },
+                {
+                  "id": 16,
+                  "grade": 3.9,
+                  "student": {
+                    "id": 2,
+                    "name": "Jane Smith"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 9,
+              "description": "Test #2",
+              "weight": 0.5,
+              "type": "Schriftlich",
+              "examEvaluations": [
+                {
+                  "id": 17,
+                  "grade": 5.3,
+                  "student": {
+                    "id": 1,
+                    "name": "John Doe"
+                  }
+                },
+                {
+                  "id": 18,
+                  "grade": 4.8,
+                  "student": {
+                    "id": 2,
+                    "name": "Jane Smith"
+                  }
+                }
+              ]
+            }
+          ],
+          "students": [
+            {
+              "id": 1,
+              "name": "John Doe"
+            },
+            {
+              "id": 2,
+              "name": "Jane Smith"
             }
           ]
         }

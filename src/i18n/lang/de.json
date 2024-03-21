@@ -1,4 +1,12 @@
 {
+    "button.cancel": {
+        "defaultMessage": "Abbrechen",
+        "description": "Knopf zum Abbrechen von Änderungen"
+    },
+    "button.save": {
+        "defaultMessage": "Speichern",
+        "description": "Knopf zum Speichern von Änderungen"
+    },
     "course.ButtonCancel": {
         "defaultMessage": "Abbrechen",
         "description": "Abbrechen Button"
@@ -210,6 +218,22 @@
     "studyType": {
         "defaultMessage": "Studiengang",
         "description": "Studiengang Dropdown Titel"
+    },
+    "teacher.addStudent": {
+        "defaultMessage": "Student(en) hinzufügen",
+        "description": "Studenten zu Kurs hinzufügen"
+    },
+    "teacher.courseParticipants": {
+        "defaultMessage": "Teilnehmer",
+        "description": "Überschrift Teilnehmerliste"
+    },
+    "teacher.editGrades": {
+        "defaultMessage": "Kursnoten bearbeiten",
+        "description": "Kursnoten bearbeiten"
+    },
+    "teacher.editStudents": {
+        "defaultMessage": "Teilnehmer bearbeiten",
+        "description": "Kursteilnehmer bearbeiten"
     },
     "user-management.menu": {
         "defaultMessage": "Benutzer",

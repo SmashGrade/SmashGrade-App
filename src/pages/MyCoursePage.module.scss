@@ -22,14 +22,20 @@
 .flexRowStart {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: start;
     justify-content: flex-start;
     gap: 5%;
 }
 
 .outlined {
-    border-radius: 5px;
+    border-radius: 15px;
     background-color: $colorSecondary;
+    padding: 10px;
+    margin: 5px;
+}
+
+.examOutline {
+    border-radius: 15px;
     padding: 10px;
     margin: 5px;
 }
