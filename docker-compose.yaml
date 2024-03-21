@@ -14,7 +14,7 @@ services:
     image: ghcr.io/smashgrade/json-server:dev-latest
     container_name: json-server
     ports:
-      - "3000:9000"
+      - "9000:9000"
     networks:
       - smash-grade-network
 
