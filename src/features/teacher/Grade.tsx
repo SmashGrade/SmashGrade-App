@@ -1,7 +1,7 @@
 import { UserOutlined } from '@ant-design/icons';
 import styles from '@pages/MyCoursePage.module.scss';
 import { InputNumber } from 'antd';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { getRatingClass } from '@components/ui-elements/Rating';
 
 interface GradeProps {
@@ -16,9 +16,9 @@ interface GradeProps {
 export default function Grade(props: Readonly<GradeProps>) {
     const [ratingClass, setRatingClass] = useState(getRatingClass(props.rating));
 
-    function handleOnChange(value: number | null) {
+    const handleOnChange = useCallback((value: number | null) => {
         setRatingClass(getRatingClass(value!));
-    }
+    }, []);
 
     return (
         <div className={`${styles.outlined} ${styles.gradeComponent}`}>

@@ -1,6 +1,6 @@
 import { getExam } from '@features/teacher/api/examApi.ts';
 import { Student } from '@features/teacher/interfaces/TeacherCourseData.ts';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { CloseCircleFilled, PlusCircleFilled, UserOutlined } from '@ant-design/icons';
 import { Button, Modal } from 'antd';
@@ -22,22 +22,25 @@ export default function StudentForm(props: Readonly<StudentFormProps>) {
 
     const [students, setStudents] = useState<Student[]>(exam.examEvaluations.map((evaluation) => evaluation.student));
 
-    function handleCancel() {
+    const handleCancel = useCallback(() => {
         setOpenList(false);
-    }
+    }, []);
 
-    function handleOk() {
+    const handleOk = useCallback(() => {
         setOpenList(false);
         console.info('Add student');
-    }
+    }, []);
 
-    const removeStudent = (studentId: number) => {
-        setStudents(students.filter((student) => student.id !== studentId));
-    };
+    const removeStudent = useCallback(
+        (studentId: number) => {
+            setStudents(students.filter((student) => student.id !== studentId));
+        },
+        [students]
+    );
 
-    function openModal() {
+    const openModal = useCallback(() => {
         setOpenList(true);
-    }
+    }, []);
 
     return (
         <div className={`${styles.gradeContainer}`}>

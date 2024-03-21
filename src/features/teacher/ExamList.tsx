@@ -38,9 +38,9 @@ export default function ExamList(props: Readonly<ExamListProps>) {
         [exams]
     );
 
-    function editOnClick() {
+    const editOnClick = useCallback(() => {
         setEditStudents(!editStudents);
-    }
+    }, [editStudents]);
 
     return (
         <div className={styles.flexRowStart} style={{ flex: 'content' }}>
