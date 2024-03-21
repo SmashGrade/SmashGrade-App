@@ -2,29 +2,7 @@ import { UserOutlined } from '@ant-design/icons';
 import styles from '@pages/MyCoursePage.module.scss';
 import { InputNumber } from 'antd';
 import { useState } from 'react';
-
-// TODO: Make these available globally
-export type RatingType = 'good' | 'median' | 'bad' | 'none';
-
-const RATING_CLASSNAMES: Record<RatingType, string> = {
-    good: styles.ratingGood,
-    median: styles.ratingMedian,
-    bad: styles.ratingBad,
-    none: styles.ratingNone,
-};
-
-const getRatingClass = (rating: number) => {
-    switch (true) {
-        case rating <= 0:
-            return RATING_CLASSNAMES.none;
-        case rating < 4:
-            return RATING_CLASSNAMES.bad;
-        case rating < 5:
-            return RATING_CLASSNAMES.median;
-        default:
-            return RATING_CLASSNAMES.good;
-    }
-};
+import { getRatingClass } from '@components/ui-elements/Rating';
 
 interface GradeProps {
     examId: number;

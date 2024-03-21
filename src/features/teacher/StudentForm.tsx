@@ -11,8 +11,6 @@ interface StudentFormProps {
     examId: number;
 }
 
-// TODO: Add popup for adding students, needs to have a search field for adding students -> Modal component from antd
-// TODO: Handle removing students
 export default function StudentForm(props: Readonly<StudentFormProps>) {
     const intl = useIntl();
     const [openList, setOpenList] = useState<boolean>(false);
@@ -30,7 +28,6 @@ export default function StudentForm(props: Readonly<StudentFormProps>) {
 
     function handleOk() {
         setOpenList(false);
-        // TODO: Add student
         console.info('Add student');
     }
 

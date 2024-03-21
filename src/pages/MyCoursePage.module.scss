@@ -114,20 +114,3 @@
     @extend .baseBackground;
     @extend .cardOverwrite;
 }
-
-// TODO: Make these available globally
-.ratingGood {
-    background-color: $colorRatingGood;
-}
-
-.ratingBad {
-    background-color: $colorRatingBad;
-}
-
-.ratingMedian {
-    background-color: $colorRatingMedian;
-}
-
-.ratingNone {
-    background-color: $colorSecondary;
-}
